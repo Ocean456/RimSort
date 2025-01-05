@@ -1469,6 +1469,9 @@ class ModListWidget(QListWidget):
                             [steamdb_remove_blacklist, False]
                         )
                     return True
+                # If user is changing mod color, display color picker once no matter how many mods are selected
+                if action == change_mod_name_color_action:
+                    new_color = QColorDialog().getColor()
                 # Execute action for each selected mod
                 for source_item in selected_items:
                     if type(source_item) is CustomListWidgetItem:
@@ -1484,7 +1487,7 @@ class ModListWidget(QListWidget):
                         if action == toggle_warning_action:
                             self.toggle_warning(mod_metadata["packageid"], uuid)
                         elif action == change_mod_name_color_action:
-                            self.change_mod_name_color(uuid)
+                            self.change_mod_name_color(uuid, new_color)
                         elif action == reset_mod_name_color_action:
                             self.reset_mod_name_color(uuid)
                         # Open folder action
@@ -2134,13 +2137,11 @@ class ModListWidget(QListWidget):
         item.setData(Qt.ItemDataRole.UserRole, item_data)
         self.recalculate_warnings_signal.emit()
 
-    def change_mod_name_color(self, uuid: str) -> None:
+    def change_mod_name_color(self, uuid: str, new_color: QColor) -> None:
         current_mod_index = self.uuids.index(uuid)
         item = self.item(current_mod_index)
         item_data = item.data(Qt.ItemDataRole.UserRole)
-        # Show window to change color
-        color = QColorDialog.getColor()
-        item_data["mod_color"] = color
+        item_data["mod_color"] = new_color
         item.setData(Qt.ItemDataRole.UserRole, item_data)
 
     def reset_mod_name_color(self, uuid: str) -> None:
