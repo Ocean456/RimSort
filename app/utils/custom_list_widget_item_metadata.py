@@ -3,7 +3,7 @@ from typing import Any, Optional
 from loguru import logger
 from PySide6.QtGui import QColor
 
-from app.utils.constants import MOD_DEFAULT_COLOR
+from app.utils.constants import MOD_TEXT_DEFAULT_COLOR
 from app.utils.metadata import MetadataManager
 
 
@@ -20,7 +20,7 @@ class CustomListWidgetItemMetadata:
         filtered: bool, representing whether the widget's item is filtered
         invalid: bool, representing whether the widget's item is an invalid mod
         mismatch: bool, representing whether the widget's item has a version mismatch
-        mod_color: QColor, the color of the mod's text in the list widget item
+        mod_text_color: QColor, the color of the mod's text in the list widget item
     """
 
     def __init__(
@@ -35,7 +35,7 @@ class CustomListWidgetItemMetadata:
         invalid: Optional[bool] = None,
         mismatch: Optional[bool] = None,
         alternative: Optional[str] = None,
-        mod_color: QColor = MOD_DEFAULT_COLOR,
+        mod_text_color: QColor = MOD_TEXT_DEFAULT_COLOR,
     ) -> None:
         """
         Must provide a uuid, the rest is optional.
@@ -52,7 +52,7 @@ class CustomListWidgetItemMetadata:
         :param invalid: a bool representing whether the widget's item is an invalid mod
         :param mismatch: a bool representing whether the widget's item has a version mismatch
         :param alternative: a bool representing whether the widget's item has an alternative mod in the "Use This Instead" database
-        :param mod_color: QColor, the color of the mod's text in the list widget item
+        :param mod_text_color: mod_text_color: QColor, the color of the mod's text in the list widget item
         """
         # Do not cache the metadata manager, it will cause freezes/crashes when dragging mods.
         # self.metatadata_manager = MetadataManager.instance()
@@ -71,7 +71,7 @@ class CustomListWidgetItemMetadata:
         self.mismatch = (
             mismatch if mismatch is not None else self.get_mismatch_by_uuid(uuid)
         )
-        self.mod_color = mod_color
+        self.mod_text_color = mod_text_color
         self.alternative = (
             alternative
             if alternative is not None
