@@ -1,6 +1,7 @@
 from typing import Any, Optional
 
 from loguru import logger
+from PySide6.QtGui import QColor
 
 from app.utils.metadata import MetadataManager
 
@@ -32,6 +33,7 @@ class CustomListWidgetItemMetadata:
         invalid: Optional[bool] = None,
         mismatch: Optional[bool] = None,
         alternative: Optional[str] = None,
+        mod_color: QColor = QColor("#e6edf3"),
     ) -> None:
         """
         Must provide a uuid, the rest is optional.
@@ -48,6 +50,7 @@ class CustomListWidgetItemMetadata:
         :param invalid: a bool representing whether the widget's item is an invalid mod
         :param mismatch: a bool representing whether the widget's item has a version mismatch
         :param alternative: a bool representing whether the widget's item has an alternative mod in the "Use This Instead" database
+        :param mod_color: #TODO
         """
         # Do not cache the metadata manager, it will cause freezes/crashes when dragging mods.
         # self.metatadata_manager = MetadataManager.instance()
@@ -66,6 +69,7 @@ class CustomListWidgetItemMetadata:
         self.mismatch = (
             mismatch if mismatch is not None else self.get_mismatch_by_uuid(uuid)
         )
+        self.mod_color = mod_color
         self.alternative = (
             alternative
             if alternative is not None
