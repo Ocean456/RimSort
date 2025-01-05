@@ -20,6 +20,7 @@ class CustomListWidgetItemMetadata:
         filtered: bool, representing whether the widget's item is filtered
         invalid: bool, representing whether the widget's item is an invalid mod
         mismatch: bool, representing whether the widget's item has a version mismatch
+        mod_color: QColor, the color of the mod's text in the list widget item
     """
 
     def __init__(
@@ -51,7 +52,7 @@ class CustomListWidgetItemMetadata:
         :param invalid: a bool representing whether the widget's item is an invalid mod
         :param mismatch: a bool representing whether the widget's item has a version mismatch
         :param alternative: a bool representing whether the widget's item has an alternative mod in the "Use This Instead" database
-        :param mod_color: #TODO
+        :param mod_color: QColor, the color of the mod's text in the list widget item
         """
         # Do not cache the metadata manager, it will cause freezes/crashes when dragging mods.
         # self.metatadata_manager = MetadataManager.instance()

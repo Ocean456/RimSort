@@ -164,7 +164,7 @@ class ModListItemInner(QWidget):
         :param alternative: a bool representing whether the widget's item has a recommended alternative mod
         :param settings_controller: an instance of SettingsController for accessing settings
         :param uuid: str, the uuid of the mod which corresponds to a mod's metadata
-        :param mod_color: #TODO
+        :param mod_color: QColor, the color of the mod's text in the list widget item
         """
 
         super(ModListItemInner, self).__init__()
