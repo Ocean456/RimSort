@@ -15,6 +15,10 @@ class ModsPanelController(QObject):
 
         self.reset_warnings_signal.connect(self._on_menu_bar_reset_warnings_triggered)
 
+        EventBus().reset_mod_colors_signal.connect(
+            self._on_menu_bar_reset_mod_colors_triggered
+        )
+
         # Only one label can be active at a time; these are used only in the active modlist.
 
         self.warnings_label_active = False
@@ -137,3 +141,19 @@ class ModsPanelController(QObject):
                     mod.setHidden(False)
         self.mods_panel.update_count("Active")
         logger.debug("Finished hiding mods without errors.")
+
+
+    def _on_menu_bar_reset_mod_colors_triggered(self) -> None:
+        """
+        Resets all mod colors to the default color.
+        """
+        active_mods = self.mods_panel.active_mods_list.get_all_mod_list_items()
+        inactive_mods = self.mods_panel.inactive_mods_list.get_all_mod_list_items()
+        for mod in active_mods :
+            mod_data = mod.data(Qt.ItemDataRole.UserRole)
+            uuid = mod_data["uuid"]
+            self.mods_panel.active_mods_list.reset_mod_name_color(uuid)
+        for mod in inactive_mods:
+            mod_data = mod.data(Qt.ItemDataRole.UserRole)
+            uuid = mod_data["uuid"]
+            self.mods_panel.inactive_mods_list.reset_mod_name_color(uuid)
