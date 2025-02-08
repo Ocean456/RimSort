@@ -1,4 +1,4 @@
-from typing import Any, Optional
+from typing import Any
 
 from loguru import logger
 from PySide6.QtGui import QColor
@@ -34,7 +34,7 @@ class CustomListWidgetItemMetadata:
         invalid: Optional[bool] = None,
         mismatch: Optional[bool] = None,
         alternative: Optional[str] = None,
-        mod_color: QColor = None,
+        mod_color: Optional[QColor] = None,
     ) -> None:
         """
         Must provide a uuid, the rest is optional.
