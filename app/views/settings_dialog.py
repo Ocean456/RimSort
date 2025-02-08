@@ -1086,6 +1086,62 @@ class SettingsDialog(QDialog):
         tab_layout = QVBoxLayout(tab)
         tab_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
 
+        group_box = QGroupBox()
+        tab_layout.addWidget(group_box)
+
+        group_layout = QVBoxLayout()
+        group_box.setLayout(group_layout)
+
+        user_note = QLabel("RimSort restart required for some settings")
+        user_note.setFont(GUIInfo().emphasis_font)
+        user_note.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        group_layout.addWidget(user_note)
+
+        self.debug_logging_checkbox = QCheckBox("Enable debug logging")
+        group_layout.addWidget(self.debug_logging_checkbox)
+
+        self.watchdog_checkbox = QCheckBox("Enable watchdog file monitor daemon")
+        group_layout.addWidget(self.watchdog_checkbox)
+
+        self.mod_type_filter_checkbox = QCheckBox("Enable mod type filter")
+        group_layout.addWidget(self.mod_type_filter_checkbox)
+
+        self.hide_invalid_mods_when_filtering_checkbox = QCheckBox(
+            "Hide invalid mods when filtering"
+        )
+        group_layout.addWidget(self.hide_invalid_mods_when_filtering_checkbox)
+
+        self.color_background_instead_of_text_checkbox = QCheckBox(
+            "Apply mod coloring to background instead of text"
+        )
+        group_layout.addWidget(self.color_background_instead_of_text_checkbox)
+
+        self.show_duplicate_mods_warning_checkbox = QCheckBox(
+            "Show duplicate mods warning"
+        )
+        group_layout.addWidget(self.show_duplicate_mods_warning_checkbox)
+
+        self.show_mod_updates_checkbox = QCheckBox("Check for mod updates on refresh")
+        group_layout.addWidget(self.show_mod_updates_checkbox)
+
+        self.steam_client_integration_checkbox = QCheckBox(
+            "Enable Steam client integration"
+        )
+        group_layout.addWidget(self.steam_client_integration_checkbox)
+
+        self.download_missing_mods_checkbox = QCheckBox(
+            "Download missing mods automatically"
+        )
+        group_layout.addWidget(self.download_missing_mods_checkbox)
+
+        self.render_unity_rich_text_checkbox = QCheckBox(
+            "Render Unity Rich Text in mod descriptions"
+        )
+        self.render_unity_rich_text_checkbox.setToolTip(
+            "Enable this option to render Unity Rich Text in mod descriptions. Images will not be displayed."
+        )
+        group_layout.addWidget(self.render_unity_rich_text_checkbox)
+
         auth_group = QGroupBox()
         tab_layout.addWidget(auth_group)
 
