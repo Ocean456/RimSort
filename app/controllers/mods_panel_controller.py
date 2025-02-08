@@ -90,6 +90,21 @@ class ModsPanelController(QObject):
         if package_id in inactive_mods_list:
             inactive_mods_list.remove(package_id)
 
+    def _on_menu_bar_reset_mod_colors_triggered(self) -> None:
+        """
+        Resets all mod colors to the default color.
+        """
+        active_mods = self.mods_panel.active_mods_list.get_all_mod_list_items()
+        inactive_mods = self.mods_panel.inactive_mods_list.get_all_mod_list_items()
+        for mod in active_mods :
+            mod_data = mod.data(Qt.ItemDataRole.UserRole)
+            uuid = mod_data["uuid"]
+            self.mods_panel.active_mods_list.reset_mod_color(uuid)
+        for mod in inactive_mods:
+            mod_data = mod.data(Qt.ItemDataRole.UserRole)
+            uuid = mod_data["uuid"]
+            self.mods_panel.inactive_mods_list.reset_mod_color(uuid)
+
     @Slot()
     def _change_visibility_of_mods_with_warnings(self) -> None:
         """When on, shows only mods that have warnings.
