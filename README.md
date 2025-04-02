@@ -1,38 +1,39 @@
 <p align="center">
     <h1 align="center">RimSort</h1>
-    <p align="center">A free and open source multi-platform mod manager for the video game RimWorld.<br>
-    Built from the ground up to be reliable and community managed.<br>
-    Includes support for Linux, Mac, and Windows.</p>
-    <p align="center"><strong><a href="https://github.com/RimSort/RimSort/releases">Releases</a> | <a href="https://rimsort.github.io/RimSort/">Wiki</a> | <a href="https://discord.gg/aV7g69JmR2">Discord</a></strong> </p>
+    <p align="center">一个免费的开源跨平台模组管理器，适用于游戏 RimWorld。<br>
+    从头开始构建，旨在提供可靠性，并由社区管理。<br>
+    支持 Linux、Mac 和 Windows。</p>
+    <p align="center"><strong><a href="https://github.com/RimSort/RimSort/releases">版本发布</a> | <a href="https://rimsort.github.io/RimSort/">Wiki</a> | <a href="https://discord.gg/aV7g69JmR2">Discord</a></strong> </p>
     <br><br><br>
-</p>
 
-![RimSort Preview](./docs/rimsort_preview.png)
+![RimSort 预览](./docs/rimsort_preview.png)
 
-## Installation
+## 安装
 
-To install RimSort, visit the [Releases][Releases] page and download the latest zipped release for your operating system.
+要安装 RimSort，请访问 [Releases][Releases] 页面并下载适合你操作系统的最新压缩包。
 
-For Windows and Linux, unzip the download and run the `RimSort` executable inside the unzipped folder.
+对于 Windows 和 Linux，解压下载的文件并运行解压后的 `RimSort` 可执行文件。
 
-For macOS, make sure you grab the appropriate release per your CPU (i386 is for an Intel CPU Mac, ARM is for an Apple M1/M2 CPU Mac). You may need to follow [special instructions](https://rimsort.github.io/RimSort/user-guide/downloading-and-installing/#macos) to get around Gatekeeper errors.
+对于 macOS，请确保下载与你 CPU 类型匹配的版本（i386 适用于 Intel CPU 的 Mac，ARM 适用于 Apple M1/M2 CPU 的 Mac）。你可能需要按照 [特殊说明](https://rimsort.github.io/RimSort/user-guide/downloading-and-installing/#macos) 解决 Gatekeeper 错误。
 
-Check the [wiki][Wiki] for more detailed instructions.
+查看 [wiki][Wiki] 获取更详细的安装说明。
 
-## Contributing
+## 贡献
 
-Bugs and feature requests are tracked in the [Issues][Issues] section of this repo. If you run into a bug or have a feature suggestion, feel free to create an Issue here yourself!
+Bug 和功能请求可以在该项目的 [Issues][Issues] 部分找到。如果你遇到 Bug 或有功能建议，可以在这里创建一个 Issue！
 
-See the [wiki][Wiki] for detailed instructions on building RimSort yourself as well as guidelines for making pull requests.
-## FAQ and Issues
+查看 [wiki][Wiki] 了解如何自己构建 RimSort，并且查看提交 Pull Request 的指南。
 
-If you have an issue, make sure you **checked the [wiki][Wiki]** for a solution.
+## 常见问题和问题
 
-[![Join us on Discord](https://github-production-user-asset-6210df.s3.amazonaws.com/2766946/248529301-486f4f8c-fed5-4fe1-832f-6461b7ce3a55.png)][Discord]
+如果你有问题，确保你**已经查看过 [wiki][Wiki]** 以获取解决方案。
 
+[![加入我们的 Discord](https://github-production-user-asset-6210df.s3.amazonaws.com/2766946/248529301-486f4f8c-fed5-4fe1-832f-6461b7ce3a55.png)][Discord]
 
-[Wiki]: https://rimsort.github.io/RimSort/
+[Wiki]: https://rimsort.github.io/RimSort/zh-cn/
 [Repo]: https://github.com/RimSort/RimSort
 [Issues]: https://github.com/RimSort/RimSort/issues
 [Releases]: https://github.com/oceancabbage/RimSort/releases
 [Discord]: https://discord.gg/aV7g69JmR2
+
+本项目是 RimSort 的翻译版本，由 @Ocean456 和 @Day29 翻译。
