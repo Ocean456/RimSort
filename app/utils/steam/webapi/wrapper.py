@@ -56,8 +56,8 @@ class CollectionImport:
     def input_dialog(self) -> None:
         # Initialize the UI for entering collection links
         self.link_input = show_dialogue_input(
-            title="Add Workshop collection link",
-            label="Add Workshop collection link",
+            title="添加创意工坊合集链接",
+            label="添加创意工坊合集链接",
         )
         logger.info("Workshop collection link Input UI initialized successfully!")
         if self.link_input[1]:
@@ -97,8 +97,8 @@ class CollectionImport:
             )
             # Show warning message box
             show_warning(
-                title="Invalid Link",
-                text="Invalid Workshop collection link. Please enter a valid Workshop collection link.",
+                title="无效链接",
+                text="无效的创意工坊合集链接。请输入有效的创意工坊合集链接。",
             )
             return
 
@@ -109,8 +109,8 @@ class CollectionImport:
             )
             # Show warning message box
             show_warning(
-                title="Invalid Database",
-                text="Cannot import collection without SteamDB supplied! Please configure Steam Workshop Database in settings.",
+                title="无效数据库",
+                text="未提供Steam数据库，无法导入合集！请在设置中配置创意工坊数据库。",
             )
             return
 

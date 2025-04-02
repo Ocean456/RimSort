@@ -183,10 +183,10 @@ class MetadataManager(QObject):
                     # Fallback to the expired metadata
                     if life != 0:  # Disable Notification if value is 0
                         self.show_warning_signal.emit(
-                            "Steam DB metadata expired",
-                            "Steam DB is expired! Consider updating!\n",
-                            f"Steam DB last updated: {strftime('%Y-%m-%d %H:%M:%S', localtime(db_data['version'] - life))}\n\n"
-                            + "Falling back to cached, but EXPIRED Steam Database...",
+                            "Steam 数据库元数据已过期",
+                            "Steam 数据库 已过期！建议更新！",
+                            f"Steam 数据库上次更新：{strftime('%Y-%m-%d %H:%M:%S', localtime(db_data['version'] - life))}<br/><br/>"
+                            + "正在回退到已缓存但过期的Steam数据库……",
                             "",
                         )
                     db_json_data = db_data[
@@ -469,9 +469,9 @@ class MetadataManager(QObject):
                 f"The provided Version.txt path does not exist: {version_file_path}"
             )
             self.show_warning_signal.emit(
-                "Missing Version.txt",
-                f"RimSort is unable to get the game version at the expected path: [{version_file_path}].",
-                f"\nIs your game path [{self.settings_controller.settings.instances[self.settings_controller.settings.current_instance].game_folder}] set correctly? There should be a Version.txt file in the game install directory.",
+                "缺失 Version.txt",
+                f"RimSort无法在预期路径下获得游戏版本：[{version_file_path}].",
+                f"\n您的游戏路径 [{self.settings_controller.settings.instances[self.settings_controller.settings.current_instance].game_folder}] 设置正确吗？ 在游戏安装目录中应该有一个Version.txt文件。",
                 "",
             )
         # Get and cache installed base game / DLC data
@@ -1875,13 +1875,13 @@ class ModParser(QRunnable):
             # Assign our metadata to the UUID
             metadata[uuid] = {
                 "invalid": True,
-                "name": "Invalid item",
+                "name": "无效的项目",
                 "packageid": "invalid.item",
                 "authors": "Not found",
                 "description": (
-                    "This mod is considered invalid by RimSort (and the RimWorld game)."
-                    + "\n\nThis mod does NOT contain an ./About/About.xml and is likely leftover from previous usage."
-                    + "\n\nThis can happen sometimes with Steam mods if there are leftover .dds textures or unexpected data."
+                    "这个mod被认为是无效的。"
+                    + "\n\n这个mod不包含./About/About.xml，可能是以前使用的剩余内容。"
+                    + "如果有剩余的.dds纹理或意外数据，这种情况有时会发生在Steam mod上。"
                 ),
                 "data_source": data_source,
                 "folder": directory_name,

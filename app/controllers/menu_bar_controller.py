@@ -182,7 +182,7 @@ class MenuBarController(QObject):
     def _on_set_current_instance(
         self, current_instance: str, initialize: bool = False
     ) -> None:
-        self.menu_bar.instances_submenu.setTitle(f"Current: {current_instance}")
+        self.menu_bar.instances_submenu.setTitle(f"当前： {current_instance}")
         self.menu_bar.instances_submenu.setActiveAction(
             next(
                 (

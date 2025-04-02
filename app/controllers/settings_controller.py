@@ -898,8 +898,8 @@ class SettingsController(QObject):
         Reset the settings to their default values.
         """
         answer = BinaryChoiceDialog(
-            title="Reset to defaults",
-            text="Are you sure you want to reset all settings to their default values?",
+            title="恢复默认设置",
+            text="您确定要将所有设置恢复为默认值吗？",
         )
         if not answer.exec_is_positive():
             return
@@ -1070,8 +1070,8 @@ class SettingsController(QObject):
         """
         if not skip_confirmation:
             answer = BinaryChoiceDialog(
-                title="Clear all locations",
-                text="Are you sure you want to clear all locations?",
+                title="清除所有路径",
+                text="您确定要清除所有路径吗？",
             )
             if not answer.exec_is_positive():
                 return
@@ -1619,12 +1619,12 @@ class SettingsController(QObject):
         Build the Steam Workshop database.
         """
         confirm_diag = BinaryChoiceDialog(
-            title="Confirm Build Database",
-            text="Are you sure you want to build the Steam Workshop database?",
+            title="确认构建数据库",
+            text="您确定要构建创意工坊数据库吗？",
             information=(
-                "For most users this is not necessary as the GitHub SteamDB is adequate. Building the database may take a long time. "
-                "Depending on your settings, it may also crawl through the entirety of the steam workshop via the webAPI. "
-                "This can be a large amount of data and take a long time. Are you sure you want to continue?"
+                "对多数用户而言无需此操作，GitHub提供的Steam数据库已足够。构建数据库可能需要较长时间。<br>"
+                "根据您的设置，系统可能通过WebAPI爬取整个创意工坊内容。<br>"
+                "此过程将产生大量数据且耗时较长。确定要继续吗？"
             ),
             icon=QMessageBox.Icon.Warning,
         )

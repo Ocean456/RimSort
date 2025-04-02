@@ -178,3 +178,6 @@ version.xml
 
 # Dictionaries
 ltex.dictionary*
+
+# Local configuration
+.fleet
