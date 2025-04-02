@@ -2402,28 +2402,28 @@ class MainContent(QObject):
             if os.path.exists(repo_path):  # If local repo does exist
                 # Prompt to user to handle
                 answer = dialogue.show_dialogue_conditional(
-                    title="Existing repository found",
-                    text="An existing local repo that matches this repository was found:",
+                    title="已找到现有存储库",
+                    text="找到与该存储库匹配的本地存储库：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
                     information=(
-                        f"{repo_path}\n\n"
-                        + "How would you like to handle? Choose option:\n"
-                        + "\n1) Clone new repository (deletes existing and replaces)"
-                        + "\n2) Update existing repository (in-place force-update)"
+                        f"{repo_path}<br/>"
+                        + "您希望如何处理？请选择以下选项：<br/>"
+                        + "1) 克隆新存储库（将删除现有存储库并替换）<br/>"
+                        + "\n2) 更新现有存储库（直接强制更新）"
                     ),
                     button_text_override=[
-                        "Clone new",
-                        "Update existing",
+                        "克隆新存储库",
+                        "更新现有存储库",
                     ],
                 )
-                if answer == "Cancel":
+                if answer == "取消":
                     logger.debug(
                         f"User cancelled prompt. Skipping any {repo_folder_name} repository actions."
                     )
                     return
-                elif answer == "Clone new":
+                elif answer == "克隆新存储库":
                     logger.info(f"Deleting local git repo at: {repo_path}")
                     delete_files_except_extension(directory=repo_path, extension=".dds")
-                elif answer == "Update existing":
+                elif answer == "更新现有存储库":
                     self._do_force_update_existing_repo(
                         base_path=base_path, repo_url=repo_url
                     )
@@ -2523,8 +2523,8 @@ class MainContent(QObject):
                     origin.pull(rebase=True)
                     # Notify user
                     dialogue.show_information(
-                        title="Repo force updated",
-                        text="The configured repository was updated!",
+                        title="存储库已更新",
+                        text="配置的存储库已更新！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
                         information=f"{repo_path} ->\n "
                         + f"Latest Commit: {repo.head.commit.message.decode() if isinstance(repo.head.commit.message, bytes) else repo.head.commit.message}",
                     )
@@ -2533,10 +2533,10 @@ class MainContent(QObject):
                 except GitCommandError:
                     stacktrace = traceback.format_exc()
                     dialogue.show_warning(
-                        title="Failed to update repo!",
-                        text="The configured repo failed to update! "
-                        + "Are you connected to the Internet? "
-                        + "Is your configured repo valid?",
+                        title="更新存储库失败",
+                        text="配置的存储库更新失败！"
+                        + "请检查是否连接到互联网，"
+                        + "，或者确认配置的仓库地址是否有效。",
                         information=f"Configured repository: {repo_url}",
                         details=stacktrace,
                     )

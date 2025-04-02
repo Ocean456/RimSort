@@ -59,6 +59,9 @@ def show_dialogue_conditional(
         # Remove standard buttons
         dialogue.setStandardButtons(QMessageBox.StandardButton.Cancel)
 
+        cancer_button = dialogue.button(QMessageBox.StandardButton.Cancel)
+        cancer_button.setText("取消")
+
         # Add custom buttons
         custom_btns = []
         for btn_text in button_text_override:

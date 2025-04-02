@@ -912,7 +912,7 @@ class SettingsDialog(QDialog):
         run_args_info_layout = QHBoxLayout()
 
         self.run_args_info_label = QLabel(
-            "输入一串以逗号分隔的参数，传递给 Rimworld 可执行文件 \n" "\n 示例： \n" "\n -logfile,/path/to/file.log,-savedatafolder=/path/to/savedata,-popupwindow \n"
+            "请输入 RimWorld 的启动参数（多个参数请用逗号分隔） \n" "\n 示例： \n" "\n -logfile/path/to/file.log,-savedatafolder=/path/to/savedata,-popupwindow \n"
         )
         self.run_args_info_label.setFixedHeight(GUIInfo().default_font_line_height * 6)
         run_args_info_layout.addWidget(self.run_args_info_label, 0)
@@ -920,7 +920,7 @@ class SettingsDialog(QDialog):
 
         run_args_layout.addLayout(run_args_info_layout, 0, 0, 1, 2)
 
-        run_args_label = QLabel("编辑游戏启动参数：")
+        run_args_label = QLabel("游戏启动参数：")
         run_args_layout.addWidget(
             run_args_label, 1, 0, alignment=Qt.AlignmentFlag.AlignRight
         )

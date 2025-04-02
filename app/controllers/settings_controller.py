@@ -898,8 +898,8 @@ class SettingsController(QObject):
         Reset the settings to their default values.
         """
         answer = BinaryChoiceDialog(
-            title="Reset to defaults",
-            text="Are you sure you want to reset all settings to their default values?",
+            title="恢复默认设置",
+            text="您确定要将所有设置恢复为默认值吗？",
         )
         if not answer.exec_is_positive():
             return
