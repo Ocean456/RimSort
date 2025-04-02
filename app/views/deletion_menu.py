@@ -25,7 +25,7 @@ class ModDeletionMenu(QMenu):
         self,
         get_selected_mod_metadata: Callable[[], list[ModMetadata]],
         remove_from_uuids: list[str] | None,
-        menu_title: str = "Deletion options",
+        menu_title: str = "删除选项",
         delete_mod: bool = True,
         delete_both: bool = True,
         delete_dds: bool = True,
@@ -36,16 +36,16 @@ class ModDeletionMenu(QMenu):
         self.metadata_manager = MetadataManager.instance()
         self.delete_actions: list[tuple[QAction, Callable[[], None]]] = []
         if delete_mod:
-            self.delete_actions.append((QAction("Delete mod"), self.delete_both))
+            self.delete_actions.append((QAction("删除模组"), self.delete_both))
 
         if delete_both:
             self.delete_actions.append(
-                (QAction("Delete mod (keep .dds)"), self.delete_mod_keep_dds)
+                (QAction("删除模组（保留 .dds 文件）"), self.delete_mod_keep_dds)
             )
         if delete_dds:
             self.delete_actions.append(
                 (
-                    QAction("Delete optimized textures (.dds files only)"),
+                    QAction("删除优化后的纹理（仅 .dds 文件）"),
                     self.delete_dds,
                 )
             )

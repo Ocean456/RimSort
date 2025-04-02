@@ -1070,8 +1070,8 @@ class SettingsController(QObject):
         """
         if not skip_confirmation:
             answer = BinaryChoiceDialog(
-                title="Clear all locations",
-                text="Are you sure you want to clear all locations?",
+                title="清除所有位置",
+                text="您确定要清除所有位置吗？",
             )
             if not answer.exec_is_positive():
                 return

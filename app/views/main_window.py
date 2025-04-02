@@ -105,12 +105,12 @@ class MainWindow(QMainWindow):
         button_layout.addStretch()
 
         # Define button attributes
-        self.refresh_button = QPushButton("Refresh")
-        self.clear_button = QPushButton("Clear")
-        self.restore_button = QPushButton("Restore")
-        self.sort_button = QPushButton("Sort")
-        self.save_button = QPushButton("Save")
-        self.run_button = QPushButton("Run")
+        self.refresh_button = QPushButton("刷新")
+        self.clear_button = QPushButton("清除")
+        self.restore_button = QPushButton("刷新")
+        self.sort_button = QPushButton("排序")
+        self.save_button = QPushButton("保存")
+        self.run_button = QPushButton("启动")
 
         buttons = [
             self.refresh_button,

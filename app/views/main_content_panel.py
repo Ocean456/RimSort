@@ -1065,7 +1065,7 @@ class MainContent(QObject):
                 target=partial(
                     self.metadata_manager.refresh_cache, is_initial=is_initial
                 ),
-                text="Scanning mod sources and populating metadata...",
+                text="正在扫描模组来源，加载数据中",
             )
 
             # Insert mod data into list

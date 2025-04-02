@@ -77,7 +77,7 @@ class ModInfo:
                 self.preview_picture.size(), Qt.AspectRatioMode.KeepAspectRatio
             )
         )
-        self.mod_info_name_label = QLabel("Name:")
+        self.mod_info_name_label = QLabel("名称：")
         self.mod_info_name_label.setObjectName("summaryLabel")
         self.mod_info_name_value = QLabel()
         self.mod_info_name_value.setObjectName("summaryValue")
@@ -92,7 +92,7 @@ class ModInfo:
             Qt.TextInteractionFlag.TextSelectableByMouse
         )
         self.scenario_info_summary_value.setWordWrap(True)
-        self.mod_info_package_id_label = QLabel("PackageID:")
+        self.mod_info_package_id_label = QLabel("包名：")
         self.mod_info_package_id_label.setObjectName("summaryLabel")
         self.mod_info_package_id_value = QLabel()
         self.mod_info_package_id_value.setObjectName("summaryValue")
@@ -100,7 +100,7 @@ class ModInfo:
             Qt.TextInteractionFlag.TextSelectableByMouse
         )
         self.mod_info_package_id_value.setWordWrap(True)
-        self.mod_info_author_label = QLabel("Authors:")
+        self.mod_info_author_label = QLabel("作者：")
         self.mod_info_author_label.setObjectName("summaryLabel")
         self.mod_info_author_value = QLabel()
         self.mod_info_author_value.setObjectName("summaryValue")
@@ -108,7 +108,7 @@ class ModInfo:
             Qt.TextInteractionFlag.TextSelectableByMouse
         )
         self.mod_info_author_value.setWordWrap(True)
-        self.mod_info_mod_version_label = QLabel("Mod Version:")
+        self.mod_info_mod_version_label = QLabel("模组版本：")
         self.mod_info_mod_version_label.setObjectName("summaryLabel")
         self.mod_info_mod_version_value = QLabel()
         self.mod_info_mod_version_value.setObjectName("summaryValue")
@@ -116,11 +116,11 @@ class ModInfo:
             Qt.TextInteractionFlag.TextSelectableByMouse
         )
         self.mod_info_mod_version_value.setWordWrap(True)
-        self.mod_info_supported_versions_label = QLabel("Supported Version:")
+        self.mod_info_supported_versions_label = QLabel("支持版本：")
         self.mod_info_supported_versions_label.setObjectName("summaryLabel")
         self.mod_info_supported_versions_value = QLabel()
         self.mod_info_supported_versions_value.setObjectName("summaryValue")
-        self.mod_info_path_label = QLabel("Path:")
+        self.mod_info_path_label = QLabel("路径:")
         self.mod_info_path_label.setObjectName("summaryLabel")
         self.mod_info_path_value = QLabel()
         self.mod_info_path_value.setObjectName("summaryValue")
@@ -130,7 +130,7 @@ class ModInfo:
         self.mod_info_path_value.setWordWrap(True)
         self.description = DescriptionWidget()
         self.description.setText(
-            "<br><br><br><center><h3>Welcome to RimSort!</h3></center>", convert=False
+            "<br><br><br><center><h3>欢迎使用 RimSort！</h3></center>", convert=False
         )
         # Add widgets to child layouts
         self.image_layout.addWidget(self.preview_picture)

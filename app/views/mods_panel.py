@@ -797,13 +797,13 @@ class ModListWidget(QListWidget):
                     mod_data_source = mod_metadata.get("data_source")
                     # Open folder action text
                     open_folder_action = QAction()
-                    open_folder_action.setText("Open folder")
+                    open_folder_action.setText("打开文件夹")
                     # If we have a "url" or "steam_url"
                     if mod_metadata.get("url") or mod_metadata.get("steam_url"):
                         open_url_browser_action = QAction()
-                        open_url_browser_action.setText("Open URL in browser")
+                        open_url_browser_action.setText("在 浏览器 中打开模组页面")
                         copy_url_to_clipboard_action = QAction()
-                        copy_url_to_clipboard_action.setText("Copy URL to clipboard")
+                        copy_url_to_clipboard_action.setText("复制 模组链接 到剪贴板")
                     # If we have a "steam_uri"
                     if (
                         mod_metadata.get("steam_uri")
@@ -812,7 +812,7 @@ class ModListWidget(QListWidget):
                         ].steam_client_integration
                     ):
                         open_mod_steam_action = QAction()
-                        open_mod_steam_action.setText("Open mod in Steam")
+                        open_mod_steam_action.setText("在 Steam 中打开模组页面")
                     # Conversion options (SteamCMD <-> local) + re-download (local mods found in SteamDB and SteamCMD)
                     if mod_data_source == "local":
                         mod_name = mod_metadata.get("name")
@@ -845,7 +845,7 @@ class ModListWidget(QListWidget):
                             # Convert steamcmd mods -> local
                             convert_steamcmd_local_action = QAction()
                             convert_steamcmd_local_action.setText(
-                                "Convert SteamCMD mod to local"
+                                "将 Steam 模组转换为本地模组"
                             )
                             # Re-download steamcmd mods
                             re_steamcmd_action = QAction()
@@ -869,7 +869,7 @@ class ModListWidget(QListWidget):
                         # Convert steam mods -> local
                         convert_workshop_local_action = QAction()
                         convert_workshop_local_action.setText(
-                            "Convert Steam mod to local"
+                            "将 Steam 模组转换为本地模组"
                         )
                         # Only enable subscription actions if user has enabled Steam client integration
                         if self.settings_controller.settings.instances[
@@ -877,11 +877,11 @@ class ModListWidget(QListWidget):
                         ].steam_client_integration:
                             # Re-subscribe steam mods
                             re_steam_action = QAction()
-                            re_steam_action.setText("Re-subscribe mod with Steam")
+                            re_steam_action.setText("重新订阅 Steam 模组")
                             # Unsubscribe steam mods
                             unsubscribe_mod_steam_action = QAction()
                             unsubscribe_mod_steam_action.setText(
-                                "Unsubscribe mod with Steam"
+                                "取消订阅 Steam 模组"
                             )
                     # SteamDB blacklist options
                     if (
@@ -901,19 +901,19 @@ class ModListWidget(QListWidget):
                             steamdb_add_blacklist = publishedfileid
                             add_to_steamdb_blacklist_action = QAction()
                             add_to_steamdb_blacklist_action.setText(
-                                "Add mod to SteamDB blacklist"
+                                "将模组添加到 SteamDB 黑名单"
                             )
                     # Copy packageId to clipboard
                     copy_packageid_to_clipboard_action = QAction()
                     copy_packageid_to_clipboard_action.setText(
-                        "Copy packageId to clipboard"
+                        "复制 包名 到剪贴板"
                     )
                     # Edit mod rules with Rule Editor (only for individual mods)
                     edit_mod_rules_action = QAction()
-                    edit_mod_rules_action.setText("Edit mod with Rule Editor")
+                    edit_mod_rules_action.setText("使用规则编辑器编辑模组")
                     # Ignore error action
                     toggle_warning_action = QAction()
-                    toggle_warning_action.setText("Toggle warning")
+                    toggle_warning_action.setText("启用 / 禁用警告")
             # Multiple items selected
             elif len(selected_items) > 1:  # Multiple items selected
                 for source_item in selected_items:
@@ -927,11 +927,11 @@ class ModListWidget(QListWidget):
                         mod_data_source = mod_metadata.get("data_source")
                         # Open folder action text
                         open_folder_action = QAction()
-                        open_folder_action.setText("Open folder(s)")
+                        open_folder_action.setText("打开文件夹")
                         # If we have a "url" or "steam_url"
                         if mod_metadata.get("url") or mod_metadata.get("steam_url"):
                             open_url_browser_action = QAction()
-                            open_url_browser_action.setText("Open URL(s) in browser")
+                            open_url_browser_action.setText("在浏览器中打开模组页面")
                         # Conversion options (local <-> SteamCMD)
                         if mod_data_source == "local":
                             mod_name = mod_metadata.get("name")
@@ -982,7 +982,7 @@ class ModListWidget(QListWidget):
                         # Toggle warning
                         if not toggle_warning_action:
                             toggle_warning_action = QAction()
-                            toggle_warning_action.setText("Toggle warning(s)")
+                            toggle_warning_action.setText("启用/禁用警告")
                         # If Workshop, and pfid, allow Steam actions
                         if mod_data_source == "workshop" and mod_metadata.get(
                             "publishedfileid"
@@ -996,7 +996,7 @@ class ModListWidget(QListWidget):
                             if not convert_workshop_local_action:
                                 convert_workshop_local_action = QAction()
                                 convert_workshop_local_action.setText(
-                                    "Convert Steam mod(s) to local"
+                                    "将 Steam 模组转换为本地模组"
                                 )
                             # Only enable subscription actions if user has enabled Steam client integration
                             if self.settings_controller.settings.instances[
@@ -1006,13 +1006,13 @@ class ModListWidget(QListWidget):
                                 if not re_steam_action:
                                     re_steam_action = QAction()
                                     re_steam_action.setText(
-                                        "Re-subscribe mod(s) with Steam"
+                                        "重新订阅 Steam 模组"
                                     )
                                 # Unsubscribe steam mods
                                 if not unsubscribe_mod_steam_action:
                                     unsubscribe_mod_steam_action = QAction()
                                     unsubscribe_mod_steam_action.setText(
-                                        "Unsubscribe mod(s) with Steam"
+                                        "取消订阅 Steam 模组"
                                     )
                         # No SteamDB blacklist options when multiple selected
             # Put together our contextMenu
@@ -1033,9 +1033,9 @@ class ModListWidget(QListWidget):
                 or edit_mod_rules_action
                 or re_git_action
             ):
-                misc_options_menu = QMenu(title="Miscellaneous options")
+                misc_options_menu = QMenu(title="其他选项")
                 if copy_packageid_to_clipboard_action:
-                    clipboard_options_menu = QMenu(title="Clipboard options")
+                    clipboard_options_menu = QMenu(title="剪贴板选项")
                     clipboard_options_menu.addAction(copy_packageid_to_clipboard_action)
                     if copy_url_to_clipboard_action:
                         clipboard_options_menu.addAction(copy_url_to_clipboard_action)
@@ -1058,7 +1058,7 @@ class ModListWidget(QListWidget):
                 local_folder = self.settings_controller.settings.instances[
                     self.settings_controller.settings.current_instance
                 ].local_folder
-                workshop_actions_menu = QMenu(title="Workshop mods options")
+                workshop_actions_menu = QMenu(title="创意工坊模组选项")
                 if local_folder and convert_local_steamcmd_action:
                     workshop_actions_menu.addAction(convert_local_steamcmd_action)
                 if local_folder and convert_steamcmd_local_action:
@@ -2120,7 +2120,8 @@ class ModsPanel(QWidget):
         self.mode_nofilter_tooltip = "Hide Filter Enabled"
 
         # ACTIVE mod list widget
-        self.active_mods_label = QLabel("Active [0]")
+        # self.active_mods_label = QLabel("Active [0]")
+        self.active_mods_label = QLabel("启用 [0]")
         self.active_mods_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.active_mods_label.setObjectName("summaryValue")
         self.active_mods_list = ModListWidget(
@@ -2140,7 +2141,8 @@ class ModsPanel(QWidget):
         self.active_panel.addWidget(self.errors_summary_frame)
 
         # Initialize inactive mods widgets
-        self.inactive_mods_label = QLabel("Inactive [0]")
+        # self.inactive_mods_label = QLabel("Inactive [0]")
+        self.inactive_mods_label = QLabel("未启用 [0]")
         self.inactive_mods_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.inactive_mods_label.setObjectName("summaryValue")
         self.inactive_mods_list = ModListWidget(
@@ -2207,7 +2209,7 @@ class ModsPanel(QWidget):
         self.active_mods_search.setClearButtonEnabled(True)
         self.active_mods_search.textChanged.connect(self.on_active_mods_search)
         self.active_mods_search.inputRejected.connect(self.on_active_mods_search_clear)
-        self.active_mods_search.setPlaceholderText("Search by...")
+        self.active_mods_search.setPlaceholderText("按...搜索")
         self.active_mods_search_clear_button = self.active_mods_search.findChild(
             QToolButton
         )
@@ -2221,8 +2223,10 @@ class ModsPanel(QWidget):
         self.active_mods_search_filter.setObjectName("MainUI")
         self.active_mods_search_filter.setMaximumWidth(125)
         self.active_mods_search_filter.addItems(
-            ["Name", "PackageId", "Author(s)", "PublishedFileId"]
+            # ["Name", "PackageId", "Author(s)", "PublishedFileId"]
+            ["名称", "包名", "作者", "文件ID"]
         )
+
         # Active mods search layouts
         self.active_mods_search_layout.addWidget(
             self.active_mods_filter_data_source_button
@@ -2340,7 +2344,7 @@ class ModsPanel(QWidget):
         self.inactive_mods_search.inputRejected.connect(
             self.on_inactive_mods_search_clear
         )
-        self.inactive_mods_search.setPlaceholderText("Search by...")
+        self.inactive_mods_search.setPlaceholderText("按...搜索")
         self.inactive_mods_search_clear_button = self.inactive_mods_search.findChild(
             QToolButton
         )
@@ -2354,7 +2358,8 @@ class ModsPanel(QWidget):
         self.inactive_mods_search_filter.setObjectName("MainUI")
         self.inactive_mods_search_filter.setMaximumWidth(140)
         self.inactive_mods_search_filter.addItems(
-            ["Name", "PackageId", "Author(s)", "PublishedFileId"]
+            # ["Name", "PackageId", "Author(s)", "PublishedFileId"]
+            ["名称", "包名", "作者", "文件ID"]
         )
         self.inactive_mods_search_layout.addWidget(
             self.inactive_mods_filter_data_source_button
@@ -2630,13 +2635,13 @@ class ModsPanel(QWidget):
             raise NotImplementedError(f"Unknown list type: {list_type}")
         # Evaluate the search filter state for the list
         search_filter = None
-        if _filter.currentText() == "Name":
+        if _filter.currentText() == "名称":
             search_filter = "name"
-        elif _filter.currentText() == "PackageId":
+        elif _filter.currentText() == "包名":
             search_filter = "packageid"
-        elif _filter.currentText() == "Author(s)":
+        elif _filter.currentText() == "作者":
             search_filter = "authors"
-        elif _filter.currentText() == "PublishedFileId":
+        elif _filter.currentText() == "文件ID":
             search_filter = "publishedfileid"
         # Filter the list using any search and filter state
         for uuid in uuids:
@@ -2797,6 +2802,7 @@ class ModsPanel(QWidget):
 
     def update_count(self, list_type: str) -> None:
         # Calculate filtered items
+        list_type_cn = "启用" if list_type == "Active" else "未启用"
         label = (
             self.active_mods_label
             if list_type == "Active"
@@ -2828,13 +2834,9 @@ class ModsPanel(QWidget):
             else:
                 num_unfiltered += 1
         if search.text():
-            label.setText(
-                f"{list_type} [{num_unfiltered}/{num_filtered + num_unfiltered}]"
-            )
+            label.setText(f"{list_type_cn} [{num_unfiltered}/{num_filtered + num_unfiltered}]")
         elif num_filtered > 0:
-            # If any filter is active, show how many mods are displayed out of total
-            label.setText(
-                f"{list_type} [{num_unfiltered}/{num_filtered + num_unfiltered}]"
-            )
+            label.setText(f"{list_type_cn} [{num_unfiltered}/{num_filtered + num_unfiltered}]")
         else:
-            label.setText(f"{list_type} [{num_filtered + num_unfiltered}]")
+            label.setText(f"{list_type_cn} [{num_filtered + num_unfiltered}]")
+
