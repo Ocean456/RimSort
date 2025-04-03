@@ -306,8 +306,8 @@ class RentryError:
         """
         logger.error(f"A network error occurred while processing Rentry: {str(e)}")
         show_warning(
-            title="Network Error",
-            text="Network error occurred while processing Rentry, Please check your internet connection.",
+            title="网络错误",
+            text="处理 Rentry 时发生网络错误，请检查网络连接。",
             details=f"{str(e)}",
         )
         return None  # Return None to indicate failure
@@ -316,8 +316,8 @@ class RentryError:
         """Show a warning for missing Rentry Auth code."""
         logger.warning("Rentry Auth code not found in user settings.")
         show_warning(
-            title="Rentry Auth Code Not Found",
-            text="You need to email support@rentry.co and request an auth code. Then paste it into Settings -> Advanced -> Rentry Auth.",
+            title="未找到 Rentry 授权码",
+            text="你需要发送邮件至 support@rentry.co 申请授权码，然后将其粘贴到 设置 → 高级 → Rentry 授权码 中。",
         )
 
 

@@ -107,7 +107,7 @@ class MainWindow(QMainWindow):
         # Define button attributes
         self.refresh_button = QPushButton("刷新")
         self.clear_button = QPushButton("清除")
-        self.restore_button = QPushButton("刷新")
+        self.restore_button = QPushButton("恢复")
         self.sort_button = QPushButton("排序")
         self.save_button = QPushButton("保存")
         self.run_button = QPushButton("启动")

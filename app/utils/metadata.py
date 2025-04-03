@@ -183,10 +183,10 @@ class MetadataManager(QObject):
                     # Fallback to the expired metadata
                     if life != 0:  # Disable Notification if value is 0
                         self.show_warning_signal.emit(
-                            "Steam DB metadata expired",
-                            "Steam DB is expired! Consider updating!\n",
-                            f"Steam DB last updated: {strftime('%Y-%m-%d %H:%M:%S', localtime(db_data['version'] - life))}\n\n"
-                            + "Falling back to cached, but EXPIRED Steam Database...",
+                            "Steam 数据库元数据已过期",
+                            "Steam 数据库 已过期！建议更新！",
+                            f"Steam 数据库 上次更新：{strftime('%Y-%m-%d %H:%M:%S', localtime(db_data['version'] - life))}\n\n"
+                            + "正在使用缓存的 Steam 数据库，但该数据库已过期…",
                             "",
                         )
                     db_json_data = db_data[

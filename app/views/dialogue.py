@@ -97,7 +97,16 @@ def show_dialogue_input(
     text: str = "",
     parent: QWidget | None = None,
 ) -> Tuple[str, bool]:
-    return QInputDialog().getText(parent, title, label, text=text)  # type: ignore # Is okay to set parent to None
+    # return QInputDialog().getText(parent, title, label, text=text)  # type: ignore # Is okay to set parent to None
+    dialog = QInputDialog(parent)
+    dialog.setWindowTitle(title)
+    dialog.setLabelText(label)
+    dialog.setTextValue(text)
+    dialog.setOkButtonText("确定")
+    dialog.setCancelButtonText("取消")
+    if dialog.exec_() == QDialog.DialogCode.Accepted:
+        return dialog.textValue(), True
+    return "", False
 
 
 def show_dialogue_file(
@@ -164,6 +173,8 @@ def show_information(
     if details:
         info_message_box.setDetailedText(details)
 
+    info_message_box.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Default)
+    info_message_box.setButtonText(QMessageBox.StandardButton.Yes, "确定")
     # Show the message box
     logger.debug("Finished showing information box")
     info_message_box.exec_()

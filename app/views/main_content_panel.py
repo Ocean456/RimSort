@@ -1534,9 +1534,9 @@ class MainContent(QObject):
             )
         # Copy report to clipboard
         dialogue.show_information(
-            title="Export active mod list",
-            text="Copied active mod list report to clipboard...",
-            information='Click "Show Details" to see the full report!',
+            title="导出当前模组列表",
+            text="当前模组列表报告已复制到剪贴板...",
+            information='点击“show details”查看完整报告！',
             details=f"{active_mods_clipboard_report}",
         )
         copy_to_clipboard_safely(active_mods_clipboard_report)
@@ -1696,8 +1696,8 @@ class MainContent(QObject):
             )
         else:
             dialogue.show_warning(
-                title="Failed to upload",
-                text="Failed to upload exported active mod list to Rentry.co",
+                title="上传失败",
+                text="向 Rentry.co 上传启用的模组模式列表失败",
             )
 
     def _do_open_app_directory(self) -> None:
@@ -2224,8 +2224,8 @@ class MainContent(QObject):
         that are configured to be passed to the Rimworld executable
         """
         args, ok = dialogue.show_dialogue_input(
-            title="Enter git repo",
-            label="Enter a git repository url (http/https) to clone to local mods:",
+            title="输入 git 链接",
+            label="输入 git 仓库网址（http/https）以克隆到本地模组：",
         )
         if ok:
             self._do_clone_repo_to_path(
