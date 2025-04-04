@@ -2092,12 +2092,12 @@ class ModsPanel(QWidget):
             ModListIcons.steam_icon(),
         ]
         self.data_source_filter_tooltips = [
-            "Showing All Mods",
-            "Showing Core and DLC",
-            "Showing Local Mods",
-            "Showing Git Mods",
-            "Showing SteamCMD Mods",
-            "Showing Steam Mods",
+            "显示所有模组",
+            "显示核心和DLC模组",
+            "显示本地模组",
+            "显示Git模组",
+            "显示SteamCMD模组",
+            "显示Steam模组"
         ]
         self.data_source_filter_type_icons = [
             QIcon(str(AppInfo().theme_data_folder / "default-icons" / "AppIcon_b.png")),
@@ -2105,19 +2105,19 @@ class ModsPanel(QWidget):
             ModListIcons.xml_icon(),
         ]
         self.data_source_filter_type_tooltips = [
-            "Showing All Mod Types",
-            "Showing C# Mods",
-            "Showing XML Mods",
+            "显示所有模组类型",
+            "显示C#模组",
+            "显示XML模组"
         ]
 
         self.mode_filter_icon = QIcon(
             str(AppInfo().theme_data_folder / "default-icons" / "filter.png")
         )
-        self.mode_filter_tooltip = "Hide Filter Disabled"
+        self.mode_filter_tooltip = "隐藏已过滤模组"
         self.mode_nofilter_icon = QIcon(
             str(AppInfo().theme_data_folder / "default-icons" / "nofilter.png")
         )
-        self.mode_nofilter_tooltip = "Hide Filter Enabled"
+        self.mode_nofilter_tooltip = "显示所有项"
 
         # ACTIVE mod list widget
         # self.active_mods_label = QLabel("Active [0]")

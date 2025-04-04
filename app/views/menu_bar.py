@@ -109,7 +109,7 @@ class MenuBar(QObject):
         )
         file_menu.addSeparator()
         self.save_mod_list_action = self._add_action(
-            file_menu, "另存模组列表", "Ctrl+Shift+S"
+            file_menu, "保存模组列表", "Ctrl+Shift+S"
         )
         file_menu.addSeparator()
         self.import_submenu = QMenu("导入")
@@ -126,7 +126,7 @@ class MenuBar(QObject):
             self.export_submenu, "导出到 剪切板"
         )
         self.export_to_rentry_action = self._add_action(
-            self.export_submenu, "导出到 Rentry.co…"
+            self.export_submenu, "导出到 Rentry.co"
         )
         file_menu.addSeparator()
         self.upload_submenu = QMenu("上传日志")

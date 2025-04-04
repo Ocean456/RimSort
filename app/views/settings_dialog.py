@@ -713,7 +713,7 @@ class SettingsDialog(QDialog):
         when_optimizing_label.setFont(GUIInfo().emphasis_font)
         group_layout.addWidget(when_optimizing_label)
 
-        self.todds_active_mods_only_radio = QRadioButton("仅优化激活的模组")
+        self.todds_active_mods_only_radio = QRadioButton("仅优化启用的模组")
         group_layout.addWidget(self.todds_active_mods_only_radio)
 
         self.todds_all_mods_radio = QRadioButton("优化所有模组")

@@ -402,14 +402,13 @@ class MainContent(QObject):
         else:
             logger.warning("Essential path(s) are invalid or not set!")
             answer = dialogue.show_dialogue_conditional(
-                title="Essential path(s)",
-                text="Essential path(s) are invalid or not set!\n",
+                title="必要路径",
+                text="必要路径无效或未设置！<br/>",
                 information=(
-                    "RimSort requires, at the minimum, for the game install folder and the "
-                    "config folder paths to be set, and that the paths both exist. Please set "
-                    "both of these manually or by using the autodetect functionality.\n\n"
-                    "Would you like to configure them now?"
-                ),
+                    "RimSort 至少需要设置游戏安装文件夹和配置文件夹路径，且路径必须存在。"
+                    "请通过手动设置或使用自动检测功能配置这两个路径。<br/><br/"
+                    "是否要立即进行配置？"
+                )
             )
             if answer == "&Yes":
                 self.settings_controller.show_settings_dialog("Locations")
@@ -590,11 +589,9 @@ class MainContent(QObject):
         else:
             list_of_missing_mods = "\n".join([f"* {mod}" for mod in self.missing_mods])
             dialogue.show_information(
-                text="Could not find data for some mods!",
+                text="无法找到某些模组的数据！",
                 information=(
-                    "The following list of mods were set active in your mods list but "
-                    "no data could be found for these mods in local/workshop mod paths. "
-                    "\n\nAre your game configuration paths correct?"
+                    "以下模组已在您的模组列表中启用，但在本地/创意工坊模组路径中未找到相关数据。\n\n请检查您的游戏配置路径是否设置正确？"
                 ),
                 details=list_of_missing_mods,
             )
@@ -1278,7 +1275,7 @@ class MainContent(QObject):
         logger.info("Opening file dialog to select input file")
         file_path = dialogue.show_dialogue_file(
             mode="open",
-            caption="Open RimWorld mod list",
+            caption="打开模组列表",
             _dir=str(AppInfo().saved_modlists_folder),
             _filter="RimWorld mod list (*.rml *.rws *.xml)",
         )
@@ -1328,7 +1325,7 @@ class MainContent(QObject):
         logger.info("Opening file dialog to specify output file")
         file_path = dialogue.show_dialogue_file(
             mode="save",
-            caption="Save mod list",
+            caption="保存模组列表",
             _dir=str(AppInfo().saved_modlists_folder),
             _filter="XML (*.xml)",
         )
@@ -2536,7 +2533,7 @@ class MainContent(QObject):
                         title="更新存储库失败",
                         text="配置的存储库更新失败！"
                         + "请检查是否连接到互联网，"
-                        + "，或者确认配置的仓库地址是否有效。",
+                        + "或者确认配置的仓库地址是否有效。",
                         information=f"Configured repository: {repo_url}",
                         details=stacktrace,
                     )
@@ -3049,12 +3046,14 @@ class MainContent(QObject):
         database_b_deps: dict[str, Any] = {}
         # Notify user
         dialogue.show_information(
-            title="Steam DB Builder",
-            text="This operation will compare 2 databases, A & B, by checking dependencies from A with dependencies from B.",
-            information="- This will produce an accurate comparison of dependency data between 2 Steam DBs.\n"
-            + "A report of discrepancies is generated. You will be prompted for these paths in order:\n"
-            + "\n\t1) Select input A"
-            + "\n\t2) Select input B",
+            title="Steam数据库构建工具",
+            text="本操作将通过对比数据库A与数据库B的依赖关系，进行两者差异分析。",
+            information=(
+                "- 本操作将生成两个Steam数据库间依赖数据的精确对比报告。<br/>"
+                "系统将按以下顺序提示您选择路径：<br/>"
+                "<br/>1) 选择输入A"
+                "<br/>2) 选择输入B"
+            )
         )
         # Input A
         logger.info("Opening file dialog to specify input file A")
@@ -3158,16 +3157,18 @@ class MainContent(QObject):
     def _do_merge_databases(self) -> None:
         # Notify user
         dialogue.show_information(
-            title="Steam DB Builder",
-            text="This operation will merge 2 databases, A & B, by recursively updating A with B, barring exceptions.",
-            information="- This will effectively recursively overwrite A's key/value with B's key/value to the resultant database.\n"
-            + "- Exceptions will not be recursively updated. Instead, they will be overwritten with B's key entirely.\n"
-            + "- The following exceptions will be made:\n"
-            + f"\n\t{app_constants.DB_BUILDER_RECURSE_EXCEPTIONS}\n\n"
-            + "The resultant database, C, is saved to a user-specified path. You will be prompted for these paths in order:\n"
-            + "\n\t1) Select input A (db to-be-updated)"
-            + "\n\t2) Select input B (update source)"
-            + "\n\t3) Select output C (resultant db)",
+            title="Steam数据库构建工具",
+            text="本操作将通过递归方式用数据库B更新数据库A（例外情况除外），实现两者的合并。",
+            information=(
+                "- 本操作将递归地用B的键值对覆盖A中的对应键值，生成结果数据库。<br/>"
+                "- 例外情况不会递归更新，而是直接使用B的键值完全覆盖。<br/>"
+                "- 以下例外情况将被应用：<br/>"
+                f"\n\t{app_constants.DB_BUILDER_RECURSE_EXCEPTIONS}<br/><br/>"
+                "生成的结果数据库C将保存至用户指定路径。系统将按以下顺序提示您选择路径：<br/>"
+                "<br/>1) 选择输入A（待更新的数据库）"
+                "<br/>2) 选择输入B（更新源数据库）"
+                "<br/>3) 选择输出C（结果数据库）"
+            )
         )
         # Input A
         logger.info("Opening file dialog to specify input file A")
@@ -3460,8 +3461,8 @@ class MainContent(QObject):
             self.use_this_instead_dialog.show()
         else:
             dialogue.show_information(
-                title="Use This Instead",
-                text='No suggestions were found in the "Use This Instead" database.',
+                title="替换为此",
+                text='在"替换为此"数据库中未找到任何建议。',
             )
 
     def set_main_window(self, main_window: "MainWindow") -> None:

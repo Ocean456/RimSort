@@ -129,10 +129,10 @@ class ModDeletionMenu(QMenu):
 
         uuids = self.get_selected_mod_metadata()
         answer = show_dialogue_conditional(
-            title="Are you sure?",
-            text=f"You have selected {len(uuids)} mods for deletion.",
-            information="\nThis operation delete a mod's directory from the filesystem."
-            + "\nDo you want to proceed?",
+            title="确认操作",
+            text=f"您已选择删除{len(uuids)}个模组",
+            information="此操作将从文件系统中删除模组的整个目录"
+                        "<br>确定要继续吗？"
         )
         if answer == "&Yes":
             self._iterate_mods(_inner_delete_both, uuids)
@@ -140,10 +140,10 @@ class ModDeletionMenu(QMenu):
     def delete_dds(self) -> None:
         mod_metadata = self.get_selected_mod_metadata()
         answer = show_dialogue_conditional(
-            title="Are you sure?",
-            text=f"You have selected {len(mod_metadata)} mods to Delete optimized textures (.dds files only)",
-            information="\nThis operation will only delete optimized textures (.dds files only) from mod files."
-            + "\nDo you want to proceed?",
+            title="确认操作",
+            text=f"您已选择{len(mod_metadata)}个模组 仅删除优化后的纹理（.dds文件）",
+            information="此操作仅会删除模组文件中的优化纹理（仅.dds文件）"
+                        "<br>确定要继续吗？"
         )
         if answer == "&Yes":
             self._iterate_mods(
@@ -159,10 +159,11 @@ class ModDeletionMenu(QMenu):
     def delete_mod_keep_dds(self) -> None:
         mod_metadata = self.get_selected_mod_metadata()
         answer = show_dialogue_conditional(
-            title="Are you sure?",
-            text=f"You have selected {len(mod_metadata)} mods for deletion.",
-            information="\nThis operation will recursively delete all mod files, except for .dds textures found."
-            + "\nDo you want to proceed?",
+            title="确认操作",
+            text=f"您已选择删除{len(mod_metadata)}个模组 但保留优化后的纹理（.dds文件）",
+            information="此操作将彻底删除模组文件"
+                        "<br>但会保留其中的.dds纹理文件"
+                        "<br>确定要继续吗？"
         )
         if answer == "&Yes":
             self._iterate_mods(
