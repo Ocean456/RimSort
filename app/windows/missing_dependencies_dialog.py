@@ -22,7 +22,7 @@ class MissingDependenciesDialog(QDialog):
 
     def init_ui(self) -> None:
         # set window title and size
-        self.setWindowTitle("Dependency Manager")
+        self.setWindowTitle("依赖管理")
         self.resize(700, 500)
 
         # create main layout
@@ -82,7 +82,7 @@ class MissingDependenciesDialog(QDialog):
                 child.widget().deleteLater()
 
         if not missing_deps:
-            label = QLabel("All dependencies are satisfied!")
+            label = QLabel("所有依赖项已满足！")
             label.setAlignment(Qt.AlignmentFlag.AlignCenter)
             self.scroll_layout.addWidget(label)
             return

@@ -1290,9 +1290,9 @@ class ModListWidget(QListWidget):
                     publishedfileids = steam_publishedfileid_to_name.keys()
                     # Prompt user
                     answer = show_dialogue_conditional(
-                        title="Are you sure?",
-                        text=f"You have selected {len(publishedfileids)} mods for unsubscribe.",
-                        information="\nDo you want to proceed?",
+                        title="确定吗？",
+                        text=f"您已选择取消订阅 {len(publishedfileids)} 个模组。",
+                        information="\n是否继续？"
                     )
                     if answer == "&Yes":
                         logger.debug(
@@ -2274,7 +2274,7 @@ class ModsPanel(QWidget):
         self.errors_summary_layout.addLayout(self.warnings_errors_layout)
 
         # Create and add Use This Instead button
-        self.use_this_instead_button = QPushButton('Check "Use This Instead" Database')
+        self.use_this_instead_button = QPushButton('查看“替换为此”数据库')
         self.use_this_instead_button.setObjectName("useThisInsteadButton")
         self.use_this_instead_button.clicked.connect(
             EventBus().use_this_instead_clicked.emit
@@ -2282,7 +2282,7 @@ class ModsPanel(QWidget):
         self.errors_summary_layout.addWidget(self.use_this_instead_button)
 
         # Create and add Check Dependencies button
-        self.check_dependencies_button: QPushButton = QPushButton("Check Dependencies")
+        self.check_dependencies_button: QPushButton = QPushButton("查看依赖")
         self.check_dependencies_button.setObjectName("MainUI")
         self.errors_summary_layout.addWidget(self.check_dependencies_button)
         self.check_dependencies_button.clicked.connect(

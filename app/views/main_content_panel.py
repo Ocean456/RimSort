@@ -2209,7 +2209,7 @@ class MainContent(QObject):
         self.do_threaded_loading_animation(
             gif_path=str(AppInfo().theme_data_folder / "default-icons" / "steam.gif"),
             target=partial(self._do_steamworks_api_call, instruction=instruction),
-            text="Processing Steam subscription action(s) via Steamworks API...",
+            text="正在通过Steamworks API处理Steam订阅操作...",
         )
         # self._do_refresh()
 
@@ -2221,8 +2221,8 @@ class MainContent(QObject):
         that are configured to be passed to the Rimworld executable
         """
         args, ok = dialogue.show_dialogue_input(
-            title="输入 git 链接",
-            label="输入 git 仓库网址（http/https）以克隆到本地模组：",
+            title="输入Git仓库地址",
+            label="请输入Git仓库URL（HTTP/HTTPS）以克隆到本地模组："
         )
         if ok:
             self._do_clone_repo_to_path(
@@ -2466,22 +2466,21 @@ class MainContent(QObject):
                 except GitCommandError:
                     stacktrace = traceback.format_exc()
                     dialogue.show_warning(
-                        title="Failed to clone repo!",
-                        text="The configured repo failed to clone/initialize! "
-                        + "Are you connected to the Internet? "
-                        + "Is your configured repo valid?",
-                        information=f"Configured repository: {repo_url}",
+                        title="无法克隆仓库！",
+                        text="配置的仓库克隆/初始化失败！ "
+                        + "请检查网络连接是否正常？"
+                        + "您配置的仓库是否有效？",
+                        information=f"配置的仓库地址：{repo_url}",
                         details=stacktrace,
                     )
         else:
             # Warn the user so they know to configure in settings
             dialogue.show_warning(
-                title="Invalid repository",
-                text="An invalid repository was detected!",
-                information="Please check your repository URL!\n"
-                + "A valid repository is a repository URL which is not\n"
-                + 'empty and is prefixed with "http://" or "https://"',
-                details=f"Invalid repository: {repo_url}",
+                title="无效仓库",
+                text="检测到无效仓库！",
+                information="请检查仓库URL！<br>有效的仓库应为非空且以'http://'或'https://'开头的URL",
+                details=f"无效仓库地址：{repo_url}"
+
             )
 
     def _do_force_update_existing_repo(self, base_path: str, repo_url: str) -> None:
@@ -2521,7 +2520,7 @@ class MainContent(QObject):
                     # Notify user
                     dialogue.show_information(
                         title="存储库已更新",
-                        text="配置的存储库已更新！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
+                        text="配置的存储库已更新！",
                         information=f"{repo_path} ->\n "
                         + f"Latest Commit: {repo.head.commit.message.decode() if isinstance(repo.head.commit.message, bytes) else repo.head.commit.message}",
                     )
@@ -2534,14 +2533,14 @@ class MainContent(QObject):
                         text="配置的存储库更新失败！"
                         + "请检查是否连接到互联网，"
                         + "或者确认配置的仓库地址是否有效。",
-                        information=f"Configured repository: {repo_url}",
+                        information=f"配置的仓库地址：{repo_url}",
                         details=stacktrace,
                     )
             else:
                 answer = dialogue.show_dialogue_conditional(
-                    title="Repository does not exist",
-                    text="Tried to update a git repository that does not exist!",
-                    information="Would you like to clone a new copy of this repository?",
+                    title="仓库不存在",
+                    text="尝试更新不存在的Git仓库！",
+                    information="是否要克隆该仓库的新副本？",
                 )
                 if answer == "&Yes":
                     if GIT_EXISTS:
@@ -2554,11 +2553,9 @@ class MainContent(QObject):
         else:
             # Warn the user so they know to configure in settings
             dialogue.show_warning(
-                title="Invalid repository",
-                text="An invalid repository was detected!",
-                information="Please reconfigure a repository in settings!\n"
-                + "A valid repository is a repository URL which is not\n"
-                + 'empty and is prefixed with "http://" or "https://"',
+                title="无效仓库",
+                text="检测到无效仓库！",
+                information="请在设置中重新配置仓库！<br>有效的仓库应为非空且以'http://'或'https://'开头的URL地址"
             )
 
     def _do_upload_db_to_repo(self, repo_url: str, file_name: str) -> None:
@@ -2603,9 +2600,9 @@ class MainContent(QObject):
                                 "Unable to parse version or timestamp from database. Cancelling upload."
                             )
                             dialogue.show_warning(
-                                title="Failed to upload database!",
-                                text="The database file does not contain a version or timestamp!",
-                                information=f"File: {file_full_path}",
+                                title="数据库上传失败！",
+                                text="数据库文件中缺少版本号或时间戳！",
+                                information=f"文件：{file_full_path}"
                             )
                             return
                         # Get the abbreviated timezone
@@ -2622,9 +2619,9 @@ class MainContent(QObject):
                         )
                     else:
                         dialogue.show_warning(
-                            title="File does not exist",
-                            text="Please ensure the file exists and then try to upload again!",
-                            information=f"File not found:\n{file_full_path}\nRepository:\n{repo_url}",
+                            title="文件不存在",
+                            text="请确保文件存在，然后重新尝试上传！",
+                            information=f"未找到文件：\n{file_full_path}\n仓库地址：\n{repo_url}"
                         )
                         return
 
@@ -2667,10 +2664,10 @@ class MainContent(QObject):
                     except Exception:
                         stacktrace = traceback.format_exc()
                         dialogue.show_warning(
-                            title="Failed to push new branch to repo!",
-                            text=f"Failed to push a new branch {new_branch_name} to {repo_folder_name}! Try to see "
-                            + "if you can manually push + Pull Request. Otherwise, checkout main and try again!",
-                            information=f"Configured repository: {repo_url}",
+                            title="推送新分支到仓库失败！",
+                            text=f"无法将新分支 {new_branch_name} 推送至 {repo_folder_name}！<br>"
+                            + "请尝试手动推送并创建拉取请求。否则，请切换到主分支并重试！",
+                            information=f"已配置的仓库：{repo_url}",
                             details=stacktrace,
                         )
                     try:
@@ -2685,11 +2682,11 @@ class MainContent(QObject):
                     except Exception:
                         stacktrace = traceback.format_exc()
                         dialogue.show_warning(
-                            title="Failed to create pull request!",
-                            text=f"Failed to create a pull request for branch {base_branch} <- {new_branch_name}!\n"
-                            + "The branch should be pushed. Check on Github to see if you can manually"
-                            + " make a Pull Request there! Otherwise, checkout main and try again!",
-                            information=f"Configured repository: {repo_url}",
+                            title="创建拉取请求失败！",
+                            text=f"无法为分支 {base_branch} <- {new_branch_name} 创建拉取请求！<br>"
+                            + "无法为分支 {base_branch} <- {new_branch_name} 创建拉取请求！<br>"
+                            + "否则，请切换到主分支并重试！",
+                            information=f"已配置的仓库：{repo_url}",
                             details=stacktrace,
                         )
                         self._do_cleanup_gitpython(repo=local_repo)
@@ -2698,10 +2695,9 @@ class MainContent(QObject):
                     self._do_cleanup_gitpython(repo=local_repo)
                     # Notify the pull request URL
                     answer = dialogue.show_dialogue_conditional(
-                        title="Pull request created",
-                        text="Successfully created pull request!",
-                        information="Do you want to try to open it in your web browser?\n\n"
-                        + f"URL: {pull_request_url}",
+                        title="拉取请求已创建",
+                        text="成功创建拉取请求！",
+                        information="您是否要尝试在网页浏览器中打开它？<br><br>URL：{pull_request_url}"
                     )
                     if answer == "&Yes":
                         # Open the url in user's web browser
@@ -2709,16 +2705,16 @@ class MainContent(QObject):
                 except Exception:
                     stacktrace = traceback.format_exc()
                     dialogue.show_warning(
-                        title="Failed to update repo!",
-                        text=f"The configured repo failed to update!\nFile name: {file_name}",
-                        information=f"Configured repository: {repo_url}",
+                        title="更新仓库失败！",
+                        text=f"配置的仓库更新失败！<br>文件名：{file_name}",
+                        information=f"已配置的仓库：{repo_url}",
                         details=stacktrace,
                     )
             else:
                 answer = dialogue.show_dialogue_conditional(
-                    title="Repository does not exist",
-                    text="Tried to update a git repository that does not exist!",
-                    information="Would you like to clone a new copy of this repository?",
+                    title="仓库不存在",
+                    text="尝试更新不存在的 Git 仓库！",
+                    information="是否要克隆此仓库的新副本？",
                 )
                 if answer == "&Yes":
                     if GIT_EXISTS:
@@ -2731,20 +2727,20 @@ class MainContent(QObject):
         else:
             # Warn the user so they know to configure in settings
             dialogue.show_warning(
-                title="Invalid repository",
-                text="An invalid repository was detected!",
-                information="Please reconfigure a repository in settings!\n"
-                + 'A valid repository is a repository URL which is not empty and is prefixed with "http://" or "https://"',
+                title="无效的仓库",
+                text="检测到无效的仓库！",
+                information="请在设置中重新配置仓库！<br>"
+                + "有效的仓库应为非空且以“http://”或“https://”开头的仓库URL",
             )
 
     def _do_notify_no_git(self) -> None:
         answer = dialogue.show_dialogue_conditional(  # We import last so we can use gui + utils
-            title="git not found",
-            text="git executable was not found in $PATH!",
+            title="未找到Git",
+            text="在系统环境变量$PATH中未找到git可执行文件！",
             information=(
-                "Git integration will not work without Git installed! Do you want to open download page for Git?\n\n"
-                "If you just installed Git, please restart RimSort for the PATH changes to take effect."
-            ),
+                "未安装Git将无法使用Git集成功能！是否要打开Git的下载页面？<br><br>"
+                "如果您刚刚安装了Git，请重启RimSort以使环境变量更改生效。"
+            )
         )
         if answer == "&Yes":
             open_url_browser("https://git-scm.com/downloads")
@@ -2768,7 +2764,7 @@ class MainContent(QObject):
         logger.info("Opening file dialog to specify Steam DB")
         input_path = dialogue.show_dialogue_file(
             mode="open",
-            caption="Choose Steam Workshop Database",
+            caption="选择Steam创意工坊数据库",
             _dir=str(AppInfo().app_storage_folder),
             _filter="JSON (*.json)",
         )
@@ -2787,7 +2783,7 @@ class MainContent(QObject):
         logger.info("Opening file dialog to specify Community Rules DB")
         input_path = dialogue.show_dialogue_file(
             mode="open",
-            caption="Choose Community Rules DB",
+            caption="选择社区规则数据库",
             _dir=str(AppInfo().app_storage_folder),
             _filter="JSON (*.json)",
         )
@@ -3462,7 +3458,7 @@ class MainContent(QObject):
         else:
             dialogue.show_information(
                 title="替换为此",
-                text='在"替换为此"数据库中未找到任何建议。',
+                text='在“替换为此”数据库中未找到任何建议。',
             )
 
     def set_main_window(self, main_window: "MainWindow") -> None:

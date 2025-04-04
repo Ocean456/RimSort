@@ -395,7 +395,7 @@ class SettingsDialog(QDialog):
             self.steam_workshop_db_local_file_choose_button,
         ) = self.__create_db_group(section_lbl, none_lbl, tab_layout)
         database_expiry_label = QLabel(
-            "Steam Workshop database expiry in Epoch Time (Use 0 to Disable Notification. Default is 7 Days)"
+            "Steam创意工坊数据库到期时间（使用Unix时间戳格式，0表示禁用通知，默认值604800=7天）"
         )
         group_layout.addWidget(database_expiry_label)
 
@@ -506,7 +506,7 @@ class SettingsDialog(QDialog):
         group_layout.addWidget(when_building_database_label)
 
         self.db_builder_include_all_radio = QRadioButton(
-            "从本地安装的模组获取 PublishedFileID"
+            "从本地安装的模组获取文件ID"
         )
         group_layout.addWidget(self.db_builder_include_all_radio)
 
@@ -516,7 +516,7 @@ class SettingsDialog(QDialog):
         group_layout.addWidget(explanatory_label)
 
         self.db_builder_include_no_local_radio = QRadioButton(
-            "从 Steam 创意工坊获取 PublishedFileID"
+            "从 Steam 创意工坊获取文件ID"
         )
         group_layout.addWidget(self.db_builder_include_no_local_radio)
 
@@ -623,12 +623,12 @@ class SettingsDialog(QDialog):
         group_layout.addWidget(self.steamcmd_validate_downloads_checkbox)
 
         self.steamcmd_auto_clear_depot_cache_checkbox = QCheckBox(
-            "自动清除 depot 缓存"
+            "自动清除仓库缓存"
         )
         self.steamcmd_auto_clear_depot_cache_checkbox.setToolTip(
             (
-                "Automatically clear the depot cache before downloading mods through SteamCMD.\n"
-                "This may potentially prevent some issues with downloading mods such as download failures and deleted mods repopulating."
+                "在使用SteamCMD下载模组前自动清除仓库缓存。\n"
+                "这可能会避免在下载模组时出现的一些问题，例如下载失败以及已删除模组重新生成的情况。"
             )
         )
         group_layout.addWidget(self.steamcmd_auto_clear_depot_cache_checkbox)
@@ -666,7 +666,7 @@ class SettingsDialog(QDialog):
 
         self.steamcmd_clear_depot_cache_button = QPushButton("清除仓库缓存")
         self.steamcmd_clear_depot_cache_button.setToolTip(
-            "Clear the depot cache manually. This may be useful if you encounter issues with downloading mods through SteamCMD."
+            "手动清除仓库缓存。当通过SteamCMD下载模组遇到问题时，这一操作可能会非常有用。"
         )
         button_layout.addWidget(self.steamcmd_clear_depot_cache_button)
 
@@ -748,17 +748,17 @@ class SettingsDialog(QDialog):
         group_box.setFont(GUIInfo().emphasis_font)
 
         self.enable_themes_checkbox = QCheckBox(
-            "启用使用主题/样式表，而非系统主题"
+            "启用主题/样式表而非系统默认主题"
         )
         self.enable_themes_checkbox.setToolTip(
-            "To add your own theme / stylesheet \n\n"
-            "1) Create a new-folder in 'themes' folder in your 'RimSort' config folder \n"
-            "2) Using the default 'RimPy' theme copy it to the folder you created \n"
-            "3) Edit the copied 'style.qss' as per your imagination \n"
-            "4) Start 'RimSort' and select your theme from dropdown \n"
-            "5) Click 'ok' to save settings and apply the selected theme \n\n"
-            "NOTE \n"
-            "Name of folder will be used as name of the theme and any invalid theme will be ignored \n"
+            "要添加自定义主题/样式表 \n\n"
+            "1) 在您的'RimSort'配置文件夹中的'themes'文件夹内新建一个文件夹 \n"
+            "2) 将默认的'RimPy'主题复制到您创建的文件夹中 \n"
+            "3) 根据您的创意编辑复制的'style.qss'文件 \n"
+            "4) 启动'RimSort'并从下拉菜单中选择您的主题 \n"
+            "5) 点击'确定'保存设置并应用所选主题 \n\n"
+            "注意 \n"
+            "文件夹名称将用作主题名称，任何无效主题将被忽略 \n"
         )
         group_layout.addWidget(self.enable_themes_checkbox)
 
