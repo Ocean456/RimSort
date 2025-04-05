@@ -173,7 +173,7 @@ def show_information(
     if details:
         info_message_box.setDetailedText(details)
 
-        def translate_text():
+        def translate_text() -> None:
             for btn in info_message_box.buttons():
                 raw_text = btn.text().lower()
                 if raw_text.startswith("show details"):
@@ -480,8 +480,6 @@ class BinaryChoiceDialog(_BaseMessageBox):
             self.setDefaultButton(self.negative_btn)
         else:
             self.setDefaultButton(self.positive_btn)
-        positive_text = "确认"
-        negative_text = "取消"
 
         # Set button text where necessary
         if positive_text is not None:
