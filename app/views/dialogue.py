@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Tuple
 
 from loguru import logger
-from PySide6.QtCore import QEvent, QRunnable, Qt, QThreadPool, Signal, Slot, QTimer
+from PySide6.QtCore import QEvent, QRunnable, Qt, QThreadPool, QTimer, Signal, Slot
 from PySide6.QtWidgets import (
     QDialog,
     QFileDialog,
