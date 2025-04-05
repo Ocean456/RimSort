@@ -1070,8 +1070,8 @@ class SettingsController(QObject):
         """
         if not skip_confirmation:
             answer = BinaryChoiceDialog(
-                title="清除所有位置",
-                text="您确定要清除所有位置吗？",
+                title="清除所有路径",
+                text="您确定要清除所有路径吗？",
             )
             if not answer.exec_is_positive():
                 return
@@ -1622,8 +1622,8 @@ class SettingsController(QObject):
             title="确认构建数据库",
             text="您确定要构建创意工坊数据库吗？",
             information=(
-                "对多数用户而言无需此操作，GitHub提供的Steam数据库已足够。构建数据库可能需要较长时间。\n"
-                "根据您的设置，系统可能通过WebAPI爬取整个创意工坊内容。\n"
+                "对多数用户而言无需此操作，GitHub提供的Steam数据库已足够。构建数据库可能需要较长时间。<br>"
+                "根据您的设置，系统可能通过WebAPI爬取整个创意工坊内容。<br>"
                 "此过程将产生大量数据且耗时较长。确定要继续吗？"
             ),
             icon=QMessageBox.Icon.Warning,

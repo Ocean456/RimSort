@@ -42,8 +42,8 @@ def copy_to_clipboard_safely(text: str) -> None:
     except Exception as e:
         logger.error(f"Failed to copy to clipboard: {e}")
         dialogue.show_fatal_error(
-            title="Failed to copy to clipboard.",
-            text="RimSort failed to copy the text to your clipboard. Please copy it manually.",
+            title="复制到剪贴板失败",
+            text="RimSort无法完成剪贴板复制，请手动操作",
             details=str(e),
         )
 
@@ -64,18 +64,18 @@ def rmtree(path: str | Path, **kwargs: Any) -> bool:
     if not path.exists():
         logger.error(f"Tried to delete directory that does not exist: {path}")
         dialogue.show_warning(
-            title="Failed to remove directory",
-            text="RimSort tried to remove a directory that does not exist.",
-            details=f"Directory does not exist: {path}",
+            title="删除目录失败",
+            text="RimSort 试图删除一个不存在的目录。",
+            details=f"目录不存在：{path}",
         )
         return False
 
     if not path.is_dir():
         logger.error(f"rmtree path is not a directory: {path}")
         dialogue.show_warning(
-            title="Failed to remove directory",
-            text="RimSort tried to remove a directory that is not a directory.",
-            details=f"Path is not a directory: {path}",
+            title="删除目录失败",
+            text="RimSort 试图删除一个不是目录的目录。",
+            details=f"路径不是目录：{path}",
         )
         return False
 
@@ -88,9 +88,9 @@ def rmtree(path: str | Path, **kwargs: Any) -> bool:
             error_code = e.errno
         logger.error(f"Failed to remove directory: {e}")
         dialogue.show_warning(
-            title="Failed to remove directory",
-            text="An OSError occurred while trying to remove a directory.",
-            information=f"{e.strerror} occurred at {e.filename} with error code {error_code}.",
+            title="删除目录失败",
+            text="试图删除目录时发生系统错误。",
+            information=f"{e.strerror} 发生于 {e.filename} 路径，错误代码：{error_code}。",
             details=str(e),
         )
         return False
@@ -255,23 +255,20 @@ def launch_game_process(game_install_path: Path, args: list[str]) -> None:
         else:
             logger.debug("The game executable path does not exist")
             dialogue.show_warning(
-                title="File not found",
-                text="Unable to launch game process",
+                title="找不到文件",
+                text="游戏启动失败",
                 information=(
-                    "RimSort could not start RimWorld as the game executable does "
-                    f"not exist at the specified path: {executable_path}. Please check "
-                    "that this directory is correct and the RimWorld game executable "
-                    "exists in it."
+                    f"RimSort无法启动RimWorld，由于在指定路径未找到游戏主程序文件：<br>{executable_path}<br><b请检查以下项目：<br>1. 该目录配置是否正确<br>2. RimWorld主程序是否存在于该路径"
                 ),
             )
     else:
         logger.error("The path to the game folder is empty")
         dialogue.show_warning(
-            title="Game launch failed",
-            text="Unable to launch RimWorld",
+            title="游戏启动失败",
+            text="无法启动RimWorld",
             information=(
-                f"RimSort could not start RimWorld as the game folder is empty or invalid: [{game_install_path}] "
-                "Please check that the game folder is properly set and that the RimWorld executable exists in it."
+                f"由于游戏文件夹为空或无效，RimSort无法启动RimWorld: [{game_install_path}] "
+                "请检查游戏文件夹是否正确设置，并且其中存在RimWorld可执行文件。"
             ),
         )
 

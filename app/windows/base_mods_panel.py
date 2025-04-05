@@ -114,19 +114,19 @@ class BaseModsPanel(QWidget):
                 else QHeaderView.ResizeMode.Stretch,
             )
 
-        self.editor_deselect_all_button = QPushButton("Deselect all")
+        self.editor_deselect_all_button = QPushButton("取消全选")
         self.editor_deselect_all_button.clicked.connect(
             partial(self._set_all_checkbox_rows, False)
         )
         self.editor_checkbox_actions_layout.addWidget(self.editor_deselect_all_button)
 
-        self.editor_select_all_button = QPushButton("Select all")
+        self.editor_select_all_button = QPushButton("全选")
         self.editor_select_all_button.clicked.connect(
             partial(self._set_all_checkbox_rows, True)
         )
         self.editor_checkbox_actions_layout.addWidget(self.editor_select_all_button)
 
-        self.editor_cancel_button = QPushButton("Do nothing and exit")
+        self.editor_cancel_button = QPushButton("取消并退出")
         self.editor_cancel_button.clicked.connect(self.close)
         self.editor_exit_actions_layout.addWidget(self.editor_cancel_button)
 

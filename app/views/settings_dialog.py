@@ -73,7 +73,7 @@ class SettingsDialog(QDialog):
 
     def _do_locations_tab(self) -> None:
         tab = QWidget()
-        self.tab_widget.addTab(tab, "位置")
+        self.tab_widget.addTab(tab, "路径")
 
         tab_layout = QVBoxLayout(tab)
         tab_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
@@ -102,7 +102,7 @@ class SettingsDialog(QDialog):
         buttons_layout.addStretch()
 
         # "Clear" button"
-        self.locations_clear_button = QPushButton("清除所有位置", tab)
+        self.locations_clear_button = QPushButton("清除所有路径", tab)
         buttons_layout.addWidget(self.locations_clear_button)
 
         # "Autodetect" button

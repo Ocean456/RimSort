@@ -172,8 +172,8 @@ class RentryImport:
     def input_dialog(self) -> None:
         """Initialize the UI for entering Rentry.co links."""
         self.link_input = show_dialogue_input(
-            title="Enter Rentry.co link",
-            label="Enter the Rentry.co link:",
+            title="输入 Rentry.co 链接",
+            label="输入 the Rentry.co 链接:",
         )
         logger.info("Rentry link Input UI initialized successfully!")
         if self.link_input[1]:
@@ -203,8 +203,8 @@ class RentryImport:
             logger.warning("Invalid Rentry link. Please enter a valid Rentry link.")
             # Show warning if rentry link is invalid
             show_warning(
-                title="Invalid Rentry Link",
-                text="Invalid Rentry link, Please enter a valid Rentry link.",
+                title="无效的 Rentry 链接",
+                text="无效的 Rentry 链接, 请输入有效的 Rentry 链接。",
             )
             return self.input_dialog()  # Re-initialize the UI for new input
 
@@ -290,9 +290,9 @@ class RentryError:
             f"Rentry returned status code: {response.status_code}. Reason: {response.reason}"
         )
         InformationBox(
-            title="Failed to fetch Rentry Content",
-            text=f"Rentry returned status code: {response.status_code}",
-            information="RimSort failed to fetch the content from the provided Rentry link. This may be due to an invalid link, your internet connection, or Rentry.co being down. It may also be the result of a captcha. Please try again later.",
+            title="获取 Rentry 内容失败",
+            text=f"Rentry 返回状态码：{response.status_code}",
+            information="RimSort未能通过指定Rentry链接获取内容<br>可能原因：1. 链接无效2. 网络连接异常3. Rentry.co服务中断4. 需完成验证码验证<br>请稍后重新尝试",
             details=response.reason,
             icon=QMessageBox.Icon.Warning,
         ).exec()

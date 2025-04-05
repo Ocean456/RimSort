@@ -90,7 +90,7 @@ class ModDeletionMenu(QMenu):
             )
 
         show_information(
-            title="RimSort", text=f"Successfully deleted {count} seleted mods."
+            title="RimSort", text=f"成功删除{count}个选择的模组。"
         )
 
     def delete_both(self) -> None:
@@ -113,17 +113,17 @@ class ModDeletionMenu(QMenu):
                 else:
                     error_code = e.errno
                 if e.errno == ENOTEMPTY:
-                    warning_text = "Mod directory was not empty. Please close all programs accessing files or subfolders in the directory (including your file manager) and try again."
+                    warning_text = "模组目录非空。请关闭所有正在访问该目录内文件或子文件夹的程序（包括文件管理器），然后重试。"
                 else:
-                    warning_text = "An OSError occurred while deleting mod."
+                    warning_text = "删除模组时发生系统错误。"
 
                 logger.warning(
                     f"Unable to delete mod located at the path: {mod_metadata['path']}"
                 )
                 show_warning(
-                    title="Unable to delete mod",
+                    title="无法删除模组",
                     text=warning_text,
-                    information=f"{e.strerror} occurred at {e.filename} with error code {error_code}.",
+                    information=f"{e.strerror} 发生于 {e.filename} 路径，错误代码：{error_code}。",
                 )
             return False
 

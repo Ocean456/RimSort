@@ -21,7 +21,7 @@ class InvalidArchivePathError(ValueError):
     """Raised when the provided archive path is invalid"""
 
     def __init__(self, archive_path: str) -> None:
-        super().__init__(f"Invalid archive path: {archive_path}")
+        super().__init__(f"无效的存档路径：{archive_path}")
 
 
 class InstanceController(QObject):
@@ -41,11 +41,11 @@ class InstanceController(QObject):
     def __new__(cls, instance: Instance | str) -> Self:
         if isinstance(instance, str):
             if not cls._validate_archive_path(instance):
-                logger.error(f"Invalid archive path: {instance}")
+                logger.error(f"无效的存档路径：{instance}")
                 show_warning(
-                    title="Invalid archive path",
-                    text="The provided archive path is invalid.",
-                    information="Please provide a valid archive path.",
+                    title="无效的存档路径",
+                    text="提供的存档路径无效。",
+                    information="请提供有效的存档路径。",
                 )
 
                 raise InvalidArchivePathError("Invalid archive path")
@@ -65,8 +65,8 @@ class InstanceController(QObject):
         except Exception as e:
             logger.error(f"An error occurred while reading instance archive: {e}")
             show_fatal_error(
-                title="Error restoring instance",
-                text=f"An error occurred while reading instance archive: {e}",
+                title="恢复实例出错",
+                text=f"读取实例存档时发生错误：{e}",
                 details=format_exc(),
             )
 

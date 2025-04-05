@@ -561,13 +561,11 @@ class MainContent(QObject):
             [f"* {mod}" for mod in self.duplicate_mods.keys()]
         )
         dialogue.show_warning(
-            title="Duplicate mod(s) found",
-            text="Duplicate mods(s) found for package ID(s) in your ModsConfig.xml (active mods list)",
+            title="发现重复模组",
+            text="在您的ModsConfig.xml（当前激活模组列表）中检测到以下Package ID存在重复模组",
             information=(
-                "The following list of mods were set active in your ModsConfig.xml and "
-                "duplicate instances were found of these mods in your mod data sources. "
-                "The vanilla game will use the first 'local mod' of a particular package ID "
-                "that is found - so RimSort will also adhere to this logic."
+                "下列模组已在ModsConfig.xml中启用，但在您的模组数据源中发现重复实例。"
+                "原版游戏会采用首个匹配的Package ID的'本地模组'，因此RimSort也将遵循此逻辑。"
             ),
             details=list_of_duplicate_mods,
         )
@@ -827,9 +825,9 @@ class MainContent(QObject):
         logger.debug(f"Current RimSort version found: {current_version}")
         if current_version != tag_name:
             answer = dialogue.show_dialogue_conditional(
-                title="RimSort update found",
-                text=f"An update to RimSort has been released: {tag_name}",
-                information=f"You are running RimSort {current_version}\nDo you want to update now?",
+                title="发现RimSort更新",
+                text=f"RimSort 已发布新版本：{tag_name}",
+                information=f"当前运行版本：{current_version}\n是否立即更新？"
             )
             if answer == "&Yes":
                 # Setup environment
@@ -906,20 +904,18 @@ class MainContent(QObject):
                     )
                     temp_dir = "RimSort" if SYSTEM != "Darwin" else "RimSort.app"
                     answer = dialogue.show_dialogue_conditional(
-                        title="Update downloaded",
-                        text="Do you want to proceed with the update?",
-                        information=f"\nSuccessfully retrieved latest release. The update will be installed from: {os.path.join(gettempdir(), temp_dir)}",
+                        title="更新已就绪",
+                        text="是否立即执行更新？",
+                        information=f"\n已成功获取最新版本，更新程序将从以下路径安装：{os.path.join(gettempdir(), temp_dir)}"
                     )
                     if answer != "&Yes":
                         return
                 except Exception:
                     stacktrace = traceback.format_exc()
                     dialogue.show_warning(
-                        title="Failed to download update",
-                        text="Failed to download latest RimSort release!",
-                        information="Did the file/url change? "
-                        + "Does your environment have access to the Internet?\n"
-                        + f"URL: {browser_download_url}",
+                        title="更新获取失败",
+                        text="最新版 RimSort 下载失败！",
+                        information=f"可能原因：<br>文件地址是否变更？<br>当前网络环境是否受限？<br>下载地址：{browser_download_url}",
                         details=stacktrace,
                     )
                     return
@@ -969,8 +965,8 @@ class MainContent(QObject):
         else:
             logger.debug("Up to date!")
             dialogue.show_information(
-                title="RimSort is up to date!",
-                text=f"You are already running the latest release: {tag_name}",
+                title="RimSort 已是最新版本！",
+                text=f"当前运行的版本已是最新发布版本：{tag_name}"
             )
 
     def _do_validate_steam_client(self) -> None:
@@ -1226,12 +1222,12 @@ class MainContent(QObject):
             )
         except NotImplementedError as e:
             dialogue.show_warning(
-                title="Sorting algorithm not implemented",
-                text="The selected sorting algorithm is not implemented",
+                title="排序算法未实现",
+                text="选定的排序算法未实现",
                 information=(
-                    "This may be caused by malformed settings or improper migration between versions or different mod manager. "
-                    "Try resetting your settings, selecting a different sorting algorithm, or "
-                    "deleting your settings file. If the issue persists, please report it the developers."
+                    "这可能是由于设置文件损坏、跨版本迁移错误或模组管理器冲突引起的。"
+                    "请尝试重置设置、选择其他排序算法或删除设置文件。"
+                    "若问题仍未解决，请向开发者报告。"
                 ),
                 details=str(e),
             )
@@ -1369,8 +1365,8 @@ class MainContent(QObject):
                     json_to_xml_write(mods_config_data, file_path)
             except Exception:
                 dialogue.show_fatal_error(
-                    title="Failed to export to file",
-                    text="Failed to export active mods to file:",
+                    title="导出到文件失败",
+                    text="未能导出当前启用的模组到文件：",
                     information=f"{file_path}",
                     details=traceback.format_exc(),
                 )
@@ -1533,7 +1529,7 @@ class MainContent(QObject):
         dialogue.show_information(
             title="导出当前模组列表",
             text="当前模组列表报告已复制到剪贴板...",
-            information='点击“show details”查看完整报告！',
+            information='点击「show details」查看完整报告！',
             details=f"{active_mods_clipboard_report}",
         )
         copy_to_clipboard_safely(active_mods_clipboard_report)
@@ -1686,10 +1682,10 @@ class MainContent(QObject):
         if rentry_uploader.url and host and host.endswith("rentry.co"):
             copy_to_clipboard_safely(rentry_uploader.url)
             dialogue.show_information(
-                title="Uploaded active mod list",
-                text=f"Uploaded active mod list report to Rentry.co! The URL has been copied to your clipboard:\n\n{rentry_uploader.url}",
-                information='Click "Show Details" to see the full report!',
-                details=f"{active_mods_rentry_report}",
+                title="当前启用模组列表已上传",
+                text=f"已成功将当前启用的模组列表报告上传至Rentry.co！链接已复制到剪贴板：<br><br>{rentry_uploader.url}",
+                information='点击「show details」查看完整报告！',
+                details=f"{active_mods_rentry_report}"
             )
         else:
             dialogue.show_warning(
@@ -1762,10 +1758,10 @@ class MainContent(QObject):
     def show_dialog_specify_paths(self, directory_name: str) -> None:
         logger.error(f"Could not open {directory_name} directory")
         answer = dialogue.show_dialogue_conditional(
-            title="Could not open directory",
-            text=f"{directory_name} path does not exist or is not set.",
-            information="Would you like to set the path now?",
-            button_text_override=["Open settings"],
+            title="无法打开目录",
+            text=f"{directory_name} 路径不存在或未设置。",
+            information="是否现在设置路径？",
+            button_text_override=["打开设置"]
         )
         if "settings" in answer:
             self.settings_controller.show_settings_dialog()
@@ -1794,9 +1790,9 @@ class MainContent(QObject):
     def _upload_log(self, path: Path) -> None:
         if not os.path.exists(path):
             dialogue.show_warning(
-                title="File not found",
-                text="The file you are trying to upload does not exist.",
-                information=f"File: {path}",
+                title="文件未找到",
+                text="您尝试上传的文件不存在。",
+                information=f"文件路径：{path}"
             )
             return
 
@@ -2555,7 +2551,7 @@ class MainContent(QObject):
             dialogue.show_warning(
                 title="无效仓库",
                 text="检测到无效仓库！",
-                information="请在设置中重新配置仓库！<br>有效的仓库应为非空且以'http://'或'https://'开头的URL地址"
+                information="请检查仓库URL！<br>有效的仓库应为非空且以'http://'或'https://'开头的URL"
             )
 
     def _do_upload_db_to_repo(self, repo_url: str, file_name: str) -> None:

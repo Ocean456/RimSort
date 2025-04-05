@@ -348,7 +348,7 @@ class ModListItemInner(QWidget):
         """
         metadata = self.metadata_manager.internal_local_metadata.get(self.uuid, {})
 
-        name_line = f"Mod: {metadata.get('name', 'Not specified')}\n"
+        name_line = f"名称: {metadata.get('name', 'Not specified')}\n"
 
         authors_tag = metadata.get("authors")
         authors_text = (
@@ -356,13 +356,13 @@ class ModListItemInner(QWidget):
             if isinstance(authors_tag, dict)
             else authors_tag or "Not specified"
         )
-        author_line = f"Authors: {authors_text}\n"
+        author_line = f"作者： {authors_text}\n"
 
         package_id = metadata.get("packageid", "Not specified")
-        package_id_line = f"PackageID: {package_id}\n"
+        package_id_line = f"包名： {package_id}\n"
 
         mod_version = metadata.get("modversion", "Not specified")
-        modversion_line = f"Mod Version: {mod_version}\n"
+        modversion_line = f"模组版本：{mod_version}\n"
 
         supported_versions_tag = metadata.get("supportedversions", {})
         supported_versions_list = supported_versions_tag.get("li")
@@ -371,10 +371,10 @@ class ModListItemInner(QWidget):
             if isinstance(supported_versions_list, list)
             else supported_versions_list or "Not specified"
         )
-        supported_versions_line = f"Supported Versions: {supported_versions_text}\n"
+        supported_versions_line = f"支持版本:{supported_versions_text}\n"
 
         path = metadata.get("path", "Not specified")
-        path_line = f"Path: {path}"
+        path_line = f"路径： {path}"
 
         return "".join(
             [
@@ -1264,9 +1264,9 @@ class ModListWidget(QListWidget):
                     publishedfileids = steam_publishedfileid_to_name.keys()
                     # Prompt user
                     answer = show_dialogue_conditional(
-                        title="Are you sure?",
-                        text=f"You have selected {len(publishedfileids)} mods for unsubscribe + re-subscribe.",
-                        information="\nThis operation will potentially delete .dds textures leftover. Steam is unreliable for this. Do you want to proceed?",
+                        title="确定吗？",
+                        text=f"您已选择取消并重新订阅 {len(publishedfileids)} 个模组。",
+                        information="<br>该操作可能会删除残留的.dds纹理文件。Steam对此类操作支持不可靠，您确定要继续吗？",
                     )
                     if answer == "&Yes":
                         logger.debug(
@@ -1316,16 +1316,16 @@ class ModListWidget(QListWidget):
                             f"Unable to add mod to SteamDB blacklist: {steamdb_remove_blacklist}"
                         )
                         show_warning(
-                            "Warning",
-                            "Unable to add mod to SteamDB blacklist",
-                            "Metadata manager or steamdb_add_blacklist was None type",
+                            "警告",
+                            "无法将模组添加到 SteamDB 黑名单",
+                            "元数据管理器或SteamDB黑名单添加接口未初始化",
                             parent=self,
                         )
                         return False
 
                     args, ok = show_dialogue_input(
-                        title="Add comment",
-                        label="Enter a comment providing your reasoning for wanting to blacklist this mod: "
+                        title="添加备注",
+                        label="请输入您要将此模组加入黑名单的备注："
                         + f"{self.metadata_manager.external_steam_metadata.get(steamdb_add_blacklist, {}).get('steamName', steamdb_add_blacklist)}",
                     )
                     if ok:
@@ -1334,8 +1334,8 @@ class ModListWidget(QListWidget):
                         )
                     else:
                         show_warning(
-                            title="Unable to add to blacklist",
-                            text="Comment was not provided or entry was cancelled. Comments are REQUIRED for this action!",
+                            title="黑名单添加失败",
+                            text="未提交理由说明或操作已中止！该操作必须填写理由说明"
                         )
                     return True
                 elif (
@@ -1349,19 +1349,18 @@ class ModListWidget(QListWidget):
                             f"Unable to remove mod from SteamDB blacklist: {steamdb_remove_blacklist}"
                         )
                         show_warning(
-                            "Warning",
-                            "Unable to remove mod from SteamDB blacklist",
-                            "Metadata manager or steamdb_remove_blacklist was None type",
+                            "警告",
+                            "无法从SteamDB黑名单中删除mod",
+                            "元数据管理器或SteamDB黑名单添加接口未初始化",
                             parent=self,
                         )
                         return False
 
                     answer = show_dialogue_conditional(
-                        title="Are you sure?",
-                        text="This will remove the selected mod, "
-                        + f"{self.metadata_manager.external_steam_metadata.get(steamdb_remove_blacklist, {}).get('steamName', steamdb_remove_blacklist)}, "
-                        + "from your configured Steam DB blacklist."
-                        + "\nDo you want to proceed?",
+                        title="确定吗",
+                        text="此操作将从您配置的Steam数据库黑名单中移除选定模组："
+                             + f"{self.metadata_manager.external_steam_metadata.get(steamdb_remove_blacklist, {}).get('steamName', steamdb_remove_blacklist)}，"
+                             + "该操作不可逆转！<br>是否确认继续执行？"
                     )
                     if answer == "&Yes":
                         self.steamdb_blacklist_signal.emit(

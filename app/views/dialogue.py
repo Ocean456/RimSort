@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Tuple
 
 from loguru import logger
-from PySide6.QtCore import QEvent, QRunnable, Qt, QThreadPool, Signal, Slot
+from PySide6.QtCore import QEvent, QRunnable, Qt, QThreadPool, Signal, Slot, QTimer
 from PySide6.QtWidgets import (
     QDialog,
     QFileDialog,
@@ -173,7 +173,26 @@ def show_information(
     if details:
         info_message_box.setDetailedText(details)
 
-    info_message_box.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.Default)
+        def translate_text():
+            for btn in info_message_box.buttons():
+                raw_text = btn.text().lower()
+                if raw_text.startswith("show details"):
+                    btn.setText("显示详情")
+                elif raw_text.startswith("hide details"):
+                    btn.setText("隐藏详情")
+
+        QTimer.singleShot(0, translate_text)
+
+        # info_message_box.buttonClicked.connect(lambda :QTimer.singleShot(0, translate_text))
+        #
+        # check_timer = QTimer(info_message_box)
+        # check_timer.timeout.connect(translate_text)
+        # check_timer.start(200)
+        #
+        # info_message_box.finished.connect(lambda :check_timer.stop())
+
+
+    info_message_box.setStandardButtons(QMessageBox.StandardButton.Yes)
     info_message_box.setButtonText(QMessageBox.StandardButton.Yes, "确定")
     # Show the message box
     logger.debug("Finished showing information box")
@@ -461,6 +480,8 @@ class BinaryChoiceDialog(_BaseMessageBox):
             self.setDefaultButton(self.negative_btn)
         else:
             self.setDefaultButton(self.positive_btn)
+        positive_text = "确认"
+        negative_text = "取消"
 
         # Set button text where necessary
         if positive_text is not None:
@@ -509,11 +530,11 @@ class FatalErrorDialog(_BaseDialogue):
         self.details = details
 
         # Buttons
-        self.details_btn = QPushButton("Show Details")
-        self.close_btn = QPushButton("Close")
-        self.open_log_btn = QPushButton("Open Log Directory")
-        self.upload_log_btn = QPushButton("Upload Log")
-        self.upload_log_btn.setToolTip("Upload the log file to 0x0.st")
+        self.details_btn = QPushButton("显示详情")
+        self.close_btn = QPushButton("关闭")
+        self.open_log_btn = QPushButton("打开日志目录")
+        self.upload_log_btn = QPushButton("上传日志文件")
+        self.upload_log_btn.setToolTip("将日志文件上传到0x0.st")
 
         btn_layout = QHBoxLayout()
         btn_layout.addWidget(self.open_log_btn)
@@ -591,7 +612,7 @@ class _UploadLogDialog(QDialog):
     def __init__(self, parent: QWidget):
         super().__init__(parent=parent)
 
-        self.setWindowTitle("Uploading Log...")
+        self.setWindowTitle("上传日志中")
         self.setObjectName("dialogue")
 
         self.progress = QProgressBar()
@@ -608,16 +629,16 @@ class _UploadLogDialog(QDialog):
                 # Show the URL
                 generic.copy_to_clipboard_safely(url)
                 show_information(
-                    title="Log Upload Successful",
-                    text="Log file uploaded successfully! Copied URL to clipboard.",
+                    title="日志上传成功",
+                    text="日志文件上传成功，链接已复制到剪切板。",
                     information=f"URL: <a href='{url}'>{url}</a>",
                     parent=parent,
                 )
             else:
                 show_warning(
-                    title="Log Upload Failed",
-                    text="Log file upload failed!",
-                    information="Please check your internet connection and try again.",
+                    title="日志上传失败",
+                    text="日志文件上传失败",
+                    information="请检查您的网络设置并重试",
                     parent=parent,
                 )
 
@@ -688,7 +709,7 @@ class SettingsFailureDialog(QDialog):
         super().__init__()
 
         # Set up the message box
-        self.setWindowTitle("Unable to parse settings file!")
+        self.setWindowTitle("无法解析配置文件")
         self.setModal(True)
         self.setObjectName("dialogue")
 
@@ -698,13 +719,13 @@ class SettingsFailureDialog(QDialog):
         )
 
         # Add data
-        self.text = "Your RimSort settings file is corrupt.\nPlease choose one of the following options to proceed."
+        self.text = "您的RimSort配置文件已损坏。<br>请选择以下操作继续："
 
         # Buttons
-        self.open_settings_file_btn = QPushButton("Open Settings")
-        self.open_settings_folder_btn = QPushButton("Open Settings Folder")
-        self.reset_settings_btn = QPushButton("Reset Settings")
-        self.close_application_btn = QPushButton("Exit RimSort")
+        self.open_settings_file_btn = QPushButton("打开配置文件")
+        self.open_settings_folder_btn = QPushButton("打开配置文件夹")
+        self.reset_settings_btn = QPushButton("重置配置")
+        self.close_application_btn = QPushButton("退出RimSort")
 
         btn_layout = QHBoxLayout()
         btn_layout.addWidget(self.open_settings_file_btn)
