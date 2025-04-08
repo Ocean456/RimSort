@@ -3272,8 +3272,8 @@ class MainContent(QObject):
         # Overwrite rules database
         answer = dialogue.show_dialogue_conditional(
             title="RimSort - DB Builder",
-            text="Do you want to continue?",
-            information=f"This operation will overwrite the {rules_source} database located at the following path:\n\n{path}",
+            text="你想继续吗？",
+            information=f"此操作将覆盖位于以下路径的 {rules_source} 数据库：<br><br>{path}",
         )
         if answer == "&Yes":
             with open(path, "w", encoding="utf-8") as output:

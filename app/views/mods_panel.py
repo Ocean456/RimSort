@@ -1847,8 +1847,8 @@ class ModListWidget(QListWidget):
             # Calculate any needed string for errors
             tool_tip_text = ""
             for error_type, tooltip_header in [
-                ("missing_dependencies", "\nMissing Dependencies:"),
-                ("conflicting_incompatibilities", "\nIncompatibilities:"),
+                ("missing_dependencies", "\n缺少的依赖："),
+                ("conflicting_incompatibilities", "\n不兼容："),
             ]:
                 if mod_errors[error_type]:
                     tool_tip_text += tooltip_header
@@ -2548,8 +2548,8 @@ class ModsPanel(QWidget):
             if total_error_text or total_warning_text or num_errors or num_warnings:
                 self.errors_summary_frame.setHidden(False)
                 padding = " "
-                self.warnings_text.setText(f"{padding}{num_warnings} warning(s)")
-                self.errors_text.setText(f"{padding}{num_errors} error(s)")
+                self.warnings_text.setText(f"{padding}{num_warnings} 警告")
+                self.errors_text.setText(f"{padding}{num_errors} 错误")
                 self.errors_icon.setToolTip(
                     total_error_text.lstrip() if total_error_text else ""
                 )
@@ -2558,8 +2558,8 @@ class ModsPanel(QWidget):
                 )
             else:  # Hide the summary if there are no errors or warnings
                 self.errors_summary_frame.setHidden(True)
-                self.warnings_text.setText("0 warnings")
-                self.errors_text.setText("0 errors")
+                self.warnings_text.setText("0 警告")
+                self.errors_text.setText("0 错误")
                 self.errors_icon.setToolTip("")
                 self.warnings_icon.setToolTip("")
             # First time, and when Refreshing, the slot will evaluate false and do nothing.
