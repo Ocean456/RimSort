@@ -434,22 +434,22 @@ class TroubleshootingController:
             if downloading_folder.exists():
                 rmtree(downloading_folder)
                 show_dialogue_conditional(
-                    title="清除缓存",
-                    text="成功删除 Steam 的下载文件夹。\n重新启动 Steam 以使更改生效。",
+                    title="Cache Cleared",
+                    text="Successfully deleted Steam's downloading folder.\nRestart Steam for the changes to take effect.",
                     icon="info",
                 )
             else:
                 show_dialogue_conditional(
-                    title="清除缓存",
-                    text="Steam的下载文件夹已经是空的。",
+                    title="Cache Clear",
+                    text="Steam's downloading folder is already empty.",
                     icon="info",
                     buttons=["Ok"],
                 )
 
         except Exception:
             show_dialogue_conditional(
-                title="清空缓存失败",
-                text="无法删除Steam的下载文件夹。\n请手动删除：Steam/steamapps/downloads",
+                title="Cache Clear Failed",
+                text="Could not delete Steam's downloading folder.\nPlease delete it manually: Steam/steamapps/downloading",
                 icon="warning",
                 buttons=["Ok"],
             )
@@ -462,8 +462,8 @@ class TroubleshootingController:
             platform_specific_open("steam://validate/294100")  # rim steam app id
         except Exception:
             show_dialogue_conditional(
-                title="Steam 操作失败",
-                text="无法打开 Steam 来验证游戏文件。\n请通过 Steam 的游戏属性手动验证游戏文件。",
+                title="Steam Action Failed",
+                text="Could not open Steam to verify game files.\nPlease verify game files manually through Steam's game properties.",
                 icon="warning",
                 buttons=["Ok"],
             )
@@ -486,8 +486,8 @@ class TroubleshootingController:
 
             if not app_ids:
                 show_dialogue_conditional(
-                    title="没有找到游戏",
-                    text="在这个 Steam 库文件夹中没有找到安装的游戏。\n你可以将游戏安装在不同的 Steam 库文件夹或驱动器中。",
+                    title="No Games Found",
+                    text="No installed games found in this Steam library folder.\nYou may have games installed in a different Steam library folder or drive.",
                     icon="warning",
                     buttons=["Ok"],
                 )
