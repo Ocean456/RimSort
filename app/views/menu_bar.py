@@ -131,7 +131,7 @@ class MenuBar(QObject):
         )
         file_menu.addSeparator()
         self.file_search_action = self._add_action(
-            file_menu, "File Search…", "Ctrl+Shift+F"
+            file_menu, "文件搜索", "Ctrl+Shift+F"
         )
         file_menu.addSeparator()
         self.upload_submenu = QMenu("上传日志")
@@ -275,7 +275,7 @@ class MenuBar(QObject):
         help_menu = self.menu_bar.addMenu("帮助")
         self.wiki_action = self._add_action(help_menu, "RimSort Wiki")
         help_menu.addSeparator()
-        self.troubleshooting_action = self._add_action(help_menu, "Troubleshooting…")
+        self.troubleshooting_action = self._add_action(help_menu, "疑难解答")
         help_menu.addSeparator()
         # TODO: updates not implemented yet
         # self.check_for_updates_action = self._add_action(
@@ -292,16 +292,16 @@ class MenuBar(QObject):
         Create the menu bar. On macOS, include the app menu.
         """
         if SystemInfo().operating_system == SystemInfo.OperatingSystem.MACOS:
-            app_menu = self.menu_bar.addMenu("AppName")
+            app_menu = self.menu_bar.addMenu("应用程序名称")
             app_menu.addSeparator()
             self.settings_action = self._add_action(
                 app_menu,
-                "Settings...",
+                "设置",
                 shortcut="Ctrl+,",
                 role=QAction.MenuRole.ApplicationSpecificRole,
             )
             app_menu.addSeparator()
-            self.quit_action = self._add_action(app_menu, "Quit")
+            self.quit_action = self._add_action(app_menu, "退出")
         self._create_file_menu()
         self._create_edit_menu()
         self._create_download_menu()

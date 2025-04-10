@@ -588,6 +588,9 @@ QDialog#settingsPanel QComboBox {
     border-color: #cccccc;
     border-width: 1px;
 }
+QDialog QPushButton {
+    border: 1px solid #A0A0A0
+}
 
 /* ===== Status panel (bottom message bar) */
 QWidget#StatusPanel {

@@ -184,7 +184,7 @@ class SearchWorker(QThread):
                     or self.processed_files == self.total_files
                 ):
                     self.stats.emit(
-                        f"Processed: {self.processed_files}/{self.total_files} files, Found: {self.found_files} matches"
+                        f"已处理: {self.processed_files}/{self.total_files} 个文件，找到: {self.found_files} 个匹配项"
                     )
 
             # perform search

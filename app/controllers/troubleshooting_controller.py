@@ -88,8 +88,8 @@ class TroubleshootingController:
             platform_specific_open("steam://install/294100")  # RimWorld's Steam ID
         except Exception:
             show_dialogue_conditional(
-                title="Steam Launch Failed",
-                text="Could not automatically start game installation through Steam.\n\nPlease manually verify/install the game through Steam.",
+                title="Steam 启动失败",
+                text="无法通过 Steam 自动启动游戏安装。\n\n请通过 Steam 手动验证/安装游戏。/install the game through Steam.",
                 icon="warning",
             )
 
@@ -131,8 +131,8 @@ class TroubleshootingController:
                 )
         except Exception:
             show_dialogue_conditional(
-                title="Steam Workshop Redownload",
-                text="Mods have been deleted. Please restart Steam to trigger automatic redownload of subscribed mods.\n\nIf mods don't download automatically, try:\n1. Restart Steam\n2. Verify game files in Steam\n3. Visit the Workshop page of each mod",
+                title="Steam Workshop 重新下载",
+                text="模组已被删除。请重启 Steam 以触发已订阅模组的自动重新下载。\n\n如果模组没有自动下载，请尝试：\n1. 重启 Steam\n2. 在 Steam 中验证游戏文件\n3. 访问每个模组的 Workshop 页面",
                 icon="warning",
             )
 
@@ -168,9 +168,9 @@ class TroubleshootingController:
     def _on_integrity_apply_button_clicked(self) -> None:
         """Handle clicking the Apply button in the integrity check section."""
         if not show_dialogue_conditional(
-            "Confirm Changes",
-            "Are you sure you want to apply these changes? This cannot be undone.",
-            "This will delete the selected files. Make sure you have backups if needed.",
+            "确认更改",
+            "您确定要应用这些更改吗？此操作不可撤销。",
+            "这将删除所选文件。请确保备份必要的文件。",
         ):
             return
 
@@ -202,8 +202,8 @@ class TroubleshootingController:
             return
 
         if not show_dialogue_conditional(
-            title="Confirm Clear",
-            text="Are you sure you want to delete all mods?\n\nWARNING: This will permanently delete all mods in your Mods folder and reset to vanilla state.",
+            title="确认清除",
+            text="您确定要删除所有模组？\n\n警告：这将永久删除 Mods 文件夹中的所有模组，并重置为原始状态。",
             icon="warning",
         ):
             return
@@ -252,7 +252,7 @@ class TroubleshootingController:
 
         # let user select save location
         save_path = show_dialogue_file(
-            title="Export Mod List",
+            title="导出模组列表",
             directory=str(config_dir),
             file_type="File",
             file_filter="RimSort Mod List (*.rml)",
@@ -267,8 +267,8 @@ class TroubleshootingController:
             save_path += ".rml"
 
         if not show_dialogue_conditional(
-            "Confirm Export",
-            "Export current mod list to file?",
+            "确认导出",
+            "是否将当前 Mod 列表导出到文件？",
         ):
             return
 
@@ -327,7 +327,7 @@ class TroubleshootingController:
 
         # let user select file to import
         import_path = show_dialogue_file(
-            title="Import Mod List",
+            title="导入 Mod 列表",
             directory=str(config_dir),
             file_type="File",
             file_filter="RimSort Mod List (*.rml *.rws *.xml)",
@@ -336,9 +336,9 @@ class TroubleshootingController:
             return
 
         if not show_dialogue_conditional(
-            "Confirm Import",
-            "Import mod list from file?",
-            "This will overwrite your current mod list.",
+            "确认导入",
+            "是否从文件导入模组列表？",
+            "这将覆盖当前的模组列表",
         ):
             return
 
@@ -375,9 +375,9 @@ class TroubleshootingController:
 
         except (json.JSONDecodeError, ValueError, KeyError):
             show_dialogue_conditional(
-                "Error",
-                "Failed to import mod list",
-                "The selected file is not a valid mod list file.",
+                "错误",
+                "导入模组列表失败",
+                "所选文件不是有效的模组列表文件。",
             )
 
     def _get_steam_root_from_workshop(self) -> Path | None:
@@ -434,22 +434,22 @@ class TroubleshootingController:
             if downloading_folder.exists():
                 rmtree(downloading_folder)
                 show_dialogue_conditional(
-                    title="Cache Cleared",
-                    text="Successfully deleted Steam's downloading folder.\nRestart Steam for the changes to take effect.",
+                    title="清除缓存",
+                    text="成功删除 Steam 的下载文件夹。\n重新启动 Steam 以使更改生效。",
                     icon="info",
                 )
             else:
                 show_dialogue_conditional(
-                    title="Cache Clear",
-                    text="Steam's downloading folder is already empty.",
+                    title="清除缓存",
+                    text="Steam的下载文件夹已经是空的。",
                     icon="info",
                     buttons=["Ok"],
                 )
 
         except Exception:
             show_dialogue_conditional(
-                title="Cache Clear Failed",
-                text="Could not delete Steam's downloading folder.\nPlease delete it manually: Steam/steamapps/downloading",
+                title="清空缓存失败",
+                text="无法删除Steam的下载文件夹。\n请手动删除：Steam/steamapps/downloads",
                 icon="warning",
                 buttons=["Ok"],
             )
@@ -462,8 +462,8 @@ class TroubleshootingController:
             platform_specific_open("steam://validate/294100")  # rim steam app id
         except Exception:
             show_dialogue_conditional(
-                title="Steam Action Failed",
-                text="Could not open Steam to verify game files.\nPlease verify game files manually through Steam's game properties.",
+                title="Steam 操作失败",
+                text="无法打开 Steam 来验证游戏文件。\n请通过 Steam 的游戏属性手动验证游戏文件。",
                 icon="warning",
                 buttons=["Ok"],
             )
@@ -486,8 +486,8 @@ class TroubleshootingController:
 
             if not app_ids:
                 show_dialogue_conditional(
-                    title="No Games Found",
-                    text="No installed games found in this Steam library folder.\nYou may have games installed in a different Steam library folder or drive.",
+                    title="没有找到游戏",
+                    text="在这个 Steam 库文件夹中没有找到安装的游戏。\n你可以将游戏安装在不同的 Steam 库文件夹或驱动器中。",
                     icon="warning",
                     buttons=["Ok"],
                 )
