@@ -30,7 +30,7 @@ class FileSearchDialog(QDialog):
 
     def __init__(self, parent: Optional[QWidget] = None) -> None:
         super().__init__(parent)
-        self.setWindowTitle("file search")
+        self.setWindowTitle("文件搜索")
         self.setWindowFlags(Qt.WindowType.Window)
         self._search_paths: List[str] = []
 
@@ -47,12 +47,12 @@ class FileSearchDialog(QDialog):
         search_input_layout = QHBoxLayout()
         self.search_input = QLineEdit()
         self.search_input.setPlaceholderText(
-            "files that contains this text will be shown"
+            "将显示包含此文本的文件"
         )
         search_input_layout.addWidget(self.search_input)
 
-        self.search_button = QPushButton("search")
-        self.stop_button = QPushButton("stop")
+        self.search_button = QPushButton("搜索")
+        self.stop_button = QPushButton("停止")
         self.stop_button.setEnabled(False)
         search_input_layout.addWidget(self.search_button)
         search_input_layout.addWidget(self.stop_button)
@@ -63,35 +63,32 @@ class FileSearchDialog(QDialog):
 
         # search scope and algorithm
         scope_layout = QVBoxLayout()
-        scope_label = QLabel("search in:")
+        scope_label = QLabel("搜索：")
         self.search_scope = QComboBox()
-        self.search_scope.addItems(
-            ["active mods", "not active mods", "all mods", "configs folder"]
-        )
+        self.search_scope.addItem("启用的模组", "active mods")
+        self.search_scope.addItem("未启用的模组", "not active mods")
+        self.search_scope.addItem("所有模组", "all mods")
+        self.search_scope.addItem("配置文件夹", "configs folder")
         scope_layout.addWidget(scope_label)
         scope_layout.addWidget(self.search_scope)
         options_layout.addLayout(scope_layout)
 
         algo_layout = QVBoxLayout()
-        algo_label = QLabel("search method:")
+        algo_label = QLabel("搜索方法：")
         self.algorithm_selector = QComboBox()
-        self.algorithm_selector.addItems(
-            [
-                "simple search (good for small mod collections)",
-                "parallel search (for large mod collections)",
-            ]
-        )
+        self.algorithm_selector.addItem("简单搜索 (适用于小型模组合集)", "simple search (good for small mod collections)")
+        self.algorithm_selector.addItem("并行搜索 (适用于大型模组合集)", "parallel search (for large mod collections)")
         algo_layout.addWidget(algo_label)
         algo_layout.addWidget(self.algorithm_selector)
         options_layout.addLayout(algo_layout)
 
         # checkboxes in horizontal layout
         checks_layout = QVBoxLayout()
-        checks_label = QLabel("options:")
+        checks_label = QLabel("选项：")
         checks_box_layout = QHBoxLayout()
-        self.case_sensitive = QCheckBox("case sensitive")
-        self.skip_translations = QCheckBox("skip translations")
-        self.xml_only = QCheckBox("xml only")
+        self.case_sensitive = QCheckBox("区分大小写")
+        self.skip_translations = QCheckBox("跳过翻译")
+        self.xml_only = QCheckBox("仅 xml 文件")
         checks_layout.addWidget(checks_label)
         checks_box_layout.addWidget(self.case_sensitive)
         checks_box_layout.addWidget(self.skip_translations)
@@ -111,11 +108,11 @@ class FileSearchDialog(QDialog):
         # progress bar
         self.progress_bar = QProgressBar()
         self.progress_bar.setTextVisible(True)
-        self.progress_bar.setFormat("Searching... %p% (%v/%m files)")
+        self.progress_bar.setFormat("搜索中... %p% (%v/%m 文件)")
         progress_layout.addWidget(self.progress_bar)
 
         # statistics label
-        self.stats_label = QLabel("Ready to search")
+        self.stats_label = QLabel("准备好搜索了吗")
         progress_layout.addWidget(self.stats_label)
 
         layout.addWidget(progress_section)
@@ -126,10 +123,10 @@ class FileSearchDialog(QDialog):
         filter_layout.setContentsMargins(0, 0, 0, 0)
         filter_layout.setSpacing(5)  # reduce spacing
 
-        filter_label = QLabel("filter results:")
+        filter_label = QLabel("筛选结果:")
         self.filter_input = QLineEdit()
         self.filter_input.setPlaceholderText(
-            "only paths that contain specified text will be shown (applies to paths, filenames and mod names)"
+            "只显示包含指定文本的路径（适用于路径、文件名和mod名）"
         )
         filter_layout.addWidget(filter_label)
         filter_layout.addWidget(self.filter_input)
@@ -142,13 +139,13 @@ class FileSearchDialog(QDialog):
         results_layout.setContentsMargins(0, 0, 0, 0)
         results_layout.setSpacing(5)  # reduce spacing
 
-        results_label = QLabel("results:")
+        results_label = QLabel("结果:")
         results_layout.addWidget(results_label)
 
         self.results_table = QTableWidget()
         self.results_table.setColumnCount(4)  # added column for preview
         self.results_table.setHorizontalHeaderLabels(
-            ["mod name", "name", "path", "preview"]
+            ["模组名称", "文件名", "路径", "预览"]
         )
 
         # stretch columns to content
@@ -174,9 +171,9 @@ class FileSearchDialog(QDialog):
         """show context menu for results table"""
         menu = QMenu()
 
-        open_file = menu.addAction("open file")
-        open_folder = menu.addAction("open containing folder")
-        copy_path = menu.addAction("copy path")
+        open_file = menu.addAction("打开文件")
+        open_folder = menu.addAction("打开所在文件夹")
+        copy_path = menu.addAction("复制路径")
 
         # get selected item
         item = self.results_table.itemAt(pos)
@@ -218,8 +215,8 @@ class FileSearchDialog(QDialog):
     def get_search_options(self) -> Dict[str, Any]:
         """get current search options as a dictionary"""
         return {
-            "scope": self.search_scope.currentText(),
-            "algorithm": self.algorithm_selector.currentText().split(" (")[0],
+            "scope": self.search_scope.currentData(),
+            "algorithm": self.algorithm_selector.currentData().split(" (")[0],
             "case_sensitive": self.case_sensitive.isChecked(),
             "skip_translations": self.skip_translations.isChecked(),
             "xml_only": self.xml_only.isChecked(),
