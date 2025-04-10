@@ -350,13 +350,13 @@ class SteamcmdInterface:
         else:
             btn_text = ["&Yes", "&No"]
 
-        answer = show_dialogue_conditional(
-            title="RimSort - SteamCMD setup",
-            text="RimSort was unable to find SteamCMD installed in the configured prefix:\n",
-            information=f"{self.steamcmd_prefix if self.steamcmd_prefix else '<None>'}\n\n"
-            + "Do you want to setup SteamCMD?",
-            button_text_override=btn_text,
-        )
+            answer = show_dialogue_conditional(
+                title="RimSort - SteamCMD 设置",
+                text="RimSort 无法在配置的前缀路径中找到已安装的 SteamCMD：\n",
+                information=f"{self.steamcmd_prefix if self.steamcmd_prefix else '<无>'}\n\n"
+                            + "你想要设置 SteamCMD 吗？",
+                button_text_override=btn_text,
+            )
         if answer == "&Yes":
             EventBus().do_install_steamcmd.emit()
         if runner:
@@ -400,8 +400,8 @@ class SteamcmdInterface:
                 )
             else:
                 InformationBox(
-                    title="Depot Cache Cleared",
-                    text="SteamCMD depot cache was already cleared.",
+                    title="Depot 缓存已清除",
+                    text="SteamCMD 的 depot 缓存已经被清除。",
                 ).exec()
             return False
 
@@ -411,8 +411,8 @@ class SteamcmdInterface:
                 runner.message("Depot cache cleared")
             else:
                 InformationBox(
-                    title="Depot Cache Cleared",
-                    text="SteamCMD depot cache has been cleared.",
+                    title="Depot 缓存已清除",
+                    text="SteamCMD 的 depot 缓存已被清除。",
                 ).exec()
             return True
 
