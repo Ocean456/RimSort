@@ -84,29 +84,29 @@ class LogReader(QDialog):
         # Top controls layout
         controls_layout = QHBoxLayout()
 
-        # Search box
+        # 搜索框
         self.search_box = QLineEdit()
-        self.search_box.setPlaceholderText("Search...")
+        self.search_box.setPlaceholderText("搜索...")
         self.search_box.textChanged.connect(self.filter_table)
         controls_layout.addWidget(self.search_box)
 
-        # Refresh button
-        self.refresh_btn = QPushButton("Refresh")
+        # 刷新按钮
+        self.refresh_btn = QPushButton("刷新")
         self.refresh_btn.clicked.connect(self.load_acf_data)
         controls_layout.addWidget(self.refresh_btn)
 
-        # Import ACF Data button
-        self.import_acf_btn = QPushButton("Import ACF Data")
+        # 导入 ACF 数据按钮
+        self.import_acf_btn = QPushButton("导入 ACF 数据")
         self.import_acf_btn.clicked.connect(self.import_acf_data)
         controls_layout.addWidget(self.import_acf_btn)
 
-        # Export ACF Data button
-        self.export_acf_btn = QPushButton("Export ACF Data")
+        # 导出 ACF 数据按钮
+        self.export_acf_btn = QPushButton("导出 ACF 数据")
         self.export_acf_btn.clicked.connect(self.export_acf_data)
         controls_layout.addWidget(self.export_acf_btn)
 
-        # Export button
-        self.export_btn = QPushButton("Export to CSV")
+        # 导出按钮
+        self.export_btn = QPushButton("导出为 CSV")
         self.export_btn.clicked.connect(self.export_to_csv)
         controls_layout.addWidget(self.export_btn)
 
@@ -143,8 +143,8 @@ class LogReader(QDialog):
             acf_path = Path(steamcmd.steamcmd_appworkshop_acf_path)
             if not acf_path.exists():
                 raise FileNotFoundError(
-                    f"ACF file not found at: {acf_path}\n"
-                    f"Ensure SteamCMD is properly installed and configured"
+                    f"ACF 文件未找到: {acf_path}\n"
+                    f"请确保 SteamCMD 已正确安装和配置"
                 )
 
             try:
@@ -179,7 +179,7 @@ class LogReader(QDialog):
 
             self.populate_table(entries)
             self.status_bar.showMessage(
-                f"Loaded {len(entries)} items | Last updated: {datetime.now().strftime('%H:%M:%S')}"
+                f"已加载 {len(entries)} 个项目 | 最后更新时间: {datetime.now().strftime('%H:%M:%S')}"
             )
 
             if not self.refresh_timer.isActive():
@@ -388,17 +388,17 @@ class LogReader(QDialog):
         Returns "Unknown path" if the mod cannot be found.
         """
         if not pfid:
-            return "Unknown path"
+            return "未知路径"
 
         pfid = str(pfid)
         metadata = self._get_mod_metadata(pfid)
 
-        # Try to get path from metadata
+        # 尝试从元数据中获取路径
         path = metadata.get("path")
         if path:
             return path
 
-        return f"Unknown path ({pfid})"
+        return f"未知路径 ({pfid})"
 
     def _get_mod_metadata(self, pfid: str) -> dict[str, Any]:
         """
@@ -455,19 +455,19 @@ class LogReader(QDialog):
             delta = now - dt
 
             if delta.days > 365:
-                return f"{delta.days // 365} years ago"
+                return f"{delta.days // 365} 年前"
             elif delta.days > 30:
-                return f"{delta.days // 30} months ago"
+                return f"{delta.days // 30} 个月前"
             elif delta.days > 0:
-                return f"{delta.days} days ago"
+                return f"{delta.days} 天前"
             elif delta.seconds > 3600:
-                return f"{delta.seconds // 3600} hours ago"
+                return f"{delta.seconds // 3600} 小时前"
             elif delta.seconds > 60:
-                return f"{delta.seconds // 60} minutes ago"
+                return f"{delta.seconds // 60} 分钟前"
             else:
-                return "Just now"
+                return "刚刚"
         except (ValueError, TypeError):
-            return "Invalid timestamp"
+            return "无效的时间戳"
 
     def show_context_menu(self, position: QPoint) -> None:
         menu = QMenu()
@@ -516,12 +516,12 @@ class LogReader(QDialog):
             self.table_widget.setColumnCount(6)
             self.table_widget.setHorizontalHeaderLabels(
                 [
-                    "Published File ID",
-                    "Last Updated",
-                    "Relative Time",
-                    "Type",
-                    "Mod Name",
-                    "Mod Path",
+                    "发布文件 ID",
+                    "最后更新",
+                    "相对时间",
+                    "类型",
+                    "模组名称",
+                    "模组路径",
                 ]
             )
 
@@ -602,8 +602,8 @@ class LogReader(QDialog):
         if not steamcmd or not hasattr(steamcmd, "steamcmd_appworkshop_acf_path"):
             logger.warning("Export failed: SteamCMD interface not properly initialized")
             show_warning(
-                title="Export Error",
-                text="SteamCMD interface not properly initialized",
+                title="导出错误",
+                text="SteamCMD 接口未正确初始化",
             )
             return
 
@@ -612,7 +612,7 @@ class LogReader(QDialog):
             self.status_bar.showMessage(f"ACF file not found: {acf_path}")
             logger.error(f"Export failed: ACF file not found: {acf_path}")
             show_warning(
-                title="Export Error", text=f"ACF file not found at: {acf_path}"
+                title="导出错误", text=f"未找到 ACF 文件: {acf_path}"
             )
             return
 
@@ -624,8 +624,8 @@ class LogReader(QDialog):
         )
         if not file_path:
             show_warning(
-                title="Export Error",
-                text="Invalid file path provided for export: {file_path}",
+                title="导出错误",
+                text=f"提供的导出文件路径无效: {file_path}",
             )
             return
 
@@ -634,8 +634,8 @@ class LogReader(QDialog):
             self.status_bar.showMessage(f"Successfully exported ACF to {file_path}")
             logger.debug(f"Successfully exported ACF to {file_path}")
             show_information(
-                title="Export Success",
-                text=f"Successfully exported ACF to {file_path}",
+                title="导出成功",
+                text=f"成功导出 ACF 文件到 {file_path}",
             )
         except PermissionError:
             error_msg = "Export failed: Permission denied - check file permissions"
@@ -645,7 +645,7 @@ class LogReader(QDialog):
             error_msg = f"Export failed: {str(e)}"
             logger.error(f"Export failed {error_msg}")
             show_fatal_error(
-                title="Export failed",
-                text="Exportfailed unknown exception occurred",
+                title="导出失败",
+                text="导出失败，发生未知异常",
                 details=error_msg,
             )

@@ -366,18 +366,18 @@ QStyle::PE_IndicatorItemViewItemDrop {
 }
 /* Style for table view with sortable columns */
 QHeaderView {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #f4f4f4;
+    color: #333333;
 }
 QHeaderView::section {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #f4f4f4;
+    color: #333333;
     padding: 4px;
     border-radius: 0px;
 }
 QHeaderView::section:horizontal:hover,
 QHeaderView::section:vertical:hover {
-    background-color: #f0f0f0;
+    background-color: #e0e0e0;
 }
 /* QTableView specific styling */
 QTableView {
@@ -406,7 +406,7 @@ QTableView::item:selected {
 }
 /* Styling for table corner button */
 QTableView QTableCornerButton::section {
-    background-color: #ffffff;
+    background-color: #e8e8e8;
     color: #000000;
 }
 QTableView QTableCornerButton::section:hover {
@@ -588,15 +588,17 @@ QDialog#settingsPanel QComboBox {
     border-color: #cccccc;
     border-width: 1px;
 }
-QDialog QPushButton {
-    border: 1px solid #A0A0A0
-}
 
 /* ===== Status panel (bottom message bar) */
 QWidget#StatusPanel {
     background-color: #ffffff;
 }
+
 QLabel#StatusLabel {
     color: #000000;
     background-color: #ffffff;
+}
+
+QDialog QPushButton {
+    background-color: #f5f5f5;
 }

@@ -80,7 +80,7 @@ class SteamBrowser(QWidget):
         self.downloader_layout = QVBoxLayout()
 
         # DOWNLOADER WIDGETS
-        self.downloader_label = QLabel("Mod下载器")
+        self.downloader_label = QLabel("模组下载器")
         self.downloader_label.setObjectName("browserPaneldownloader_label")
         self.downloader_list = QListWidget()
         self.downloader_list.setFixedWidth(200)
@@ -94,13 +94,13 @@ class SteamBrowser(QWidget):
         self.clear_list_button = QPushButton("清空列表")
         self.clear_list_button.setObjectName("browserPanelClearList")
         self.clear_list_button.clicked.connect(self._clear_downloader_list)
-        self.download_steamcmd_button = QPushButton("下载Mod（SteamCMD）")
+        self.download_steamcmd_button = QPushButton("下载模组（SteamCMD）")
         self.download_steamcmd_button.clicked.connect(
             partial(
                 self.steamcmd_downloader_signal.emit, self.downloader_list_mods_tracking
             )
         )
-        self.download_steamworks_button = QPushButton("下载Mod（Steam）")
+        self.download_steamworks_button = QPushButton("下载模组（Steam）")
         self.download_steamworks_button.clicked.connect(
             self._subscribe_to_mods_from_list
         )
