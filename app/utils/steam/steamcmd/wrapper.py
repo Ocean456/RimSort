@@ -357,15 +357,15 @@ class SteamcmdInterface:
                             + "你想要设置 SteamCMD 吗？",
                 button_text_override=btn_text,
             )
-        if answer == "&Yes":
-            EventBus().do_install_steamcmd.emit()
-        if runner:
-            runner.close()
+            if answer == "&Yes":
+                EventBus().do_install_steamcmd.emit()
+            if runner:
+                runner.close()
 
-        if ask_ignore and answer == "&Don't Ask Again":
-            if settings_controller is not None:
-                settings_controller.active_instance.steamcmd_ignore = True
-                settings_controller.settings.save()
+            if ask_ignore and answer == "&Don't Ask Again":
+                if settings_controller is not None:
+                    settings_controller.active_instance.steamcmd_ignore = True
+                    settings_controller.settings.save()
 
             return True
         return False
