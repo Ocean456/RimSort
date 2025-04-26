@@ -161,7 +161,7 @@ class MainWindow(QMainWindow):
             dialog=self.troubleshooting_dialog,
         )
         self.troubleshooting_layout.addWidget(self.troubleshooting_dialog)
-        self.tab_widget.addTab(self.troubleshooting_tab, "Troubleshooting")
+        self.tab_widget.addTab(self.troubleshooting_tab, "故障排除")
 
         # Save button flashing animation
         self.save_button_flashing_animation = QTimer()

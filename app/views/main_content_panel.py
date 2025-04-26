@@ -1798,15 +1798,15 @@ class MainContent(QObject):
         if success:
             copy_to_clipboard_safely(ret)
             dialogue.show_information(
-                title="Uploaded file",
-                text=f"Uploaded {path.name} to http://0x0.st/",
-                information=f"The URL has been copied to your clipboard:\n\n{ret}",
+                title="文件已上传",
+                text=f"已将 {path.name} 上传到 http://0x0.st/",
+                information=f"URL 已复制到剪贴板：\n\n{ret}",
             )
             webbrowser.open(ret)
         else:
             dialogue.show_warning(
-                title="Failed to upload file.",
-                text="Failed to upload the file to 0x0.st",
+                title="文件上传失败",
+                text="未能将文件上传到 0x0.st",
                 information=ret,
             )
 
@@ -1860,8 +1860,8 @@ class MainContent(QObject):
         except Exception:
             logger.error("Could not save active mods")
             dialogue.show_fatal_error(
-                title="Could not save active mods",
-                text="Failed to save active mods to file:",
+                title="无法保存启用模组",
+                text="未能将启用模组保存到文件：",
                 information=f"{mods_config_path}",
                 details=traceback.format_exc(),
             )
@@ -1971,9 +1971,9 @@ class MainContent(QObject):
         # If we failed to check for updates, skip the comparison(s) & UI prompt
         if updates_checked == "failed":
             dialogue.show_warning(
-                title="Unable to check for updates",
-                text="RimSort was unable to query Steam WebAPI for update information!\n",
-                information="Are you connected to the Internet?",
+                title="无法检查更新",
+                text="RimSort 无法通过 Steam WebAPI 查询更新信息！\n",
+                information="您是否已连接到互联网？",
             )
             return
         workshop_mod_updater = ModUpdaterPrompt()
@@ -1991,9 +1991,9 @@ class MainContent(QObject):
             and self.steamcmd_runner.process.state() == QProcess.ProcessState.Running
         ):
             dialogue.show_warning(
-                title="RimSort - SteamCMD setup",
-                text="Unable to create SteamCMD runner!",
-                information="There is an active process already running!",
+                title="RimSort - SteamCMD 设置",
+                text="无法创建 SteamCMD 运行器！",
+                information="当前已有一个活动进程正在运行！",
                 details=f"PID {self.steamcmd_runner.process.processId()} : "
                 + self.steamcmd_runner.process.program(),
             )
@@ -2014,9 +2014,9 @@ class MainContent(QObject):
             RunnerPanel().process_complete()
         else:
             dialogue.show_warning(
-                title="RimSort - SteamCMD setup",
-                text="Unable to initiate SteamCMD installation. Local mods path not set!",
-                information="Please configure local mods path in Settings before attempting to install.",
+                title="RimSort - SteamCMD 设置",
+                text="无法启动 SteamCMD 安装。未设置本地模组路径！",
+                information="请在尝试安装之前在设置中配置本地模组路径。",
             )
 
     def _do_download_mods_with_steamcmd(self, publishedfileids: list[str]) -> None:
@@ -2033,8 +2033,8 @@ class MainContent(QObject):
         if len(publishedfileids) == 0:
             dialogue.show_warning(
                 title="RimSort",
-                text="No PublishedFileIds were supplied in operation.",
-                information="Please add mods to list before attempting to download.",
+                text="未提供任何 PublishedFileIds。",
+                information="请在尝试下载之前将模组添加到列表中。",
             )
             return
         # Check for existing steamcmd_runner process
@@ -2045,8 +2045,8 @@ class MainContent(QObject):
         ):
             dialogue.show_warning(
                 title="RimSort",
-                text="Unable to create SteamCMD runner!",
-                information="There is an active process already running!",
+                text="无法创建 SteamCMD 运行器！",
+                information="当前已有一个活动进程正在运行！",
                 details=f"PID {self.steamcmd_runner.process.processId()} : "
                 + self.steamcmd_runner.process.program(),
             )
@@ -2082,9 +2082,9 @@ class MainContent(QObject):
             )
         else:
             dialogue.show_warning(
-                title="SteamCMD not found",
-                text="SteamCMD executable was not found.",
-                information='Please setup an existing SteamCMD prefix, or setup a new prefix with "Setup SteamCMD".',
+                title="未找到 SteamCMD",
+                text="未找到 SteamCMD 可执行文件。",
+                information='请设置一个现有的 SteamCMD 前缀，或通过“设置 SteamCMD”创建一个新前缀。',
             )
 
     def _do_steamworks_api_call(self, instruction: list[Any]) -> None:
@@ -2188,8 +2188,8 @@ class MainContent(QObject):
         if len(publishedfileids) == 0:
             dialogue.show_warning(
                 title="RimSort",
-                text="No PublishedFileIds were supplied in operation.",
-                information="Please add mods to list before attempting to download.",
+                text="未提供任何 PublishedFileIds。",
+                information="请在尝试下载之前将模组添加到列表中。",
             )
             return
         # Close browser if open
@@ -2233,8 +2233,8 @@ class MainContent(QObject):
         "Github mod" related actions
         """
         args, ok = dialogue.show_dialogue_input(
-            title="Edit username",
-            label="Enter your Github username:",
+            title="编辑用户名",
+            label="请输入您的 Github 用户名：",
             text=self.settings_controller.settings.github_username,
         )
         if ok:
@@ -2244,8 +2244,8 @@ class MainContent(QObject):
             logger.debug("USER ACTION: cancelled input!")
             return
         args, ok = dialogue.show_dialogue_input(
-            title="Edit token",
-            label="Enter your Github personal access token here (ghp_*):",
+            title="编辑令牌",
+            label="请输入您的 Github 个人访问令牌 (ghp_*)：",
             text=self.settings_controller.settings.github_token,
         )
         if ok:
@@ -2328,12 +2328,12 @@ class MainContent(QObject):
                     except GitCommandError:
                         stacktrace = traceback.format_exc()
                         dialogue.show_warning(
-                            title="Failed to update repo!",
-                            text=f"The repository supplied at [{repo_path}] failed to update!\n"
-                            + "Are you connected to the Internet? "
-                            + "Is the repo valid?",
+                            title="更新存储库失败！",
+                            text=f"位于 [{repo_path}] 的存储库更新失败！\n"
+                            + "您是否已连接到互联网？"
+                            + "存储库是否有效？",
                             information=(
-                                f"Supplied repository: {repo.remotes.origin.url}"
+                                f"提供的存储库：{repo.remotes.origin.url}"
                                 if repo
                                 and repo.remotes
                                 and repo.remotes.origin
@@ -2357,15 +2357,15 @@ class MainContent(QObject):
                     ]
                 )
                 dialogue.show_information(
-                    title="Git repo(s) updated",
-                    text="The following repo(s) had updates pulled from the remote:",
+                    title="Git 仓库已更新",
+                    text="以下仓库已从远程拉取更新：",
                     information=repos_updated,
                     details=updates_summarized,
                 )
             else:
                 dialogue.show_information(
-                    title="Git repo(s) not updated",
-                    text="No updates were found.",
+                    title="Git 仓库未更新",
+                    text="未找到任何更新。",
                 )
         else:
             self._do_notify_no_git()
@@ -2420,8 +2420,8 @@ class MainContent(QObject):
             try:
                 Repo.clone_from(repo_url, repo_path)
                 dialogue.show_information(
-                    title="Repo retrieved",
-                    text="The configured repository was cloned!",
+                    title="已获取存储库",
+                    text="已克隆配置的存储库！",
                     information=f'<a href="{repo_url}">{repo_url}</a>  ->\n'
                     + f"{repo_path}",
                 )
@@ -2449,8 +2449,8 @@ class MainContent(QObject):
                         # Handle the case when the target branch is not found
                         logger.warning("Target branch not found.")
                     dialogue.show_information(
-                        title="Repo retrieved",
-                        text="The configured repository was reinitialized with existing files! (likely leftover .dds textures)",
+                        title="已获取存储库",
+                        text="已使用现有文件重新初始化配置的存储库！（可能是遗留的 .dds 纹理）",
                         information=f"{repo_url} ->\n" + f"{repo_path}",
                     )
                 except GitCommandError:
@@ -2936,7 +2936,7 @@ class MainContent(QObject):
         # Create query runner
         self.query_runner = RunnerPanel()
         self.query_runner.closing_signal.connect(self.db_builder.terminate)
-        self.query_runner.setWindowTitle("RimSort - DB Builder PublishedFileIDs query")
+        self.query_runner.setWindowTitle("RimSort - 数据库构建工具 PublishedFileIDs 查询")
         self.query_runner.progress_bar.show()
         self.query_runner.show()
         # Connect message signal
@@ -2950,10 +2950,10 @@ class MainContent(QObject):
         loop.exec_()
         if len(self.db_builder.publishedfileids) == 0:
             dialogue.show_warning(
-                title="No PublishedFileIDs",
-                text="DB Builder query did not return any PublishedFileIDs!",
-                information="This is typically caused by invalid/missing Steam WebAPI key, or a connectivity issue to the Steam WebAPI.\n"
-                + "PublishedFileIDs are needed to retrieve mods from Steam!",
+                title="没有 PublishedFileIDs",
+                text="DB Builder 查询未返回任何 PublishedFileIDs！",
+                information="这通常是由于无效/缺失的 Steam WebAPI 密钥，或与 Steam WebAPI 的连接问题导致的。\n"
+                + "PublishedFileIDs 是从 Steam 获取模组所必需的！",
             )
         else:
             self.query_runner.close()
@@ -2974,13 +2974,13 @@ class MainContent(QObject):
                 self._do_download_mods_with_steamcmd(self.db_builder.publishedfileids)
             elif "steamworks" in action:
                 answer = dialogue.show_dialogue_conditional(
-                    title="Are you sure?",
-                    text="Here be dragons.",
-                    information="WARNING: It is NOT recommended to subscribe to this many mods at once via Steam. "
-                    + "Steam has limitations in place seemingly intentionally and unintentionally for API subscriptions. "
-                    + "It is highly recommended that you instead download these mods to a SteamCMD prefix by using SteamCMD. "
-                    + "This can take longer due to rate limits, but you can also re-use the script generated by RimSort with "
-                    + "a separate, authenticated instance of SteamCMD, if you do not want to anonymously download via RimSort.",
+                    title="您确定吗？",
+                    text="这里有风险。",
+                    information="警告：不建议通过 Steam 一次性订阅如此多的模组。"
+                    + "Steam 对 API 订阅设置了看似有意或无意的限制。"
+                    + "强烈建议您改用 SteamCMD 将这些模组下载到 SteamCMD 前缀。"
+                    + "由于速率限制，这可能需要更长时间，但您还可以使用 RimSort 生成的脚本，"
+                    + "在单独的已验证 SteamCMD 实例中重新使用该脚本，而无需通过 RimSort 匿名下载。",
                 )
                 if answer == "&Yes":
                     for (
@@ -3134,9 +3134,9 @@ class MainContent(QObject):
             f"Comparison skipped for {len(comparison_skipped)} unpublished mods: {comparison_skipped}"
         )
         dialogue.show_information(
-            title="Steam DB Builder",
-            text=f"Steam DB comparison report: {len(discrepancies)} found",
-            information="Click 'Show Details' to see the full report!",
+            title="Steam 数据库构建工具",
+            text=f"Steam 数据库对比报告：发现 {len(discrepancies)} 项差异",
+            information="点击「显示详情」查看完整报告！",
             details=report,
         )
 
@@ -3249,9 +3249,9 @@ class MainContent(QObject):
         except Exception:
             logger.error("Failed to read info from existing database")
             dialogue.show_warning(
-                title="Failed to read existing database",
-                text="Failed to read the existing database!",
-                information=f"Path: {path}",
+                title="读取现有数据库失败",
+                text="读取现有数据库失败！",
+                information=f"路径：{path}",
             )
             return
         db_input_b = {"timestamp": int(time.time()), "rules": rules_data}
@@ -3282,8 +3282,8 @@ class MainContent(QObject):
         WebAPI Query Expiry (in seconds)
         """
         args, ok = dialogue.show_dialogue_input(
-            title="Edit SteamDB expiry:",
-            label="Enter your preferred expiry duration in seconds (default 1 week/604800 sec):",
+            title="编辑 SteamDB 过期时间：",
+            label="请输入您首选的过期持续时间（以秒为单位，默认 1 周/604800 秒）：",
             text=str(self.settings_controller.settings.database_expiry),
         )
         if ok:

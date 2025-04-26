@@ -108,7 +108,7 @@ class TroubleshootingDialog(QDialog):
         )
         self.integrity_delete_game_files.setStyleSheet("padding: 5px;")
         self.integrity_delete_game_files.setToolTip(
-            "Deletes and redownloads game files but keeps your local mods intact."
+            "删除并重新下载游戏文件，但保留您的本地模组。"
         )
         group_layout.addWidget(self.integrity_delete_game_files)
 
@@ -117,7 +117,7 @@ class TroubleshootingDialog(QDialog):
         )
         self.integrity_delete_steam_mods.setStyleSheet("padding: 5px;")
         self.integrity_delete_steam_mods.setToolTip(
-            "Deletes all Steam Workshop mods and triggers redownload."
+            "删除所有Steam创意工坊模组并重新下载。"
         )
         group_layout.addWidget(self.integrity_delete_steam_mods)
 
@@ -126,7 +126,7 @@ class TroubleshootingDialog(QDialog):
         )
         self.integrity_delete_mod_configs.setStyleSheet("padding: 5px;")
         self.integrity_delete_mod_configs.setToolTip(
-            "Deletes mod configuration files except ModsConfig.xml and Prefs.xml."
+            "删除模组配置文件，但保留 ModsConfig.xml 和 Prefs.xml。"
         )
         group_layout.addWidget(self.integrity_delete_mod_configs)
 
@@ -135,13 +135,13 @@ class TroubleshootingDialog(QDialog):
         )
         self.integrity_delete_game_configs.setStyleSheet("padding: 5px;")
         self.integrity_delete_game_configs.setToolTip(
-            "Deletes game configuration files including ModsConfig.xml, Prefs.xml, and KeyPrefs.xml."
+            "删除游戏配置文件，包括 ModsConfig.xml、Prefs.xml 和 KeyPrefs.xml。"
         )
         group_layout.addWidget(self.integrity_delete_game_configs)
 
         # Note about ModsConfig.xml
         note_label = QLabel(
-            "After resetting game configurations, launch the game directly through Steam to regenerate ModsConfig.xml, then restart RimSort."
+            "重置游戏配置后，请通过 Steam 直接启动游戏以重新生成 ModsConfig.xml，然后重新启动 RimSort。"
         )
         note_label.setStyleSheet("color: yellow; font-size: 12px; padding: 5px;")
         note_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -152,16 +152,16 @@ class TroubleshootingDialog(QDialog):
         group_layout.addLayout(button_layout)
 
         # Apply button
-        self.integrity_apply_button = QPushButton("Apply Recovery")
+        self.integrity_apply_button = QPushButton("应用恢复选项")
         self.integrity_apply_button.setStyleSheet(self._button_style_danger)
         self.integrity_apply_button.setShortcut("Ctrl+R")
-        self.integrity_apply_button.setToolTip("Apply the selected recovery options")
+        self.integrity_apply_button.setToolTip("应用选定的恢复选项")
 
         # Cancel button
-        self.integrity_cancel_button = QPushButton("Cancel")
+        self.integrity_cancel_button = QPushButton("取消")
         self.integrity_cancel_button.setStyleSheet(self._button_style_base)
         self.integrity_cancel_button.setShortcut("Ctrl+C")
-        self.integrity_cancel_button.setToolTip("Cancel and clear selections")
+        self.integrity_cancel_button.setToolTip("取消并清除选择")
 
         # Add Apply and Cancel buttons to layout
         button_layout.addWidget(self.integrity_apply_button)
@@ -169,7 +169,7 @@ class TroubleshootingDialog(QDialog):
         button_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         # Mod configuration options section
-        mod_config_group = QGroupBox("Mod Configuration Options")
+        mod_config_group = QGroupBox("模组配置选项")
         mod_config_group.setStyleSheet(self._group_box_style)
         main_layout.addWidget(mod_config_group)
         mod_config_layout = QVBoxLayout()
@@ -196,7 +196,7 @@ class TroubleshootingDialog(QDialog):
         mod_list_layout.addLayout(export_mod_layout)
 
         export_mod_list_desc = QLabel(
-            "Save your current mod list to a .xml file to share with others."
+            "将当前的模组列表保存为 .xml 文件以便与他人分享。"
         )
         export_mod_list_desc.setStyleSheet(
             "color: white; padding-left: 0px; margin-top: 5px; font-size: 15px;"
@@ -206,7 +206,7 @@ class TroubleshootingDialog(QDialog):
 
         self.mod_export_list_button = QPushButton("导出模组列表")
         self.mod_export_list_button.setStyleSheet(self._button_style_base)
-        self.mod_export_list_button.setToolTip("Export your current mod list to a file")
+        self.mod_export_list_button.setToolTip("将当前模组列表导出到文件")
         export_mod_layout.addWidget(self.mod_export_list_button)
 
         # Import mod list vertical layout
@@ -214,7 +214,7 @@ class TroubleshootingDialog(QDialog):
         mod_list_layout.addLayout(import_mod_layout)
 
         import_mod_list_desc = QLabel(
-            "Import a mod list in .xml format from another player"
+            "从其他玩家导入 .xml 格式的模组列表"
         )
         import_mod_list_desc.setStyleSheet(
             "color: white; padding-left: 0px; margin-top: 5px; font-size: 15px;"
@@ -222,9 +222,9 @@ class TroubleshootingDialog(QDialog):
         import_mod_list_desc.setAlignment(Qt.AlignmentFlag.AlignCenter)
         import_mod_layout.addWidget(import_mod_list_desc)
 
-        self.mod_import_list_button = QPushButton("Import Mod List")
+        self.mod_import_list_button = QPushButton("导入模组列表")
         self.mod_import_list_button.setStyleSheet(self._button_style_base)
-        self.mod_import_list_button.setToolTip("Import a mod list from a file")
+        self.mod_import_list_button.setToolTip("从文件导入模组列表")
         import_mod_layout.addWidget(self.mod_import_list_button)
 
         # Clear mods section (in red)
@@ -241,16 +241,16 @@ class TroubleshootingDialog(QDialog):
         )
         clear_mods_layout.addWidget(clear_mods_desc)
 
-        self.clear_mods_button = QPushButton("Clear Mods")
+        self.clear_mods_button = QPushButton("清除模组")
         self.clear_mods_button.setStyleSheet(self._button_style_danger)
         self.clear_mods_button.setMinimumWidth(160)
-        self.clear_mods_button.setToolTip("Delete all mods and reset to vanilla state")
+        self.clear_mods_button.setToolTip("删除所有模组并重置为原版状态")
         clear_mods_layout.addWidget(
             self.clear_mods_button, alignment=Qt.AlignmentFlag.AlignCenter
         )
 
         # Steam tools section
-        steam_group = QGroupBox("Steam Utilities")
+        steam_group = QGroupBox("Steam 工具")
         steam_group.setStyleSheet(self._group_box_style)
         main_layout.addWidget(steam_group)
         steam_layout = QHBoxLayout()

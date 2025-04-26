@@ -168,7 +168,7 @@ class LogReader(QDialog):
                 entries.append(
                     {
                         "published_file_id": str(pfid),
-                        "type": "workshop",
+                        "type": "创意工坊",
                         "path": str(item.get("manifest", "")),
                         "timeupdated": item.get("timeupdated"),
                     }
@@ -369,18 +369,18 @@ class LogReader(QDialog):
             "Unknown Mod"
         """
         if not pfid:
-            return "Unknown Mod"
+            return "未知模组"
 
         pfid_str = str(pfid)
         if not pfid_str.isdigit():
-            return f"Unknown Mod (Invalid ID: {pfid_str})"
+            return f"未知模组 (无效 ID: {pfid_str})"
 
         metadata = self._get_mod_metadata(pfid_str)
         if not isinstance(metadata, dict):
-            return f"Unknown Mod ({pfid_str})"
+            return f"未知模组 ({pfid_str})"
 
         name = metadata.get("name") or metadata.get("steamName")
-        return str(name) if name else f"Unknown Mod ({pfid_str})"
+        return str(name) if name else f"未知模组 ({pfid_str})"
 
     def get_mod_path_from_pfid(self, pfid: Union[str, int, None]) -> str:
         """

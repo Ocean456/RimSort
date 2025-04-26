@@ -272,7 +272,7 @@ class MenuBar(QObject):
             QMenu: The created "Help" menu.
         """
         help_menu = self.menu_bar.addMenu("帮助")
-        self.wiki_action = self._add_action(help_menu, "RimSort Wiki…")
+        self.wiki_action = self._add_action(help_menu, "RimSort Wiki")
         help_menu.addSeparator()
         # TODO: updates not implemented yet
         # self.check_for_updates_action = self._add_action(
