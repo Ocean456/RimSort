@@ -58,7 +58,7 @@ class UseThisInsteadPanel(BaseModsPanel):
         )
 
         self.editor_tool_button = QToolButton()
-        self.editor_tool_button.setText("More Options")
+        self.editor_tool_button.setText("更多选项")
 
         self.editor_tool_menu = QMenu(self.editor_tool_button)
 
@@ -134,7 +134,7 @@ class UseThisInsteadPanel(BaseModsPanel):
                 original_pfid_btn_item = QStandardItem(mv["publishedfileid"])
                 original_pfid_btn = QPushButton()
                 original_pfid_btn.setObjectName("originalPFIDButton")
-                original_pfid_btn.setText("Open Workshop Page")
+                original_pfid_btn.setText("打开创意工坊页面")
                 original_pfid_btn.clicked.connect(
                     partial(platform_specific_open, mv["steam_uri"])
                 )
@@ -145,7 +145,7 @@ class UseThisInsteadPanel(BaseModsPanel):
 
             replacement_pfid_btn = QPushButton()
             replacement_pfid_btn.setObjectName("replacementPFIDButton")
-            replacement_pfid_btn.setText("Open Workshop Page")
+            replacement_pfid_btn.setText("打开创意工坊页面")
             replacement_pfid_btn.clicked.connect(
                 partial(
                     platform_specific_open,

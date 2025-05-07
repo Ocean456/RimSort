@@ -157,7 +157,7 @@ class RuleEditor(QWidget):
                     )
 
         # MOD LABEL
-        self.mod_label = QLabel("No mod currently being edited")
+        self.mod_label = QLabel("当前没有正在编辑的模组")
         self.mod_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         # CONTAINER LAYOUTS
@@ -278,7 +278,7 @@ class RuleEditor(QWidget):
         # Create the model and set column headers
         self.editor_model = QStandardItemModel(0, 5)
         self.editor_model.setHorizontalHeaderLabels(
-            ["Name", "PackageId", "Rule source", "Rule type", "Comment"]
+            ["名称", "包名", "规则来源", "规则类型", "备注"]
         )
         # Create the table view and set the model
         self.editor_delegate = EditableDelegate()
@@ -730,7 +730,7 @@ class RuleEditor(QWidget):
                     and metadata["packageid"].lower() == self.edit_packageid.lower()
                 ):
                     self.edit_name = metadata["name"]
-                    self.mod_label.setText(f"Editing rules for: {self.edit_name}")
+                    self.mod_label.setText(f"正在编辑规则: {self.edit_name}")
                     # All Lowercase!!!
                     # cSpell:enableCompoundWords
                     rule_types = {

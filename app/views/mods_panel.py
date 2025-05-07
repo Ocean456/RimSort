@@ -856,7 +856,7 @@ class ModListWidget(QListWidget):
                         ):
                             git_paths.append(mod_folder_path)
                             re_git_action = QAction()
-                            re_git_action.setText("Update mod with git")
+                            re_git_action.setText("使用 Git 更新模组")
                     # If Workshop, and pfid, allow Steam actions
                     if mod_data_source == "workshop" and mod_metadata.get(
                         "publishedfileid"
@@ -951,7 +951,7 @@ class ModListWidget(QListWidget):
                                 if not convert_local_steamcmd_action:
                                     convert_local_steamcmd_action = QAction()
                                     convert_local_steamcmd_action.setText(
-                                        "Convert local mod(s) to SteamCMD"
+                                        "将本地模组转换为 SteamCMD 模组"
                                     )
                             if mod_metadata.get("steamcmd"):
                                 steamcmd_mod_paths.append(mod_folder_path)

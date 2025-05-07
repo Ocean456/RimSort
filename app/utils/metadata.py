@@ -127,20 +127,20 @@ class MetadataManager(QObject):
         ) -> bool:
             if not os.path.exists(path):
                 self.show_warning_signal.emit(
-                    f"{db_type} DB is missing",
-                    f"Configured {db_type} DB not found!",
-                    f"Unable to initialize external metadata. There is no external {db_type} metadata being factored!\n"
-                    + "\nPlease make sure your Database location settings are correct.",
+                    f"{db_type} 数据库缺失",
+                    f"配置的 {db_type} 数据库未找到！",
+                    f"无法初始化外部元数据。未检测到任何外部  {db_type} 元数据！\n"
+                    + "\n请确认数据库路径设置是否正确。",
                     f"{path}",
                 )
                 return False
 
             if os.path.isdir(path) == (not expect_directory):
                 self.show_warning_signal.emit(
-                    f"{db_type} DB is missing",
-                    f"Configured {db_type} DB path is {'not' if expect_directory else ''} a directory! Expected a {'directory' if expect_directory else 'file'} path.",
-                    f"Unable to initialize external metadata. There is no external {db_type} metadata being factored!\n"
-                    + "\nPlease make sure your Database location settings are correct.",
+                    f"{db_type} 数据库缺失",
+                    f"配置的 {db_type} 数据库路径不是一个{'目录' if expect_directory else '文件'}！应为一个{'目录' if expect_directory else '文件'}路径。",
+                    f"无法初始化外部元数据。未检测到任何外部 {db_type} 元数据！\n"
+                    + "\n请确认数据库路径设置是否正确。",
                     f"{path}",
                 )
                 return False
@@ -184,9 +184,10 @@ class MetadataManager(QObject):
                     if life != 0:  # Disable Notification if value is 0
                         self.show_warning_signal.emit(
                             "Steam 数据库元数据已过期",
-                            "Steam 数据库 已过期！建议更新！",
-                            f"Steam 数据库上次更新：{strftime('%Y-%m-%d %H:%M:%S', localtime(db_data['version'] - life))}<br/><br/>"
-                            + "正在回退到已缓存但过期的Steam数据库……",
+                            "Steam 数据库已过期，建议进行更新。",
+                            f"Steam 数据库上次更新时间：<br/>{strftime('%Y-%m-%d %H:%M:%S', localtime(db_data['version'] - life))}<br/><br/>"
+                            + "正在使用缓存的（已过期的）Steam 数据库...<br/><br/>"
+                            + "Tip: 可以参考 Wiki 中的步骤来自行构建数据库",
                             "",
                         )
                     db_json_data = db_data[

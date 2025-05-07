@@ -1619,7 +1619,7 @@ class SettingsController(QObject):
         Build the Steam Workshop database.
         """
         confirm_diag = BinaryChoiceDialog(
-            title="确认构建数据库",
+            title="确定构建数据库",
             text="您确定要构建创意工坊数据库吗？",
             information=(
                 "对多数用户而言无需此操作，GitHub提供的Steam数据库已足够。构建数据库可能需要较长时间。<br>"
