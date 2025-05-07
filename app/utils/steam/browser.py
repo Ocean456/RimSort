@@ -6,7 +6,7 @@ from typing import Any
 from loguru import logger
 from PySide6.QtCore import QPoint, QSize, Qt, QUrl, Signal
 from PySide6.QtGui import QAction, QPixmap
-from PySide6.QtWebEngineCore import QWebEnginePage
+from PySide6.QtWebEngineCore import QWebEnginePage, QWebEngineProfile
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWidgets import (
     QHBoxLayout,
@@ -80,7 +80,7 @@ class SteamBrowser(QWidget):
         self.downloader_layout = QVBoxLayout()
 
         # DOWNLOADER WIDGETS
-        self.downloader_label = QLabel("Mod Downloader")
+        self.downloader_label = QLabel("模组下载器")
         self.downloader_label.setObjectName("browserPaneldownloader_label")
         self.downloader_list = QListWidget()
         self.downloader_list.setFixedWidth(200)
@@ -91,16 +91,16 @@ class SteamBrowser(QWidget):
         self.downloader_list.customContextMenuRequested.connect(
             self._downloader_item_contextmenu_event
         )
-        self.clear_list_button = QPushButton("Clear List")
+        self.clear_list_button = QPushButton("清空列表")
         self.clear_list_button.setObjectName("browserPanelClearList")
         self.clear_list_button.clicked.connect(self._clear_downloader_list)
-        self.download_steamcmd_button = QPushButton("Download mod(s) (SteamCMD)")
+        self.download_steamcmd_button = QPushButton("下载模组（SteamCMD）")
         self.download_steamcmd_button.clicked.connect(
             partial(
                 self.steamcmd_downloader_signal.emit, self.downloader_list_mods_tracking
             )
         )
-        self.download_steamworks_button = QPushButton("Download mod(s) (Steam app)")
+        self.download_steamworks_button = QPushButton("下载模组（Steam）")
         self.download_steamworks_button.clicked.connect(
             self._subscribe_to_mods_from_list
         )
@@ -125,6 +125,8 @@ class SteamBrowser(QWidget):
         self.web_view.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
         self.web_view.load(self.startpage)
 
+        QWebEngineProfile.defaultProfile().setHttpAcceptLanguage("zh-CN")
+
         # Location box
         self.location = QLineEdit()
         self.location.setSizePolicy(
@@ -134,7 +136,7 @@ class SteamBrowser(QWidget):
         self.location.returnPressed.connect(self.__browse_to_location)
 
         # Nav bar
-        self.add_to_list_button = QAction("Add to list")
+        self.add_to_list_button = QAction("添加到列表")
         self.add_to_list_button.triggered.connect(self._add_collection_or_mod_to_list)
         self.nav_bar = QToolBar()
         self.nav_bar.setObjectName("browserPanelnav_bar")
@@ -191,9 +193,9 @@ class SteamBrowser(QWidget):
                 f"Unable to parse publishedfileid from url: {self.current_url}"
             )
             show_warning(
-                title="No publishedfileid found",
-                text="Unable to parse publishedfileid from url, Please check if url is in the correct format",
-                information=f"Url: {self.current_url}",
+                title="未找到文件ID",
+                text="无法从URL解析文件ID",
+                information=f"Url地址： {self.current_url}",
             )
             return None
         # If there is extra data after the PFID, strip it
@@ -212,17 +214,17 @@ class SteamBrowser(QWidget):
                 from app.views.dialogue import show_dialogue_conditional
 
                 answer = show_dialogue_conditional(
-                    title="Add Collection",
-                    text="How would you like to add the collection?",
-                    information="You can choose to add all mods from the collection or only the ones you don't have installed.",
-                    button_text_override=["Add All Mods", "Add Missing Mods"],
+                    title="添加合集",
+                    text="请选择添加合集的方式",
+                    information="您可以选择添加合集所有模组或仅添加未安装模组",
+                    button_text_override=["添加所有模组", "添加缺失模组"],
                 )
 
-                if answer == "Add All Mods":
+                if answer == "添加所有模组":
                     # add all mods
                     for pfid, title in collection_mods_pfid_to_title.items():
                         self._add_mod_to_list(publishedfileid=pfid, title=title)
-                elif answer == "Add Missing Mods":
+                elif answer == "添加缺失模组":
                     # add only mods that aren't installed
                     for pfid, title in collection_mods_pfid_to_title.items():
                         if not self._is_mod_installed(pfid):
@@ -233,8 +235,8 @@ class SteamBrowser(QWidget):
                 )
                 show_warning(
                     title="SteamCMD downloader",
-                    text="Empty list of mods returned, unable to add collection to list!",
-                    information="Please reach out to us on Github Issues page or\n#rimsort-testing on the Rocketman/CAI discord",
+                    text="返回的模组列表为空，无法将合集添加至列表！",
+                    information="如需反馈问题，请前往 GitHub Issues 页面 或 Rocketman/CAI Discord 服务器的 #rimsort-testing 频道 联系我们。",
                 )
         if len(self.downloader_list_dupe_tracking.keys()) > 0:
             # Build a report from our dict
@@ -244,8 +246,8 @@ class SteamBrowser(QWidget):
             # Notify the user
             show_warning(
                 title="SteamCMD downloader",
-                text="You already have these mods in your download list!",
-                information="Skipping the following mods which are already present in your download list!",
+                text="当前模组已存在于您的下载列表中！",
+                information="已跳过以下已存在于下载列表中的模组！",
                 details=dupe_report,
             )
             self.downloader_list_dupe_tracking = {}
@@ -332,7 +334,7 @@ class SteamBrowser(QWidget):
 
         if context_item:  # Check if the right-clicked point corresponds to an item
             context_menu = QMenu(self)  # Downloader item context menu event
-            remove_item = context_menu.addAction("Remove mod from list")
+            remove_item = context_menu.addAction("从列表中移除Mod")
             remove_item.triggered.connect(
                 partial(self._remove_mod_from_list, context_item)
             )
@@ -567,7 +569,7 @@ class SteamBrowser(QWidget):
                     installedDiv.style.marginBottom = '10px';
                     installedDiv.style.textAlign = 'center';
                     installedDiv.style.fontWeight = 'bold';
-                    installedDiv.innerHTML = '✓ Already Installed';
+                    installedDiv.innerHTML = '✓ 已安装';
                     // Insert it at the top of the page content
                     var contentDiv = document.querySelector('.workshopItemDetailsHeader');
                     if (contentDiv) {

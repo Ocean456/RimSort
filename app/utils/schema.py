@@ -73,18 +73,18 @@ def validate_rimworld_mods_list(
     except Exception as e:
         logger.error(f"Error trying to validate data: {e}")
         show_warning(
-            title="Unable to read data",
-            text=("RimSort was unable to read the supplied mods list."),
-            information="The supplied mods list may be missing or invalid. "
-            + "If you just (re)installed RimWorld, you may need to run it once to generate the mods list.",
+            title="无法读取数据",
+            text=("RimSort 无法读取提供的mod列表。"),
+            information="提供的mod列表可能缺失或无效。"
+            + "如果你刚刚（重新）安装了RimWorld，你可能需要运行它一次来生成mod列表。",
             details=str(e),
         )
     else:
         logger.error(f"Invalid format: {mods_config_data}")
         show_warning(
-            title="Unable to read data",
+            title="无法读取数据",
             text=(
-                "RimSort was unable to read the supplied mods list because it may be invalid or missing."
+                "RimSort 无法读取提供的mod列表，因为它可能无效或丢失。"
             ),
         )
 

@@ -62,8 +62,8 @@ def find_circular_dependencies(dependency_graph: dict[str, set[str]]) -> None:
         logger.info("No circular dependencies found.")
 
     show_warning(
-        title="Unable to Sort",
-        text="Unable to Sort",
-        information="RimSort found circular dependencies in your mods list. Please see the details for dependency loops.",
+        title="无法排序",
+        text="无法排序",
+        information="RimSort在mods列表中发现了循环依赖项。请参阅依赖循环的详细信息。",
         details="\n\n".join(cycle_strings),
     )

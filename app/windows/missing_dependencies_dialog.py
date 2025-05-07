@@ -34,14 +34,14 @@ class MissingDependenciesDialog(QDialog):
         """
         Set up the UI components of the dialog.
         """
-        self.setWindowTitle("Dependency Manager")
+        self.setWindowTitle("依赖管理")
         self.resize(700, 500)
 
         main_layout = QVBoxLayout(self)
 
         description = QLabel(
-            "Some mods in your active list require other mods to work properly.\n"
-            "Select which missing dependencies to add to your active mods list."
+            "您的启用列表中的某些模组需要其他模组才能正常工作。\n"
+            "请选择要添加到您的启用模组列表中的缺失依赖项。"
         )
         description.setWordWrap(True)
         description.setStyleSheet("font-size: 10pt; margin-bottom: 10px;")
@@ -56,19 +56,19 @@ class MissingDependenciesDialog(QDialog):
 
         button_layout = QHBoxLayout()
 
-        select_all_button = QPushButton("Select All")
+        select_all_button = QPushButton("全选")
         select_all_button.clicked.connect(self.select_all)
         button_layout.addWidget(select_all_button)
 
         button_layout.addStretch()
 
-        add_button = QPushButton("Add Selected && Sort")
+        add_button = QPushButton("添加并排序")
         add_button.clicked.connect(self.accept)
         add_button.setDefault(True)
         add_button.setShortcut("Return")  # Enter key
         button_layout.addWidget(add_button)
 
-        ignore_button = QPushButton("Sort Without Adding")
+        ignore_button = QPushButton("仅排序")
         ignore_button.clicked.connect(self.reject)
         ignore_button.setShortcut("Escape")  # Esc key
         button_layout.addWidget(ignore_button)
@@ -108,7 +108,7 @@ class MissingDependenciesDialog(QDialog):
         local_deps, download_deps = self._classify_dependencies(missing_deps)
 
         if local_deps:
-            local_label = QLabel("Local mods (available but not active):")
+            local_label = QLabel("本地模组（已下载但未启用）：")
             local_label.setStyleSheet("font-weight: bold; color: green;")
             self.scroll_layout.addWidget(local_label)
 
@@ -118,7 +118,7 @@ class MissingDependenciesDialog(QDialog):
             self.scroll_layout.addSpacing(20)
 
         if download_deps:
-            download_label = QLabel("Mods that need to be downloaded:")
+            download_label = QLabel("需要下载的模组：")
             download_label.setStyleSheet("font-weight: bold; color: orange;")
             self.scroll_layout.addWidget(download_label)
 
@@ -189,7 +189,7 @@ class MissingDependenciesDialog(QDialog):
         group_layout.addWidget(checkbox)
         self.checkboxes[dep_id] = checkbox
 
-        requiring_label = QLabel("Required by:\n  • " + "\n  • ".join(requiring_mods))
+        requiring_label = QLabel("以下模组需要：\n  • " + "\n  • ".join(requiring_mods))
         requiring_label.setStyleSheet("color: gray; margin-left: 20px;")
         requiring_label.setWordWrap(True)
         group_layout.addWidget(requiring_label)

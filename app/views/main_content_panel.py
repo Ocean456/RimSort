@@ -401,14 +401,13 @@ class MainContent(QObject):
         else:
             logger.warning("Essential path(s) are invalid or not set!")
             answer = dialogue.show_dialogue_conditional(
-                title="Essential path(s)",
-                text="Essential path(s) are invalid or not set!\n",
+                title="必要路径",
+                text="必要路径无效或未设置！<br/>",
                 information=(
-                    "RimSort requires, at the minimum, for the game install folder and the "
-                    "config folder paths to be set, and that the paths both exist. Please set "
-                    "both of these manually or by using the autodetect functionality.\n\n"
-                    "Would you like to configure them now?"
-                ),
+                    "RimSort 至少需要设置游戏安装文件夹和配置文件夹路径，且路径必须存在。"
+                    "请通过手动设置或使用自动检测功能配置这两个路径。<br/><br/"
+                    "是否要立即进行配置？"
+                )
             )
             if answer == "&Yes":
                 self.settings_controller.show_settings_dialog("Locations")
@@ -561,13 +560,11 @@ class MainContent(QObject):
             [f"* {mod}" for mod in self.duplicate_mods.keys()]
         )
         dialogue.show_warning(
-            title="Duplicate mod(s) found",
-            text="Duplicate mods(s) found for package ID(s) in your ModsConfig.xml (active mods list)",
+            title="发现重复模组",
+            text="在您的ModsConfig.xml（当前激活模组列表）中检测到以下Package ID存在重复模组",
             information=(
-                "The following list of mods were set active in your ModsConfig.xml and "
-                "duplicate instances were found of these mods in your mod data sources. "
-                "The vanilla game will use the first 'local mod' of a particular package ID "
-                "that is found - so RimSort will also adhere to this logic."
+                "下列模组已在ModsConfig.xml中启用，但在您的模组数据源中发现重复实例。"
+                "原版游戏会采用首个匹配的Package ID的'本地模组'，因此RimSort也将遵循此逻辑。"
             ),
             details=list_of_duplicate_mods,
         )
@@ -589,11 +586,9 @@ class MainContent(QObject):
         else:
             list_of_missing_mods = "\n".join([f"* {mod}" for mod in self.missing_mods])
             dialogue.show_information(
-                text="Could not find data for some mods!",
+                text="无法找到某些模组的数据！",
                 information=(
-                    "The following list of mods were set active in your mods list but "
-                    "no data could be found for these mods in local/workshop mod paths. "
-                    "\n\nAre your game configuration paths correct?"
+                    "以下模组已在您的模组列表中启用，但在本地/创意工坊模组路径中未找到相关数据。\n\n请检查您的游戏配置路径是否设置正确？"
                 ),
                 details=list_of_missing_mods,
             )
@@ -829,9 +824,9 @@ class MainContent(QObject):
         logger.debug(f"Current RimSort version found: {current_version}")
         if current_version != tag_name:
             answer = dialogue.show_dialogue_conditional(
-                title="RimSort update found",
-                text=f"An update to RimSort has been released: {tag_name}",
-                information=f"You are running RimSort {current_version}\nDo you want to update now?",
+                title="发现RimSort更新",
+                text=f"RimSort 已发布新版本：{tag_name}",
+                information=f"当前运行版本：{current_version}\n是否立即更新？"
             )
             if answer == "&Yes":
                 # Setup environment
@@ -908,20 +903,18 @@ class MainContent(QObject):
                     )
                     temp_dir = "RimSort" if SYSTEM != "Darwin" else "RimSort.app"
                     answer = dialogue.show_dialogue_conditional(
-                        title="Update downloaded",
-                        text="Do you want to proceed with the update?",
-                        information=f"\nSuccessfully retrieved latest release. The update will be installed from: {os.path.join(gettempdir(), temp_dir)}",
+                        title="更新已就绪",
+                        text="是否立即执行更新？",
+                        information=f"\n已成功获取最新版本，更新程序将从以下路径安装：{os.path.join(gettempdir(), temp_dir)}"
                     )
                     if answer != "&Yes":
                         return
                 except Exception:
                     stacktrace = traceback.format_exc()
                     dialogue.show_warning(
-                        title="Failed to download update",
-                        text="Failed to download latest RimSort release!",
-                        information="Did the file/url change? "
-                        + "Does your environment have access to the Internet?\n"
-                        + f"URL: {browser_download_url}",
+                        title="更新获取失败",
+                        text="最新版 RimSort 下载失败！",
+                        information=f"可能原因：<br>文件地址是否变更？<br>当前网络环境是否受限？<br>下载地址：{browser_download_url}",
                         details=stacktrace,
                     )
                     return
@@ -971,8 +964,8 @@ class MainContent(QObject):
         else:
             logger.debug("Up to date!")
             dialogue.show_information(
-                title="RimSort is up to date!",
-                text=f"You are already running the latest release: {tag_name}",
+                title="RimSort 已是最新版本！",
+                text=f"当前运行的版本已是最新发布版本：{tag_name}"
             )
 
     def __do_download_extract_release_to_tempdir(self, url: str) -> None:
@@ -1061,7 +1054,7 @@ class MainContent(QObject):
                 target=partial(
                     self.metadata_manager.refresh_cache, is_initial=is_initial
                 ),
-                text="Scanning mod sources and populating metadata...",
+                text="正在扫描模组来源，加载数据中",
             )
 
             # Insert mod data into list
@@ -1222,12 +1215,12 @@ class MainContent(QObject):
             )
         except NotImplementedError as e:
             dialogue.show_warning(
-                title="Sorting algorithm not implemented",
-                text="The selected sorting algorithm is not implemented",
+                title="排序算法未实现",
+                text="选定的排序算法未实现",
                 information=(
-                    "This may be caused by malformed settings or improper migration between versions or different mod manager. "
-                    "Try resetting your settings, selecting a different sorting algorithm, or "
-                    "deleting your settings file. If the issue persists, please report it the developers."
+                    "这可能是由于设置文件损坏、跨版本迁移错误或模组管理器冲突引起的。"
+                    "请尝试重置设置、选择其他排序算法或删除设置文件。"
+                    "若问题仍未解决，请向开发者报告。"
                 ),
                 details=str(e),
             )
@@ -1271,7 +1264,7 @@ class MainContent(QObject):
         logger.info("Opening file dialog to select input file")
         file_path = dialogue.show_dialogue_file(
             mode="open",
-            caption="Open RimWorld mod list",
+            caption="打开模组列表",
             _dir=str(AppInfo().saved_modlists_folder),
             _filter="RimWorld mod list (*.rml *.rws *.xml)",
         )
@@ -1321,7 +1314,7 @@ class MainContent(QObject):
         logger.info("Opening file dialog to specify output file")
         file_path = dialogue.show_dialogue_file(
             mode="save",
-            caption="Save mod list",
+            caption="保存模组列表",
             _dir=str(AppInfo().saved_modlists_folder),
             _filter="XML (*.xml)",
         )
@@ -1365,8 +1358,8 @@ class MainContent(QObject):
                     json_to_xml_write(mods_config_data, file_path)
             except Exception:
                 dialogue.show_fatal_error(
-                    title="Failed to export to file",
-                    text="Failed to export active mods to file:",
+                    title="导出到文件失败",
+                    text="未能导出当前启用的模组到文件：",
                     information=f"{file_path}",
                     details=traceback.format_exc(),
                 )
@@ -1527,9 +1520,9 @@ class MainContent(QObject):
             )
         # Copy report to clipboard
         dialogue.show_information(
-            title="Export active mod list",
-            text="Copied active mod list report to clipboard...",
-            information='Click "Show Details" to see the full report!',
+            title="导出当前模组列表",
+            text="当前模组列表报告已复制到剪贴板...",
+            information='点击「show details」查看完整报告！',
             details=f"{active_mods_clipboard_report}",
         )
         copy_to_clipboard_safely(active_mods_clipboard_report)
@@ -1682,15 +1675,15 @@ class MainContent(QObject):
         if rentry_uploader.url and host and host.endswith("rentry.co"):
             copy_to_clipboard_safely(rentry_uploader.url)
             dialogue.show_information(
-                title="Uploaded active mod list",
-                text=f"Uploaded active mod list report to Rentry.co! The URL has been copied to your clipboard:\n\n{rentry_uploader.url}",
-                information='Click "Show Details" to see the full report!',
-                details=f"{active_mods_rentry_report}",
+                title="当前启用模组列表已上传",
+                text=f"已成功将当前启用的模组列表报告上传至Rentry.co！链接已复制到剪贴板：<br><br>{rentry_uploader.url}",
+                information='点击「show details」查看完整报告！',
+                details=f"{active_mods_rentry_report}"
             )
         else:
             dialogue.show_warning(
-                title="Failed to upload",
-                text="Failed to upload exported active mod list to Rentry.co",
+                title="上传失败",
+                text="向 Rentry.co 上传启用的模组模式列表失败",
             )
 
     def _do_open_app_directory(self) -> None:
@@ -1758,10 +1751,10 @@ class MainContent(QObject):
     def show_dialog_specify_paths(self, directory_name: str) -> None:
         logger.error(f"Could not open {directory_name} directory")
         answer = dialogue.show_dialogue_conditional(
-            title="Could not open directory",
-            text=f"{directory_name} path does not exist or is not set.",
-            information="Would you like to set the path now?",
-            button_text_override=["Open settings"],
+            title="无法打开目录",
+            text=f"{directory_name} 路径不存在或未设置。",
+            information="是否现在设置路径？",
+            button_text_override=["打开设置"]
         )
         if "settings" in answer:
             self.settings_controller.show_settings_dialog()
@@ -1790,9 +1783,9 @@ class MainContent(QObject):
     def _upload_log(self, path: Path) -> None:
         if not os.path.exists(path):
             dialogue.show_warning(
-                title="File not found",
-                text="The file you are trying to upload does not exist.",
-                information=f"File: {path}",
+                title="文件未找到",
+                text="您尝试上传的文件不存在。",
+                information=f"文件路径：{path}"
             )
             return
 
@@ -1805,15 +1798,15 @@ class MainContent(QObject):
         if success:
             copy_to_clipboard_safely(ret)
             dialogue.show_information(
-                title="Uploaded file",
-                text=f"Uploaded {path.name} to http://0x0.st/",
-                information=f"The URL has been copied to your clipboard:\n\n{ret}",
+                title="文件已上传",
+                text=f"已将 {path.name} 上传到 http://0x0.st/",
+                information=f"URL 已复制到剪贴板：\n\n{ret}",
             )
             webbrowser.open(ret)
         else:
             dialogue.show_warning(
-                title="Failed to upload file.",
-                text="Failed to upload the file to 0x0.st",
+                title="文件上传失败",
+                text="未能将文件上传到 0x0.st",
                 information=ret,
             )
 
@@ -1867,8 +1860,8 @@ class MainContent(QObject):
         except Exception:
             logger.error("Could not save active mods")
             dialogue.show_fatal_error(
-                title="Could not save active mods",
-                text="Failed to save active mods to file:",
+                title="无法保存启用模组",
+                text="未能将启用模组保存到文件：",
                 information=f"{mods_config_path}",
                 details=traceback.format_exc(),
             )
@@ -1978,9 +1971,9 @@ class MainContent(QObject):
         # If we failed to check for updates, skip the comparison(s) & UI prompt
         if updates_checked == "failed":
             dialogue.show_warning(
-                title="Unable to check for updates",
-                text="RimSort was unable to query Steam WebAPI for update information!\n",
-                information="Are you connected to the Internet?",
+                title="无法检查更新",
+                text="RimSort 无法通过 Steam WebAPI 查询更新信息！\n",
+                information="您是否已连接到互联网？",
             )
             return
         workshop_mod_updater = ModUpdaterPrompt()
@@ -1998,9 +1991,9 @@ class MainContent(QObject):
             and self.steamcmd_runner.process.state() == QProcess.ProcessState.Running
         ):
             dialogue.show_warning(
-                title="RimSort - SteamCMD setup",
-                text="Unable to create SteamCMD runner!",
-                information="There is an active process already running!",
+                title="RimSort - SteamCMD 设置",
+                text="无法创建 SteamCMD 运行器！",
+                information="当前已有一个活动进程正在运行！",
                 details=f"PID {self.steamcmd_runner.process.processId()} : "
                 + self.steamcmd_runner.process.program(),
             )
@@ -2021,9 +2014,9 @@ class MainContent(QObject):
             RunnerPanel().process_complete()
         else:
             dialogue.show_warning(
-                title="RimSort - SteamCMD setup",
-                text="Unable to initiate SteamCMD installation. Local mods path not set!",
-                information="Please configure local mods path in Settings before attempting to install.",
+                title="RimSort - SteamCMD 设置",
+                text="无法启动 SteamCMD 安装。未设置本地模组路径！",
+                information="请在尝试安装之前在设置中配置本地模组路径。",
             )
 
     def _do_download_mods_with_steamcmd(self, publishedfileids: list[str]) -> None:
@@ -2040,8 +2033,8 @@ class MainContent(QObject):
         if len(publishedfileids) == 0:
             dialogue.show_warning(
                 title="RimSort",
-                text="No PublishedFileIds were supplied in operation.",
-                information="Please add mods to list before attempting to download.",
+                text="未提供任何 PublishedFileIds。",
+                information="请在尝试下载之前将模组添加到列表中。",
             )
             return
         # Check for existing steamcmd_runner process
@@ -2052,8 +2045,8 @@ class MainContent(QObject):
         ):
             dialogue.show_warning(
                 title="RimSort",
-                text="Unable to create SteamCMD runner!",
-                information="There is an active process already running!",
+                text="无法创建 SteamCMD 运行器！",
+                information="当前已有一个活动进程正在运行！",
                 details=f"PID {self.steamcmd_runner.process.processId()} : "
                 + self.steamcmd_runner.process.program(),
             )
@@ -2089,9 +2082,9 @@ class MainContent(QObject):
             )
         else:
             dialogue.show_warning(
-                title="SteamCMD not found",
-                text="SteamCMD executable was not found.",
-                information='Please setup an existing SteamCMD prefix, or setup a new prefix with "Setup SteamCMD".',
+                title="未找到 SteamCMD",
+                text="未找到 SteamCMD 可执行文件。",
+                information='请设置一个现有的 SteamCMD 前缀，或通过“设置 SteamCMD”创建一个新前缀。',
             )
 
     def _do_steamworks_api_call(self, instruction: list[Any]) -> None:
@@ -2195,8 +2188,8 @@ class MainContent(QObject):
         if len(publishedfileids) == 0:
             dialogue.show_warning(
                 title="RimSort",
-                text="No PublishedFileIds were supplied in operation.",
-                information="Please add mods to list before attempting to download.",
+                text="未提供任何 PublishedFileIds。",
+                information="请在尝试下载之前将模组添加到列表中。",
             )
             return
         # Close browser if open
@@ -2206,7 +2199,7 @@ class MainContent(QObject):
         self.do_threaded_loading_animation(
             gif_path=str(AppInfo().theme_data_folder / "default-icons" / "steam.gif"),
             target=partial(self._do_steamworks_api_call, instruction=instruction),
-            text="Processing Steam subscription action(s) via Steamworks API...",
+            text="正在通过Steamworks API处理Steam订阅操作...",
         )
         # self._do_refresh()
 
@@ -2218,8 +2211,8 @@ class MainContent(QObject):
         that are configured to be passed to the Rimworld executable
         """
         args, ok = dialogue.show_dialogue_input(
-            title="Enter git repo",
-            label="Enter a git repository url (http/https) to clone to local mods:",
+            title="输入Git仓库地址",
+            label="请输入Git仓库URL（HTTP/HTTPS）以克隆到本地模组："
         )
         if ok:
             self._do_clone_repo_to_path(
@@ -2240,8 +2233,8 @@ class MainContent(QObject):
         "Github mod" related actions
         """
         args, ok = dialogue.show_dialogue_input(
-            title="Edit username",
-            label="Enter your Github username:",
+            title="编辑用户名",
+            label="请输入您的 Github 用户名：",
             text=self.settings_controller.settings.github_username,
         )
         if ok:
@@ -2251,8 +2244,8 @@ class MainContent(QObject):
             logger.debug("USER ACTION: cancelled input!")
             return
         args, ok = dialogue.show_dialogue_input(
-            title="Edit token",
-            label="Enter your Github personal access token here (ghp_*):",
+            title="编辑令牌",
+            label="请输入您的 Github 个人访问令牌 (ghp_*)：",
             text=self.settings_controller.settings.github_token,
         )
         if ok:
@@ -2335,12 +2328,12 @@ class MainContent(QObject):
                     except GitCommandError:
                         stacktrace = traceback.format_exc()
                         dialogue.show_warning(
-                            title="Failed to update repo!",
-                            text=f"The repository supplied at [{repo_path}] failed to update!\n"
-                            + "Are you connected to the Internet? "
-                            + "Is the repo valid?",
+                            title="更新存储库失败！",
+                            text=f"位于 [{repo_path}] 的存储库更新失败！\n"
+                            + "您是否已连接到互联网？"
+                            + "存储库是否有效？",
                             information=(
-                                f"Supplied repository: {repo.remotes.origin.url}"
+                                f"提供的存储库：{repo.remotes.origin.url}"
                                 if repo
                                 and repo.remotes
                                 and repo.remotes.origin
@@ -2364,15 +2357,15 @@ class MainContent(QObject):
                     ]
                 )
                 dialogue.show_information(
-                    title="Git repo(s) updated",
-                    text="The following repo(s) had updates pulled from the remote:",
+                    title="Git 仓库已更新",
+                    text="以下仓库已从远程拉取更新：",
                     information=repos_updated,
                     details=updates_summarized,
                 )
             else:
                 dialogue.show_information(
-                    title="Git repo(s) not updated",
-                    text="No updates were found.",
+                    title="Git 仓库未更新",
+                    text="未找到任何更新。",
                 )
         else:
             self._do_notify_no_git()
@@ -2396,28 +2389,28 @@ class MainContent(QObject):
             if os.path.exists(repo_path):  # If local repo does exist
                 # Prompt to user to handle
                 answer = dialogue.show_dialogue_conditional(
-                    title="Existing repository found",
-                    text="An existing local repo that matches this repository was found:",
+                    title="已找到现有存储库",
+                    text="找到与该存储库匹配的本地存储库：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",
                     information=(
-                        f"{repo_path}\n\n"
-                        + "How would you like to handle? Choose option:\n"
-                        + "\n1) Clone new repository (deletes existing and replaces)"
-                        + "\n2) Update existing repository (in-place force-update)"
+                        f"{repo_path}<br/>"
+                        + "您希望如何处理？请选择以下选项：<br/>"
+                        + "1) 克隆新存储库（将删除现有存储库并替换）<br/>"
+                        + "\n2) 更新现有存储库（直接强制更新）"
                     ),
                     button_text_override=[
-                        "Clone new",
-                        "Update existing",
+                        "克隆新存储库",
+                        "更新现有存储库",
                     ],
                 )
-                if answer == "Cancel":
+                if answer == "取消":
                     logger.debug(
                         f"User cancelled prompt. Skipping any {repo_folder_name} repository actions."
                     )
                     return
-                elif answer == "Clone new":
+                elif answer == "克隆新存储库":
                     logger.info(f"Deleting local git repo at: {repo_path}")
                     delete_files_except_extension(directory=repo_path, extension=".dds")
-                elif answer == "Update existing":
+                elif answer == "更新现有存储库":
                     self._do_force_update_existing_repo(
                         base_path=base_path, repo_url=repo_url
                     )
@@ -2427,8 +2420,8 @@ class MainContent(QObject):
             try:
                 Repo.clone_from(repo_url, repo_path)
                 dialogue.show_information(
-                    title="Repo retrieved",
-                    text="The configured repository was cloned!",
+                    title="已获取存储库",
+                    text="已克隆配置的存储库！",
                     information=f'<a href="{repo_url}">{repo_url}</a>  ->\n'
                     + f"{repo_path}",
                 )
@@ -2456,29 +2449,28 @@ class MainContent(QObject):
                         # Handle the case when the target branch is not found
                         logger.warning("Target branch not found.")
                     dialogue.show_information(
-                        title="Repo retrieved",
-                        text="The configured repository was reinitialized with existing files! (likely leftover .dds textures)",
+                        title="已获取存储库",
+                        text="已使用现有文件重新初始化配置的存储库！（可能是遗留的 .dds 纹理）",
                         information=f"{repo_url} ->\n" + f"{repo_path}",
                     )
                 except GitCommandError:
                     stacktrace = traceback.format_exc()
                     dialogue.show_warning(
-                        title="Failed to clone repo!",
-                        text="The configured repo failed to clone/initialize! "
-                        + "Are you connected to the Internet? "
-                        + "Is your configured repo valid?",
-                        information=f"Configured repository: {repo_url}",
+                        title="无法克隆仓库！",
+                        text="配置的仓库克隆/初始化失败！ "
+                        + "请检查网络连接是否正常？"
+                        + "您配置的仓库是否有效？",
+                        information=f"配置的仓库地址：{repo_url}",
                         details=stacktrace,
                     )
         else:
             # Warn the user so they know to configure in settings
             dialogue.show_warning(
-                title="Invalid repository",
-                text="An invalid repository was detected!",
-                information="Please check your repository URL!\n"
-                + "A valid repository is a repository URL which is not\n"
-                + 'empty and is prefixed with "http://" or "https://"',
-                details=f"Invalid repository: {repo_url}",
+                title="无效仓库",
+                text="检测到无效仓库！",
+                information="请检查仓库URL！<br>有效的仓库应为非空且以'http://'或'https://'开头的URL",
+                details=f"无效仓库地址：{repo_url}"
+
             )
 
     def _do_force_update_existing_repo(self, base_path: str, repo_url: str) -> None:
@@ -2517,8 +2509,8 @@ class MainContent(QObject):
                     origin.pull(rebase=True)
                     # Notify user
                     dialogue.show_information(
-                        title="Repo force updated",
-                        text="The configured repository was updated!",
+                        title="存储库已更新",
+                        text="配置的存储库已更新！",
                         information=f"{repo_path} ->\n "
                         + f"Latest Commit: {repo.head.commit.message.decode() if isinstance(repo.head.commit.message, bytes) else repo.head.commit.message}",
                     )
@@ -2527,18 +2519,18 @@ class MainContent(QObject):
                 except GitCommandError:
                     stacktrace = traceback.format_exc()
                     dialogue.show_warning(
-                        title="Failed to update repo!",
-                        text="The configured repo failed to update! "
-                        + "Are you connected to the Internet? "
-                        + "Is your configured repo valid?",
-                        information=f"Configured repository: {repo_url}",
+                        title="更新存储库失败",
+                        text="配置的存储库更新失败！"
+                        + "请检查是否连接到互联网，"
+                        + "或者确认配置的仓库地址是否有效。",
+                        information=f"配置的仓库地址：{repo_url}",
                         details=stacktrace,
                     )
             else:
                 answer = dialogue.show_dialogue_conditional(
-                    title="Repository does not exist",
-                    text="Tried to update a git repository that does not exist!",
-                    information="Would you like to clone a new copy of this repository?",
+                    title="仓库不存在",
+                    text="尝试更新不存在的Git仓库！",
+                    information="是否要克隆该仓库的新副本？",
                 )
                 if answer == "&Yes":
                     if GIT_EXISTS:
@@ -2551,11 +2543,9 @@ class MainContent(QObject):
         else:
             # Warn the user so they know to configure in settings
             dialogue.show_warning(
-                title="Invalid repository",
-                text="An invalid repository was detected!",
-                information="Please reconfigure a repository in settings!\n"
-                + "A valid repository is a repository URL which is not\n"
-                + 'empty and is prefixed with "http://" or "https://"',
+                title="无效仓库",
+                text="检测到无效仓库！",
+                information="请检查仓库URL！<br>有效的仓库应为非空且以'http://'或'https://'开头的URL"
             )
 
     def _do_upload_db_to_repo(self, repo_url: str, file_name: str) -> None:
@@ -2600,9 +2590,9 @@ class MainContent(QObject):
                                 "Unable to parse version or timestamp from database. Cancelling upload."
                             )
                             dialogue.show_warning(
-                                title="Failed to upload database!",
-                                text="The database file does not contain a version or timestamp!",
-                                information=f"File: {file_full_path}",
+                                title="数据库上传失败！",
+                                text="数据库文件中缺少版本号或时间戳！",
+                                information=f"文件：{file_full_path}"
                             )
                             return
                         # Get the abbreviated timezone
@@ -2619,9 +2609,9 @@ class MainContent(QObject):
                         )
                     else:
                         dialogue.show_warning(
-                            title="File does not exist",
-                            text="Please ensure the file exists and then try to upload again!",
-                            information=f"File not found:\n{file_full_path}\nRepository:\n{repo_url}",
+                            title="文件不存在",
+                            text="请确保文件存在，然后重新尝试上传！",
+                            information=f"未找到文件：\n{file_full_path}\n仓库地址：\n{repo_url}"
                         )
                         return
 
@@ -2664,10 +2654,10 @@ class MainContent(QObject):
                     except Exception:
                         stacktrace = traceback.format_exc()
                         dialogue.show_warning(
-                            title="Failed to push new branch to repo!",
-                            text=f"Failed to push a new branch {new_branch_name} to {repo_folder_name}! Try to see "
-                            + "if you can manually push + Pull Request. Otherwise, checkout main and try again!",
-                            information=f"Configured repository: {repo_url}",
+                            title="推送新分支到仓库失败！",
+                            text=f"无法将新分支 {new_branch_name} 推送至 {repo_folder_name}！<br>"
+                            + "请尝试手动推送并创建拉取请求。否则，请切换到主分支并重试！",
+                            information=f"已配置的仓库：{repo_url}",
                             details=stacktrace,
                         )
                     try:
@@ -2682,11 +2672,11 @@ class MainContent(QObject):
                     except Exception:
                         stacktrace = traceback.format_exc()
                         dialogue.show_warning(
-                            title="Failed to create pull request!",
-                            text=f"Failed to create a pull request for branch {base_branch} <- {new_branch_name}!\n"
-                            + "The branch should be pushed. Check on Github to see if you can manually"
-                            + " make a Pull Request there! Otherwise, checkout main and try again!",
-                            information=f"Configured repository: {repo_url}",
+                            title="创建拉取请求失败！",
+                            text=f"无法为分支 {base_branch} <- {new_branch_name} 创建拉取请求！<br>"
+                            + "无法为分支 {base_branch} <- {new_branch_name} 创建拉取请求！<br>"
+                            + "否则，请切换到主分支并重试！",
+                            information=f"已配置的仓库：{repo_url}",
                             details=stacktrace,
                         )
                         self._do_cleanup_gitpython(repo=local_repo)
@@ -2695,10 +2685,9 @@ class MainContent(QObject):
                     self._do_cleanup_gitpython(repo=local_repo)
                     # Notify the pull request URL
                     answer = dialogue.show_dialogue_conditional(
-                        title="Pull request created",
-                        text="Successfully created pull request!",
-                        information="Do you want to try to open it in your web browser?\n\n"
-                        + f"URL: {pull_request_url}",
+                        title="拉取请求已创建",
+                        text="成功创建拉取请求！",
+                        information="您是否要尝试在网页浏览器中打开它？<br><br>URL：{pull_request_url}"
                     )
                     if answer == "&Yes":
                         # Open the url in user's web browser
@@ -2706,16 +2695,16 @@ class MainContent(QObject):
                 except Exception:
                     stacktrace = traceback.format_exc()
                     dialogue.show_warning(
-                        title="Failed to update repo!",
-                        text=f"The configured repo failed to update!\nFile name: {file_name}",
-                        information=f"Configured repository: {repo_url}",
+                        title="更新仓库失败！",
+                        text=f"配置的仓库更新失败！<br>文件名：{file_name}",
+                        information=f"已配置的仓库：{repo_url}",
                         details=stacktrace,
                     )
             else:
                 answer = dialogue.show_dialogue_conditional(
-                    title="Repository does not exist",
-                    text="Tried to update a git repository that does not exist!",
-                    information="Would you like to clone a new copy of this repository?",
+                    title="仓库不存在",
+                    text="尝试更新不存在的 Git 仓库！",
+                    information="是否要克隆此仓库的新副本？",
                 )
                 if answer == "&Yes":
                     if GIT_EXISTS:
@@ -2728,20 +2717,20 @@ class MainContent(QObject):
         else:
             # Warn the user so they know to configure in settings
             dialogue.show_warning(
-                title="Invalid repository",
-                text="An invalid repository was detected!",
-                information="Please reconfigure a repository in settings!\n"
-                + 'A valid repository is a repository URL which is not empty and is prefixed with "http://" or "https://"',
+                title="无效的仓库",
+                text="检测到无效的仓库！",
+                information="请在设置中重新配置仓库！<br>"
+                + "有效的仓库应为非空且以“http://”或“https://”开头的仓库URL",
             )
 
     def _do_notify_no_git(self) -> None:
         answer = dialogue.show_dialogue_conditional(  # We import last so we can use gui + utils
-            title="git not found",
-            text="git executable was not found in $PATH!",
+            title="未找到Git",
+            text="在系统环境变量$PATH中未找到git可执行文件！",
             information=(
-                "Git integration will not work without Git installed! Do you want to open download page for Git?\n\n"
-                "If you just installed Git, please restart RimSort for the PATH changes to take effect."
-            ),
+                "未安装Git将无法使用Git集成功能！是否要打开Git的下载页面？<br><br>"
+                "如果您刚刚安装了Git，请重启RimSort以使环境变量更改生效。"
+            )
         )
         if answer == "&Yes":
             open_url_browser("https://git-scm.com/downloads")
@@ -2765,7 +2754,7 @@ class MainContent(QObject):
         logger.info("Opening file dialog to specify Steam DB")
         input_path = dialogue.show_dialogue_file(
             mode="open",
-            caption="Choose Steam Workshop Database",
+            caption="选择Steam创意工坊数据库",
             _dir=str(AppInfo().app_storage_folder),
             _filter="JSON (*.json)",
         )
@@ -2784,7 +2773,7 @@ class MainContent(QObject):
         logger.info("Opening file dialog to specify Community Rules DB")
         input_path = dialogue.show_dialogue_file(
             mode="open",
-            caption="Choose Community Rules DB",
+            caption="选择社区规则数据库",
             _dir=str(AppInfo().app_storage_folder),
             _filter="JSON (*.json)",
         )
@@ -2947,7 +2936,7 @@ class MainContent(QObject):
         # Create query runner
         self.query_runner = RunnerPanel()
         self.query_runner.closing_signal.connect(self.db_builder.terminate)
-        self.query_runner.setWindowTitle("RimSort - DB Builder PublishedFileIDs query")
+        self.query_runner.setWindowTitle("RimSort - 数据库构建工具 PublishedFileIDs 查询")
         self.query_runner.progress_bar.show()
         self.query_runner.show()
         # Connect message signal
@@ -2961,10 +2950,10 @@ class MainContent(QObject):
         loop.exec_()
         if len(self.db_builder.publishedfileids) == 0:
             dialogue.show_warning(
-                title="No PublishedFileIDs",
-                text="DB Builder query did not return any PublishedFileIDs!",
-                information="This is typically caused by invalid/missing Steam WebAPI key, or a connectivity issue to the Steam WebAPI.\n"
-                + "PublishedFileIDs are needed to retrieve mods from Steam!",
+                title="没有 PublishedFileIDs",
+                text="DB Builder 查询未返回任何 PublishedFileIDs！",
+                information="这通常是由于无效/缺失的 Steam WebAPI 密钥，或与 Steam WebAPI 的连接问题导致的。\n"
+                + "PublishedFileIDs 是从 Steam 获取模组所必需的！",
             )
         else:
             self.query_runner.close()
@@ -2985,13 +2974,13 @@ class MainContent(QObject):
                 self._do_download_mods_with_steamcmd(self.db_builder.publishedfileids)
             elif "steamworks" in action:
                 answer = dialogue.show_dialogue_conditional(
-                    title="Are you sure?",
-                    text="Here be dragons.",
-                    information="WARNING: It is NOT recommended to subscribe to this many mods at once via Steam. "
-                    + "Steam has limitations in place seemingly intentionally and unintentionally for API subscriptions. "
-                    + "It is highly recommended that you instead download these mods to a SteamCMD prefix by using SteamCMD. "
-                    + "This can take longer due to rate limits, but you can also re-use the script generated by RimSort with "
-                    + "a separate, authenticated instance of SteamCMD, if you do not want to anonymously download via RimSort.",
+                    title="您确定吗？",
+                    text="这里有风险。",
+                    information="警告：不建议通过 Steam 一次性订阅如此多的模组。"
+                    + "Steam 对 API 订阅设置了看似有意或无意的限制。"
+                    + "强烈建议您改用 SteamCMD 将这些模组下载到 SteamCMD 前缀。"
+                    + "由于速率限制，这可能需要更长时间，但您还可以使用 RimSort 生成的脚本，"
+                    + "在单独的已验证 SteamCMD 实例中重新使用该脚本，而无需通过 RimSort 匿名下载。",
                 )
                 if answer == "&Yes":
                     for (
@@ -3043,12 +3032,14 @@ class MainContent(QObject):
         database_b_deps: dict[str, Any] = {}
         # Notify user
         dialogue.show_information(
-            title="Steam DB Builder",
-            text="This operation will compare 2 databases, A & B, by checking dependencies from A with dependencies from B.",
-            information="- This will produce an accurate comparison of dependency data between 2 Steam DBs.\n"
-            + "A report of discrepancies is generated. You will be prompted for these paths in order:\n"
-            + "\n\t1) Select input A"
-            + "\n\t2) Select input B",
+            title="Steam数据库构建工具",
+            text="本操作将通过对比数据库A与数据库B的依赖关系，进行两者差异分析。",
+            information=(
+                "- 本操作将生成两个Steam数据库间依赖数据的精确对比报告。<br/>"
+                "系统将按以下顺序提示您选择路径：<br/>"
+                "<br/>1) 选择输入A"
+                "<br/>2) 选择输入B"
+            )
         )
         # Input A
         logger.info("Opening file dialog to specify input file A")
@@ -3143,25 +3134,27 @@ class MainContent(QObject):
             f"Comparison skipped for {len(comparison_skipped)} unpublished mods: {comparison_skipped}"
         )
         dialogue.show_information(
-            title="Steam DB Builder",
-            text=f"Steam DB comparison report: {len(discrepancies)} found",
-            information="Click 'Show Details' to see the full report!",
+            title="Steam 数据库构建工具",
+            text=f"Steam 数据库对比报告：发现 {len(discrepancies)} 项差异",
+            information="点击「显示详情」查看完整报告！",
             details=report,
         )
 
     def _do_merge_databases(self) -> None:
         # Notify user
         dialogue.show_information(
-            title="Steam DB Builder",
-            text="This operation will merge 2 databases, A & B, by recursively updating A with B, barring exceptions.",
-            information="- This will effectively recursively overwrite A's key/value with B's key/value to the resultant database.\n"
-            + "- Exceptions will not be recursively updated. Instead, they will be overwritten with B's key entirely.\n"
-            + "- The following exceptions will be made:\n"
-            + f"\n\t{app_constants.DB_BUILDER_RECURSE_EXCEPTIONS}\n\n"
-            + "The resultant database, C, is saved to a user-specified path. You will be prompted for these paths in order:\n"
-            + "\n\t1) Select input A (db to-be-updated)"
-            + "\n\t2) Select input B (update source)"
-            + "\n\t3) Select output C (resultant db)",
+            title="Steam数据库构建工具",
+            text="本操作将通过递归方式用数据库B更新数据库A（例外情况除外），实现两者的合并。",
+            information=(
+                "- 本操作将递归地用B的键值对覆盖A中的对应键值，生成结果数据库。<br/>"
+                "- 例外情况不会递归更新，而是直接使用B的键值完全覆盖。<br/>"
+                "- 以下例外情况将被应用：<br/>"
+                f"\n\t{app_constants.DB_BUILDER_RECURSE_EXCEPTIONS}<br/><br/>"
+                "生成的结果数据库C将保存至用户指定路径。系统将按以下顺序提示您选择路径：<br/>"
+                "<br/>1) 选择输入A（待更新的数据库）"
+                "<br/>2) 选择输入B（更新源数据库）"
+                "<br/>3) 选择输出C（结果数据库）"
+            )
         )
         # Input A
         logger.info("Opening file dialog to specify input file A")
@@ -3256,9 +3249,9 @@ class MainContent(QObject):
         except Exception:
             logger.error("Failed to read info from existing database")
             dialogue.show_warning(
-                title="Failed to read existing database",
-                text="Failed to read the existing database!",
-                information=f"Path: {path}",
+                title="读取现有数据库失败",
+                text="读取现有数据库失败！",
+                information=f"路径：{path}",
             )
             return
         db_input_b = {"timestamp": int(time.time()), "rules": rules_data}
@@ -3273,8 +3266,8 @@ class MainContent(QObject):
         # Overwrite rules database
         answer = dialogue.show_dialogue_conditional(
             title="RimSort - DB Builder",
-            text="Do you want to continue?",
-            information=f"This operation will overwrite the {rules_source} database located at the following path:\n\n{path}",
+            text="你想继续吗？",
+            information=f"此操作将覆盖位于以下路径的 {rules_source} 数据库：<br><br>{path}",
         )
         if answer == "&Yes":
             with open(path, "w", encoding="utf-8") as output:
@@ -3289,8 +3282,8 @@ class MainContent(QObject):
         WebAPI Query Expiry (in seconds)
         """
         args, ok = dialogue.show_dialogue_input(
-            title="Edit SteamDB expiry:",
-            label="Enter your preferred expiry duration in seconds (default 1 week/604800 sec):",
+            title="编辑 SteamDB 过期时间：",
+            label="请输入您首选的过期持续时间（以秒为单位，默认 1 周/604800 秒）：",
             text=str(self.settings_controller.settings.database_expiry),
         )
         if ok:
@@ -3454,6 +3447,6 @@ class MainContent(QObject):
             self.use_this_instead_dialog.show()
         else:
             dialogue.show_information(
-                title="Use This Instead",
-                text='No suggestions were found in the "Use This Instead" database.',
+                title="替换为此",
+                text='在“替换为此”数据库中未找到任何建议。',
             )

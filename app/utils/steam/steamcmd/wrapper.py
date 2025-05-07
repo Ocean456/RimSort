@@ -350,22 +350,22 @@ class SteamcmdInterface:
         else:
             btn_text = ["&Yes", "&No"]
 
-        answer = show_dialogue_conditional(
-            title="RimSort - SteamCMD setup",
-            text="RimSort was unable to find SteamCMD installed in the configured prefix:\n",
-            information=f"{self.steamcmd_prefix if self.steamcmd_prefix else '<None>'}\n\n"
-            + "Do you want to setup SteamCMD?",
-            button_text_override=btn_text,
-        )
-        if answer == "&Yes":
-            EventBus().do_install_steamcmd.emit()
-        if runner:
-            runner.close()
+            answer = show_dialogue_conditional(
+                title="RimSort - SteamCMD 设置",
+                text="RimSort 无法在配置的前缀路径中找到已安装的 SteamCMD：\n",
+                information=f"{self.steamcmd_prefix if self.steamcmd_prefix else '<无>'}\n\n"
+                            + "你想要设置 SteamCMD 吗？",
+                button_text_override=btn_text,
+            )
+            if answer == "&Yes":
+                EventBus().do_install_steamcmd.emit()
+            if runner:
+                runner.close()
 
-        if ask_ignore and answer == "&Don't Ask Again":
-            if settings_controller is not None:
-                settings_controller.active_instance.steamcmd_ignore = True
-                settings_controller.settings.save()
+            if ask_ignore and answer == "&Don't Ask Again":
+                if settings_controller is not None:
+                    settings_controller.active_instance.steamcmd_ignore = True
+                    settings_controller.settings.save()
 
             return True
         return False
@@ -392,16 +392,16 @@ class SteamcmdInterface:
         depot_cache = Path(self.steamcmd_install_path + "/depotcache")
         if not os.path.exists(depot_cache):
             logger.info(
-                f"Skipping depot cache clear. Could not find cache: {depot_cache}"
+                f"跳过清除 depot 缓存。未找到缓存路径: {depot_cache}"
             )
             if runner is not None:
                 runner.message(
-                    f"Skipping depot cache clear. Could not find cache: {depot_cache}"
+                    f"跳过清除 depot 缓存。未找到缓存路径: {depot_cache}"
                 )
             else:
                 InformationBox(
-                    title="Depot Cache Cleared",
-                    text="SteamCMD depot cache was already cleared.",
+                    title="Depot 缓存已清除",
+                    text="SteamCMD 的 depot 缓存已经被清除。",
                 ).exec()
             return False
 
@@ -411,8 +411,8 @@ class SteamcmdInterface:
                 runner.message("Depot cache cleared")
             else:
                 InformationBox(
-                    title="Depot Cache Cleared",
-                    text="SteamCMD depot cache has been cleared.",
+                    title="Depot 缓存已清除",
+                    text="SteamCMD 的 depot 缓存已被清除。",
                 ).exec()
             return True
 
@@ -474,9 +474,9 @@ class SteamcmdInterface:
                 f"A steamcmd runner already exists at: {self.steamcmd}",
             )
             answer = show_dialogue_conditional(
-                "Reinstall?",
-                "Would you like to reinstall SteamCMD?",
-                f"Existing install: {self.steamcmd_install_path}",
+                "重新安装？",
+                "您是否希望重新安装 SteamCMD？",
+                f"现有安装路径: {self.steamcmd_install_path}",
             )
             if answer == "&Yes":
                 runner.message(f"Reinstalling SteamCMD: {self.steamcmd_install_path}")
@@ -499,13 +499,13 @@ class SteamcmdInterface:
                     f"Symlink destination already exists! Please remove existing destination:\n\n{symlink_destination_path}\n"
                 )
                 answer = show_dialogue_conditional(
-                    "Re-create Symlink?",
-                    "An existing symlink already exists."
-                    " Would you like to delete and re-create the symlink?",
-                    "The symlink makes SteamCMD download mods to the local mods folder"
-                    + " and is required for SteamCMD mod downloads to work correctly.",
-                    f"Existing symlink: {symlink_destination_path}"
-                    "\n\nNew symlink:"
+                    "重新创建链接？",
+                    "目标路径已存在一个链接。"
+                    " 您是否希望删除并重新创建该链接？",
+                    "链接使 SteamCMD 将模组下载到本地模组文件夹中，"
+                    + " 并且这是 SteamCMD 模组下载正常工作的必要条件。",
+                    f"现有链接: {symlink_destination_path}"
+                    "\n\n新链接:"
                     f"\n[{symlink_source_path}] -> " + symlink_destination_path,
                 )
                 if answer == "&Yes":  # Re-create symlink

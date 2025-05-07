@@ -115,8 +115,8 @@ class ThemeController:
                 return potential_path
         logger.error(f"Stylesheet path does not exist for theme '{theme_name}'")
         dialogue.show_warning(
-            title="Theme path Error",
-            text=f"Stylesheet path does not exist for theme '{theme_name}' Resetting to default theme '{self.default_theme}'.",
+            title="主题路径错误",
+            text=f"主题“{theme_name}”的样式表路径不存在，重置为默认主题“{self.default_theme}”。",
         )
         return None
 

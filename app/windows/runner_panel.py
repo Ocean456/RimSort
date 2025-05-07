@@ -88,7 +88,7 @@ class RunnerPanel(QWidget):
         self.clear_runner_button.setIcon(self.clear_runner_icon)
         self.clear_runner_button.clicked.connect(self._do_clear_runner)
         self.clear_runner_button.setToolTip(
-            "Clear the text currently displayed by the runner"
+            "清空控制台输出"
         )
         # Restart btn
         self.restart_process_icon = QIcon(
@@ -98,7 +98,7 @@ class RunnerPanel(QWidget):
         self.restart_process_button.setIcon(self.restart_process_icon)
         self.restart_process_button.clicked.connect(self._do_restart_process)
         self.restart_process_button.setToolTip(
-            "Re-run the process last used by the runner"
+            "根据上次配置重新运行"
         )
         self.restart_process_button.hide()  # Hide this by default - it will be enabled if self.execute()
         # Kill btn
@@ -109,7 +109,7 @@ class RunnerPanel(QWidget):
         self.kill_process_button.setIcon(self.kill_process_icon)
         self.kill_process_button.clicked.connect(self._do_kill_process)
         self.kill_process_button.setToolTip(
-            "Kill a process currently being executed by the runner"
+            "终止当前正在执行的进程"
         )
         self.kill_process_button.hide()  # Hide this by default - it will be enabled if self.execute()
         # Save process output btn
@@ -390,7 +390,7 @@ class RunnerPanel(QWidget):
                     if (
                         show_dialogue_conditional(
                             title="SteamCMD downloader",
-                            text="SteamCMD failed to download mod(s)! Would you like to retry download of the mods that failed?\n\nClick 'Show Details' to see a list of mods that failed.",
+                            text="SteamCMD 无法下载模组！是否要重新尝试下载失败的模组？<br><br>点击「显示详情」可查看失败模组列表。",
                             details=details,
                         )
                         == "&Yes"
@@ -413,10 +413,10 @@ class RunnerPanel(QWidget):
 
     def process_complete(self) -> None:
         diag = BinaryChoiceDialog(
-            title="Process Complete",
-            text="Process complete, you can close the window.",
-            positive_text="Close Window",
-            negative_text="Ok",
+            title="处理完成",
+            text="处理完成，您可以关闭窗口。",
+            positive_text="关闭",
+            negative_text="确定",
         )
         if diag.exec_is_positive():
             self.close()

@@ -127,20 +127,20 @@ class MetadataManager(QObject):
         ) -> bool:
             if not os.path.exists(path):
                 self.show_warning_signal.emit(
-                    f"{db_type} DB is missing",
-                    f"Configured {db_type} DB not found!",
-                    f"Unable to initialize external metadata. There is no external {db_type} metadata being factored!\n"
-                    + "\nPlease make sure your Database location settings are correct.",
+                    f"{db_type} 数据库缺失",
+                    f"配置的 {db_type} 数据库未找到！",
+                    f"无法初始化外部元数据。未检测到任何外部  {db_type} 元数据！\n"
+                    + "\n请确认数据库路径设置是否正确。",
                     f"{path}",
                 )
                 return False
 
             if os.path.isdir(path) == (not expect_directory):
                 self.show_warning_signal.emit(
-                    f"{db_type} DB is missing",
-                    f"Configured {db_type} DB path is {'not' if expect_directory else ''} a directory! Expected a {'directory' if expect_directory else 'file'} path.",
-                    f"Unable to initialize external metadata. There is no external {db_type} metadata being factored!\n"
-                    + "\nPlease make sure your Database location settings are correct.",
+                    f"{db_type} 数据库缺失",
+                    f"配置的 {db_type} 数据库路径不是一个{'目录' if expect_directory else '文件'}！应为一个{'目录' if expect_directory else '文件'}路径。",
+                    f"无法初始化外部元数据。未检测到任何外部 {db_type} 元数据！\n"
+                    + "\n请确认数据库路径设置是否正确。",
                     f"{path}",
                 )
                 return False
@@ -183,10 +183,11 @@ class MetadataManager(QObject):
                     # Fallback to the expired metadata
                     if life != 0:  # Disable Notification if value is 0
                         self.show_warning_signal.emit(
-                            "Steam DB metadata expired",
-                            "Steam DB is expired! Consider updating!\n",
-                            f"Steam DB last updated: {strftime('%Y-%m-%d %H:%M:%S', localtime(db_data['version'] - life))}\n\n"
-                            + "Falling back to cached, but EXPIRED Steam Database...",
+                            "Steam 数据库元数据已过期",
+                            "Steam 数据库已过期，建议进行更新。",
+                            f"Steam 数据库上次更新时间：<br/>{strftime('%Y-%m-%d %H:%M:%S', localtime(db_data['version'] - life))}<br/><br/>"
+                            + "正在使用缓存的（已过期的）Steam 数据库...<br/><br/>"
+                            + "Tip: 可以参考 Wiki 中的步骤来自行构建数据库",
                             "",
                         )
                     db_json_data = db_data[
@@ -469,9 +470,9 @@ class MetadataManager(QObject):
                 f"The provided Version.txt path does not exist: {version_file_path}"
             )
             self.show_warning_signal.emit(
-                "Missing Version.txt",
-                f"RimSort is unable to get the game version at the expected path: [{version_file_path}].",
-                f"\nIs your game path [{self.settings_controller.settings.instances[self.settings_controller.settings.current_instance].game_folder}] set correctly? There should be a Version.txt file in the game install directory.",
+                "缺失 Version.txt",
+                f"RimSort无法在预期路径下获得游戏版本：[{version_file_path}].",
+                f"\n您的游戏路径 [{self.settings_controller.settings.instances[self.settings_controller.settings.current_instance].game_folder}] 设置正确吗？ 在游戏安装目录中应该有一个Version.txt文件。",
                 "",
             )
         # Get and cache installed base game / DLC data
@@ -1886,13 +1887,13 @@ class ModParser(QRunnable):
             # Assign our metadata to the UUID
             metadata[uuid] = {
                 "invalid": True,
-                "name": "Invalid item",
+                "name": "无效的项目",
                 "packageid": "invalid.item",
                 "authors": "Not found",
                 "description": (
-                    "This mod is considered invalid by RimSort (and the RimWorld game)."
-                    + "\n\nThis mod does NOT contain an ./About/About.xml and is likely leftover from previous usage."
-                    + "\n\nThis can happen sometimes with Steam mods if there are leftover .dds textures or unexpected data."
+                    "这个mod被认为是无效的。"
+                    + "\n\n这个mod不包含./About/About.xml，可能是以前使用的剩余内容。"
+                    + "如果有剩余的.dds纹理或意外数据，这种情况有时会发生在Steam mod上。"
                 ),
                 "data_source": data_source,
                 "folder": directory_name,

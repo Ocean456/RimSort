@@ -25,7 +25,7 @@ class ModDeletionMenu(QMenu):
         self,
         get_selected_mod_metadata: Callable[[], list[ModMetadata]],
         remove_from_uuids: list[str] | None,
-        menu_title: str = "Deletion options",
+        menu_title: str = "删除选项",
         delete_mod: bool = True,
         delete_both: bool = True,
         delete_dds: bool = True,
@@ -36,16 +36,16 @@ class ModDeletionMenu(QMenu):
         self.metadata_manager = MetadataManager.instance()
         self.delete_actions: list[tuple[QAction, Callable[[], None]]] = []
         if delete_mod:
-            self.delete_actions.append((QAction("Delete mod"), self.delete_both))
+            self.delete_actions.append((QAction("删除模组"), self.delete_both))
 
         if delete_both:
             self.delete_actions.append(
-                (QAction("Delete mod (keep .dds)"), self.delete_mod_keep_dds)
+                (QAction("删除模组（保留 .dds 文件）"), self.delete_mod_keep_dds)
             )
         if delete_dds:
             self.delete_actions.append(
                 (
-                    QAction("Delete optimized textures (.dds files only)"),
+                    QAction("删除优化后的纹理（仅 .dds 文件）"),
                     self.delete_dds,
                 )
             )
@@ -90,7 +90,7 @@ class ModDeletionMenu(QMenu):
             )
 
         show_information(
-            title="RimSort", text=f"Successfully deleted {count} seleted mods."
+            title="RimSort", text=f"成功删除{count}个选择的模组。"
         )
 
     def delete_both(self) -> None:
@@ -113,26 +113,26 @@ class ModDeletionMenu(QMenu):
                 else:
                     error_code = e.errno
                 if e.errno == ENOTEMPTY:
-                    warning_text = "Mod directory was not empty. Please close all programs accessing files or subfolders in the directory (including your file manager) and try again."
+                    warning_text = "模组目录非空。请关闭所有正在访问该目录内文件或子文件夹的程序（包括文件管理器），然后重试。"
                 else:
-                    warning_text = "An OSError occurred while deleting mod."
+                    warning_text = "删除模组时发生系统错误。"
 
                 logger.warning(
                     f"Unable to delete mod located at the path: {mod_metadata['path']}"
                 )
                 show_warning(
-                    title="Unable to delete mod",
+                    title="无法删除模组",
                     text=warning_text,
-                    information=f"{e.strerror} occurred at {e.filename} with error code {error_code}.",
+                    information=f"{e.strerror} 发生于 {e.filename} 路径，错误代码：{error_code}。",
                 )
             return False
 
         uuids = self.get_selected_mod_metadata()
         answer = show_dialogue_conditional(
-            title="Are you sure?",
-            text=f"You have selected {len(uuids)} mods for deletion.",
-            information="\nThis operation delete a mod's directory from the filesystem."
-            + "\nDo you want to proceed?",
+            title="确认操作",
+            text=f"您已选择删除{len(uuids)}个模组",
+            information="此操作将从文件系统中删除模组的整个目录"
+                        "<br>确定要继续吗？"
         )
         if answer == "&Yes":
             self._iterate_mods(_inner_delete_both, uuids)
@@ -140,10 +140,10 @@ class ModDeletionMenu(QMenu):
     def delete_dds(self) -> None:
         mod_metadata = self.get_selected_mod_metadata()
         answer = show_dialogue_conditional(
-            title="Are you sure?",
-            text=f"You have selected {len(mod_metadata)} mods to Delete optimized textures (.dds files only)",
-            information="\nThis operation will only delete optimized textures (.dds files only) from mod files."
-            + "\nDo you want to proceed?",
+            title="确认操作",
+            text=f"您已选择{len(mod_metadata)}个模组 仅删除优化后的纹理（.dds文件）",
+            information="此操作仅会删除模组文件中的优化纹理（仅.dds文件）"
+                        "<br>确定要继续吗？"
         )
         if answer == "&Yes":
             self._iterate_mods(
@@ -159,10 +159,11 @@ class ModDeletionMenu(QMenu):
     def delete_mod_keep_dds(self) -> None:
         mod_metadata = self.get_selected_mod_metadata()
         answer = show_dialogue_conditional(
-            title="Are you sure?",
-            text=f"You have selected {len(mod_metadata)} mods for deletion.",
-            information="\nThis operation will recursively delete all mod files, except for .dds textures found."
-            + "\nDo you want to proceed?",
+            title="确认操作",
+            text=f"您已选择删除{len(mod_metadata)}个模组 但保留优化后的纹理（.dds文件）",
+            information="此操作将彻底删除模组文件"
+                        "<br>但会保留其中的.dds纹理文件"
+                        "<br>确定要继续吗？"
         )
         if answer == "&Yes":
             self._iterate_mods(

@@ -116,12 +116,12 @@ class MainWindow(QMainWindow):
         button_layout.addStretch()
 
         # Define button attributes
-        self.refresh_button = QPushButton("Refresh")
-        self.clear_button = QPushButton("Clear")
-        self.restore_button = QPushButton("Restore")
-        self.sort_button = QPushButton("Sort")
-        self.save_button = QPushButton("Save")
-        self.run_button = QPushButton("Run")
+        self.refresh_button = QPushButton("刷新")
+        self.clear_button = QPushButton("清除")
+        self.restore_button = QPushButton("恢复")
+        self.sort_button = QPushButton("排序")
+        self.save_button = QPushButton("保存")
+        self.run_button = QPushButton("启动")
 
         buttons = [
             self.refresh_button,
@@ -136,7 +136,7 @@ class MainWindow(QMainWindow):
             button.setMinimumWidth(100)
             button_layout.addWidget(button)
 
-        self.tab_widget.addTab(self.main_content_tab, "Main Content")
+        self.tab_widget.addTab(self.main_content_tab, "主界面")
 
         # Create and add the ACF Data tab
         self.log_reader_tab = QWidget()
@@ -147,7 +147,7 @@ class MainWindow(QMainWindow):
         self.log_reader = LogReader(settings_controller)
         self.log_reader_layout.addWidget(self.log_reader)
 
-        self.tab_widget.addTab(self.log_reader_tab, "Log Reader")
+        self.tab_widget.addTab(self.log_reader_tab, "日志查看器")
 
         # Create and add the Troubleshooting tab
         self.troubleshooting_tab = QWidget()
@@ -161,7 +161,7 @@ class MainWindow(QMainWindow):
             dialog=self.troubleshooting_dialog,
         )
         self.troubleshooting_layout.addWidget(self.troubleshooting_dialog)
-        self.tab_widget.addTab(self.troubleshooting_tab, "Troubleshooting")
+        self.tab_widget.addTab(self.troubleshooting_tab, "故障排除")
 
         # Save button flashing animation
         self.save_button_flashing_animation = QTimer()
@@ -255,11 +255,11 @@ class MainWindow(QMainWindow):
 
         if instance.initial_setup and not instance.steam_client_integration:
             diag = BinaryChoiceDialog(
-                title="Steam Client Integration",
-                text="<h3>Would you like to enable Steam Client Integration for this instance?</h3>",
-                information="""This will allow you to use RimSort features that require the Steam Client. This includes, among other things, unsubscribing from workshop mods and opening workshop links via the Steam Client. 
+                title="Steam客户端集成",
+                text="<h3>您想为此实例启用Steam客户端集成吗？</h3>",
+                information="""这将允许您使用需要Steam客户端的RimSort功能。这包括但不限于取消订阅工作坊模组以及通过Steam客户端打开创意工坊链接。
                 <br><br>
-                You can change this in the settings under the Advanced tab.""",
+                您可以在设置的高级选项卡中更改此设置。""",
                 negative_text="No",
             )
             if diag.exec_is_positive():
