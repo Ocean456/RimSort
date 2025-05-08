@@ -74,7 +74,7 @@ class LogReader(QDialog):
 
     def __init__(self, settings_controller: SettingsController) -> None:
         super().__init__()
-        self.setWindowTitle("Log Reader")
+        self.setWindowTitle("日志查看器")
         self.settings_controller = settings_controller
         self._metadata_cache: dict[str, dict[str, Any]] = {}
 
@@ -93,7 +93,7 @@ class LogReader(QDialog):
 
         # Status bar
         self.status_bar = QStatusBar()
-        self.status_bar.showMessage("Ready")
+        self.status_bar.showMessage("就绪")
 
         # Top controls layout
         controls_layout = QHBoxLayout()
@@ -237,7 +237,7 @@ class LogReader(QDialog):
                 if hasattr(self, "entries") and isinstance(self.entries, list):
                     count = len(self.entries)
                 self.status_bar.showMessage(
-                    f"Loaded {count} items | Last updated: {datetime.now().strftime('%H:%M:%S')}"
+                    f"已加载 {count} 项 | 最后更新：{datetime.now().strftime('%H:%M:%S')}"
                 )
                 return
 
@@ -419,7 +419,7 @@ class LogReader(QDialog):
             "CSV Files (*.csv)",
         )
         if not file_path:
-            self.status_bar.showMessage("Export canceled by user.")
+            self.status_bar.showMessage("导出已被用户取消。")
             self._set_buttons_enabled(True)
             return
 
@@ -428,38 +428,38 @@ class LogReader(QDialog):
             with open(file_path, "w", newline="", encoding="utf-8"):
                 pass  # Just testing file opening, no need for the file object
         except PermissionError as e:
-            error_msg = "Export failed: Permission denied - check file permissions"
+            error_msg = "导出失败：权限不足 - 请检查文件权限"
             self.status_bar.showMessage(error_msg)
             logger.error(f"Export permission error: {str(e)} - file: {file_path}")
             show_warning(
-                title="Export Error",
-                text="Export failed: Permission denied - check file permissions",
+                title="导出错误",
+                text="导出失败：权限不足 - 请检查文件权限",
                 information=f"{error_msg}",
             )
             self._set_buttons_enabled(True)
             return
         except OSError as e:
-            error_msg = f"Export failed: File system error - {str(e)}"
+            error_msg = f"导出失败：文件系统错误 - {str(e)}"
             self.status_bar.showMessage(error_msg)
-            logger.error(f"Export filesystem error: {str(e)} - file: {file_path}")
+            logger.error(f"导出文件系统错误：{str(e)} - 文件：{file_path}")
             show_warning(
-                title="Export Error",
-                text="Export failed: File system error",
+                title="导出错误",
+                text="导出失败：文件系统错误",
                 information=f"{error_msg}",
             )
             self._set_buttons_enabled(True)
             return
 
         try:
-            self.status_bar.showMessage("Exporting to CSV...")
+            self.status_bar.showMessage("正在导出到 CSV...")
 
             progress = QProgressDialog(
-                "Exporting rows...", "Cancel", 0, self.table_widget.rowCount(), self
+                "正在导出行...", "取消", 0, self.table_widget.rowCount(), self
             )
             progress.setWindowModality(Qt.WindowModality.WindowModal)
             progress.show()
 
-            with open(file_path, "w", newline="", encoding="utf-8") as csvfile:
+            with open(file_path, "w", newline="", encoding="utf-8-sig") as csvfile:
                 writer = csv.writer(csvfile)
 
                 # Enhanced metadata header
@@ -489,7 +489,7 @@ class LogReader(QDialog):
                 # Write data rows with progress feedback
                 for row in range(self.table_widget.rowCount()):
                     if progress.wasCanceled():
-                        self.status_bar.showMessage("Export canceled by user.")
+                        self.status_bar.showMessage("导出已被用户取消。")
                         self._set_buttons_enabled(True)
                         return
 
@@ -502,20 +502,20 @@ class LogReader(QDialog):
                     if row % 50 == 0:  # Update progress every 50 rows
                         progress.setValue(row)
                         self.status_bar.showMessage(
-                            f"Exporting row {row + 1} of {self.table_widget.rowCount()}..."
+                            f"正在导出第 {row + 1} 行，共 {self.table_widget.rowCount()} 行..."
                         )
 
             progress.setValue(self.table_widget.rowCount())
             self.status_bar.showMessage(
-                f"Successfully exported {self.table_widget.rowCount()} items to {file_path}"
+                f"成功将 {self.table_widget.rowCount()} 个项目导出到 {file_path}"
             )
         except Exception as e:
-            error_msg = f"Export failed: {str(e)}"
+            error_msg = f"导出失败：{str(e)}"
             self.status_bar.showMessage(error_msg)
-            logger.error(f"Export error: {str(e)}", exc_info=True)
+            logger.error(f"导出错误：{str(e)}", exc_info=True)
             show_warning(
-                title="Export Error",
-                text="Export failed due to an unknown error",
+                title="导出错误",
+                text="导出失败，发生未知错误",
                 information=f"{error_msg}",
             )
         finally:
@@ -674,9 +674,9 @@ class LogReader(QDialog):
 
     def import_acf_data(self) -> None:
         answer = show_dialogue_conditional(
-            title="Conform acf import",
-            text="This will replace your current steamcmd .acf file",
-            information="Are you sure you want to import .acf? THis only works for steamcmd",
+            title="确认导入 ACF",
+            text="这将替换您当前的 steamcmd .acf 文件",
+            information="您确定要导入 .acf 文件吗？此操作仅适用于 steamcmd",
             button_text_override=[
                 "Import .acf",
             ],
@@ -704,7 +704,7 @@ class LogReader(QDialog):
 
         acf_path = steamcmd.steamcmd_appworkshop_acf_path
         if not os.path.isfile(acf_path):
-            self.status_bar.showMessage(f"ACF file not found: {acf_path}")
+            self.status_bar.showMessage(f"未找到 ACF 文件: {acf_path}")
             logger.error(f"Export failed: ACF file not found: {acf_path}")
             show_warning(
                 title="导出错误", text=f"未找到 ACF 文件: {acf_path}"
@@ -726,18 +726,18 @@ class LogReader(QDialog):
 
         try:
             shutil.copy(acf_path, file_path)
-            self.status_bar.showMessage(f"Successfully exported ACF to {file_path}")
+            self.status_bar.showMessage(f"成功将 ACF 文件导出到 {file_path}")
             logger.debug(f"Successfully exported ACF to {file_path}")
             show_information(
                 title="导出成功",
                 text=f"成功导出 ACF 文件到 {file_path}",
             )
         except PermissionError:
-            error_msg = "Export failed: Permission denied - check file permissions"
+            error_msg = "导出失败：权限不足 - 请检查文件权限"
             logger.error(f"Export failed due to Permission: {error_msg}")
             show_warning(title="Export Error", text=error_msg)
         except Exception as e:
-            error_msg = f"Export failed: {str(e)}"
+            error_msg = f"导出失败：{str(e)}"
             logger.error(f"Export failed {error_msg}")
             show_fatal_error(
                 title="导出失败",

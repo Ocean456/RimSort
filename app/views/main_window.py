@@ -165,7 +165,7 @@ class MainWindow(QMainWindow):
         )
         self.file_search_layout.addWidget(self.file_search_dialog)
 
-        self.tab_widget.addTab(self.file_search_tab, "File Search")
+        self.tab_widget.addTab(self.file_search_tab, "文件搜索")
 
         # Create and add the Troubleshooting tab
         self.troubleshooting_tab = QWidget()

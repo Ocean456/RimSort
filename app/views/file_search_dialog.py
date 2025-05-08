@@ -72,17 +72,17 @@ class FileSearchDialog(QDialog):
         search_input_layout = QHBoxLayout()
         search_input_layout.setSpacing(5)
 
-        search_label = QLabel("Search for:")
+        search_label = QLabel("搜索内容：")
         search_label.setFixedWidth(80)
         search_input_layout.addWidget(search_label)
 
         self.search_input = QLineEdit()
-        self.search_input.setPlaceholderText("Enter text to search for in files")
+        self.search_input.setPlaceholderText("输入要在文件中搜索的文本")
         search_input_layout.addWidget(self.search_input)
 
         self.recent_searches_button = QPushButton("▼")
         self.recent_searches_button.setFixedWidth(25)
-        self.recent_searches_button.setToolTip("Recent Searches")
+        self.recent_searches_button.setToolTip("最近的搜索")
         self.recent_searches_button.clicked.connect(self._show_recent_searches)
         search_input_layout.addWidget(self.recent_searches_button)
 
@@ -93,13 +93,13 @@ class FileSearchDialog(QDialog):
         scope_layout = QHBoxLayout()
         scope_layout.setSpacing(5)
 
-        scope_label = QLabel("Search in:")
+        scope_label = QLabel("搜索范围：")
         scope_label.setFixedWidth(80)
         scope_layout.addWidget(scope_label)
 
         self.search_scope = QComboBox()
         self.search_scope.addItem("启用的模组", "active mods")
-        self.search_scope.addItem("未启用的模组", "not active mods")
+        self.search_scope.addItem("未启用的模组", "inactive mods")
         self.search_scope.addItem("所有模组", "all mods")
         self.search_scope.addItem("配置文件夹", "configs folder")
         scope_layout.addWidget(self.search_scope)
@@ -123,23 +123,23 @@ class FileSearchDialog(QDialog):
         search_options_label.setStyleSheet("font-weight: bold;")
         search_options_column.addWidget(search_options_label)
 
-        self.case_sensitive = QCheckBox("Case sensitive")
-        self.case_sensitive.setToolTip("Match exact case when searching")
+        self.case_sensitive = QCheckBox("区分大小写")
+        self.case_sensitive.setToolTip("搜索时区分大小写")
 
-        self.use_regex = QCheckBox("Use regex (pattern search)")
+        self.use_regex = QCheckBox("使用正则表达式（模式搜索）")
         self.use_regex.setToolTip(
-            "Enable to use regular expressions in search\n"
-            "Examples:\n"
-            "- 'def.*\\(' to find function definitions\n"
-            "- '<[^>]+>' to find XML tags\n"
-            "- '\\d+\\.\\d+(\\.\\d+)?' to find version numbers"
+            "启用正则表达式搜索功能\n"
+            "示例：\n"
+            "- 使用 'def.*\\(' 查找函数定义\n"
+            "- 使用 '<[^>]+>' 查找 XML 标签\n"
+            "- 使用 '\\d+\\.\\d+(\\.\\d+)?' 查找版本号"
         )
 
         # XML only checkbox (moved from scope section)
-        self.xml_only = QCheckBox("XML files only")
+        self.xml_only = QCheckBox("仅限 XML 文件")
         self.xml_only.setToolTip(
-            "When checked, search only XML files and use optimized XML search.\n"
-            "When unchecked, search all file types with standard search."
+            "选中时，仅搜索 XML 文件，并使用优化的 XML 搜索方式。\n"
+            "未选中时，使用标准搜索，搜索所有文件类型。"
         )
         self.xml_only.setChecked(True)
 
@@ -161,27 +161,27 @@ class FileSearchDialog(QDialog):
         skip_options_column = QHBoxLayout()
         skip_options_column.setSpacing(8)
 
-        skip_options_label = QLabel("Exclude from Search:")
+        skip_options_label = QLabel("从搜索中排除：")
         skip_options_label.setStyleSheet("font-weight: bold;")
         skip_options_column.addWidget(skip_options_label)
 
-        self.skip_translations = QCheckBox("Skip translations")
+        self.skip_translations = QCheckBox("跳过翻译")
         self.skip_translations.setChecked(True)
         self.skip_translations.setToolTip(
-            "Skip translation files to improve search speed"
+            "跳过翻译文件以提高搜索速度"
         )
 
-        self.skip_git = QCheckBox("Skip .git folder")
+        self.skip_git = QCheckBox("跳过 .git 文件夹")
         self.skip_git.setChecked(True)
-        self.skip_git.setToolTip("Skip Git repository folders")
+        self.skip_git.setToolTip("跳过 Git 仓库文件夹")
 
-        self.skip_source = QCheckBox("Skip Source folder")
+        self.skip_source = QCheckBox("跳过 Source 文件夹")
         self.skip_source.setChecked(True)
-        self.skip_source.setToolTip("Skip Source folders containing C# code")
+        self.skip_source.setToolTip("跳过包含 C# 代码的 Source 文件夹")
 
-        self.skip_textures = QCheckBox("Skip Textures folder")
+        self.skip_textures = QCheckBox("跳过 Textures 文件夹")
         self.skip_textures.setChecked(True)
-        self.skip_textures.setToolTip("Skip Textures folders containing images")
+        self.skip_textures.setToolTip("跳过包含图像的 Textures 文件夹")
 
         skip_options_column.addWidget(self.skip_translations)
         skip_options_column.addWidget(self.skip_git)
@@ -202,19 +202,19 @@ class FileSearchDialog(QDialog):
 
         # Add a note about search method
         search_method_info = QLabel(
-            "Search method is automatically selected based on options"
+            "搜索方法会根据选项自动选择"
         )
         buttons_layout.addWidget(search_method_info)
 
         # Add spacer to push buttons to the right
         buttons_layout.addStretch()
 
-        self.search_button = QPushButton("Search")
+        self.search_button = QPushButton("搜索")
         self.search_button.setMinimumWidth(100)
         self.search_button.setEnabled(True)
         self.search_button.setStyleSheet("font-weight: bold; background-color: green;")
 
-        self.stop_button = QPushButton("Stop")
+        self.stop_button = QPushButton("停止")
         self.stop_button.setMinimumWidth(100)
         self.stop_button.setEnabled(False)
         self.stop_button.setStyleSheet("font-weight: bold; background-color: normal;")
@@ -250,7 +250,7 @@ class FileSearchDialog(QDialog):
         status_row.setSpacing(10)
 
         # Statistics
-        self.stats_label = QLabel("Ready to search")
+        self.stats_label = QLabel("准备搜索")
         self.stats_label.setAlignment(
             Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter
         )
@@ -272,7 +272,7 @@ class FileSearchDialog(QDialog):
 
         self.filter_input = QLineEdit()
         self.filter_input.setPlaceholderText(
-            "Filter results by mod name, file name, or path"
+            "通过模组名称、文件名或路径过滤结果"
         )
         filter_layout.addWidget(self.filter_input)
 
@@ -285,12 +285,12 @@ class FileSearchDialog(QDialog):
         results_table_layout.setSpacing(5)
 
         results_header = QHBoxLayout()
-        results_label = QLabel("Search Results:")
+        results_label = QLabel("搜索结果：")
         results_label.setStyleSheet("font-weight: bold;")
         results_header.addWidget(results_label)
 
         # Add a right-aligned label with instructions
-        results_help = QLabel("Double-click a result to open the file")
+        results_help = QLabel("双击结果以打开文件")
         results_help.setAlignment(Qt.AlignmentFlag.AlignRight)
         results_header.addWidget(results_help)
 
@@ -388,9 +388,9 @@ class FileSearchDialog(QDialog):
         result_count = self.results_table.rowCount()
 
         if result_count > 0:
-            self.stats_label.setText(f"Found {result_count} results")
+            self.stats_label.setText(f"找到 {result_count} 个结果")
         else:
-            self.stats_label.setText("No results found")
+            self.stats_label.setText("未找到结果")
 
         # Reset buttons
         self.search_button.setEnabled(True)
@@ -430,23 +430,23 @@ class FileSearchDialog(QDialog):
         path = path_item.text()
 
         # Create actions with keyboard shortcuts
-        open_file = menu.addAction("Open File (Enter)")
+        open_file = menu.addAction("打开文件（Enter）")
         open_file.setShortcut("Return")
 
-        open_folder = menu.addAction("Open Containing Folder (Ctrl+O)")
+        open_folder = menu.addAction("打开包含文件的文件夹（Ctrl+O）")
         open_folder.setShortcut("Ctrl+O")
 
-        copy_path = menu.addAction("Copy Path (Ctrl+C)")
+        copy_path = menu.addAction("复制路径（Ctrl+C）")
         copy_path.setShortcut("Ctrl+C")
 
         # Add a separator and more actions
         menu.addSeparator()
 
         # Add "Open With" submenu
-        open_with_menu = menu.addMenu("Open With...")
-        open_with_notepad = open_with_menu.addAction("Notepad")
+        open_with_menu = menu.addMenu("使用......打开")
+        open_with_notepad = open_with_menu.addAction("记事本")
         open_with_vscode = open_with_menu.addAction("VS Code")
-        open_with_default = open_with_menu.addAction("Default Editor")
+        open_with_default = open_with_menu.addAction("默认编辑器")
 
         # connect actions
         open_file.triggered.connect(lambda: self._open_file(path))
@@ -565,7 +565,7 @@ class FileSearchDialog(QDialog):
         }
 
         return {
-            "scope": self.search_scope.currentText(),
+            "scope": self.search_scope.currentData(),
             "algorithm": algorithm,
             "case_sensitive": self.case_sensitive.isChecked(),
             "use_regex": self.use_regex.isChecked(),
@@ -634,10 +634,10 @@ class FileSearchDialog(QDialog):
             preview_item = QTableWidgetItem(preview)
 
             # Set tooltips and formatting
-            mod_item.setToolTip(f"Mod: {mod_name}")
-            file_item.setToolTip(f"File: {file_name}")
-            path_item.setToolTip(f"Path: {path}")
-            preview_item.setToolTip("Double-click to open file")
+            mod_item.setToolTip(f"模组: {mod_name}")
+            file_item.setToolTip(f"文件: {file_name}")
+            path_item.setToolTip(f"路径: {path}")
+            preview_item.setToolTip("双击打开文件")
             preview_item.setFont(QFont("Courier New", 9))
             preview_item.setFlags(preview_item.flags() ^ Qt.ItemFlag.ItemIsEditable)
 
@@ -688,7 +688,7 @@ class FileSearchDialog(QDialog):
         # Add a separator and clear action
         if self._recent_searches:
             menu.addSeparator()
-            clear_action = menu.addAction("Clear Recent Searches")
+            clear_action = menu.addAction("清除最近的搜索")
             clear_action.triggered.connect(self._clear_recent_searches)
 
         # Show menu below the button
@@ -769,8 +769,8 @@ class FileSearchDialog(QDialog):
 
         # Update the stats label to show filter results
         if text:
-            self.update_stats(f"Filter: {visible_rows} of {total_rows} results visible")
+            self.update_stats(f"过滤：{visible_rows} 个结果可见，共 {total_rows} 个结果")
         elif total_rows > 0:
-            self.update_stats(f"Found {total_rows} results")
+            self.update_stats(f"找到 {total_rows} 个结果")
         else:
-            self.update_stats("Ready to search")
+            self.update_stats("准备搜索")

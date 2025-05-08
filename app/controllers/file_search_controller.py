@@ -652,7 +652,7 @@ class SearchWorker(QThread):
 
             # Perform the search
             for root_path in self.root_paths:
-                self.stats.emit(f"Searching in: {root_path}")
+                self.stats.emit(f"正在搜索: {root_path}")
                 for result in search_method(self.pattern, [root_path], self.options):
                     mod_name, file_name, path = result
                     preview = self._get_file_preview(path)
@@ -804,7 +804,7 @@ class FileSearchController(QObject):
         worker.error.connect(self._on_search_error)
 
         # Update UI to show search is starting
-        self.dialog.update_stats("Preparing search...")
+        self.dialog.update_stats("正在准备搜索...")
 
         return worker
 
@@ -812,7 +812,7 @@ class FileSearchController(QObject):
         """Clear filter and reset UI when a new search starts."""
         self.dialog.filter_input.clear()  # Clear the filter input
         self.dialog.clear_results()  # Clear previous results
-        self.dialog.update_stats("Starting new search...")
+        self.dialog.update_stats("开始新的搜索...")
 
     def _on_search_clicked(self) -> None:
         """
@@ -1076,7 +1076,7 @@ class FileSearchController(QObject):
             self.dialog.stop_button.setEnabled(False)
 
             # Update the UI to show search is stopping
-            self.dialog.update_stats("Stopping search...")
+            self.dialog.update_stats("正在停止搜索...")
 
             # Set the stop flag in the searcher
             self.searcher.stop_search()
@@ -1085,7 +1085,7 @@ class FileSearchController(QObject):
             self.search_worker.terminate()
 
             # Update the UI to show search has stopped
-            self.dialog.update_stats("Search stopped by user")
+            self.dialog.update_stats("搜索已被用户停止")
 
         # Reset the UI
         self._on_search_finished()
@@ -1119,31 +1119,31 @@ class FileSearchController(QObject):
         # Check for common error patterns and provide helpful messages
         if "regex" in error_msg.lower():
             show_warning(
-                title="Regular Expression Error",
-                text="There was an error with your regular expression pattern.",
-                information=f"{error_msg}\n\nTry simplifying your pattern or check for syntax errors.",
+                title="正则表达式错误",
+                text="您的正则表达式模式出现了错误。",
+                information=f"{error_msg}\n\n请尝试简化您的模式或检查语法错误。",
             )
         elif "permission" in error_msg.lower() or "access" in error_msg.lower():
             show_warning(
-                title="File Access Error",
-                text="RimSort doesn't have permission to access some files.",
-                information=f"{error_msg}\n\nTry running RimSort with administrator privileges or check folder permissions.",
+                title="文件访问错误",
+                text="RimSort 没有权限访问某些文件。",
+                information=f"{error_msg}\n\n请尝试以管理员权限运行 RimSort 或检查文件夹权限。",
             )
         elif "memory" in error_msg.lower():
             show_warning(
-                title="Memory Error",
-                text="RimSort ran out of memory while searching.",
-                information=f"{error_msg}\n\nTry searching in smaller batches or use the 'streaming search' method for very large files.",
+                title="内存错误",
+                text="RimSort 在搜索时内存不足。",
+                information=f"{error_msg}\n\n请尝试分批搜索，或者对于非常大的文件使用“流式搜索”方法。",
             )
         else:
             show_warning(
-                title="Search Error",
-                text="An error occurred during the search.",
-                information=f"{error_msg}\n\nPlease check your settings and try again.",
+                title="搜索错误",
+                text="搜索过程中发生了错误。",
+                information=f"{error_msg}\n\n请检查您的设置并重试。",
             )
 
         # Update the stats label to show the error
-        self.dialog.update_stats(f"Search failed: {error_msg[:100]}...")
+        self.dialog.update_stats(f"搜索失败: {error_msg[:100]}...")
 
         # Reset the UI
         self._on_search_finished()
@@ -1192,7 +1192,7 @@ class FileSearchController(QObject):
 
         # Update the stats label to show filter results
         self.dialog.update_stats(
-            f"Filter: {visible_rows} of {self.dialog.results_table.rowCount()} results visible"
+            f"筛选: {visible_rows} / {self.dialog.results_table.rowCount()} 个结果可见"
         )
 
         logger.debug(
@@ -1206,6 +1206,6 @@ class FileSearchController(QObject):
         Displays a warning dialog informing the user to configure game folders in settings.
         """
         show_warning(
-            title="Location Not Set",
-            text="No valid search location is available for the selected scope. Please configure your game folders in the settings.",
+            title="路径未设置",
+            text="所选范围内没有有效的搜索位置。请在设置中配置您的游戏文件夹。",
         )
