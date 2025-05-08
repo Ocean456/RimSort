@@ -56,7 +56,6 @@ class MenuBar(QObject):
         self.wiki_action: QAction
         self.check_for_updates_action: QAction
         self.check_for_updates_on_startup_action: QAction
-        self.file_search_action: QAction
 
         self.import_submenu: QMenu
         self.export_submenu: QMenu
@@ -127,10 +126,6 @@ class MenuBar(QObject):
         )
         self.export_to_rentry_action = self._add_action(
             self.export_submenu, "导出到 Rentry.co"
-        )
-        file_menu.addSeparator()
-        self.file_search_action = self._add_action(
-            file_menu, "文件搜索", "Ctrl+Shift+F"
         )
         file_menu.addSeparator()
         self.upload_submenu = QMenu("上传日志")
