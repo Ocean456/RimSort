@@ -794,8 +794,7 @@ class MainContent(QObject):
     # GAME CONFIGURATION PANEL
 
     def _do_check_for_update(self) -> None:
-        logger.debug("Skipping update check...")
-        return
+        logger.debug("Checking for RimSort update...")
         # NOT NUITKA
         if "__compiled__" not in globals():
             logger.debug(
@@ -809,7 +808,7 @@ class MainContent(QObject):
             return
         # NUITKA
         logger.debug("Checking for RimSort update...")
-        current_version = self.metadata_manager.game_version
+        current_version = AppInfo().app_version
         try:
             json_response = self.__do_get_github_release_info()
         except Exception as e:
@@ -829,6 +828,10 @@ class MainContent(QObject):
                 information=f"当前运行版本：{current_version}\n是否立即更新？"
             )
             if answer == "&Yes":
+                logger.debug("User selected to update RimSort")
+                open_url_browser("https://github.com/RimSort/RimSort/releases")
+                return  # Remove this and above line to enable auto-update
+                # TODO : Implement auto-update currenty disabled since it has issues on linux
                 # Setup environment
                 ARCH = platform.architecture()[0]
                 CWD = os.getcwd()
