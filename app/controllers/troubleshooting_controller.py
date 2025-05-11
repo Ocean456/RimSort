@@ -385,8 +385,8 @@ class TroubleshootingController:
         if not save_path:
             logger.error(f"Failed to save to Location: {save_path}.")
             show_warning(
-                title="Location Error",
-                text=f"Failed to get Location: {save_path}.",
+                title="路径错误",
+                text=f"无法获取路径：{save_path}。",
             )
             return
 

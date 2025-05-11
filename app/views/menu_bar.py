@@ -260,12 +260,12 @@ class MenuBar(QObject):
         return texture_menu
 
     def _create_update_menu(self) -> QMenu:
-        update_menu = self.menu_bar.addMenu("Update")
+        update_menu = self.menu_bar.addMenu("更新")
         self.check_for_updates_action = self._add_action(
-            update_menu, "Check for Updates…"
+            update_menu, "检查更新"
         )
         self.check_for_updates_on_startup_action = self._add_action(
-            update_menu, "Check for Updates on Startup", checkable=True
+            update_menu, "启动时检查更新", checkable=True
         )
         update_menu.addSeparator()
         return update_menu

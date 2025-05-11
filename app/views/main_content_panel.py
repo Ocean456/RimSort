@@ -829,7 +829,7 @@ class MainContent(QObject):
             )
             if answer == "&Yes":
                 logger.debug("User selected to update RimSort")
-                open_url_browser("https://github.com/RimSort/RimSort/releases")
+                open_url_browser("https://github.com/Ocean456/RimSort/releases")
                 return  # Remove this and above line to enable auto-update
                 # TODO : Implement auto-update currenty disabled since it has issues on linux
                 # Setup environment
@@ -978,7 +978,7 @@ class MainContent(QObject):
     def __do_get_github_release_info(self) -> dict[str, Any]:
         # Parse latest release
         raw = requests_get(
-            "https://api.github.com/repos/RimSort/RimSort/releases/latest"
+            "https://api.github.com/repos/Ocean456/RimSort/releases/latest"
         )
         return raw.json()
 
