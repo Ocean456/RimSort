@@ -95,7 +95,7 @@ class Settings(QObject):
         self.font_size: int = 12
 
         # Language
-        self.language = "en_US"
+        self.language = "zh_CN"
 
         # Window size configuration
         self.window_x: int = 0
