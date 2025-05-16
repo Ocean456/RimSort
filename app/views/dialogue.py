@@ -236,10 +236,10 @@ def show_warning(
 
 
 def show_fatal_error(
-        title: str = "致命错误",
-        text: str = "发生了一个致命错误！",
-        information: str = "请将此错误报告给开发者。",
-        details: str = "",
+    title: str = "Fatal Error",
+    text: str = "A fatal error has occurred!",
+    information: str = "Please report the error to the developers.",
+    details: str = "",
 ) -> None:
     """
     Displays a critical error message box, containing text,
@@ -502,9 +502,9 @@ class FatalErrorDialog(_BaseDialogue):
 
     def __init__(
         self,
-        title: str = "致命错误",
-        text: str = "发生了一个致命错误！",
-        information: str = "请将此错误报告给开发者。",
+        title: str = "Fatal Error",
+        text: str = "A fatal error has occurred!",
+        information: str = "Please report the error to the developers.",
         details: str = "",
         parent: QWidget | None = None,
     ) -> None:
