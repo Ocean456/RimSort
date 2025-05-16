@@ -9,7 +9,7 @@ from app.views.settings_dialog import SettingsDialog
 
 
 class LanguageController:
-    def __init__(self, default_language: str = "en_US") -> None:
+    def __init__(self, default_language: str = "zh_CN") -> None:
         """Initialize the LanguageController with a default language.
 
         Args:

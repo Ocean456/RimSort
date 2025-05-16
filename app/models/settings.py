@@ -92,7 +92,7 @@ class Settings(QObject):
         self.font_size: int = 12
 
         # Language
-        self.language = "en_US"
+        self.language = "zh_CN"
 
         # Advanced
         self.debug_logging_enabled: bool = False

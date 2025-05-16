@@ -35,7 +35,7 @@ class SettingsDialog(QDialog):
 
         self.setWindowTitle(self.tr("Settings"))
         self.setObjectName("settingsPanel")
-        self.resize(900, 600)
+        self.resize(1000, 600)
 
         main_layout = QVBoxLayout()
         self.setLayout(main_layout)
