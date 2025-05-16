@@ -860,8 +860,8 @@ class MainContent(QObject):
             return
         tag_name_updated = tag_name.replace("alpha", "Alpha")
         install_path = os.getcwd()
-        logger.debug(f"Current RimSort release found: {tag_name}")
-        logger.debug(f"Current RimSort version found: {current_version}")
+        logger.debug(f"Current RimSort github release found: {tag_name}")
+        logger.debug(f"Current RimSort installed version found: {current_version}")
         if current_version != tag_name:
             answer = dialogue.show_dialogue_conditional(
                 title=self.tr("RimSort update found"),
@@ -3370,7 +3370,7 @@ class MainContent(QObject):
         logger.info("Opening file dialog to specify input file B")
         input_path_b = dialogue.show_dialogue_file(
             mode="open",
-            caption='Input "to-be-updated" database, input A',
+            caption='Input "update source" database, input B',
             _dir=str(AppInfo().app_storage_folder),
             _filter="JSON (*.json)",
         )
