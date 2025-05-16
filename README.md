@@ -9,8 +9,12 @@
 ![RimSort 预览](./docs/rimsort_preview.png)
 
 ## 项目声明
-[![Forked from](https://img.shields.io/badge/Forked%20from-RimSort-green?style=flat)](https://github.com/RimSort/RimSort) [![Notion](https://img.shields.io/badge/Notion-Extra_Content-black?logo=notion&style=flat)](https://ocean-note.notion.site/RimSort-1cca59cfda53809ab1a8ee02067ef86a)  
+[![Forked from](https://img.shields.io/badge/Forked%20from-RimSort-green?style=flat)](https://github.com/RimSort/RimSort)  
 本项目是 RimSort 的非官方中文版本，由 @Ocean456 和 @Day29 翻译。
+
+目前原版 RimSort 已经可以进行语言切换。
+
+欢迎加入环世界交流群：623232093。
 
 ## 安装
 
