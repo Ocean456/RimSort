@@ -810,9 +810,6 @@ class ModListWidget(QListWidget):
                     # Open folder action text
                     open_folder_action = QAction()
                     open_folder_action.setText(self.tr("Open folder"))
-                    # Translate mod action text
-                    translate_mod_action = QAction()
-                    translate_mod_action.setText(self.tr("Extract Translations"))
                     # If we have a "url" or "steam_url"
                     if mod_metadata.get("url") or mod_metadata.get("steam_url"):
                         open_url_browser_action = QAction()
@@ -1049,8 +1046,6 @@ class ModListWidget(QListWidget):
                 context_menu.addAction(open_mod_steam_action)
             if toggle_warning_action:
                 context_menu.addAction(toggle_warning_action)
-            if translate_mod_action:
-                context_menu.addAction(translate_mod_action)
 
             context_menu.addMenu(self.deletion_sub_menu)
             context_menu.addSeparator()
@@ -1061,6 +1056,10 @@ class ModListWidget(QListWidget):
                 or re_git_action
             ):
                 misc_options_menu = QMenu(title=self.tr("Miscellaneous options"))
+                # Translate mod action text
+                translate_mod_action = QAction()
+                translate_mod_action.setText(self.tr("Extract Translations"))
+                misc_options_menu.addAction(translate_mod_action)
                 if copy_packageid_to_clipboard_action:
                     clipboard_options_menu = QMenu(title=self.tr("Clipboard options"))
                     clipboard_options_menu.addAction(copy_packageid_to_clipboard_action)
