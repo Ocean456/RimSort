@@ -2604,37 +2604,37 @@ Do you want to proceed?</source>
 <context>
     <name>ModListItemInner</name>
     <message>
-        <location filename="../app/views/mods_panel.py" line="204"/>
+        <location filename="../app/views/mods_panel.py" line="206"/>
         <source>Contains custom C# assemblies (custom code)</source>
         <translation>包含自定义 C# 程序集（自定义代码）</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="210"/>
+        <location filename="../app/views/mods_panel.py" line="212"/>
         <source>Contains custom content (textures / XML)</source>
         <translation>包含自定义内容（textures / XML)</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="224"/>
+        <location filename="../app/views/mods_panel.py" line="226"/>
         <source>Local mod that contains a git repository</source>
         <translation>包含 git 存储库的本地模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="237"/>
+        <location filename="../app/views/mods_panel.py" line="239"/>
         <source>Local mod that can be used with SteamCMD</source>
         <translation>可以与 SteamCMD 一起使用的本地模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="277"/>
+        <location filename="../app/views/mods_panel.py" line="279"/>
         <source>Official RimWorld content by Ludeon Studios</source>
         <translation>Ludeon Studios 官方的 RimWorld 内容</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="289"/>
+        <location filename="../app/views/mods_panel.py" line="291"/>
         <source>Installed locally</source>
         <translation>本地安装</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="292"/>
+        <location filename="../app/views/mods_panel.py" line="294"/>
         <source>Subscribed via Steam</source>
         <translation>通过 Steam 订阅</translation>
     </message>
@@ -2642,239 +2642,244 @@ Do you want to proceed?</source>
 <context>
     <name>ModListWidget</name>
     <message>
-        <location filename="../app/views/mods_panel.py" line="806"/>
+        <location filename="../app/views/mods_panel.py" line="812"/>
         <source>Open folder</source>
         <translation>打开文件夹</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="810"/>
+        <location filename="../app/views/mods_panel.py" line="815"/>
+        <source>Extract Translations</source>
+        <translation>提取翻译</translation>
+    </message>
+    <message>
+        <location filename="../app/views/mods_panel.py" line="819"/>
         <source>Open URL in browser</source>
         <translation>在 浏览器 中打开模组页面</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="814"/>
+        <location filename="../app/views/mods_panel.py" line="823"/>
         <source>Copy URL to clipboard</source>
         <translation>复制 模组链接 到剪切板</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="823"/>
+        <location filename="../app/views/mods_panel.py" line="832"/>
         <source>Open mod in Steam</source>
         <translation>在 Steam 中打开模组界面</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="849"/>
+        <location filename="../app/views/mods_panel.py" line="858"/>
         <source>Convert local mod to SteamCMD</source>
         <translation>将本地模组转换为 Steamcmd 模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="857"/>
+        <location filename="../app/views/mods_panel.py" line="866"/>
         <source>Convert SteamCMD mod to local</source>
         <translation>将 Steam 模组转换为本地模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="862"/>
+        <location filename="../app/views/mods_panel.py" line="871"/>
         <source>Re-download mod with SteamCMD</source>
         <translation>使用 Steamcmd 重新下载</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="869"/>
+        <location filename="../app/views/mods_panel.py" line="878"/>
         <source>Update mod with git</source>
         <translation>使用 Git 更新模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="883"/>
+        <location filename="../app/views/mods_panel.py" line="892"/>
         <source>Convert Steam mod to local</source>
         <translation>将 Steam 模组转换为本地模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="892"/>
+        <location filename="../app/views/mods_panel.py" line="901"/>
         <source>Re-subscribe mod with Steam</source>
         <translation>重新订阅 Steam 模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="897"/>
+        <location filename="../app/views/mods_panel.py" line="906"/>
         <source>Unsubscribe mod with Steam</source>
         <translation>取消订阅 Steam 模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="911"/>
+        <location filename="../app/views/mods_panel.py" line="920"/>
         <source>Remove mod from SteamDB blacklist</source>
         <translation>将模组从 SteamDB 黑名单中移除</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="917"/>
+        <location filename="../app/views/mods_panel.py" line="926"/>
         <source>Add mod to SteamDB blacklist</source>
         <translation>将模组添加到 SteamDB 黑名单</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="922"/>
+        <location filename="../app/views/mods_panel.py" line="931"/>
         <source>Copy packageId to clipboard</source>
         <translation>复制 包名 到剪切板</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="925"/>
+        <location filename="../app/views/mods_panel.py" line="934"/>
         <source>Edit mod with Rule Editor</source>
         <translation>使用规则编辑器编辑模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="928"/>
+        <location filename="../app/views/mods_panel.py" line="937"/>
         <source>Toggle warning</source>
         <translation>启用/禁用警告</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="942"/>
+        <location filename="../app/views/mods_panel.py" line="951"/>
         <source>Open folder(s)</source>
         <translation>打开文件夹</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="948"/>
+        <location filename="../app/views/mods_panel.py" line="957"/>
         <source>Open URL(s) in browser</source>
         <translation>在 浏览器 中打开模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="969"/>
+        <location filename="../app/views/mods_panel.py" line="978"/>
         <source>Convert local mod(s) to SteamCMD</source>
         <translation>将本地模组转换为 Steamcmd 模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="980"/>
+        <location filename="../app/views/mods_panel.py" line="989"/>
         <source>Convert SteamCMD mod(s) to local</source>
         <translation>将 SteamCMD 模组转换为本地模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="986"/>
+        <location filename="../app/views/mods_panel.py" line="995"/>
         <source>Re-download mod(s) with SteamCMD</source>
         <translation>使用 Steamcmd 重新下载模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="996"/>
+        <location filename="../app/views/mods_panel.py" line="1005"/>
         <source>Update mod(s) with git</source>
         <translation>使用 Git 更新模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1001"/>
+        <location filename="../app/views/mods_panel.py" line="1010"/>
         <source>Toggle warning(s)</source>
         <translation>启用/禁用警告</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1016"/>
+        <location filename="../app/views/mods_panel.py" line="1025"/>
         <source>Convert Steam mod(s) to local</source>
         <translation>将 Steam 模组转换为本地模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1026"/>
+        <location filename="../app/views/mods_panel.py" line="1035"/>
         <source>Re-subscribe mod(s) with Steam</source>
         <translation>重新订阅 Steam 模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1032"/>
+        <location filename="../app/views/mods_panel.py" line="1041"/>
         <source>Unsubscribe mod(s) with Steam</source>
         <translation>取消订阅 Steam 模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1052"/>
+        <location filename="../app/views/mods_panel.py" line="1063"/>
         <source>Miscellaneous options</source>
         <translation>其他选项</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1054"/>
+        <location filename="../app/views/mods_panel.py" line="1065"/>
         <source>Clipboard options</source>
         <translation>剪切板选项</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1077"/>
+        <location filename="../app/views/mods_panel.py" line="1088"/>
         <source>Workshop mods options</source>
         <translation>创意工坊模组选项</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1110"/>
-        <location filename="../app/views/mods_panel.py" line="1204"/>
-        <location filename="../app/views/mods_panel.py" line="1300"/>
-        <location filename="../app/views/mods_panel.py" line="1330"/>
-        <location filename="../app/views/mods_panel.py" line="1403"/>
+        <location filename="../app/views/mods_panel.py" line="1121"/>
+        <location filename="../app/views/mods_panel.py" line="1215"/>
+        <location filename="../app/views/mods_panel.py" line="1311"/>
+        <location filename="../app/views/mods_panel.py" line="1341"/>
+        <location filename="../app/views/mods_panel.py" line="1414"/>
         <source>Are you sure?</source>
         <translation>你确定吗？</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1113"/>
+        <location filename="../app/views/mods_panel.py" line="1124"/>
         <source>You have selected {len} git mods to be updated.</source>
         <translation>你选择了 {len} 个 git 模组进行更新。</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1114"/>
+        <location filename="../app/views/mods_panel.py" line="1125"/>
         <source>Do you want to proceed?</source>
         <translation>你想要继续吗？</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1207"/>
+        <location filename="../app/views/mods_panel.py" line="1218"/>
         <source>You have selected {len} mods for deletion + re-download.</source>
         <translation>你选择了 {len} 个模组进行删除和重新下载。</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1211"/>
+        <location filename="../app/views/mods_panel.py" line="1222"/>
         <source>
 This operation will recursively delete all mod files, except for .dds textures found, and attempt to re-download the mods via SteamCMD. Do you want to proceed?</source>
         <translation>
 此操作将递归删除所有模组文件，除了找到的 .dds 纹理，并尝试通过 SteamCMD 重新下载模组。你想要继续吗？</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1303"/>
+        <location filename="../app/views/mods_panel.py" line="1314"/>
         <source>You have selected {len} mods for unsubscribe + re-subscribe.</source>
         <translation>你选择了 {len} 个模组进行取消订阅和重新订阅。</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1333"/>
+        <location filename="../app/views/mods_panel.py" line="1344"/>
         <source>You have selected {len} mods for unsubscribe.</source>
         <translation>你选择了 {len} 个模组进行取消订阅。</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1306"/>
+        <location filename="../app/views/mods_panel.py" line="1317"/>
         <source>
 This operation will potentially delete .dds textures leftover. Steam is unreliable for this. Do you want to proceed?</source>
         <translation>
 此操作可能会删除残留的 .dds 纹理。Steam 对此不可靠。你想要继续吗？</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1334"/>
+        <location filename="../app/views/mods_panel.py" line="1345"/>
         <source>
 Do you want to proceed?</source>
         <translation>
 你想要继续吗？</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1366"/>
+        <location filename="../app/views/mods_panel.py" line="1377"/>
         <source>Add comment</source>
         <translation>添加备注</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1370"/>
+        <location filename="../app/views/mods_panel.py" line="1381"/>
         <source>Enter a comment providing your reasoning for wanting to blacklist this mod: </source>
         <translation>输入你的备注，提供你添加此模组到黑名单的原因：</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1378"/>
+        <location filename="../app/views/mods_panel.py" line="1389"/>
         <source>Unable to add to blacklist</source>
         <translation>无法添加到黑名单</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1381"/>
+        <location filename="../app/views/mods_panel.py" line="1392"/>
         <source>Comment was not provided or entry was cancelled. Comments are REQUIRED for this action!</source>
         <translation>未提供备注或条目已取消。此操作必须提供备注！</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1405"/>
+        <location filename="../app/views/mods_panel.py" line="1416"/>
         <source>This will remove the selected mod, </source>
         <translation>这将会移除所有选择的模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1896"/>
+        <location filename="../app/views/mods_panel.py" line="1918"/>
         <source>
 Missing Dependencies:</source>
         <translation>
 缺少依赖：</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="1897"/>
+        <location filename="../app/views/mods_panel.py" line="1919"/>
         <source>
 Incompatibilities:</source>
         <translation>
@@ -2897,152 +2902,152 @@ Incompatibilities:</source>
 <context>
     <name>ModsPanel</name>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2140"/>
+        <location filename="../app/views/mods_panel.py" line="2162"/>
         <source>Showing All Mods</source>
         <translation>显示所有模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2141"/>
+        <location filename="../app/views/mods_panel.py" line="2163"/>
         <source>Showing Core and DLC</source>
         <translation>显示核心和 DLC</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2142"/>
+        <location filename="../app/views/mods_panel.py" line="2164"/>
         <source>Showing Local Mods</source>
         <translation>显示本地模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2143"/>
+        <location filename="../app/views/mods_panel.py" line="2165"/>
         <source>Showing Git Mods</source>
         <translation>显示 Git 模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2144"/>
+        <location filename="../app/views/mods_panel.py" line="2166"/>
         <source>Showing SteamCMD Mods</source>
         <translation>显示 SteamCMD 模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2145"/>
+        <location filename="../app/views/mods_panel.py" line="2167"/>
         <source>Showing Steam Mods</source>
         <translation>显示 Steam 模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2153"/>
+        <location filename="../app/views/mods_panel.py" line="2175"/>
         <source>Showing All Mod Types</source>
         <translation>显示所有模组类型</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2154"/>
+        <location filename="../app/views/mods_panel.py" line="2176"/>
         <source>Showing C# Mods</source>
         <translation>显示 C# 模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2155"/>
+        <location filename="../app/views/mods_panel.py" line="2177"/>
         <source>Showing XML Mods</source>
         <translation>显示 XML 模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2162"/>
+        <location filename="../app/views/mods_panel.py" line="2184"/>
         <source>Hide Filter Disabled</source>
         <translation>隐藏过滤器已禁用</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2168"/>
+        <location filename="../app/views/mods_panel.py" line="2190"/>
         <source>Active [0]</source>
         <translation>启用 [0]</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2168"/>
+        <location filename="../app/views/mods_panel.py" line="2190"/>
         <source>Hide Filter Enabled</source>
         <translation>隐藏过滤器已启用</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2188"/>
+        <location filename="../app/views/mods_panel.py" line="2210"/>
         <source>Inactive [0]</source>
         <translation>未启用 [0]</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2255"/>
-        <location filename="../app/views/mods_panel.py" line="2397"/>
+        <location filename="../app/views/mods_panel.py" line="2277"/>
+        <location filename="../app/views/mods_panel.py" line="2419"/>
         <source>Search by...</source>
         <translation>按...搜索</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2270"/>
-        <location filename="../app/views/mods_panel.py" line="2412"/>
-        <location filename="../app/views/mods_panel.py" line="2702"/>
+        <location filename="../app/views/mods_panel.py" line="2292"/>
+        <location filename="../app/views/mods_panel.py" line="2434"/>
+        <location filename="../app/views/mods_panel.py" line="2724"/>
         <source>Name</source>
         <translation>名称</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2271"/>
-        <location filename="../app/views/mods_panel.py" line="2413"/>
-        <location filename="../app/views/mods_panel.py" line="2704"/>
+        <location filename="../app/views/mods_panel.py" line="2293"/>
+        <location filename="../app/views/mods_panel.py" line="2435"/>
+        <location filename="../app/views/mods_panel.py" line="2726"/>
         <source>PackageId</source>
         <translation>包名</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2272"/>
-        <location filename="../app/views/mods_panel.py" line="2414"/>
-        <location filename="../app/views/mods_panel.py" line="2706"/>
+        <location filename="../app/views/mods_panel.py" line="2294"/>
+        <location filename="../app/views/mods_panel.py" line="2436"/>
+        <location filename="../app/views/mods_panel.py" line="2728"/>
         <source>Author(s)</source>
         <translation>作者</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2273"/>
-        <location filename="../app/views/mods_panel.py" line="2415"/>
-        <location filename="../app/views/mods_panel.py" line="2708"/>
+        <location filename="../app/views/mods_panel.py" line="2295"/>
+        <location filename="../app/views/mods_panel.py" line="2437"/>
+        <location filename="../app/views/mods_panel.py" line="2730"/>
         <source>PublishedFileId</source>
         <translation>发布文件 ID</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2302"/>
-        <location filename="../app/views/mods_panel.py" line="2624"/>
+        <location filename="../app/views/mods_panel.py" line="2324"/>
+        <location filename="../app/views/mods_panel.py" line="2646"/>
         <source>0 warnings</source>
         <translation>0 警告</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2304"/>
+        <location filename="../app/views/mods_panel.py" line="2326"/>
         <source>Click to only show mods with warnings</source>
         <translation>点击仅显示有警告的模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2309"/>
+        <location filename="../app/views/mods_panel.py" line="2331"/>
         <source>Click to only show mods with errors</source>
         <translation>点击仅显示有错误的模组</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2325"/>
+        <location filename="../app/views/mods_panel.py" line="2347"/>
         <source>Check &quot;Use This Instead&quot; Database</source>
         <translation>查看&quot;替代为此&quot;数据库</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2335"/>
+        <location filename="../app/views/mods_panel.py" line="2357"/>
         <source>Check Dependencies</source>
         <translation>查看依赖</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2607"/>
+        <location filename="../app/views/mods_panel.py" line="2629"/>
         <source>{padding}{num_warnings} warning(s)</source>
         <translation>{padding}{num_warnings} 警告</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2612"/>
+        <location filename="../app/views/mods_panel.py" line="2634"/>
         <source>{padding}{num_errors} error(s)</source>
         <translation>{padding}{num_errors} 错误</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2625"/>
+        <location filename="../app/views/mods_panel.py" line="2647"/>
         <source>0 errors</source>
         <translation>0 错误</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2871"/>
+        <location filename="../app/views/mods_panel.py" line="2893"/>
         <source>Active</source>
         <translation>启用</translation>
     </message>
     <message>
-        <location filename="../app/views/mods_panel.py" line="2872"/>
+        <location filename="../app/views/mods_panel.py" line="2894"/>
         <source>Inactive</source>
         <translation>未启用</translation>
     </message>
@@ -3992,76 +3997,76 @@ Please choose one of the following options to proceed.</source>
         <translation>下载模组（Steam app）</translation>
     </message>
     <message>
-        <location filename="../app/utils/steam/browser.py" line="139"/>
+        <location filename="../app/utils/steam/browser.py" line="138"/>
         <source>Add to list</source>
         <translation>添加到列表</translation>
     </message>
     <message>
-        <location filename="../app/utils/steam/browser.py" line="196"/>
+        <location filename="../app/utils/steam/browser.py" line="195"/>
         <source>No publishedfileid found</source>
         <translation>找不到发布文件 ID</translation>
     </message>
     <message>
-        <location filename="../app/utils/steam/browser.py" line="197"/>
+        <location filename="../app/utils/steam/browser.py" line="196"/>
         <source>Unable to parse publishedfileid from url, Please check if url is in the correct format</source>
         <translation>无法从链接解析发布文件 ID，请检查链接是否正确的格式</translation>
     </message>
     <message>
-        <location filename="../app/utils/steam/browser.py" line="217"/>
+        <location filename="../app/utils/steam/browser.py" line="216"/>
         <source>Add Collection</source>
         <translation>添加合集</translation>
     </message>
     <message>
-        <location filename="../app/utils/steam/browser.py" line="218"/>
+        <location filename="../app/utils/steam/browser.py" line="217"/>
         <source>How would you like to add the collection?</source>
         <translation>你想如何添加该合集？</translation>
     </message>
     <message>
-        <location filename="../app/utils/steam/browser.py" line="219"/>
+        <location filename="../app/utils/steam/browser.py" line="218"/>
         <source>You can choose to add all mods from the collection or only the ones you don&apos;t have installed.</source>
         <translation>你可以选择添加合集中的所有模组，或者只添加你没有安装的模组。</translation>
     </message>
     <message>
-        <location filename="../app/utils/steam/browser.py" line="220"/>
-        <location filename="../app/utils/steam/browser.py" line="225"/>
+        <location filename="../app/utils/steam/browser.py" line="219"/>
+        <location filename="../app/utils/steam/browser.py" line="224"/>
         <source>Add All Mods</source>
         <translation>添加所有模组</translation>
     </message>
     <message>
-        <location filename="../app/utils/steam/browser.py" line="220"/>
-        <location filename="../app/utils/steam/browser.py" line="229"/>
+        <location filename="../app/utils/steam/browser.py" line="219"/>
+        <location filename="../app/utils/steam/browser.py" line="228"/>
         <source>Add Missing Mods</source>
         <translation>添加缺失的模组</translation>
     </message>
     <message>
-        <location filename="../app/utils/steam/browser.py" line="237"/>
-        <location filename="../app/utils/steam/browser.py" line="248"/>
+        <location filename="../app/utils/steam/browser.py" line="236"/>
+        <location filename="../app/utils/steam/browser.py" line="247"/>
         <source>SteamCMD downloader</source>
         <translation>SteamCMD 下载器</translation>
     </message>
     <message>
-        <location filename="../app/utils/steam/browser.py" line="238"/>
+        <location filename="../app/utils/steam/browser.py" line="237"/>
         <source>Empty list of mods returned, unable to add collection to list!</source>
         <translation>返回的模组列表为空，无法将合集添加到列表中！</translation>
     </message>
     <message>
-        <location filename="../app/utils/steam/browser.py" line="239"/>
+        <location filename="../app/utils/steam/browser.py" line="238"/>
         <source>Please reach out to us on Github Issues page or
 #rimsort-testing on the Rocketman/CAI discord</source>
         <translation>请在 Github Issues 页面或在 Rocketman/CAI 的 Discord 上联系我们</translation>
     </message>
     <message>
-        <location filename="../app/utils/steam/browser.py" line="249"/>
+        <location filename="../app/utils/steam/browser.py" line="248"/>
         <source>You already have these mods in your download list!</source>
         <translation>你的下载列表中已经有这些模组！</translation>
     </message>
     <message>
-        <location filename="../app/utils/steam/browser.py" line="250"/>
+        <location filename="../app/utils/steam/browser.py" line="249"/>
         <source>Skipping the following mods which are already present in your download list!</source>
         <translation>跳过已经存在于你的下载列表中的模组！</translation>
     </message>
     <message>
-        <location filename="../app/utils/steam/browser.py" line="337"/>
+        <location filename="../app/utils/steam/browser.py" line="336"/>
         <source>Remove mod from list</source>
         <translation>从列表中移除模组</translation>
     </message>

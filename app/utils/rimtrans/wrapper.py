@@ -1,24 +1,32 @@
 import os
 import time
+from typing import Any
+
 from loguru import logger
+
 from app.windows.runner_panel import RunnerPanel
-from app.controllers.settings_controller import SettingsController
 
 
 class RimTransInterface:
-    def __init__(self):
+    def __init__(self) -> None:
         self.trans_exe_path = os.path.abspath(r"rimtrans\Trans.exe")
 
         self.core_path = ""
         self.dll_path = ""
 
-    def execute_trans_cmd(self, mod_metadata: dict, runner: RunnerPanel, game_folder: str):
+    def execute_trans_cmd(
+        self, mod_metadata: dict[str, Any], runner: RunnerPanel, game_folder: str
+    ) -> None:
         self.core_path = os.path.join(game_folder, "Data", "Core")
-        self.dll_path = os.path.join(game_folder, "RimWorldWin64_Data", "Managed", "Assembly-CSharp.dll")
+        self.dll_path = os.path.join(
+            game_folder, "RimWorldWin64_Data", "Managed", "Assembly-CSharp.dll"
+        )
 
         mod_path = mod_metadata["path"]
         mod_name = mod_metadata.get("name", mod_metadata["packageid"])
-        temp_xml_path = os.path.join(os.path.dirname(self.trans_exe_path), "translation_project.rtp.xml")
+        temp_xml_path = os.path.join(
+            os.path.dirname(self.trans_exe_path), "translation_project.rtp.xml"
+        )
 
         xml_content = f"""<?xml version="1.0" encoding="utf-8"?>
 <RimTransProject>
@@ -44,13 +52,15 @@ class RimTransInterface:
                     break
                 time.sleep(0.1)
             else:
-                runner.message("Failed to write XML file: Not generated within the specified time.")
+                runner.message(
+                    "Failed to write XML file: Not generated within the specified time."
+                )
                 return
-            
+
             args = [
-                f'-p:{temp_xml_path}',
-                f'-Dll:{self.dll_path}',
-                f'-Core:{self.core_path}',
+                f"-p:{temp_xml_path}",
+                f"-Dll:{self.dll_path}",
+                f"-Core:{self.core_path}",
             ]
 
             if not os.path.exists(temp_xml_path):
@@ -61,7 +71,9 @@ class RimTransInterface:
                 runner.message(f"Starting translation extraction: {mod_name}")
                 runner.execute(self.trans_exe_path, args, -1)
             else:
-                runner.message("Trans.exe not found, please confirm the path is correct.")
+                runner.message(
+                    "Trans.exe not found, please confirm the path is correct."
+                )
 
         except Exception as e:
             logger.error(f"Failed to extract translation: {e}")
