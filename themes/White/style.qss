@@ -602,3 +602,77 @@ QLabel#StatusLabel {
 QDialog QPushButton {
     background-color: #f5f5f5;
 }
+
+/* UseThisInsteadPanel styling */
+QWidget#useThisInsteadModsPanel {
+    background-color: #f9f9f9;
+    border-style: solid;
+    border-color: #cccccc;
+    border-width: 1px;
+    border-radius: 3px;
+    margin: 7px;
+    color: #333333;
+}
+
+/* ModUpdaterPrompt styling */
+QWidget#updateModsPanel {
+    background-color: #f9f9f9;
+    border-style: solid;
+    border-color: #cccccc;
+    border-width: 1px;
+    border-radius: 3px;
+    margin: 7px;
+    color: #333333;
+}
+
+/* BaseModsPanel styling */
+QWidget#baseModsPanel {
+    background-color: #f9f9f9;
+    border-style: solid;
+    border-color: #cccccc;
+    border-width: 1px;
+    border-radius: 3px;
+    margin: 7px;
+    color: #333333;
+}
+
+/* MissingDependenciesDialog styling */
+QDialog#missingDependenciesDialog {
+    background-color: #f9f9f9;
+    border-style: solid;
+    border-color: #cccccc;
+    border-width: 1px;
+    border-radius: 3px;
+    margin: 7px;
+    color: #333333;
+}
+
+/* Local dependencies label */
+QLabel#localDepsLabel {
+    background-color: #f9f9f9;
+    font-weight: bold;
+    padding: 4px 6px;
+    border-radius: 3px;
+    margin-bottom: 6px;
+    color: #333333;
+}
+
+/* Download dependencies label */
+QLabel#downloadDepsLabel {
+    background-color: #f9f9f9;
+    font-weight: bold;
+    padding: 4px 6px;
+    border-radius: 3px;
+    margin-bottom: 6px;
+    color: #333333;
+}
+
+/* Dependency group widget background */
+QWidget#dependencyGroupWidget {
+    background-color: #f9f9f9;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    margin-bottom: 6px;
+    padding: 6px;
+    color: #333333;
+}
