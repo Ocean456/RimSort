@@ -2,12 +2,21 @@
 layout: default
 title: 翻译贡献指南
 nav_order: 4
-parent: Development Guide
+parent: 开发指南
+permalink: development-guide/translation-guide
+lang: zh-cn
 ---
 
 # 翻译贡献指南
+{: .no_toc}
 
 本指南说明如何为 RimSort 贡献翻译。项目使用 PySide6 的 Qt 国际化 (i18n) 系统和 QTranslator。
+
+## 目录
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 ## 翻译系统概述
 
@@ -162,7 +171,8 @@ python translation_helper.py compile-all
        <location filename="../app/views/settings_dialog.py" line="896"/>
        <source>Select Language (Restart required to apply changes)</source>
        <translation>选择语言（需要重启以应用更改）</translation>
-   </message>   ```
+   </message>
+   ```
 
 #### 使用 Qt Linguist（可选）
 

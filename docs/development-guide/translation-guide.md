@@ -3,11 +3,19 @@ layout: default
 title: Translation Contribution Guide
 nav_order: 4
 parent: Development Guide
+permalink: development-guide/translation-guide
 ---
 
 # Translation Contribution Guide
+{: .no_toc}
 
 This guide explains how to contribute translations to RimSort. The project uses PySide6's Qt internationalization (i18n) system with QTranslator.
+
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 ## Translation System Overview
 
