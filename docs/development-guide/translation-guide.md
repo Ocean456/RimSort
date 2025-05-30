@@ -43,16 +43,46 @@ RimSort/
 | `es_ES` | Español (Spanish) | Needs translation |
 | `ja_JP` | 日本語 (Japanese) | Needs translation |
 
+## Translation Helper Tool
+
+The project provides a `translation_helper.py` script to assist with translation work.
+
+**Important Note**: This tool is implemented using PySide6 commands and requires a properly configured development environment. Please refer to the [Development Setup Guide](development-setup.md) to set up your environment before using this tool.
+
+```bash
+# Check translation completeness for a specific language
+python translation_helper.py check en_US
+
+# Show translation statistics for all languages
+python translation_helper.py stats
+
+# Validate translation file
+python translation_helper.py validate en_US
+
+# Update translation files
+python translation_helper.py update-ts en_US
+
+# Compile translation file
+python translation_helper.py compile en_US
+
+# Compile all translation files
+python translation_helper.py compile-all
+```
+
 ## How to Contribute Translations
 
 ### Prerequisites
 
-1. **Qt Linguist** (recommended) or any XML editor
-   - Download from [Qt official website](https://www.qt.io/download-qt-installer)
-   - Alternative: Use any text editor for XML editing
+1. **Development Environment**
+   - **Required**: Set up the project development environment following the [Development Setup Guide](development-setup.md)
+   - This includes installing Python 3.12, PySide6, and project dependencies
 
-2. **Git** for version control
-3. **GitHub account** for contributing
+2. **Translation Editor Choice**
+   - **Recommended**: Any text editor with XML syntax highlighting (VS Code, Sublime Text, Notepad++, etc.)
+   - **Optional**: Qt Linguist (if you already have Qt development environment installed)
+
+3. **Git** for version control
+4. **GitHub account** for contributing
 
 ### Step 1: Set Up Your Environment
 
@@ -74,15 +104,24 @@ RimSort/
 #### Option A: Improve Existing Translation
 
 1. Navigate to the `locales/` directory
-2. Open the existing `.ts` file for your language (e.g., `zh_CN.ts`)
+2. Open the existing `.ts` file for your language (e.g., `en_US.ts`)
 3. Look for entries marked as `type="unfinished"` or empty `<translation>` tags
 
 #### Option B: Create New Language Translation
 
-1. Copy the `en_US.ts` file as a template:
+1. Use PySide6 tools to generate new translation file:
    ```bash
-   cp locales/en_US.ts locales/NEW_LANGUAGE_CODE.ts
-   # Example: cp locales/en_US.ts locales/pt_BR.ts
+   # For Unix-like systems (Linux/macOS)
+   pyside6-lupdate $(find app -name "*.py") -ts locales/NEW_LANGUAGE_CODE.ts -no-obsolete
+   # Example:
+   pyside6-lupdate $(find app -name "*.py") -ts locales/pt_BR.ts -no-obsolete
+   ```
+
+   ```powershell
+   # For Windows PowerShell
+   pyside6-lupdate @(Get-ChildItem -Recurse -Filter *.py -Path app | ForEach-Object { $_.FullName }) -ts locales\NEW_LANGUAGE_CODE.ts -no-obsolete
+   # Example:
+   pyside6-lupdate @(Get-ChildItem -Recurse -Filter *.py -Path app | ForEach-Object { $_.FullName }) -ts locales\pt_BR.ts -no-obsolete
    ```
 
 2. Update the language attribute in the file:
@@ -105,19 +144,7 @@ RimSort/
 
 ### Step 3: Translation Process
 
-#### Using Qt Linguist (Recommended)
-
-1. Open Qt Linguist
-2. File → Open → Select your `.ts` file
-3. Translate each string:
-   - Select an untranslated item from the list
-   - Enter your translation in the "Translation" field
-   - Mark as "Done" when satisfied
-   - Add translator comments if needed
-
-4. Save your work: File → Save
-
-#### Using Text Editor
+#### Using Text Editor (Recommended)
 
 1. Open the `.ts` file in your preferred text editor
 2. Find `<message>` blocks that need translation:
@@ -137,6 +164,20 @@ RimSort/
        <translation>Selecionar Idioma (Reinicialização necessária para aplicar as alterações)</translation>
    </message>
    ```
+
+#### Using Qt Linguist (Optional)
+
+If you already have Qt Linguist installed, you can also use it:
+
+1. Open Qt Linguist
+2. File → Open → Select your `.ts` file
+3. Translate each string:
+   - Select an untranslated item from the list
+   - Enter your translation in the "Translation" field
+   - Mark as "Done" when satisfied
+   - Add translator comments if needed
+
+4. Save your work: File → Save
 
 ### Step 4: Translation Guidelines
 
@@ -176,23 +217,64 @@ Each translatable string has context information:
 <translation>Encontrados {count} mods</translation>
 
 <!-- With line breaks -->
-<source>Click OK to save settings\nand restart the application</source>
-<translation>Clique em OK para salvar as configurações\ne reiniciar a aplicação</translation>
+<source>Click OK to save settings
+and restart the application</source>
+<translation>Clique em OK para salvar as configurações
+e reiniciar a aplicação</translation>
 ```
 
 ### Step 5: Testing Your Translation
 
-1. **Generate compiled translation** (optional for testing):
+#### 5.1 Validate Translation File
+
+1. **Check translation completeness**:
    ```bash
-   # If you have Qt tools installed
-   lrelease locales/YOUR_LANGUAGE.ts
+   python translation_helper.py check YOUR_LANGUAGE
+   # Example: python translation_helper.py check zh_CN
    ```
 
-2. **Test in development environment**:
-   - Set up the development environment following the [Development Setup Guide](development-setup.md)
-   - Change the language in RimSort settings
-   - Verify your translations appear correctly
-   - Check for text overflow or layout issues
+2. **Validate translation file**:
+   ```bash
+   python translation_helper.py validate YOUR_LANGUAGE
+   # This checks for placeholder mismatches, HTML tag issues, etc.
+   ```
+
+3. **View overall statistics**:
+   ```bash
+   python translation_helper.py stats
+   # Shows completion status for all languages
+   ```
+
+#### 5.2 Compile Translation
+
+1. **Using translation helper tool** (recommended):
+   ```bash
+   python translation_helper.py compile YOUR_LANGUAGE
+   # Example: python translation_helper.py compile en_US
+   ```
+
+2. **Using PySide6 tools directly**:
+   ```bash
+   pyside6-lrelease locales/YOUR_LANGUAGE.ts
+   ```
+
+#### 5.3 Test in Application
+
+1. **Launch RimSort and switch language**:
+   - Start the application
+   - Go to Settings → Language
+   - Select your language
+   - Restart the application when prompted
+
+2. **Basic UI testing**:
+   - Check main interface menu items, buttons, tooltips
+   - Verify settings dialog options are translated
+   - Test mod listing, sorting, filtering labels
+
+3. **Layout checks**:
+   - Ensure translated text fits in UI elements
+   - Check if buttons accommodate longer text
+   - Verify dialog dimensions remain proper
 
 ### Step 6: Submit Your Contribution
 
@@ -226,9 +308,14 @@ You can check translation completeness by looking for:
 
 ### When Source Code Changes
 
-1. **Update source strings**: When developers add new translatable strings, they update the `.ts` files
-2. **Translator notification**: We'll notify translators of updates via GitHub issues
-3. **Incremental updates**: You only need to translate new or changed strings
+Translation files may need updates. You can:
+
+1. **Self-update translation files**: Use the translation helper tool to generate updated translation files
+   ```bash
+   python translation_helper.py update-ts YOUR_LANGUAGE
+   ```
+
+2. **Incremental updates**: You only need to translate new or changed strings
 
 ### Translation File Format
 
@@ -247,19 +334,5 @@ The `.ts` files use XML format with this structure:
 </context>
 </TS>
 ```
-
-## Getting Help
-
-- **Questions about translation**: Open an issue with the "translation" label
-- **Technical problems**: Check the [Development Setup Guide](development-setup.md)
-- **Collaboration**: Join discussions in translation-related issues
-- **Context clarification**: Ask in the pull request comments
-
-## Recognition
-
-Contributors will be acknowledged in:
-- `ACKNOWLEDGEMENTS.md` file
-- Release notes for versions containing their translations
-- GitHub contributors list
 
 Thank you for helping make RimSort accessible to users worldwide! 🌍

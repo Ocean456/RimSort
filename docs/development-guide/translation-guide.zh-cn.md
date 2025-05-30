@@ -43,16 +43,46 @@ RimSort/
 | `es_ES` | Español（西班牙语） | 需要翻译 |
 | `ja_JP` | 日本語（日语） | 需要翻译 |
 
+## 翻译助手工具
+
+项目提供了 `translation_helper.py` 脚本来帮助翻译工作。
+
+**重要提示**：该工具基于 PySide6 的命令实现，需要先设置好项目的开发环境。请参考 [开发环境设置指南](development-setup.md) 完成环境配置后再使用此工具。
+
+```bash
+# 检查特定语言的翻译完整性
+python translation_helper.py check zh_CN
+
+# 显示所有语言的翻译统计
+python translation_helper.py stats
+
+# 验证翻译文件
+python translation_helper.py validate zh_CN
+
+# 更新翻译文件
+python translation_helper.py update-ts zh_CN
+
+# 编译翻译文件
+python translation_helper.py compile zh_CN
+
+# 编译所有翻译文件
+python translation_helper.py compile-all
+```
+
 ## 如何贡献翻译
 
 ### 先决条件
 
-1. **Qt Linguist**（推荐）或任何 XML 编辑器
-   - 从 [Qt 官方网站](https://www.qt.io/download-qt-installer) 下载
-   - 替代方案：使用任何文本编辑器编辑 XML
+1. **开发环境**
+   - **必需**：按照 [开发环境设置指南](development-setup.md) 配置项目开发环境
+   - 这包括 Python 3.12、PySide6 以及项目依赖项的安装
 
-2. **Git** 版本控制
-3. **GitHub 账户** 用于贡献
+2. **翻译编辑器选择**
+   - **推荐**：任何支持 XML 语法高亮的文本编辑器（VS Code、Sublime Text、Notepad++ 等）
+   - **可选**：Qt Linguist（如果你已经安装了 Qt 开发环境）
+
+3. **Git** 版本控制
+4. **GitHub 账户** 用于贡献
 
 ### 步骤 1：设置环境
 
@@ -79,10 +109,19 @@ RimSort/
 
 #### 选项 B：创建新语言翻译
 
-1. 复制 `en_US.ts` 文件作为模板：
+1. 使用 PySide6 工具生成新的翻译文件：
    ```bash
-   cp locales/en_US.ts locales/NEW_LANGUAGE_CODE.ts
-   # 例如：cp locales/en_US.ts locales/pt_BR.ts
+   # Unix-like 系统 (Linux/macOS)
+   pyside6-lupdate $(find app -name "*.py") -ts locales/NEW_LANGUAGE_CODE.ts -no-obsolete
+   # 例如：
+   pyside6-lupdate $(find app -name "*.py") -ts locales/pt_BR.ts -no-obsolete
+   ```
+
+   ```powershell
+   # Windows PowerShell 命令
+   pyside6-lupdate @(Get-ChildItem -Recurse -Filter *.py -Path app | ForEach-Object { $_.FullName }) -ts locales\NEW_LANGUAGE_CODE.ts -no-obsolete
+   # 例如：
+   pyside6-lupdate @(Get-ChildItem -Recurse -Filter *.py -Path app | ForEach-Object { $_.FullName }) -ts locales\pt_BR.ts -no-obsolete
    ```
 
 2. 更新文件中的语言属性：
@@ -105,19 +144,7 @@ RimSort/
 
 ### 步骤 3：翻译过程
 
-#### 使用 Qt Linguist（推荐）
-
-1. 打开 Qt Linguist
-2. 文件 → 打开 → 选择你的 `.ts` 文件
-3. 翻译每个字符串：
-   - 从列表中选择未翻译的项目
-   - 在"翻译"字段中输入你的翻译
-   - 满意时标记为"完成"
-   - 如需要可添加翻译者注释
-
-4. 保存工作：文件 → 保存
-
-#### 使用文本编辑器
+#### 使用文本编辑器（推荐）
 
 1. 在你喜欢的文本编辑器中打开 `.ts` 文件
 2. 找到需要翻译的 `<message>` 块：
@@ -135,8 +162,21 @@ RimSort/
        <location filename="../app/views/settings_dialog.py" line="896"/>
        <source>Select Language (Restart required to apply changes)</source>
        <translation>选择语言（需要重启以应用更改）</translation>
-   </message>
-   ```
+   </message>   ```
+
+#### 使用 Qt Linguist（可选）
+
+如果你已经安装了 Qt Linguist，也可以使用它：
+
+1. 打开 Qt Linguist
+2. 文件 → 打开 → 选择你的 `.ts` 文件
+3. 翻译每个字符串：
+   - 从列表中选择未翻译的项目
+   - 在"翻译"字段中输入你的翻译
+   - 满意时标记为"完成"
+   - 如需要可添加翻译者注释
+
+4. 保存工作：文件 → 保存
 
 ### 步骤 4：翻译指南
 
@@ -176,23 +216,64 @@ RimSort/
 <translation>找到 {count} 个模组</translation>
 
 <!-- 带换行符 -->
-<source>Click OK to save settings\nand restart the application</source>
-<translation>点击确定保存设置\n并重启应用程序</translation>
+<source>Click OK to save settings
+and restart the application</source>
+<translation>点击确定保存设置
+并重启应用程序</translation>
 ```
 
 ### 步骤 5：测试翻译
 
-1. **生成编译翻译**（测试可选）：
+#### 5.1 验证翻译文件
+
+1. **检查翻译完整性**：
    ```bash
-   # 如果已安装 Qt 工具
-   lrelease locales/YOUR_LANGUAGE.ts
+   python translation_helper.py check YOUR_LANGUAGE
+   # 例如：python translation_helper.py check zh_CN
    ```
 
-2. **在开发环境中测试**：
-   - 按照[开发设置指南](development-setup.zh-cn.md)设置开发环境
-   - 在 RimSort 设置中更改语言
-   - 验证翻译正确显示
-   - 检查文本溢出或布局问题
+2. **验证翻译文件**：
+   ```bash
+   python translation_helper.py validate YOUR_LANGUAGE
+   # 检查占位符不匹配、HTML 标签问题等
+   ```
+
+3. **查看整体统计**：
+   ```bash
+   python translation_helper.py stats
+   # 显示所有语言的完成状态
+   ```
+
+#### 5.2 编译翻译
+
+1. **使用翻译助手工具编译**（推荐）：
+   ```bash
+   python translation_helper.py compile YOUR_LANGUAGE
+   # 例如：python translation_helper.py compile zh_CN
+   ```
+
+2. **直接使用 PySide6 工具编译**：
+   ```bash
+   pyside6-lrelease locales/YOUR_LANGUAGE.ts
+   ```
+
+#### 5.3 在应用程序中测试
+
+1. **启动 RimSort 并切换语言**：
+   - 启动应用程序
+   - 转到 设置 → 语言
+   - 选择你的语言
+   - 按提示重启应用程序
+
+2. **基本 UI 测试**：
+   - 检查主界面的菜单项、按钮、工具提示
+   - 验证设置对话框的选项都已翻译
+   - 测试模组列表、排序、筛选标签
+
+3. **布局检查**：
+   - 确保翻译文本适合 UI 元素
+   - 检查按钮是否能容纳较长的文本
+   - 验证对话框尺寸正常
 
 ### 步骤 6：提交贡献
 
@@ -226,9 +307,14 @@ RimSort/
 
 ### 当源代码更改时
 
-1. **更新源字符串**：当开发者添加新的可翻译字符串时，他们会更新 `.ts` 文件
-2. **翻译者通知**：我们将通过 GitHub issues 通知翻译者更新
-3. **增量更新**：你只需要翻译新的或更改的字符串
+翻译文件可能需要更新，你可以：
+
+1. **自行更新翻译文件**：使用翻译助手工具生成最新的翻译文件
+   ```bash
+   python translation_helper.py update-ts YOUR_LANGUAGE
+   ```
+
+2. **增量更新**：你只需要翻译新的或更改的字符串
 
 ### 翻译文件格式
 
@@ -247,19 +333,5 @@ RimSort/
 </context>
 </TS>
 ```
-
-## 获取帮助
-
-- **翻译问题**：创建带有"translation"标签的 issue
-- **技术问题**：查看[开发设置指南](development-setup.zh-cn.md)
-- **协作**：参加翻译相关 issues 的讨论
-- **上下文说明**：在 pull request 评论中询问
-
-## 认可
-
-贡献者将在以下地方得到认可：
-- `ACKNOWLEDGEMENTS.md` 文件
-- 包含其翻译的版本发布说明
-- GitHub 贡献者列表
 
 感谢你帮助让 RimSort 为全世界用户提供服务！🌍
