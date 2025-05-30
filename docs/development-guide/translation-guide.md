@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Translation Contribution Guide
+title: Translation Contribution Guidelines
 nav_order: 4
 parent: Development Guide
-permalink: development-guide/translation-guide
+permalink: development-guide/translation-guidelines
 ---
 
 # Translation Contribution Guide
@@ -110,12 +110,14 @@ python translation_helper.py compile-all
 ### Step 2: Choose Your Contribution Type
 
 #### Option A: Improve Existing Translation
+{: .no_toc}
 
 1. Navigate to the `locales/` directory
 2. Open the existing `.ts` file for your language (e.g., `en_US.ts`)
 3. Look for entries marked as `type="unfinished"` or empty `<translation>` tags
 
 #### Option B: Create New Language Translation
+{: .no_toc}
 
 1. Use PySide6 tools to generate new translation file:
    ```bash
@@ -153,6 +155,7 @@ python translation_helper.py compile-all
 ### Step 3: Translation Process
 
 #### Using Text Editor (Recommended)
+{: .no_toc}
 
 1. Open the `.ts` file in your preferred text editor
 2. Find `<message>` blocks that need translation:
@@ -174,6 +177,7 @@ python translation_helper.py compile-all
    ```
 
 #### Using Qt Linguist (Optional)
+{: .no_toc}
 
 If you already have Qt Linguist installed, you can also use it:
 
@@ -190,6 +194,7 @@ If you already have Qt Linguist installed, you can also use it:
 ### Step 4: Translation Guidelines
 
 #### Context Understanding
+{: .no_toc}
 
 Each translatable string has context information:
 - **Filename**: Shows which file contains the string
@@ -197,6 +202,7 @@ Each translatable string has context information:
 - **Context name**: Usually the class name (e.g., "SettingsDialog", "ModInfo")
 
 #### Translation Best Practices
+{: .no_toc}
 
 1. **Preserve formatting**:
    - Keep `\n` for line breaks
@@ -214,6 +220,7 @@ Each translatable string has context information:
    - Software-specific terms should be consistent
 
 #### Example Translation
+{: .no_toc}
 
 ```xml
 <!-- English source -->
@@ -234,6 +241,7 @@ e reiniciar a aplicação</translation>
 ### Step 5: Testing Your Translation
 
 #### 5.1 Validate Translation File
+{: .no_toc}
 
 1. **Check translation completeness**:
    ```bash
@@ -254,6 +262,7 @@ e reiniciar a aplicação</translation>
    ```
 
 #### 5.2 Compile Translation
+{: .no_toc}
 
 1. **Using translation helper tool** (recommended):
    ```bash
@@ -267,6 +276,7 @@ e reiniciar a aplicação</translation>
    ```
 
 #### 5.3 Test in Application
+{: .no_toc}
 
 1. **Launch RimSort and switch language**:
    - Start the application
@@ -326,6 +336,7 @@ Translation files may need updates. You can:
 2. **Incremental updates**: You only need to translate new or changed strings
 
 ### Translation File Format
+{: .no_toc}
 
 The `.ts` files use XML format with this structure:
 ```xml

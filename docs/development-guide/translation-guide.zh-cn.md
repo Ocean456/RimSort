@@ -3,7 +3,7 @@ layout: default
 title: 翻译贡献指南
 nav_order: 4
 parent: 开发指南
-permalink: development-guide/translation-guide
+permalink: development-guide/translation-guidelines
 lang: zh-cn
 ---
 
@@ -111,12 +111,14 @@ python translation_helper.py compile-all
 ### 步骤 2：选择贡献类型
 
 #### 选项 A：改进现有翻译
+{: .no_toc}
 
 1. 导航到 `locales/` 目录
 2. 打开你的语言的现有 `.ts` 文件（例如 `zh_CN.ts`）
 3. 查找标记为 `type="unfinished"` 或空的 `<translation>` 标签的条目
 
 #### 选项 B：创建新语言翻译
+{: .no_toc}
 
 1. 使用 PySide6 工具生成新的翻译文件：
    ```bash
@@ -154,6 +156,7 @@ python translation_helper.py compile-all
 ### 步骤 3：翻译过程
 
 #### 使用文本编辑器（推荐）
+{: .no_toc}
 
 1. 在你喜欢的文本编辑器中打开 `.ts` 文件
 2. 找到需要翻译的 `<message>` 块：
@@ -175,6 +178,7 @@ python translation_helper.py compile-all
    ```
 
 #### 使用 Qt Linguist（可选）
+{: .no_toc}
 
 如果你已经安装了 Qt Linguist，也可以使用它：
 
@@ -191,6 +195,7 @@ python translation_helper.py compile-all
 ### 步骤 4：翻译指南
 
 #### 上下文理解
+{: .no_toc}
 
 每个可翻译字符串都有上下文信息：
 - **文件名**：显示包含该字符串的文件
@@ -198,6 +203,7 @@ python translation_helper.py compile-all
 - **上下文名称**：通常是类名（例如"SettingsDialog"、"ModInfo"）
 
 #### 翻译最佳实践
+{: .no_toc}
 
 1. **保留格式**：
    - 保持 `\n` 换行符
@@ -215,6 +221,7 @@ python translation_helper.py compile-all
    - 软件特定术语应保持一致
 
 #### 翻译示例
+{: .no_toc}
 
 ```xml
 <!-- 英语源 -->
@@ -235,6 +242,7 @@ and restart the application</source>
 ### 步骤 5：测试翻译
 
 #### 5.1 验证翻译文件
+{: .no_toc}
 
 1. **检查翻译完整性**：
    ```bash
@@ -255,6 +263,7 @@ and restart the application</source>
    ```
 
 #### 5.2 编译翻译
+{: .no_toc}
 
 1. **使用翻译助手工具编译**（推荐）：
    ```bash
@@ -268,6 +277,7 @@ and restart the application</source>
    ```
 
 #### 5.3 在应用程序中测试
+{: .no_toc}
 
 1. **启动 RimSort 并切换语言**：
    - 启动应用程序
@@ -327,6 +337,7 @@ and restart the application</source>
 2. **增量更新**：你只需要翻译新的或更改的字符串
 
 ### 翻译文件格式
+{: .no_toc}
 
 `.ts` 文件使用 XML 格式，结构如下：
 ```xml

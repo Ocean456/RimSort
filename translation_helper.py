@@ -31,8 +31,8 @@ def get_source_keys(source_file: Path) -> Set[str]:
 
         keys = set()
         for context in root.findall("context"):
-            context_name = context.find("name")
-            context_name = context_name.text if context_name is not None else "Unknown"
+            name_element = context.find("name")
+            context_name = name_element.text if name_element is not None else "Unknown"
 
             for message in context.findall("message"):
                 source = message.find("source")
@@ -101,16 +101,16 @@ def parse_ts_file(
                     stats["missing"] += 1
                     issues.append(
                         f"Missing translation tag: {context_name} - {source_text[:50]}..."
-                    )
-
-        # Calculate missing keys based on source language
+                    )  # Calculate missing keys based on source language
         if source_keys:
             missing_keys = source_keys - translated_keys
             stats["missing_from_source"] = len(missing_keys)
 
             for key in list(missing_keys)[:5]:  # Show first 5 missing keys
-                context, source_text = key.split("::", 1)
-                issues.append(f"Missing from source: {context} - {source_text[:50]}...")
+                context_key, source_text_key = key.split("::", 1)
+                issues.append(
+                    f"Missing from source: {context_key} - {source_text_key[:50]}..."
+                )
 
         return {
             "stats": stats,
