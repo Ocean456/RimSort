@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Translation Contribution Guidelines
+title: Translation Guidelines
 nav_order: 4
 parent: Development Guide
-permalink: development-guide/translation-contribution-guidelines
+permalink: development-guide/translation-guidelines
 ---
 
-# Translation Contribution Guide
+# Translation Guide
 {: .no_toc}
 
 This guide explains how to contribute translations to RimSort. The project uses PySide6's Qt internationalization (i18n) system with QTranslator.
@@ -57,40 +57,45 @@ The project provides a `translation_helper.py` script to assist with translation
 
 **Important Note**: This tool is implemented using PySide6 commands and requires a properly configured development environment. Please refer to the [Development Setup Guide](development-setup.md) to set up your environment before using this tool.
 
-```bash
-# Check translation completeness for a specific language
-python translation_helper.py check en_US
+Main features include:
+- Check translation completeness
+- Show translation statistics
+- Validate translation file format
+- Update translation files
+- Compile translation files
 
-# Show translation statistics for all languages
-python translation_helper.py stats
+For specific usage methods, please refer to the "[Testing Your Translation](#step-5-testing-your-translation)" section.
 
-# Validate translation file
-python translation_helper.py validate en_US
+## Quick Start
 
-# Update translation files
-python translation_helper.py update-ts en_US
+If you want to get started quickly with translation work, you can follow this simplified process:
 
-# Compile translation file
-python translation_helper.py compile en_US
+1. **Fork and clone the project**
+2. **Set up development environment** (following the [Development Setup Guide](development-setup.md))
+3. **Choose language file**: Open `locales/YOUR_LANGUAGE.ts`
+4. **Edit translations**: Find entries marked as `type="unfinished"` and translate them
+5. **Compile and test**: Run `python translation_helper.py compile YOUR_LANGUAGE`
+6. **Submit code**: Commit both `.ts` and `.qm` files
 
-# Compile all translation files
-python translation_helper.py compile-all
-```
+For detailed steps, please refer to the complete guide below.
 
 ## How to Contribute Translations
 
 ### Prerequisites
 
-1. **Development Environment**
-   - **Required**: Set up the project development environment following the [Development Setup Guide](development-setup.md)
+Before starting translation work, you need to prepare the following:
+
+1. **Development Environment** (Required)
+   - Set up the project development environment following the [Development Setup Guide](development-setup.md)
    - This includes installing Python 3.12, PySide6, and project dependencies
 
-2. **Translation Editor Choice**
-   - **Recommended**: Any text editor with XML syntax highlighting (VS Code, Sublime Text, Notepad++, etc.)
-   - **Optional**: Qt Linguist (if you already have Qt development environment installed)
+2. **Translation Editor**
+   - **Recommended**: Text editor with XML syntax highlighting (VS Code, Sublime Text, Notepad++, etc.)
+   - **Optional**: Qt Linguist (requires separate Qt development environment installation)
 
-3. **Git** for version control
-4. **GitHub account** for contributing
+3. **Version Control Tools**
+   - Git version control system
+   - GitHub account for contributing code
 
 ### Step 1: Set Up Your Environment
 
@@ -120,37 +125,44 @@ python translation_helper.py compile-all
 {: .no_toc}
 
 1. Use PySide6 tools to generate new translation file:
+
+   **Linux/macOS systems**:
    ```bash
-   # For Unix-like systems (Linux/macOS)
    pyside6-lupdate $(find app -name "*.py") -ts locales/NEW_LANGUAGE_CODE.ts -no-obsolete
    # Example:
    pyside6-lupdate $(find app -name "*.py") -ts locales/pt_BR.ts -no-obsolete
    ```
 
+   **Windows systems (recommended to use translation helper tool)**:
    ```powershell
-   # For Windows PowerShell
-   pyside6-lupdate @(Get-ChildItem -Recurse -Filter *.py -Path app | ForEach-Object { $_.FullName }) -ts locales\NEW_LANGUAGE_CODE.ts -no-obsolete
-   # Example:
-   pyside6-lupdate @(Get-ChildItem -Recurse -Filter *.py -Path app | ForEach-Object { $_.FullName }) -ts locales\pt_BR.ts -no-obsolete
+   # Use translation helper tool (recommended, simpler)
+   python translation_helper.py update-ts pt_BR
    ```
+   
+   If you need to manually use PySide6 tools, you can refer to the Linux/macOS command format, but using the translation helper tool is recommended to avoid complex path handling.
 
 2. Update the language attribute in the file:
    ```xml
    <TS version="2.1" language="pt_BR">
    ```
 
-3. Add your language to the supported languages map in `app/controllers/language_controller.py`:
+3. Register the new language in the language controller:
+   
+   Open the file `app/controllers/language_controller.py` and find the `language_map` dictionary in the `populate_languages_combobox` method, add your language:
+   
    ```python
    language_map = {
        "en_US": "English",
-       "es_ES": "Español",
+       "es_ES": "Español", 
        "fr_FR": "Français",
        "de_DE": "Deutsch",
        "zh_CN": "简体中文",
        "ja_JP": "日本語",
-       "pt_BR": "Português (Brasil)",  # Add your language here
+       "pt_BR": "Português (Brasil)",  # Add new language entry
    }
    ```
+   
+   Where `"pt_BR"` is the language code and `"Português (Brasil)"` is the language name that will be displayed in the settings interface.
 
 ### Step 3: Translation Process
 
@@ -214,10 +226,12 @@ Each translatable string has context information:
    - Consider text expansion (some languages need more space)
    - Maintain the tone consistent with the application
 
-3. **Technical terms**:
-   - "Mod" → Usually kept as "Mod" in most languages
-   - "Workshop" → May translate or keep as "Workshop"
-   - Software-specific terms should be consistent
+3. **Technical terms handling principles**:
+   - **"Mod"**: Keep as "Mod" in all languages (has become an internationally accepted term)
+   - **"Workshop"**: Can be translated to localized terms or kept as original
+   - **Software-specific terms**: Maintain consistency, recommend checking existing translations as reference
+   - **UI element names**: Such as "Settings", "Options" should be translated to corresponding language
+   - **File formats and extensions**: Such as ".ts", ".qm" should be kept as original
 
 #### Example Translation
 {: .no_toc}
@@ -225,7 +239,7 @@ Each translatable string has context information:
 ```xml
 <!-- English source -->
 <source>Sort mods</source>
-<translation>Organizar mods</translation>
+<translation>Ordenar mods</translation>
 
 <!-- With placeholders -->
 <source>Found {count} mods</source>
@@ -234,8 +248,8 @@ Each translatable string has context information:
 <!-- With line breaks -->
 <source>Click OK to save settings
 and restart the application</source>
-<translation>Clique em OK para salvar as configurações
-e reiniciar a aplicação</translation>
+<translation>Haz clic en Aceptar para guardar la configuración
+y reiniciar la aplicación</translation>
 ```
 
 ### Step 5: Testing Your Translation
@@ -243,66 +257,71 @@ e reiniciar a aplicação</translation>
 #### 5.1 Validate Translation File
 {: .no_toc}
 
-1. **Check translation completeness**:
+Use the translation helper tool for file validation:
+
    ```bash
+   # Check translation completeness for a specific language
    python translation_helper.py check YOUR_LANGUAGE
    # Example: python translation_helper.py check zh_CN
-   ```
 
-2. **Validate translation file**:
-   ```bash
+   # Validate translation file format and content
    python translation_helper.py validate YOUR_LANGUAGE
    # This checks for placeholder mismatches, HTML tag issues, etc.
-   ```
 
-3. **View overall statistics**:
-   ```bash
+   # View completion status for all languages
    python translation_helper.py stats
-   # Shows completion status for all languages
    ```
 
-#### 5.2 Compile Translation
+#### 5.2 Compile and Test Translation
 {: .no_toc}
 
-1. **Using translation helper tool** (recommended):
+1. **Compile translation file**:   
    ```bash
+   # Using translation helper tool (recommended)
    python translation_helper.py compile YOUR_LANGUAGE
-   # Example: python translation_helper.py compile en_US
-   ```
-
-2. **Using PySide6 tools directly**:
-   ```bash
+   # Example: python translation_helper.py compile zh_CN
+   
+   # Or use PySide6 tools directly
    pyside6-lrelease locales/YOUR_LANGUAGE.ts
    ```
+
+   **Note**: Compilation generates corresponding `.qm` files in the `locales/` directory. In this project, these `.qm` files are also committed to version control to ensure users can directly use translation features after downloading without additional compilation steps.
 
 #### 5.3 Test in Application
 {: .no_toc}
 
 1. **Launch RimSort and switch language**:
-   - Start the application
-   - Go to Settings → Language
-   - Select your language
-   - Restart the application when prompted
+   - Run `python -m app` to start the application
+   - Click "Settings" in the menu bar
+   - Find the "Language" option
+   - Select your language from the dropdown menu
+   - Restart the application when prompted to apply changes
 
-2. **Basic UI testing**:
-   - Check main interface menu items, buttons, tooltips
-   - Verify settings dialog options are translated
-   - Test mod listing, sorting, filtering labels
+2. **Functional testing**:
+   - **Main interface**: Check menu bar, toolbar, and status bar text
+   - **Settings dialog**: Verify all options and buttons are translated
+   - **Mod management**: Test mod list, sorting, and filtering function labels
+   - **Error messages**: Trigger some warnings or errors to check if messages are translated
 
-3. **Layout checks**:
-   - Ensure translated text fits in UI elements
-   - Check if buttons accommodate longer text
-   - Verify dialog dimensions remain proper
+3. **Visual inspection**:
+   - **Text adaptation**: Ensure translated text displays completely in UI elements
+   - **Button sizing**: Check if buttons can accommodate longer translated text
+   - **Dialog layout**: Verify dialogs remain properly sized after displaying translations
+   - **Tooltips**: Hover over various elements to check tooltip translations
 
 ### Step 6: Submit Your Contribution
 
 1. **Commit your changes**:
    ```bash
+   # Add translation files (including .ts source files and compiled .qm files)
    git add locales/YOUR_LANGUAGE.ts
-   # If you added a new language, also commit the language controller changes
+   git add locales/YOUR_LANGUAGE.qm
+   # If you added a new language, also update the language controller
    git add app/controllers/language_controller.py
    git commit -m "Add/Update [Language Name] translation"
    ```
+
+   **Note**: Both `.ts` source files and compiled `.qm` files need to be committed in this project to ensure users can directly use translation features without additional compilation steps.
 
 2. **Push to your fork**:
    ```bash
@@ -311,9 +330,18 @@ e reiniciar a aplicação</translation>
 
 3. **Create Pull Request**:
    - Go to your fork on GitHub
-   - Click "New Pull Request"
-   - Select your translation branch
-   - Provide a clear description of your changes
+   - Click "Compare & pull request" or "New Pull Request"
+   - Select your translation branch as the source branch
+   - Write a clear title in the format: "Add Portuguese translation" or "Update Chinese translation"
+   - In the description, mention:
+     - Translation completion percentage (e.g., "Completed 80% of string translations")
+     - Main changes
+     - Whether further testing is needed
+
+**Pull Request Title Examples**:
+- `Add French translation (fr_FR)`
+- `Improve German translation - Fix interface terminology`
+- `Update Japanese translation - Add settings page translations`
 
 ## Translation Status Tracking
 
@@ -326,14 +354,14 @@ You can check translation completeness by looking for:
 
 ### When Source Code Changes
 
-Translation files may need updates. You can:
+When RimSort's source code is updated, there may be new translatable strings added or existing strings modified. You will need to update translation files:
 
-1. **Self-update translation files**: Use the translation helper tool to generate updated translation files
-   ```bash
-   python translation_helper.py update-ts YOUR_LANGUAGE
-   ```
+```bash
+# Update translation files to include the latest translatable strings
+python translation_helper.py update-ts YOUR_LANGUAGE
+```
 
-2. **Incremental updates**: You only need to translate new or changed strings
+After updating, you only need to translate new or modified strings; existing translations will be preserved.
 
 ### Translation File Format
 {: .no_toc}
