@@ -3,7 +3,7 @@ layout: default
 title: 翻译贡献指南
 nav_order: 4
 parent: 开发指南
-permalink: development-guide/translation-guidelines
+permalink: development-guide/translation-contribution-guidelines
 lang: zh-cn
 ---
 

@@ -3,7 +3,7 @@ layout: default
 title: Translation Contribution Guidelines
 nav_order: 4
 parent: Development Guide
-permalink: development-guide/translation-guidelines
+permalink: development-guide/translation-contribution-guidelines
 ---
 
 # Translation Contribution Guide
