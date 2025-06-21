@@ -54,14 +54,12 @@ from app.utils.generic import (
     sanitize_filename,
 )
 from app.utils.metadata import MetadataManager, ModMetadata
-from app.utils.rimtrans.wrapper import RimTransInterface
 from app.views.deletion_menu import ModDeletionMenu
 from app.views.dialogue import (
     show_dialogue_conditional,
     show_dialogue_input,
     show_warning,
 )
-from app.windows.runner_panel import RunnerPanel
 
 
 def uuid_no_key(uuid: str) -> str:
@@ -649,8 +647,6 @@ class ModListWidget(QListWidget):
         )  # TDOD: should we enable items conditionally? For now use all
         logger.debug("Finished ModListW`idget initialization")
 
-        self.rimtrans_runner: RunnerPanel | None = None
-
     def item(self, row: int) -> CustomListWidgetItem:
         """
         Return the currently selected item.
@@ -792,8 +788,6 @@ class ModListWidget(QListWidget):
             re_steam_action = None
             # Unsubscribe + delete mod
             unsubscribe_mod_steam_action = None
-            # Translate mod action
-            translate_mod_action = None
 
             # Get all selected CustomListWidgetItems
             selected_items = self.selectedItems()
@@ -1440,17 +1434,6 @@ class ModListWidget(QListWidget):
                             if os.path.exists(mod_path):  # If the path actually exists
                                 logger.info(f"Opening folder: {mod_path}")
                                 platform_specific_open(mod_path)
-                        elif action == translate_mod_action:
-                            if os.path.exists(mod_path):
-                                rimtrans_interface = RimTransInterface()
-                                self.rimtrans_runner = RunnerPanel()
-                                self.rimtrans_runner.setWindowTitle("RimSort - RimTrans")
-                                self.rimtrans_runner.show()
-                                #         self.settings_controller = settings_controller
-                                game_folder = self.settings_controller.settings.instances[
-                                    self.settings_controller.settings.current_instance
-                                ].game_folder
-                                rimtrans_interface.execute_trans_cmd(mod_metadata, self.rimtrans_runner, game_folder)
                         # Open url action
                         elif (
                             action == open_url_browser_action

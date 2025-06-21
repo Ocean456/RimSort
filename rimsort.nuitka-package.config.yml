@@ -7,7 +7,6 @@
   data-files:
     dirs:
       - "../themes"
-      - "../rimtrans"
       - "../locales"
 
   dlls:
