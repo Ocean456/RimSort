@@ -1050,10 +1050,6 @@ class ModListWidget(QListWidget):
                 or re_git_action
             ):
                 misc_options_menu = QMenu(title=self.tr("Miscellaneous options"))
-                # Translate mod action text
-                translate_mod_action = QAction()
-                translate_mod_action.setText(self.tr("Extract Translations"))
-                misc_options_menu.addAction(translate_mod_action)
                 if copy_packageid_to_clipboard_action:
                     clipboard_options_menu = QMenu(title=self.tr("Clipboard options"))
                     clipboard_options_menu.addAction(copy_packageid_to_clipboard_action)
