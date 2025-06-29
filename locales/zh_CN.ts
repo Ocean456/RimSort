@@ -3219,10 +3219,6 @@ Click &apos;Show Details&apos; to see a list of mods that failed.</source>
         <translation>Steam 创意工坊数据库到期时间（使用 0 禁用通知，默认为 7 天）</translation>
     </message>
     <message>
-        <source>Cross Version Databases</source>
-        <translation>跨版本数据库</translation>
-    </message>
-    <message>
         <source>&quot;No Version Warning&quot; Database</source>
         <translation>&apos;&apos;无版本警告&apos;&apos; 数据库</translation>
     </message>
@@ -3525,6 +3521,14 @@ Name of folder will be used as name of the theme and any invalid theme will be i
         <translation>启用此选项将在模组描述中渲染 Unity 富文本，图片不会显示。</translation>
     </message>
     <message>
+        <source>Update databases on startup</source>
+        <translation>启动时更新数据库</translation>
+    </message>
+    <message>
+        <source>Enable this option to automatically update enabled databases when RimSort starts. This will check for updates and download them if available.</source>
+        <translation>启用此选项将在 RimSort 启动时自动更新启用的数据库。这将检查更新并在可用时下载它们。</translation>
+    </message>
+    <message>
         <source>Rentry Auth:</source>
         <translation>Rentry 授权：</translation>
     </message>
@@ -3541,6 +3545,10 @@ Name of folder will be used as name of the theme and any invalid theme will be i
         <translation>GitHub 个人访问令牌</translation>
     </message>
     <message>
+        <source>Edit Game Run Arguments:</source>
+        <translation>编辑游戏启动参数：</translation>
+    </message>
+    <message>
         <source>Enter a comma separated list of arguments to pass to the Rimworld executable 
 
  Examples : 
@@ -3552,10 +3560,6 @@ Name of folder will be used as name of the theme and any invalid theme will be i
 示例：
 
 -logfile,path/to/file.log,-savedatafolder=/path/to/savedata,-popupwindow</translation>
-    </message>
-    <message>
-        <source>Edit Game Run Arguments:</source>
-        <translation>编辑游戏启动参数：</translation>
     </message>
 </context>
 <context>
