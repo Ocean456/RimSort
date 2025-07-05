@@ -234,7 +234,6 @@ jobs:
                 </Component>
                 <Component Id="AdditionalFiles" Guid="*">
                   <File Id="VersionXml" Source="version.xml" />
-                  <File Id="AppIcon" Source="themes\default-icons\AppIcon.ico" />
                 </Component>
               </ComponentGroup>
             </Product>
