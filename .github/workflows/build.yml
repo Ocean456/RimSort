@@ -203,6 +203,7 @@ jobs:
               
               <Feature Id="ProductFeature" Title="RimSort" Level="1">
                 <ComponentGroupRef Id="ProductComponents" />
+                <ComponentGroupRef Id="ShortcutComponents" />
               </Feature>
               
               <Directory Id="TARGETDIR" Name="SourceDir">
@@ -218,22 +219,32 @@ jobs:
               
               <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
                 <Component Id="MainExecutable" Guid="*">
-                  <File Id="RimSortExe" Source="build\__main__.dist\RimSort.exe" KeyPath="yes">
-                    <Shortcut Id="ApplicationStartMenuShortcut" 
-                             Directory="ApplicationProgramsFolder" 
-                             Name="RimSort" 
-                             WorkingDirectory="INSTALLFOLDER" 
-                             Icon="RimSortIcon" 
-                             IconIndex="0" 
-                             Advertise="no" />
-                  </File>
-                  <RemoveFile Id="RemoveShortcut"
-                    Name="RimSort.lnk"
-                    Directory="ApplicationProgramsFolder"
-                    On="uninstall" />
+                  <File Id="RimSortExe" Source="build\__main__.dist\RimSort.exe" KeyPath="yes" />
                 </Component>
                 <Component Id="AdditionalFiles" Guid="*">
                   <File Id="VersionXml" Source="version.xml" />
+                </Component>
+              </ComponentGroup>
+              
+              <ComponentGroup Id="ShortcutComponents" Directory="ApplicationProgramsFolder">
+                <Component Id="StartMenuShortcut" Guid="*">
+                  <RegistryValue Root="HKCU" 
+                                Key="Software\RimSort\StartMenu" 
+                                Name="installed" 
+                                Type="integer" 
+                                Value="1" 
+                                KeyPath="yes" />
+                  <Shortcut Id="ApplicationStartMenuShortcut" 
+                           Directory="ApplicationProgramsFolder" 
+                           Name="RimSort" 
+                           Target="[INSTALLFOLDER]RimSort.exe"
+                           WorkingDirectory="INSTALLFOLDER" 
+                           Icon="RimSortIcon" 
+                           IconIndex="0" 
+                           Advertise="no" />
+                  <RemoveFolder Id="RemoveApplicationProgramsFolder" 
+                               Directory="ApplicationProgramsFolder" 
+                               On="uninstall" />
                 </Component>
               </ComponentGroup>
             </Product>
