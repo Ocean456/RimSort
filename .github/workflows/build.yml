@@ -213,6 +213,8 @@ jobs:
                   <Directory Id="ApplicationProgramsFolder" Name="RimSort"/>
                 </Directory>
               </Directory>
+
+              <Icon Id="RimSortIcon" SourceFile="build\output\RimSort.exe" />
               
               <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
                 <Component Id="MainExecutable" Guid="*">
@@ -221,7 +223,7 @@ jobs:
                              Directory="ApplicationProgramsFolder" 
                              Name="RimSort" 
                              WorkingDirectory="INSTALLFOLDER" 
-                             Icon="RimSort.exe" 
+                             Icon="RimSortIcon" 
                              IconIndex="0" 
                              Advertise="yes" />
                   </File>
