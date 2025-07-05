@@ -214,7 +214,7 @@ jobs:
                 </Directory>
               </Directory>
 
-              <Icon Id="RimSortIcon" SourceFile="build\__main__.dist\RimSort.exe" />
+              <Icon Id="RimSortIcon" SourceFile="themes\default-icons\AppIcon.ico" />
               
               <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
                 <Component Id="MainExecutable" Guid="*">
@@ -234,6 +234,7 @@ jobs:
                 </Component>
                 <Component Id="AdditionalFiles" Guid="*">
                   <File Id="VersionXml" Source="version.xml" />
+                  <File Id="AppIcon" Source="themes\default-icons\AppIcon.ico" />
                 </Component>
               </ComponentGroup>
             </Product>
