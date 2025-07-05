@@ -218,7 +218,7 @@ jobs:
               
               <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
                 <Component Id="MainExecutable" Guid="*">
-                  <File Id="RimSortExe" Source="build\output\RimSort.exe" KeyPath="yes">
+                  <File Id="RimSortExe" Source="build\__main__.dist\RimSort.exe" KeyPath="yes">
                     <Shortcut Id="ApplicationStartMenuShortcut" 
                              Directory="ApplicationProgramsFolder" 
                              Name="RimSort" 
