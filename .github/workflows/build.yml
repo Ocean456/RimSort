@@ -268,7 +268,7 @@ jobs:
             -ext WixUIExtension `
             -cultures:en-us `
             maindist.wixobj RimSort.wixobj `
-            -o "Windows_x86_64.msi"
+            -o "RimSort-${{ steps.sem_version.outputs.version }}-${{ matrix.platform }}-${{ matrix.arch }}.msi"
         shell: powershell
 
 
@@ -312,7 +312,7 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: RimSort-MSI-${{ matrix.platform }}-${{ matrix.arch }}
-          path: ./Windows_x86_64.msi
+          path: ./RimSort-${{ steps.sem_version.outputs.version }}-${{ matrix.platform }}-${{ matrix.arch }}.msi
           if-no-files-found: error
 
     outputs:
