@@ -246,11 +246,17 @@ jobs:
             </Product>
           </Wix>
           "@
-
           $wixContent | Out-File -FilePath "RimSort.wxs" -Encoding UTF8
 
-          candle.exe maindist.wxs RimSort.wxs
-          light.exe -ext WixUIExtension -cultures:en-us maindist.wixobj RimSort.wixobj -o "Windows_x86_64.msi"
+          candle.exe `
+            -d DistDir="build\\__main__.dist" `
+            maindist.wxs RimSort.wxs
+
+          light.exe `
+            -ext WixUIExtension `
+            -cultures:en-us `
+            maindist.wixobj RimSort.wixobj `
+            -o "Windows_x86_64.msi"
         shell: powershell
 
 
@@ -294,7 +300,7 @@ jobs:
         uses: actions/upload-artifact@main
         with:
           name: RimSort-MSI-${{ matrix.platform }}-${{ matrix.arch }}
-          path: ./RimSort-${{ steps.sem_version.outputs.version }}-${{ matrix.platform }}-${{ matrix.arch }}.msi
+          path: ./Windows_x86_64.msi
           if-no-files-found: error
 
     outputs:
