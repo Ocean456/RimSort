@@ -224,7 +224,7 @@ jobs:
               <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
 
               <ComponentGroup Id="ShortcutComponents" Directory="ApplicationProgramsFolder">
-                <Component Id="StartMenuShortcut" Guid="*">
+                <Component Id="StartMenuShortcut" Guid="3C5F5459-99AE-5A3E-0422-E64DA66B4443">
                   <Shortcut Id="ApplicationStartMenuShortcut"
                             Directory="ApplicationProgramsFolder"
                             Name="RimSort"
