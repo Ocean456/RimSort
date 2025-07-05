@@ -186,7 +186,7 @@ jobs:
           
           $env:PATH += ";C:\Program Files (x86)\WiX Toolset v3.11\bin"
 
-          heat.exe dir "build\\__main__.dist" -cg MainDist -dr INSTALLFOLDER -gg -sfrag -srd -var var.DistDir -out maindist.wxs
+          heat.exe dir "build\\__main__.dist" -cg MainDist -dr INSTALLFOLDER -gg -sfrag -sreg -srd -var var.DistDir -out maindist.wxs
 
           $wixContent = @"
           <?xml version="1.0" encoding="UTF-8"?>
@@ -249,7 +249,7 @@ jobs:
           $wixContent | Out-File -FilePath "RimSort.wxs" -Encoding UTF8
 
           candle.exe `
-            -d DistDir="build\\__main__.dist" `
+            -dDistDir="build\\__main__.dist" `
             maindist.wxs RimSort.wxs
 
           light.exe `
