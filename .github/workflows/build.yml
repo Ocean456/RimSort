@@ -239,7 +239,7 @@ jobs:
               </ComponentGroup>
 
               <ComponentGroup Id="RegistryComponents" Directory="INSTALLFOLDER">
-                <Component Id="InstallFlagRegistry" Guid="*">
+                <Component Id="InstallFlagRegistry" Guid="92D579F1-DC10-4E2F-87F5-25B36476C271">
                   <RegistryValue Root="HKCU"
                                 Key="Software\\RimSort\\StartMenu"
                                 Name="installed"
