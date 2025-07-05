@@ -224,12 +224,6 @@ jobs:
 
               <ComponentGroup Id="ShortcutComponents" Directory="ApplicationProgramsFolder">
                 <Component Id="StartMenuShortcut" Guid="*">
-                  <RegistryValue Root="HKCU"
-                                 Key="Software\\RimSort\\StartMenu"
-                                 Name="installed"
-                                 Type="integer"
-                                 Value="1"
-                                 KeyPath="yes" />
                   <Shortcut Id="ApplicationStartMenuShortcut"
                             Directory="ApplicationProgramsFolder"
                             Name="RimSort"
@@ -241,6 +235,17 @@ jobs:
                   <RemoveFolder Id="RemoveApplicationProgramsFolder"
                                 Directory="ApplicationProgramsFolder"
                                 On="uninstall" />
+                </Component>
+              </ComponentGroup>
+
+              <ComponentGroup Id="RegistryComponents" Directory="INSTALLFOLDER">
+                <Component Id="InstallFlagRegistry" Guid="*">
+                  <RegistryValue Root="HKCU"
+                                Key="Software\\RimSort\\StartMenu"
+                                Name="installed"
+                                Type="integer"
+                                Value="1"
+                                KeyPath="yes" />
                 </Component>
               </ComponentGroup>
             </Product>
