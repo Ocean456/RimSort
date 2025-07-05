@@ -225,6 +225,12 @@ jobs:
 
               <ComponentGroup Id="ShortcutComponents" Directory="ApplicationProgramsFolder">
                 <Component Id="StartMenuShortcut" Guid="3C5F5459-99AE-5A3E-0422-E64DA66B4443">
+                  <RegistryValue Root="HKCU"
+                                Key="Software\RimSort"
+                                Name="StartMenuShortcutInstalled"
+                                Type="integer"
+                                Value="1"
+                                KeyPath="yes" />
                   <Shortcut Id="ApplicationStartMenuShortcut"
                             Directory="ApplicationProgramsFolder"
                             Name="RimSort"
