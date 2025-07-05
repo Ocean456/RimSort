@@ -217,6 +217,7 @@ jobs:
               <Feature Id="ProductFeature" Title="RimSort" Level="1">
                 <ComponentGroupRef Id="MainDist" />
                 <ComponentGroupRef Id="ShortcutComponents" />
+                <ComponentGroupRef Id="RegistryComponents" />
               </Feature>
 
               <UIRef Id="WixUI_InstallDir" />
