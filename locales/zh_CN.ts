@@ -2768,6 +2768,20 @@ Should be Loaded Before:</source>
         <translation>
 应在以下模组之前加载：</translation>
     </message>
+    <message>
+        <source>
+Mod and Game Version Mismatch</source>
+        <translation>
+模组和游戏版本不匹配</translation>
+    </message>
+    <message>
+        <source>
+An alternative updated mod is recommended:
+{alternative}</source>
+        <translation>
+推荐一个替代的更新模组：
+{alternative}</translation>
+    </message>
 </context>
 <context>
     <name>ModUpdaterPrompt</name>
@@ -3555,7 +3569,7 @@ Name of folder will be used as name of the theme and any invalid theme will be i
     </message>
     <message>
         <source>RimSort restart required for some settings</source>
-        <translation>某些设置需要重新启动 RimSort</translation>
+        <translation>部分设置需要重启 RimSort</translation>
     </message>
     <message>
         <source>Enable debug logging</source>
@@ -4517,27 +4531,6 @@ The following table displays Workshop mods with suggested replacements according
     <message>
         <source>{e.strerror} occurred at {e.filename} with error code {error_code}.</source>
         <translation>{e.strerror} 在 {e.filename} 发生，错误代码 {error_code}。</translation>
-    </message>
-</context>
-<context>
-    <name>show_dialogue_conditional</name>
-    <message>
-        <source>Cancel</source>
-        <translation>取消</translation>
-    </message>
-</context>
-<context>
-    <name>show_dialogue_information</name>
-    <message>
-        <source>OK</source>
-        <translation>确认</translation>
-    </message>
-</context>
-<context>
-    <name>show_warning</name>
-    <message>
-        <source>OK</source>
-        <translation>确认</translation>
     </message>
 </context>
 <context>
