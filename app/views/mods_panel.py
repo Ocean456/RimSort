@@ -1938,13 +1938,15 @@ class ModListWidget(QListWidget):
                 and mod_data["packageid"] not in self.ignore_warning_list
             ):
                 # Add tool tip to indicate mod and game version mismatch
-                tool_tip_text += "\nMod and Game Version Mismatch"
+                tool_tip_text += self.tr("\nMod and Game Version Mismatch")
             # Handle "use this instead" behavior
             if (
                 current_item_data["alternative"]
                 and mod_data["packageid"] not in self.ignore_warning_list
             ):
-                tool_tip_text += f"\nAn alternative updated mod is recommended:\n{current_item_data['alternative']}"
+                tool_tip_text += self.tr(
+                    "\nAn alternative updated mod is recommended:\n{alternative}"
+                ).format(alternative=current_item_data["alternative"])
             # Add to error summary if any missing dependencies or incompatibilities
             if self.list_type == "Active" and any(
                 [
