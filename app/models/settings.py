@@ -26,7 +26,7 @@ class Settings(QObject):
         self._debug_file = AppInfo().app_storage_folder / "DEBUG"
 
         # RimSort Update check
-        self.check_for_update_startup: bool = True
+        self.check_for_update_startup: bool = False
 
         # Databases
         self.external_steam_metadata_source: str = "None"
@@ -70,7 +70,7 @@ class Settings(QObject):
             True  # Whether to check for missing dependencies when sorting
         )
         self.use_moddependencies_as_loadTheseBefore: bool = (
-            False  # Whether to use moddependencies as loadTheseBefore
+            True  # Whether to use moddependencies as loadTheseBefore
         )
 
         # DB Builder
@@ -80,7 +80,7 @@ class Settings(QObject):
         self.steam_apikey: str = ""
 
         # SteamCMD
-        self.steamcmd_validate_downloads: bool = True
+        self.steamcmd_validate_downloads: bool = False
 
         # todds
         self.todds_preset: str = "optimized"
@@ -117,7 +117,7 @@ class Settings(QObject):
         self.steam_mods_update_check: bool = False
         self.try_download_missing_mods: bool = True
         self.render_unity_rich_text: bool = True
-        self.update_databases_on_startup: bool = True
+        self.update_databases_on_startup: bool = False
 
         self.rentry_auth_code: str = ""
 
