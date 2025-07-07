@@ -7,7 +7,7 @@ from typing import Any
 from loguru import logger
 from PySide6.QtCore import QPoint, Qt, QUrl, Signal
 from PySide6.QtGui import QAction, QPixmap
-from PySide6.QtWebEngineCore import QWebEnginePage
+from PySide6.QtWebEngineCore import QWebEnginePage, QWebEngineProfile
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWidgets import (
     QHBoxLayout,
@@ -133,8 +133,7 @@ class SteamBrowser(QWidget):
         self.web_view.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
         self.web_view.load(self.startpage)
 
-        #  QWebEngineProfile.defaultProfile().setHttpAcceptLanguages
-
+        QWebEngineProfile.defaultProfile().setHttpAcceptLanguage("zh-CN")
         # Location box
         self.location = QLineEdit()
         self.location.setSizePolicy(
