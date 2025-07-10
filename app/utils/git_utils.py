@@ -1,5 +1,7 @@
 """This module contains a collection of utility functions for working with git repositories."""
 
+import os
+import platform
 import threading
 from contextlib import contextmanager
 from dataclasses import dataclass
@@ -8,7 +10,6 @@ from pathlib import Path
 from typing import Any, Generator, List, Optional, Protocol, cast
 from urllib.parse import urlparse
 
-import pygit2
 from loguru import logger
 from pygit2.enums import CheckoutStrategy, ResetMode, SortMode
 from pygit2.repository import Repository
@@ -16,6 +17,58 @@ from PySide6.QtWidgets import QMessageBox
 
 from app.utils.generic import check_internet_connection, delete_files_with_condition
 from app.views.dialogue import InformationBox
+
+
+def setup_ssl_certificates() -> None:
+    system = platform.system().lower()
+
+    if system == "linux":
+        cert_locations = [
+            "/etc/ssl/certs/ca-certificates.crt",  # Ubuntu/Debian
+            "/etc/ssl/certs/ca-bundle.crt",  # CentOS/Fedora
+            "/etc/pki/tls/certs/ca-bundle.crt",  # RHEL
+            "/etc/ssl/ca-bundle.pem",  # OpenSUSE
+            "/etc/ssl/cert.pem",  # Alpine Linux
+        ]
+
+        cert_dirs = [
+            "/etc/ssl/certs",
+            "/etc/pki/tls/certs",
+            "/etc/ssl",
+        ]
+
+        for cert_file in cert_locations:
+            if os.path.exists(cert_file):
+                os.environ["SSL_CERT_FILE"] = cert_file
+                logger.info(f"SSL_CERT_FILE set to: {cert_file}")
+                break
+
+        for cert_dir in cert_dirs:
+            if os.path.exists(cert_dir):
+                os.environ["SSL_CERT_DIR"] = cert_dir
+                logger.info(f"SSL_CERT_DIR set to: {cert_dir}")
+                break
+
+        if "SSL_CERT_FILE" not in os.environ:
+            try:
+                import certifi
+
+                os.environ["SSL_CERT_FILE"] = certifi.where()
+                os.environ["SSL_CERT_DIR"] = os.path.dirname(certifi.where())
+                logger.info(f"Using certifi certificates: {certifi.where()}")
+            except ImportError:
+                logger.warning("No SSL certificates found and certifi not available")
+                os.environ["SSL_CERT_FILE"] = ""
+                os.environ["SSL_CERT_DIR"] = ""
+
+
+setup_ssl_certificates()
+
+try:
+    import pygit2
+except Exception as e:
+    logger.error(f"Failed to import pygit2: {e}. ")
+    raise
 
 
 class GitError(Exception):
