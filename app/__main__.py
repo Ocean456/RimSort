@@ -40,53 +40,6 @@ from app.utils.app_info import AppInfo
 from app.utils.obfuscate_message import obfuscate_message
 from app.views.dialogue import show_fatal_error
 
-
-def setup_ssl_certificates() -> None:
-    system = platform.system().lower()
-    logger.debug(f"Setting up SSL certificates for {system}...")
-
-    if system == "linux":
-        cert_locations = [
-            "/etc/ssl/certs/ca-certificates.crt",  # Ubuntu/Debian
-            "/etc/ssl/certs/ca-bundle.crt",  # CentOS/Fedora
-            "/etc/pki/tls/certs/ca-bundle.crt",  # RHEL
-            "/etc/ssl/ca-bundle.pem",  # OpenSUSE
-            "/etc/ssl/cert.pem",  # Alpine Linux
-        ]
-
-        cert_dirs = [
-            "/etc/ssl/certs",
-            "/etc/pki/tls/certs",
-            "/etc/ssl",
-        ]
-
-        for cert_file in cert_locations:
-            if os.path.exists(cert_file):
-                os.environ["SSL_CERT_FILE"] = cert_file
-                logger.info(f"SSL_CERT_FILE set to: {cert_file}")
-                break
-
-        for cert_dir in cert_dirs:
-            if os.path.exists(cert_dir):
-                os.environ["SSL_CERT_DIR"] = cert_dir
-                logger.info(f"SSL_CERT_DIR set to: {cert_dir}")
-                break
-
-        if "SSL_CERT_FILE" not in os.environ:
-            try:
-                import certifi
-
-                os.environ["SSL_CERT_FILE"] = certifi.where()
-                os.environ["SSL_CERT_DIR"] = os.path.dirname(certifi.where())
-                logger.info(f"Using certifi certificates: {certifi.where()}")
-            except ImportError:
-                logger.warning("No SSL certificates found and certifi not available")
-                os.environ["SSL_CERT_FILE"] = ""
-                os.environ["SSL_CERT_DIR"] = ""
-
-
-setup_ssl_certificates()
-
 SYSTEM = platform.system()
 # Watchdog conditionals
 if SYSTEM == "Darwin":
