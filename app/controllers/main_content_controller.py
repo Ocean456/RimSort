@@ -51,7 +51,7 @@ except Exception:
 
     try:
         import pygit2
-    except ImportError as e:
+    except Exception as e:
         logger.error("Failed to import pygit2 after setting SSL certificates. ")
         raise ImportError("Failed to import pygit2. ") from e
 

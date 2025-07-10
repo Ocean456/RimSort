@@ -10,8 +10,6 @@ from typing import Any, Generator, List, Optional, Protocol, cast
 from urllib.parse import urlparse
 
 from loguru import logger
-from pygit2.enums import CheckoutStrategy, ResetMode, SortMode
-from pygit2.repository import Repository
 from PySide6.QtWidgets import QMessageBox
 
 from app.utils.generic import check_internet_connection, delete_files_with_condition
@@ -19,6 +17,8 @@ from app.views.dialogue import InformationBox
 
 try:
     import pygit2
+    from pygit2.enums import CheckoutStrategy, ResetMode, SortMode
+    from pygit2.repository import Repository
 except Exception:
     import certifi
 
@@ -28,7 +28,9 @@ except Exception:
 
     try:
         import pygit2
-    except ImportError as e:
+        from pygit2.enums import CheckoutStrategy, ResetMode, SortMode
+        from pygit2.repository import Repository
+    except Exception as e:
         logger.error("Failed to import pygit2 after setting SSL certificates. ")
         raise ImportError("Failed to import pygit2. ") from e
 
