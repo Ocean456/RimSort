@@ -13,6 +13,7 @@ from PySide6.QtWidgets import (
     QDialog,
     QFileDialog,
     QHBoxLayout,
+    QHeaderView,
     QLineEdit,
     QMenu,
     QProgressDialog,
@@ -683,7 +684,13 @@ class LogReader(QDialog):
                         self.table_widget.setItem(row_index, col, item)
 
             self.table_widget.setSortingEnabled(True)
-            self.table_widget.resizeColumnsToContents()
+
+            header = self.table_widget.horizontalHeader()
+            header.setSectionResizeMode(QHeaderView.ResizeMode.Interactive)
+
+            if not hasattr(self, "_initial_resize_done"):
+                self.table_widget.resizeColumnsToContents()
+                self._initial_resize_done = True
         finally:
             self.table_widget.setUpdatesEnabled(True)
 
