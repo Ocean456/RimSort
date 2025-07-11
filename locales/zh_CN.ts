@@ -609,16 +609,8 @@ Are your game configuration paths correct?</source>
         <translation>无法获取最新的版本信息</translation>
     </message>
     <message>
-        <source>Unable to retrieve latest release information due to exception: {e.__class__}</source>
-        <translation>由于异常无法获取最新的版本信息：{e.__class__}</translation>
-    </message>
-    <message>
         <source>RimSort update found</source>
         <translation>RimSort 有可用更新</translation>
-    </message>
-    <message>
-        <source>An update to RimSort has been released: {tag_name}</source>
-        <translation>RimSort 已发布更新：{tag_name}</translation>
     </message>
     <message>
         <source>You are running RimSort {current_version}
@@ -629,14 +621,6 @@ Do you want to update now?</source>
     <message>
         <source>Unable to complete update</source>
         <translation>无法完成更新</translation>
-    </message>
-    <message>
-        <source>Failed to find valid RimSort release for {SYSTEM} {ARCH} {PROCESSOR}</source>
-        <translation>无法找到适用于 {SYSTEM} {ARCH} {PROCESSOR} 的有效 RimSort 版本</translation>
-    </message>
-    <message>
-        <source>RimSort update found. Downloading RimSort {tag_name_updated} release...</source>
-        <translation>发现 RimSort 更新。正在下载 RimSort {tag_name_updated} 版本...</translation>
     </message>
     <message>
         <source>Update downloaded</source>
@@ -657,10 +641,6 @@ Do you want to update now?</source>
     <message>
         <source>RimSort is up to date!</source>
         <translation>RimSort 已是最新版本！</translation>
-    </message>
-    <message>
-        <source>You are already running the latest release: {tag_name}</source>
-        <translation>你正在运行最新版本：{tag_name}</translation>
     </message>
     <message>
         <source>Please check your internet connection and try again, You can also check &apos;https://github.com/RimSort/RimSort/releases&apos; directly.</source>
@@ -1165,6 +1145,38 @@ The resultant database, C, is saved to a user-specified path. You will be prompt
     <message>
         <source>Use This Instead</source>
         <translation>替代为此</translation>
+    </message>
+    <message>
+        <source>You are already running the latest release: {latest_tag_name}</source>
+        <translation>你已经在运行最新版本：{latest_tag_name}</translation>
+    </message>
+    <message>
+        <source>An update to RimSort has been released: {latest_tag_name}</source>
+        <translation>RimSort 已发布更新：{latest_tag_name}</translation>
+    </message>
+    <message>
+        <source>Failed to find valid RimSort release for {system_info}</source>
+        <translation>未能找到适用于 {system_info} 的有效 RimSort 版本</translation>
+    </message>
+    <message>
+        <source>Unable to retrieve release information</source>
+        <translation>无法获取版本信息</translation>
+    </message>
+    <message>
+        <source>Failed to connect to GitHub API: {error}</source>
+        <translation>无法连接到 GitHub API：{error}</translation>
+    </message>
+    <message>
+        <source>Downloading RimSort {tag_name} release...</source>
+        <translation>正在下载 RimSort {tag_name} 版本...</translation>
+    </message>
+    <message>
+        <source>Failed to launch update</source>
+        <translation>无法启动更新</translation>
+    </message>
+    <message>
+        <source>Could not start the update process.</source>
+        <translation>无法启动更新过程。</translation>
     </message>
 </context>
 <context>
@@ -3000,10 +3012,6 @@ An alternative updated mod is recommended:
         <translation>About.xml (loadBefore)</translation>
     </message>
     <message>
-        <source>About.xml (incompatibilities)</source>
-        <translation>About.xml (incompatibilities)</translation>
-    </message>
-    <message>
         <source>Community Rules (loadAfter)</source>
         <translation>社区规则 (loadAfter)</translation>
     </message>
@@ -3128,6 +3136,18 @@ An alternative updated mod is recommended:
     <message>
         <source>Remove this rule</source>
         <translation>删除此规则</translation>
+    </message>
+    <message>
+        <source>About.xml (incompatibilitiesWith)</source>
+        <translation>About.xml (incompatibilitiesWith)</translation>
+    </message>
+    <message>
+        <source>Community Rules (incompatibilitiesWith)</source>
+        <translation>社区规则 (incompatibilitiesWith)</translation>
+    </message>
+    <message>
+        <source>User Rules (incompatibilitiesWith)</source>
+        <translation>用户规则 (incompatibilitiesWith)</translation>
     </message>
 </context>
 <context>
