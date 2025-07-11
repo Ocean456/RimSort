@@ -547,10 +547,6 @@ When unchecked, search all file types with standard search.</source>
         <source>Exportfailed unknown exception occurred</source>
         <translation>导出失败，发生未知异常</translation>
     </message>
-    <message>
-        <source>Import .acf</source>
-        <translation type="unfinished">导入 .acf</translation>
-    </message>
 </context>
 <context>
     <name>MainContent</name>
@@ -1152,35 +1148,35 @@ The resultant database, C, is saved to a user-specified path. You will be prompt
     </message>
     <message>
         <source>You are already running the latest release: {latest_tag_name}</source>
-        <translation type="unfinished"></translation>
+        <translation>你已经在运行最新版本：{latest_tag_name}</translation>
     </message>
     <message>
         <source>An update to RimSort has been released: {latest_tag_name}</source>
-        <translation type="unfinished"></translation>
+        <translation>RimSort 已发布更新：{latest_tag_name}</translation>
     </message>
     <message>
         <source>Failed to find valid RimSort release for {system_info}</source>
-        <translation type="unfinished"></translation>
+        <translation>未能找到适用于 {system_info} 的有效 RimSort 版本</translation>
     </message>
     <message>
         <source>Unable to retrieve release information</source>
-        <translation type="unfinished"></translation>
+        <translation>无法获取版本信息</translation>
     </message>
     <message>
         <source>Failed to connect to GitHub API: {error}</source>
-        <translation type="unfinished"></translation>
+        <translation>无法连接到 GitHub API：{error}</translation>
     </message>
     <message>
         <source>Downloading RimSort {tag_name} release...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在下载 RimSort {tag_name} 版本...</translation>
     </message>
     <message>
         <source>Failed to launch update</source>
-        <translation type="unfinished"></translation>
+        <translation>无法启动更新</translation>
     </message>
     <message>
         <source>Could not start the update process.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法启动更新过程。</translation>
     </message>
 </context>
 <context>
@@ -1258,6 +1254,10 @@ The resultant database, C, is saved to a user-specified path. You will be prompt
     <message>
         <source>All repositories updated successfully!</source>
         <translation>所有仓库更新成功！</translation>
+    </message>
+    <message>
+        <source>{count} repositories were updated:&lt;br/&gt;{repos}</source>
+        <translation>{count} 个仓库已更新：&lt;br/&gt;{repos}</translation>
     </message>
     <message>
         <source>Failed to update repo!</source>
@@ -1751,10 +1751,6 @@ Error: {error}</source>
         <source>Are you sure you want to upload the Community Rules database to GitHub?</source>
         <translation>您确定要将社区规则数据库上传到 GitHub 吗？</translation>
     </message>
-    <message>
-        <source>{count} repositories were updated with their latest commits:</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -2001,18 +1997,6 @@ RimSort 可以复制所有你的创意工坊模组到新实例的本地模组文
     <message>
         <source>This action cannot be undone.</source>
         <translation>此操作无法撤消。</translation>
-    </message>
-    <message>
-        <source>Convert to SteamCMD</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Keep Workshop Folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cancelled</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3155,15 +3139,15 @@ An alternative updated mod is recommended:
     </message>
     <message>
         <source>About.xml (incompatibilitiesWith)</source>
-        <translation type="unfinished"></translation>
+        <translation>About.xml (incompatibilitiesWith)</translation>
     </message>
     <message>
         <source>Community Rules (incompatibilitiesWith)</source>
-        <translation type="unfinished"></translation>
+        <translation>社区规则 (incompatibilitiesWith)</translation>
     </message>
     <message>
         <source>User Rules (incompatibilitiesWith)</source>
-        <translation type="unfinished"></translation>
+        <translation>用户规则 (incompatibilitiesWith)</translation>
     </message>
 </context>
 <context>
@@ -4487,17 +4471,6 @@ The following table displays Workshop mods with suggested replacements according
     <message>
         <source>Please provide a valid archive path.</source>
         <translation>请提供一个有效的存档路径。</translation>
-    </message>
-</context>
-<context>
-    <name>check_if_pfids_blacklisted</name>
-    <message>
-        <source>Download blacklisted mods</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Skip blacklisted mods</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
