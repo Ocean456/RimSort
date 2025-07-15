@@ -547,6 +547,10 @@ When unchecked, search all file types with standard search.</source>
         <source>Exportfailed unknown exception occurred</source>
         <translation>导出失败，发生未知异常</translation>
     </message>
+    <message>
+        <source>Import .acf</source>
+        <translation>导入 .acf</translation>
+    </message>
 </context>
 <context>
     <name>MainContent</name>
@@ -637,10 +641,6 @@ Do you want to update now?</source>
     <message>
         <source>Failed to download latest RimSort release!</source>
         <translation>下载最新的 RimSort 版本失败！</translation>
-    </message>
-    <message>
-        <source>RimSort is up to date!</source>
-        <translation>RimSort 已是最新版本！</translation>
     </message>
     <message>
         <source>Please check your internet connection and try again, You can also check &apos;https://github.com/RimSort/RimSort/releases&apos; directly.</source>
@@ -1147,10 +1147,6 @@ The resultant database, C, is saved to a user-specified path. You will be prompt
         <translation>替代为此</translation>
     </message>
     <message>
-        <source>You are already running the latest release: {latest_tag_name}</source>
-        <translation>你已经在运行最新版本：{latest_tag_name}</translation>
-    </message>
-    <message>
         <source>An update to RimSort has been released: {latest_tag_name}</source>
         <translation>RimSort 已发布更新：{latest_tag_name}</translation>
     </message>
@@ -1254,10 +1250,6 @@ The resultant database, C, is saved to a user-specified path. You will be prompt
     <message>
         <source>All repositories updated successfully!</source>
         <translation>所有仓库更新成功！</translation>
-    </message>
-    <message>
-        <source>{count} repositories were updated:&lt;br/&gt;{repos}</source>
-        <translation>{count} 个仓库已更新：&lt;br/&gt;{repos}</translation>
     </message>
     <message>
         <source>Failed to update repo!</source>
@@ -1751,6 +1743,10 @@ Error: {error}</source>
         <source>Are you sure you want to upload the Community Rules database to GitHub?</source>
         <translation>您确定要将社区规则数据库上传到 GitHub 吗？</translation>
     </message>
+    <message>
+        <source>{count} repositories were updated with their latest commits:</source>
+        <translation>{count} 个仓库已更新到最新提交：</translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -1997,6 +1993,18 @@ RimSort 可以复制所有你的创意工坊模组到新实例的本地模组文
     <message>
         <source>This action cannot be undone.</source>
         <translation>此操作无法撤消。</translation>
+    </message>
+    <message>
+        <source>Convert to SteamCMD</source>
+        <translation>转换为 SteamCMD</translation>
+    </message>
+    <message>
+        <source>Keep Workshop Folder</source>
+        <translation>保留创意工坊文件夹</translation>
+    </message>
+    <message>
+        <source>Cancelled</source>
+        <translation>已取消</translation>
     </message>
 </context>
 <context>
@@ -2460,20 +2468,6 @@ Do you want to proceed?</source>
 您想继续吗？</translation>
     </message>
     <message>
-        <source>Steam {action.capitalize()}</source>
-        <translation>Steam {action.capitalize()}</translation>
-    </message>
-    <message>
-        <source>Successfully initiated {action} from {len(publishedfileids)} Steam Workshop mod(s).
-The process may take a few moments to complete.</source>
-        <translation>成功为 {len(publishedfileids)} 个 Steam Workshop 模组中启动 {action}。
-该过程可能需要几分钟才能完成。</translation>
-    </message>
-    <message>
-        <source>{action.capitalize()} Error</source>
-        <translation>{action.capitalize()} 错误</translation>
-    </message>
-    <message>
         <source>An error occurred while trying to {action} from Steam Workshop mods.</source>
         <translation>尝试从 Steam Workshop 模组中 {action} 时发生错误。</translation>
     </message>
@@ -2482,32 +2476,62 @@ The process may take a few moments to complete.</source>
         <translation>请至少选择一个模组进行删除和 {action}。</translation>
     </message>
     <message>
-        <source>Confirm Deletion and {action.capitalize()}</source>
-        <translation>确认删除和 {action.capitalize()}</translation>
+        <source>Deletion options</source>
+        <translation>删除选项</translation>
     </message>
     <message>
-        <source>You have selected {len(selected_mods)} mod(s) for deletion.
-{len(steam_mods)} of these are Steam Workshop mods that will also be {action}d.</source>
-        <translation>您已选择 {len(selected_mods)} 个模组进行删除。
-其中 {len(steam_mods)} 个是 Steam Workshop 模组，也将被 {action}。</translation>
+        <source>Steam {action}</source>
+        <translation>Steam {action}</translation>
+    </message>
+    <message>
+        <source>Successfully initiated {action} from {len} Steam Workshop mod(s).
+The process may take a few moments to complete.</source>
+        <translation>成功对 {len} 个 Steam 创意工坊模组进行 {action}。
+该过程可能需要几分钟才能完成。</translation>
+    </message>
+    <message>
+        <source>{action} Error</source>
+        <translation>{action} 错误</translation>
+    </message>
+    <message>
+        <source>Confirm Deletion and {action}</source>
+        <translation>确认删除并 {action}</translation>
+    </message>
+    <message>
+        <source>You have selected {count} mod(s) for deletion.
+{steam_count} of these are Steam Workshop mods that will also be {action}.</source>
+        <translation>您已选择 {count} 个模组进行删除。
+其中 {steam_count} 个是 Steam 创意工坊模组，也将被 {action}。</translation>
     </message>
     <message>
         <source>
 This operation will:
 • Delete the selected mod directories from your filesystem
-• {action.capitalize()} Steam Workshop mods from your Steam account
+• {action} Steam Workshop mods from your Steam account
 
 Do you want to proceed?</source>
         <translation>
 此操作将：
 • 从你的文件系统中删除所选模组目录
-• 从你的 Steam 账户中 {action.capitalize()} Steam Workshop 模组
+• 从你的 Steam 账户中 {action} Steam 创意工坊模组
 
 您想继续吗？</translation>
     </message>
     <message>
-        <source>Deletion options</source>
-        <translation>删除选项</translation>
+        <source>unsubscribe</source>
+        <translation>取消订阅</translation>
+    </message>
+    <message>
+        <source>resubscribe</source>
+        <translation>重新订阅</translation>
+    </message>
+    <message>
+        <source>unsubscribed</source>
+        <translation>取消订阅</translation>
+    </message>
+    <message>
+        <source>resubscribed</source>
+        <translation>重新订阅</translation>
     </message>
 </context>
 <context>
@@ -3900,6 +3924,14 @@ New symlink:
         <translation>新符号链接：
 [{symlink_source_path}] -&gt; </translation>
     </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation>&amp;是</translation>
+    </message>
+    <message>
+        <source>&amp;Don&apos;t Ask Again</source>
+        <translation>不再询问</translation>
+    </message>
 </context>
 <context>
     <name>ThemeController</name>
@@ -4194,10 +4226,6 @@ Details: {e}</source>
         <translation>游戏文件恢复</translation>
     </message>
     <message>
-        <source>⚠️ Warning: These operations will delete selected files permanently!</source>
-        <translation>⚠️ 警告：这些操作将永久删除选定的文件！</translation>
-    </message>
-    <message>
         <source>If you&apos;re experiencing issues with your game, you can try the following recovery options. Steam will automatically redownload any deleted files on next launch.</source>
         <translation>如果你在游戏中遇到问题，可以尝试以下恢复选项，Steam 将在下次启动时自动重新下载已删除的文件。</translation>
     </message>
@@ -4216,10 +4244,6 @@ Details: {e}</source>
     <message>
         <source>Deletes all Steam Workshop mods and triggers redownload.</source>
         <translation>删除所有Steam创意工坊模组并重新下载。</translation>
-    </message>
-    <message>
-        <source>Reset mod configurations (Preserves ModsConfig.xml and Prefs.xml)</source>
-        <translation>重置模组配置（保留ModsConfig.xml和Prefs.xml）</translation>
     </message>
     <message>
         <source>Deletes mod configuration files except ModsConfig.xml and Prefs.xml.</source>
@@ -4242,16 +4266,8 @@ Details: {e}</source>
         <translation>应用恢复选项</translation>
     </message>
     <message>
-        <source>Apply the selected recovery options</source>
-        <translation>应用选定的恢复选项</translation>
-    </message>
-    <message>
         <source>Cancel</source>
         <translation>取消</translation>
-    </message>
-    <message>
-        <source>Cancel and clear selections</source>
-        <translation>取消并清除选择</translation>
     </message>
     <message>
         <source>Mod Configuration Options</source>
@@ -4286,32 +4302,12 @@ Details: {e}</source>
         <translation>从文件导入模组列表</translation>
     </message>
     <message>
-        <source>⚠️ WARNING: This will delete all mods in your Mods folder and reset to vanilla state</source>
-        <translation>⚠️ 警告：此操作将删除你的Mods文件夹中的所有Mod，并重置为原版状态</translation>
-    </message>
-    <message>
-        <source>Clear Mods</source>
-        <translation>清除模组</translation>
-    </message>
-    <message>
         <source>Delete all mods and reset to vanilla state</source>
         <translation>删除所有模组并重置为原版状态</translation>
     </message>
     <message>
         <source>Steam Utilities</source>
         <translation>Steam 工具</translation>
-    </message>
-    <message>
-        <source>🔄 Clear Download Cache</source>
-        <translation>🔄 清除下载缓存</translation>
-    </message>
-    <message>
-        <source>✓ Verify Game Files</source>
-        <translation>✓ 验证游戏文件</translation>
-    </message>
-    <message>
-        <source>🔧 Repair Steam library</source>
-        <translation>🔧 修复Steam库</translation>
     </message>
     <message>
         <source>Delete Steam&apos;s downloading folder to fix download issues</source>
@@ -4324,6 +4320,46 @@ Details: {e}</source>
     <message>
         <source>Verify integrity of all installed Steam games</source>
         <translation>验证所有已安装 Steam 游戏的完整性</translation>
+    </message>
+    <message>
+        <source>Warning: These operations will delete selected files permanently!</source>
+        <translation>警告：这些操作将永久删除选定的文件！</translation>
+    </message>
+    <message>
+        <source>Export List</source>
+        <translation>导出列表</translation>
+    </message>
+    <message>
+        <source>Import List</source>
+        <translation>导入列表</translation>
+    </message>
+    <message>
+        <source>Reset to Vanilla</source>
+        <translation>重置为原版</translation>
+    </message>
+    <message>
+        <source>This will delete all mods in your Mods folder and reset to vanilla state</source>
+        <translation>这将删除你 Mods 文件夹中的所有模组并重置为原版状态</translation>
+    </message>
+    <message>
+        <source>Clear All Mods</source>
+        <translation>清除所有模组</translation>
+    </message>
+    <message>
+        <source>Steam-specific utilities to help resolve download and game file issues.</source>
+        <translation>Steam 特定工具，用于帮助解决下载和游戏文件问题。</translation>
+    </message>
+    <message>
+        <source>Clear Download Cache</source>
+        <translation>清除下载缓存</translation>
+    </message>
+    <message>
+        <source>Verify Game Files</source>
+        <translation>验证游戏文件</translation>
+    </message>
+    <message>
+        <source>Repair Steam Library</source>
+        <translation>修复 Steam 库</translation>
     </message>
 </context>
 <context>
@@ -4471,6 +4507,17 @@ The following table displays Workshop mods with suggested replacements according
     <message>
         <source>Please provide a valid archive path.</source>
         <translation>请提供一个有效的存档路径。</translation>
+    </message>
+</context>
+<context>
+    <name>check_if_pfids_blacklisted</name>
+    <message>
+        <source>Download blacklisted mods</source>
+        <translation>下载黑名单模组</translation>
+    </message>
+    <message>
+        <source>Skip blacklisted mods</source>
+        <translation>跳过黑名单模组</translation>
     </message>
 </context>
 <context>
