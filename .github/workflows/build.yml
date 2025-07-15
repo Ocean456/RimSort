@@ -203,6 +203,28 @@ jobs:
 
               <Property Id="DistDir" Value="build\\__main__.dist" />
 
+              <Property Id="INSTALLFOLDER">
+                <RegistrySearch Id="PreviousInstallDirSearch" Root="HKCU" Key="Software\RimSort" Name="InstallDir" Type="raw" />
+              </Property>
+
+              <CustomAction Id="SetDefaultInstallDir" Script="vbscript" Execute="immediate">
+                <![CDATA[
+                  Dim fso, installDir
+                  Set fso = CreateObject("Scripting.FileSystemObject")
+                  
+                  installDir = Session.Property("INSTALLFOLDER")
+                  
+                  If installDir = "" Then
+                    If fso.DriveExists("D:\") Then
+                      installDir = "D:\Program Files\RimSort"
+                    Else
+                      installDir = "C:\Program Files\RimSort"
+                    End If
+                    Session.Property("INSTALLFOLDER") = installDir
+                  End If
+                ]]>
+              </CustomAction>
+
               <Icon Id="RimSortIcon" SourceFile="themes\\default-icons\\AppIcon.ico" />
 
               <Directory Id="TARGETDIR" Name="SourceDir">
@@ -223,6 +245,14 @@ jobs:
               <UIRef Id="WixUI_InstallDir" />
 
               <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+
+              <InstallExecuteSequence>
+                <Custom Action="SetDefaultInstallDir" After="ValidateProductID">NOT Installed</Custom>
+              </InstallExecuteSequence>
+
+              <InstallUISequence>
+                <Custom Action="SetDefaultInstallDir" After="ValidateProductID">NOT Installed</Custom>
+              </InstallUISequence>
 
               <ComponentGroup Id="ShortcutComponents" Directory="ApplicationProgramsFolder">
                 <Component Id="StartMenuShortcut" Guid="3C5F5459-99AE-5A3E-0422-E64DA66B4443">
@@ -255,6 +285,14 @@ jobs:
                                 Value="1"
                                 KeyPath="yes" />
                 </Component>
+                <Component Id="InstallPathRegistry" Guid="A1B2C3D4-E5F6-7890-ABCD-EF1234567890">
+                  <RegistryValue Root="HKCU"
+                                Key="Software\RimSort"
+                                Name="InstallDir"
+                                Type="string"
+                                Value="[INSTALLFOLDER]"
+                                KeyPath="yes" />
+                </Component>
               </ComponentGroup>
             </Product>
           </Wix>
@@ -271,7 +309,6 @@ jobs:
             maindist.wixobj RimSort.wixobj `
             -o "RimSort-${{ steps.sem_version.outputs.version }}-${{ matrix.platform }}-${{ matrix.arch }}.msi"
         shell: powershell
-
 
       - name: Generate executable attestations
         uses: actions/attest-build-provenance@v2.4.0
