@@ -123,7 +123,7 @@ jobs:
             if [[ "$file" == "msi" ]]; then
               cd "$artifact"
               name="RimSort-${{ needs.pre-build.outputs.version }}-Windows_x86_64.msi"
-              mv *.msi "../$name"
+              mv ./*.msi "../$name"
               cd ..
             else
               base=${file%%.tar}
@@ -156,7 +156,7 @@ jobs:
           wait
           echo "Cleaning up - Removing non-zip files"
           shopt -s extglob
-          rm -rf ./!(*.zip|*.msi)
+          rm -rf -- ./!(*.zip|*.msi)
         shell: bash
 
       - name: Create body

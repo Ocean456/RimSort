@@ -5,6 +5,7 @@ from typing import Tuple, Union
 
 from loguru import logger
 from PySide6.QtCore import (
+    QCoreApplication,
     QEvent,
     QRunnable,
     Qt,
