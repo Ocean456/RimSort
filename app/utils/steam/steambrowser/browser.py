@@ -12,7 +12,7 @@ from loguru import logger
 from PySide6.QtCore import QPoint, Qt, QUrl, Signal
 from PySide6.QtGui import QAction, QPixmap
 from PySide6.QtWebChannel import QWebChannel
-from PySide6.QtWebEngineCore import QWebEnginePage, QWebEngineScript, QWebEngineProfile
+from PySide6.QtWebEngineCore import QWebEnginePage, QWebEngineProfile, QWebEngineScript
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWidgets import (
     QHBoxLayout,
