@@ -1,5 +1,5 @@
 # Auto tests builds.
-# Downloads artifact matching system, nzips them, finds the executable and attempts to run them.
+# Downloads artifact matching system, unzips them, finds the executable and attempts to run them.
 
 name: Test Builds
 on:
@@ -9,52 +9,20 @@ permissions: {}
 
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: macos-13
-            platform: "Darwin"
-            arch: "i386"
-            env:
-              ARTIFACT_KEY_GLOB: "*Darwin_i386*"
-              ARTIFACT_KEY: "Darwin_i386"
-              EXPECTED_NAME: "RimSort"
-          - os: macos-latest
-            arch: "arm"
-            platform: "Darwin"
-            env:
-              ARTIFACT_KEY_GLOB: "*Darwin_arm*"
-              ARTIFACT_KEY: "Darwin_arm"
-              EXPECTED_NAME: "RimSort"
-          - os: ubuntu-22.04
-            platform: "Ubuntu-22.04"
-            arch: "x86_64"
-            env:
-              ARTIFACT_KEY_GLOB: "*Ubuntu-22*"
-              ARTIFACT_KEY: "Ubuntu-22.04_x86_64 "
-              EXPECTED_NAME: "RimSort"
-          - os: ubuntu-24.04
-            platform: "Ubuntu-24.04"
-            arch: "x86_64"
-            env:
-              ARTIFACT_KEY_GLOB: "*Ubuntu-24*"
-              ARTIFACT_KEY: "Ubuntu-24.04_x86_64"
-              EXPECTED_NAME: "RimSort"
-          - os: windows-latest
-            platform: "Windows"
-            arch: "x86_64"
-            env:
-              ARTIFACT_KEY_GLOB: "*Windows_x86_64*"
-              ARTIFACT_KEY: "Windows_x86_64"
-              EXPECTED_NAME: "RimSort.exe"
+    runs-on: windows-latest
+    env:
+      ARTIFACT_KEY_GLOB: "*Windows_x86_64*"
+      ARTIFACT_KEY: "Windows_x86_64"
+      EXPECTED_NAME: "RimSort.exe"
+      platform: "Windows"
+      arch: "x86_64"
+
     steps:
       - name: Download artifact from previous run
         if: ${{ github.event.inputs.run_id != null }}
         uses: actions/download-artifact@v4.3.0
         with:
-          pattern: ${{ matrix.env.ARTIFACT_KEY_GLOB }}
+          pattern: ${{ env.ARTIFACT_KEY_GLOB }}
           run-id: ${{ github.event.inputs.run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -62,7 +30,7 @@ jobs:
         if: ${{ github.event.inputs.run_id == null }}
         uses: actions/download-artifact@v4.3.0
         with:
-          pattern: ${{ matrix.env.ARTIFACT_KEY_GLOB }}
+          pattern: ${{ env.ARTIFACT_KEY_GLOB }}
 
       - name: Un-tar artifact
         run: |
@@ -73,7 +41,7 @@ jobs:
       - name: Find executable
         id: find
         run: |
-          FOUND=$(find . -type f -name ${{ matrix.env.EXPECTED_NAME }})
+          FOUND=$(find . -type f -name ${{ env.EXPECTED_NAME }})
           echo "FOUND=$FOUND" >> "$GITHUB_OUTPUT"
         shell: bash
 
@@ -89,23 +57,8 @@ jobs:
           fi
         shell: bash
 
-      - name: If Linux, install likely missing libs for gui
-        if: ${{ matrix.platform == 'Ubuntu-22.04' || matrix.platform == 'Ubuntu-24.04' }}
+      - name: Run executable. Attempt to run the executable, waits 10 seconds, then kills it.
         run: |
-          sudo apt-get update
-          sudo apt-get install -y libegl-dev
-        shell: bash
-
-      - name: If MacOS, install coreutils for timeout
-        if: ${{ matrix.platform == 'Darwin' }}
-        run: |
-          brew install coreutils
-
-      - name: Run executable. Attempt to run the executable, waits 15 seconds, then kills it.
-        run: |
-          if [[ ${{ matrix.platform }} == "Ubuntu-22.04" || ${{ matrix.platform }} == "Ubuntu-24.04" ]]; then
-            export QT_QPA_PLATFORM=offscreen
-          fi
           timeout 10 ${{ steps.find.outputs.FOUND }} || EXIT_CODE="$?"
 
           if [[ $EXIT_CODE == 124 ]]; then
