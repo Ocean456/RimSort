@@ -2,6 +2,157 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
+    <name>AcfLogReader</name>
+    <message>
+        <source>Ready</source>
+        <translation>准备</translation>
+    </message>
+    <message>
+        <source>Search...</source>
+        <translation>搜索...</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>刷新</translation>
+    </message>
+    <message>
+        <source>Import ACF Data</source>
+        <translation>导入 ACF 数据</translation>
+    </message>
+    <message>
+        <source>Export ACF Data</source>
+        <translation>导出 ACF 数据</translation>
+    </message>
+    <message>
+        <source>Export to CSV</source>
+        <translation>导出为 CSV</translation>
+    </message>
+    <message>
+        <source>Loaded {count} items | Last updated: {time}</source>
+        <translation>加载 {count} 项，最后更新时间：{time}</translation>
+    </message>
+    <message>
+        <source>Export canceled by user.</source>
+        <translation>导出被用户取消。</translation>
+    </message>
+    <message>
+        <source>Export failed: Permission denied - check file permissions</source>
+        <translation>导出失败：权限不足 - 请检查文件权限</translation>
+    </message>
+    <message>
+        <source>Export Error</source>
+        <translation>导出错误</translation>
+    </message>
+    <message>
+        <source>Export failed: File system error - {e}</source>
+        <translation>导出失败：文件系统错误 - {e}</translation>
+    </message>
+    <message>
+        <source>Export failed: File system error</source>
+        <translation>导出失败：文件系统错误</translation>
+    </message>
+    <message>
+        <source>Exporting to CSV...</source>
+        <translation>导出到 CSV...</translation>
+    </message>
+    <message>
+        <source>Exporting rows...</source>
+        <translation>导出行...</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>取消</translation>
+    </message>
+    <message>
+        <source>Export failed due to an unknown error</source>
+        <translation>导出失败：未知错误</translation>
+    </message>
+    <message>
+        <source>View in Steam Workshop</source>
+        <translation>在 Steam 创意工坊中查看</translation>
+    </message>
+    <message>
+        <source>Open Mod Folder</source>
+        <translation>打开模组文件夹</translation>
+    </message>
+    <message>
+        <source>Published File ID</source>
+        <translation>发布文件 ID</translation>
+    </message>
+    <message>
+        <source>Mod downloaded</source>
+        <translation>模组已下载</translation>
+    </message>
+    <message>
+        <source>Updated on Workshop</source>
+        <translation>在创意工坊中更新</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>类型</translation>
+    </message>
+    <message>
+        <source>Mod Name</source>
+        <translation>模组名称</translation>
+    </message>
+    <message>
+        <source>Mod Path</source>
+        <translation>模组路径</translation>
+    </message>
+    <message>
+        <source>Conform acf import</source>
+        <translation>确认导入 acf</translation>
+    </message>
+    <message>
+        <source>This will replace your current steamcmd .acf file</source>
+        <translation>这将替换你当前的 steamcmd .acf 文件</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to import .acf? THis only works for steamcmd</source>
+        <translation>你确定要导入 .acf 吗？这仅适用于 steamcmd</translation>
+    </message>
+    <message>
+        <source>Import .acf</source>
+        <translation>导入 .acf</translation>
+    </message>
+    <message>
+        <source>SteamCMD interface not properly initialized</source>
+        <translation>SteamCMD 接口未正确初始化</translation>
+    </message>
+    <message>
+        <source>ACF file not found: {acf_path}</source>
+        <translation>未找到 ACF 文件：{acf_path}</translation>
+    </message>
+    <message>
+        <source>ACF file not found at: {acf_path}</source>
+        <translation>ACF 文件在此路径未找到：{acf_path}</translation>
+    </message>
+    <message>
+        <source>Invalid file path provided for export: {file_path}</source>
+        <translation>提供的导出文件路径无效: {file_path}</translation>
+    </message>
+    <message>
+        <source>Successfully exported ACF to {file_path}</source>
+        <translation>成功导出 ACF 到 {file_path}</translation>
+    </message>
+    <message>
+        <source>Export Success</source>
+        <translation>导出成功</translation>
+    </message>
+    <message>
+        <source>Export failed: {e}</source>
+        <translation>导出失败：{e}</translation>
+    </message>
+    <message>
+        <source>Export failed</source>
+        <translation>导出失败</translation>
+    </message>
+    <message>
+        <source>Exportfailed unknown exception occurred</source>
+        <translation>导出失败，发生未知异常</translation>
+    </message>
+</context>
+<context>
     <name>BaseModsPanel</name>
     <message>
         <source>Deselect all</source>
@@ -402,157 +553,6 @@ When unchecked, search all file types with standard search.</source>
     </message>
 </context>
 <context>
-    <name>LogReader</name>
-    <message>
-        <source>Search...</source>
-        <translation>搜索...</translation>
-    </message>
-    <message>
-        <source>Refresh</source>
-        <translation>刷新</translation>
-    </message>
-    <message>
-        <source>Import ACF Data</source>
-        <translation>导入 ACF 数据</translation>
-    </message>
-    <message>
-        <source>Export ACF Data</source>
-        <translation>导出 ACF 数据</translation>
-    </message>
-    <message>
-        <source>Export to CSV</source>
-        <translation>导出为 CSV</translation>
-    </message>
-    <message>
-        <source>Export Error</source>
-        <translation>导出错误</translation>
-    </message>
-    <message>
-        <source>Export failed: Permission denied - check file permissions</source>
-        <translation>导出失败：权限不足 - 请检查文件权限</translation>
-    </message>
-    <message>
-        <source>Ready</source>
-        <translation>准备</translation>
-    </message>
-    <message>
-        <source>Loaded {count} items | Last updated: {time}</source>
-        <translation>加载 {count} 项，最后更新时间：{time}</translation>
-    </message>
-    <message>
-        <source>Export canceled by user.</source>
-        <translation>导出被用户取消。</translation>
-    </message>
-    <message>
-        <source>Export failed: File system error - {e}</source>
-        <translation>导出失败：文件系统错误 - {e}</translation>
-    </message>
-    <message>
-        <source>Export failed: File system error</source>
-        <translation>导出失败：文件系统错误</translation>
-    </message>
-    <message>
-        <source>Exporting to CSV...</source>
-        <translation>导出到 CSV</translation>
-    </message>
-    <message>
-        <source>Exporting rows...</source>
-        <translation>导出行...</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>取消</translation>
-    </message>
-    <message>
-        <source>Export failed due to an unknown error</source>
-        <translation>导出失败：未知错误</translation>
-    </message>
-    <message>
-        <source>View in Steam Workshop</source>
-        <translation>在 Steam 创意工坊中查看</translation>
-    </message>
-    <message>
-        <source>Open Mod Folder</source>
-        <translation>打开模组文件夹</translation>
-    </message>
-    <message>
-        <source>Published File ID</source>
-        <translation>发布文件 ID</translation>
-    </message>
-    <message>
-        <source>Last Updated</source>
-        <translation>最后更新时间</translation>
-    </message>
-    <message>
-        <source>Relative Time</source>
-        <translation>相对时间</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation>类型</translation>
-    </message>
-    <message>
-        <source>Mod Name</source>
-        <translation>模组名称</translation>
-    </message>
-    <message>
-        <source>Mod Path</source>
-        <translation>模组路径</translation>
-    </message>
-    <message>
-        <source>Conform acf import</source>
-        <translation>确认导入 acf</translation>
-    </message>
-    <message>
-        <source>This will replace your current steamcmd .acf file</source>
-        <translation>这将替换你当前的 steamcmd .acf 文件</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to import .acf? THis only works for steamcmd</source>
-        <translation>你确定要导入 .acf 吗？这仅适用于 steamcmd</translation>
-    </message>
-    <message>
-        <source>SteamCMD interface not properly initialized</source>
-        <translation>SteamCMD 接口未正确初始化</translation>
-    </message>
-    <message>
-        <source>ACF file not found: {acf_path}</source>
-        <translation>未找到 ACF 文件：{acf_path}</translation>
-    </message>
-    <message>
-        <source>ACF file not found at: {acf_path}</source>
-        <translation>ACF 文件在此路径未找到：{acf_path}</translation>
-    </message>
-    <message>
-        <source>Invalid file path provided for export: {file_path}</source>
-        <translation>提供的导出文件路径无效: {file_path}</translation>
-    </message>
-    <message>
-        <source>Successfully exported ACF to {file_path}</source>
-        <translation>成功导出 ACF 到 {file_path}</translation>
-    </message>
-    <message>
-        <source>Export Success</source>
-        <translation>导出成功</translation>
-    </message>
-    <message>
-        <source>Export failed: {e}</source>
-        <translation>导出失败：{e}</translation>
-    </message>
-    <message>
-        <source>Export failed</source>
-        <translation>导出失败</translation>
-    </message>
-    <message>
-        <source>Exportfailed unknown exception occurred</source>
-        <translation>导出失败，发生未知异常</translation>
-    </message>
-    <message>
-        <source>Import .acf</source>
-        <translation type="unfinished">导入 .acf</translation>
-    </message>
-</context>
-<context>
     <name>MainContent</name>
     <message>
         <source>Essential path(s)</source>
@@ -641,10 +641,6 @@ Do you want to update now?</source>
     <message>
         <source>Failed to download latest RimSort release!</source>
         <translation>下载最新的 RimSort 版本失败！</translation>
-    </message>
-    <message>
-        <source>RimSort is up to date!</source>
-        <translation>RimSort 已是最新版本！</translation>
     </message>
     <message>
         <source>Please check your internet connection and try again, You can also check &apos;https://github.com/RimSort/RimSort/releases&apos; directly.</source>
@@ -1151,36 +1147,32 @@ The resultant database, C, is saved to a user-specified path. You will be prompt
         <translation>替代为此</translation>
     </message>
     <message>
-        <source>You are already running the latest release: {latest_tag_name}</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>An update to RimSort has been released: {latest_tag_name}</source>
-        <translation type="unfinished"></translation>
+        <translation>RimSort 已发布更新：{latest_tag_name}</translation>
     </message>
     <message>
         <source>Failed to find valid RimSort release for {system_info}</source>
-        <translation type="unfinished"></translation>
+        <translation>未找到适用于 {system_info} 的有效 RimSort 版本</translation>
     </message>
     <message>
         <source>Unable to retrieve release information</source>
-        <translation type="unfinished"></translation>
+        <translation>无法获取版本信息</translation>
     </message>
     <message>
         <source>Failed to connect to GitHub API: {error}</source>
-        <translation type="unfinished"></translation>
+        <translation>无法连接到 GitHub API：{error}</translation>
     </message>
     <message>
         <source>Downloading RimSort {tag_name} release...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在下载 RimSort {tag_name} 版本...</translation>
     </message>
     <message>
         <source>Failed to launch update</source>
-        <translation type="unfinished"></translation>
+        <translation>无法启动更新</translation>
     </message>
     <message>
         <source>Could not start the update process.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法启动更新过程。</translation>
     </message>
 </context>
 <context>
@@ -1753,7 +1745,7 @@ Error: {error}</source>
     </message>
     <message>
         <source>{count} repositories were updated with their latest commits:</source>
-        <translation type="unfinished"></translation>
+        <translation>{count} 个仓库已更新到最新提交：</translation>
     </message>
 </context>
 <context>
@@ -1785,10 +1777,6 @@ Error: {error}</source>
     <message>
         <source>Main Content</source>
         <translation>主界面</translation>
-    </message>
-    <message>
-        <source>Log Reader</source>
-        <translation>日志查看器</translation>
     </message>
     <message>
         <source>File Search</source>
@@ -2004,15 +1992,19 @@ RimSort 可以复制所有你的创意工坊模组到新实例的本地模组文
     </message>
     <message>
         <source>Convert to SteamCMD</source>
-        <translation type="unfinished"></translation>
+        <translation>转换为 SteamCMD</translation>
     </message>
     <message>
         <source>Keep Workshop Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>保留创意工坊文件夹</translation>
     </message>
     <message>
         <source>Cancelled</source>
-        <translation type="unfinished"></translation>
+        <translation>已取消</translation>
+    </message>
+    <message>
+        <source>ACF Log Reader</source>
+        <translation>ACF 日志阅读器</translation>
     </message>
 </context>
 <context>
@@ -2476,20 +2468,6 @@ Do you want to proceed?</source>
 您想继续吗？</translation>
     </message>
     <message>
-        <source>Steam {action.capitalize()}</source>
-        <translation>Steam {action.capitalize()}</translation>
-    </message>
-    <message>
-        <source>Successfully initiated {action} from {len(publishedfileids)} Steam Workshop mod(s).
-The process may take a few moments to complete.</source>
-        <translation>成功为 {len(publishedfileids)} 个 Steam Workshop 模组中启动 {action}。
-该过程可能需要几分钟才能完成。</translation>
-    </message>
-    <message>
-        <source>{action.capitalize()} Error</source>
-        <translation>{action.capitalize()} 错误</translation>
-    </message>
-    <message>
         <source>An error occurred while trying to {action} from Steam Workshop mods.</source>
         <translation>尝试从 Steam Workshop 模组中 {action} 时发生错误。</translation>
     </message>
@@ -2498,32 +2476,57 @@ The process may take a few moments to complete.</source>
         <translation>请至少选择一个模组进行删除和 {action}。</translation>
     </message>
     <message>
-        <source>Confirm Deletion and {action.capitalize()}</source>
-        <translation>确认删除和 {action.capitalize()}</translation>
+        <source>Deletion options</source>
+        <translation>删除选项</translation>
     </message>
     <message>
-        <source>You have selected {len(selected_mods)} mod(s) for deletion.
-{len(steam_mods)} of these are Steam Workshop mods that will also be {action}d.</source>
-        <translation>您已选择 {len(selected_mods)} 个模组进行删除。
-其中 {len(steam_mods)} 个是 Steam Workshop 模组，也将被 {action}。</translation>
+        <source>Steam {action}</source>
+        <translation>Steam {action}</translation>
+    </message>
+    <message>
+        <source>Successfully initiated {action} from {len} Steam Workshop mod(s).
+The process may take a few moments to complete.</source>
+        <translation>成功对 {len} 个 Steam Workshop 模组中进行 {action}。
+该过程可能需要几分钟才能完成。</translation>
+    </message>
+    <message>
+        <source>{action} Error</source>
+        <translation>{action} 错误</translation>
+    </message>
+    <message>
+        <source>Confirm Deletion and {action}</source>
+        <translation>确认删除并 {action}</translation>
+    </message>
+    <message>
+        <source>You have selected {count} mod(s) for deletion.
+{steam_count} of these are Steam Workshop mods that will also be {action}.</source>
+        <translation>您已选择 {count} 个模组进行删除。
+其中 {steam_count} 个是 Steam Workshop 模组，将被 {action}。</translation>
     </message>
     <message>
         <source>
 This operation will:
 • Delete the selected mod directories from your filesystem
-• {action.capitalize()} Steam Workshop mods from your Steam account
+• {action} Steam Workshop mods from your Steam account
 
 Do you want to proceed?</source>
-        <translation>
-此操作将：
-• 从你的文件系统中删除所选模组目录
-• 从你的 Steam 账户中 {action.capitalize()} Steam Workshop 模组
-
-您想继续吗？</translation>
+        <translation>您想继续吗？</translation>
     </message>
     <message>
-        <source>Deletion options</source>
-        <translation>删除选项</translation>
+        <source>unsubscribe</source>
+        <translation>取消订阅</translation>
+    </message>
+    <message>
+        <source>resubscribe</source>
+        <translation>重新订阅</translation>
+    </message>
+    <message>
+        <source>unsubscribed</source>
+        <translation>已取消订阅</translation>
+    </message>
+    <message>
+        <source>resubscribed</source>
+        <translation>已重新订阅</translation>
     </message>
 </context>
 <context>
@@ -2569,7 +2572,7 @@ Do you want to proceed?</source>
     </message>
     <message>
         <source>Contains custom content (textures / XML)</source>
-        <translation>包含自定义内容（textures / XML)</translation>
+        <translation>包含自定义内容（纹理 / XML）</translation>
     </message>
     <message>
         <source>Local mod that contains a git repository</source>
@@ -3155,15 +3158,15 @@ An alternative updated mod is recommended:
     </message>
     <message>
         <source>About.xml (incompatibilitiesWith)</source>
-        <translation type="unfinished"></translation>
+        <translation>About.xml (incompatibilitiesWith)</translation>
     </message>
     <message>
         <source>Community Rules (incompatibilitiesWith)</source>
-        <translation type="unfinished"></translation>
+        <translation>社区规则 (incompatibilitiesWith)</translation>
     </message>
     <message>
         <source>User Rules (incompatibilitiesWith)</source>
-        <translation type="unfinished"></translation>
+        <translation>用户规则 (incompatibilitiesWith)</translation>
     </message>
 </context>
 <context>
@@ -3916,6 +3919,14 @@ New symlink:
         <translation>新符号链接：
 [{symlink_source_path}] -&gt; </translation>
     </message>
+    <message>
+        <source>&amp;Yes</source>
+        <translation>&amp;是</translation>
+    </message>
+    <message>
+        <source>&amp;Don&apos;t Ask Again</source>
+        <translation>&amp;不再询问</translation>
+    </message>
 </context>
 <context>
     <name>ThemeController</name>
@@ -4493,11 +4504,11 @@ The following table displays Workshop mods with suggested replacements according
     <name>check_if_pfids_blacklisted</name>
     <message>
         <source>Download blacklisted mods</source>
-        <translation type="unfinished"></translation>
+        <translation>下载黑名单模组</translation>
     </message>
     <message>
         <source>Skip blacklisted mods</source>
-        <translation type="unfinished"></translation>
+        <translation>跳过黑名单模组</translation>
     </message>
 </context>
 <context>
