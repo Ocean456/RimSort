@@ -36,41 +36,13 @@ jobs:
       attestations: write
       packages: write
 
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: macos-13
-            platform: "Darwin"
-            arch: "i386"
-            env:
-              BUILD_OUTPUT: "__main__.app"
-              Executable: RimSort
-          - os: macos-latest
-            platform: "Darwin"
-            arch: "arm"
-            env:
-              BUILD_OUTPUT: "__main__.app"
-              Executable: RimSort
-          - os: ubuntu-22.04
-            platform: "Ubuntu-22.04"
-            arch: "x86_64"
-            env:
-              BUILD_OUTPUT: "__main__.dist"
-              Executable: "RimSort"
-          - os: ubuntu-24.04
-            platform: "Ubuntu-24.04"
-            arch: "x86_64"
-            env:
-              BUILD_OUTPUT: "__main__.dist"
-              Executable: RimSort
-          - os: windows-latest
-            platform: "Windows"
-            arch: "x86_64"
-            env:
-              BUILD_OUTPUT: "__main__.dist"
-              Executable: RimSort.exe
+    runs-on: windows-latest
+    env:
+      BUILD_OUTPUT: "__main__.dist"
+      Executable: RimSort.exe
+      platform: "Windows"
+      arch: "x86_64"
+
     steps:
       - name: Check-out repository
         uses: actions/checkout@main
@@ -81,18 +53,8 @@ jobs:
       - name: Add submodules to pythonpath
         id: pythonpath
         run: |
-          if [ "${{ matrix.platform }}" == "Windows" ]; then
-            echo "PYTHONPATH=$PYTHONPATH;${{ github.workspace }}\submodules\SteamworksPy" >> "$GITHUB_OUTPUT"
-          else
-            echo "PYTHONPATH=$PYTHONPATH:${{ github.workspace }}/submodules/SteamworksPy" >> "$GITHUB_OUTPUT"
-          fi
+          echo "PYTHONPATH=$PYTHONPATH;${{ github.workspace }}\submodules\SteamworksPy" >> "$GITHUB_OUTPUT"
         shell: bash
-
-      - name: Remove problematic brew libs
-        run: |
-          brew remove --force --ignore-dependencies openssl@3
-          brew cleanup openssl@3
-        if: runner.os == 'macos' && matrix.arch == 'i386'
 
       - name: Get semantic version
         id: sem_version
@@ -122,7 +84,7 @@ jobs:
         uses: actions/setup-python@main
         with:
           python-version: "3.12"
-          architecture: "x64" # optional x64 or x86. Defaults to x64 if not specified
+          architecture: "x64"
           cache: "pip"
           cache-dependency-path: |
             **/requirements*.txt
@@ -146,11 +108,10 @@ jobs:
 
       - name: Build
         uses: Nuitka/Nuitka-Action@main
-        if: true
         with:
           nuitka-version: main
           script-name: app/__main__.py
-          mode: ${{ runner.os == 'macos' && 'app' || 'standalone' }}
+          mode: standalone
           static-libpython: auto
           product-version: >-
             ${{ steps.sem_version.outputs.major }}.
@@ -166,21 +127,19 @@ jobs:
       - name: Set FILENAME
         id: filename
         run: |
-          FILENAME="${{ matrix.platform }}_"
-          FILENAME+="${{ matrix.arch }}"
+          FILENAME="Windows_x86_64"
           echo "FILENAME=$FILENAME" >> "$GITHUB_OUTPUT"
         shell: bash
 
       - name: Find Executable
         id: find_executable
         run: |
-          executable=$(find . -name "${{ matrix.env.Executable }}" | head -n 1)
+          executable=$(find . -name "RimSort.exe" | head -n 1)
           echo "EXECUTABLE=$executable" >> "$GITHUB_OUTPUT"
           echo "Executable found at $executable"
         shell: bash
 
       - name: Create MSI Package
-        if: matrix.platform == 'Windows'
         run: |
           choco install wixtoolset -y
           
@@ -307,7 +266,7 @@ jobs:
             -ext WixUIExtension `
             -cultures:en-us `
             maindist.wixobj RimSort.wixobj `
-            -o "RimSort-${{ steps.sem_version.outputs.version }}-${{ matrix.platform }}-${{ matrix.arch }}.msi"
+            -o "RimSort-${{ steps.sem_version.outputs.version }}-Windows-x86_64.msi"
         shell: powershell
 
       - name: Generate executable attestations
@@ -318,15 +277,15 @@ jobs:
 
       - name: Generate MSI attestation
         uses: actions/attest-build-provenance@v2.4.0
-        if: ${{ inputs.attest && matrix.platform == 'Windows' }}
+        if: ${{ inputs.attest }}
         with:
-          subject-path: ./RimSort-${{ steps.sem_version.outputs.version }}-${{ matrix.platform }}-${{ matrix.arch }}.msi
+          subject-path: ./RimSort-${{ steps.sem_version.outputs.version }}-Windows-x86_64.msi
 
       - name: Rename new build
         run: |
           cd build
-          mv "${{ matrix.env.BUILD_OUTPUT }}" "output"
-          tar -cvf "${{ steps.filename.outputs.FILENAME }}.tar" "output" 
+          mv "__main__.dist" "output"
+          tar -cvf "Windows_x86_64.tar" "output" 
           rm -rf "output"
         shell: bash
 
@@ -334,27 +293,24 @@ jobs:
         uses: actions/attest-build-provenance@v2.4.0
         if: ${{ inputs.attest }}
         with:
-          subject-path: ./build/${{ steps.filename.outputs.FILENAME }}.tar
+          subject-path: ./build/Windows_x86_64.tar
 
-        # Upload folder as artifact
       - name: Upload folder as artifact
         uses: actions/upload-artifact@main
         with:
-          name: ${{ steps.filename.outputs.FILENAME }}
-          path: ./build/${{ steps.filename.outputs.FILENAME }}.tar
+          name: Windows_x86_64
+          path: ./build/Windows_x86_64.tar
           if-no-files-found: error
 
-      # Upload the built executable
       - name: Upload MSI Package
-        if: matrix.platform == 'Windows'
         uses: actions/upload-artifact@main
         with:
-          name: ${{ matrix.platform }}_${{ matrix.arch }}_msi
-          path: ./RimSort-${{ steps.sem_version.outputs.version }}-${{ matrix.platform }}-${{ matrix.arch }}.msi
+          name: Windows_x86_64_msi
+          path: ./RimSort-${{ steps.sem_version.outputs.version }}-Windows-x86_64.msi
           if-no-files-found: error
 
     outputs:
-      filename: ${{ steps.filename.outputs.FILENAME }}
+      filename: Windows_x86_64
 
   post-build-test:
     needs: build
