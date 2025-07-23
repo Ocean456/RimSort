@@ -81,11 +81,11 @@
     </message>
     <message>
         <source>Mod downloaded</source>
-        <translation>模组已下载</translation>
+        <translation>模组下载时间</translation>
     </message>
     <message>
         <source>Updated on Workshop</source>
-        <translation>在创意工坊中更新</translation>
+        <translation>工坊更新时间</translation>
     </message>
     <message>
         <source>Type</source>
@@ -1607,7 +1607,7 @@ Please wait a moment for GitHub to set up the fork.</source>
     </message>
     <message>
         <source>Your local changes conflicted with remote changes. The repository has been reset to a clean state with the latest remote changes. Your original changes are preserved in the database file and will be committed.</source>
-        <translation>您的本地更改与远程更改发生冲突。仓库已重置为干净状态，并应用了最新的远程更改。您的原始更改已保存在数据库文件中，并将被提交。</translation>
+        <translation>你的本地更改与远程更改发生冲突。仓库已重置为干净状态，并应用了最新的远程更改。你的原始更改已保存在数据库文件中，并将被提交。</translation>
     </message>
     <message>
         <source>Stash restore warning</source>
@@ -1619,7 +1619,7 @@ Please wait a moment for GitHub to set up the fork.</source>
     </message>
     <message>
         <source>Continuing with current state. Your database changes should still be present.</source>
-        <translation>继续当前状态。您的数据库更改应该仍然存在。</translation>
+        <translation>继续当前状态。你的数据库更改应该仍然存在。</translation>
     </message>
     <message>
         <source>Branch creation failed</source>
@@ -1695,7 +1695,7 @@ Do you want to open it in your web browser?
 
 URL: {url}</source>
         <translation>拉取请求创建成功。
-您想在网页浏览器中打开它吗？
+你想在网页浏览器中打开它吗？
 
 URL: {url}</translation>
     </message>
@@ -1713,9 +1713,9 @@ URL: {url}</translation>
 You can manually create a pull request on GitHub.
 
 Error: {error}</source>
-        <translation>更改已成功推送到您的分支，但拉取请求创建失败。
+        <translation>更改已成功推送到你的分支，但拉取请求创建失败。
 
-您可以在 GitHub 上手动创建拉取请求。
+你可以在 GitHub 上手动创建拉取请求。
 
 错误：{error}</translation>
     </message>
@@ -1725,11 +1725,11 @@ Error: {error}</source>
     </message>
     <message>
         <source>Are you sure you want to upload the Steam Workshop database to GitHub?</source>
-        <translation>您确定要将 Steam Workshop 数据库上传到 GitHub 吗？</translation>
+        <translation>你确定要将 Steam Workshop 数据库上传到 GitHub 吗？</translation>
     </message>
     <message>
         <source>This will create a pull request with your local database changes.</source>
-        <translation>这将创建一个包含您本地数据库更改的拉取请求。</translation>
+        <translation>这将创建一个包含你本地数据库更改的拉取请求。</translation>
     </message>
     <message>
         <source>Upload</source>
@@ -1741,7 +1741,7 @@ Error: {error}</source>
     </message>
     <message>
         <source>Are you sure you want to upload the Community Rules database to GitHub?</source>
-        <translation>您确定要将社区规则数据库上传到 GitHub 吗？</translation>
+        <translation>你确定要将社区规则数据库上传到 GitHub 吗？</translation>
     </message>
     <message>
         <source>{count} repositories were updated with their latest commits:</source>
@@ -2004,7 +2004,7 @@ RimSort 可以复制所有你的创意工坊模组到新实例的本地模组文
     </message>
     <message>
         <source>ACF Log Reader</source>
-        <translation>ACF 日志阅读器</translation>
+        <translation>更新日志</translation>
     </message>
 </context>
 <context>
@@ -2321,7 +2321,7 @@ Please select your preferred mod variant in the table below. You can also open e
 
 Steam Workshop 上的 RimWorld 模组如果共享相同的 包名，则为 &apos;变体&apos;。在下载之前，请注意这一点。
 
-请选择你在下表中偏好的 模组变体。你也可以在 Steam 或网页浏览器中打开每个变体进行验证。&quot;
+请选择你在下表中偏好的 模组变体。你也可以在 Steam 或网页浏览器中打开每个变体进行验证。
         </translation>
     </message>
     <message>
@@ -2413,7 +2413,7 @@ Steam Workshop 上的 RimWorld 模组如果共享相同的 包名，则为 &apos
     </message>
     <message>
         <source>You have selected {count} mod(s) for complete deletion.</source>
-        <translation>您已选择 {count} 个模组进行完全删除。</translation>
+        <translation>你已选择 {count} 个模组进行完全删除。</translation>
     </message>
     <message>
         <source>
@@ -2423,7 +2423,7 @@ Do you want to proceed?</source>
         <translation>
 此操作将从文件系统中永久删除所选模组目录。
 
-您想继续吗？</translation>
+你想继续吗？</translation>
     </message>
     <message>
         <source>Please select at least one mod to process.</source>
@@ -2435,7 +2435,7 @@ Do you want to proceed?</source>
     </message>
     <message>
         <source>You have selected {count} mod(s) for DDS texture deletion.</source>
-        <translation>您已选择 {count} 个模组进行 DDS 纹理删除。</translation>
+        <translation>你已选择 {count} 个模组进行 DDS 纹理删除。</translation>
     </message>
     <message>
         <source>
@@ -2445,7 +2445,7 @@ Do you want to proceed?</source>
         <translation>
 此操作将仅删除所选模组中的优化纹理（.dds 文件）。
 
-您想继续吗？</translation>
+你想继续吗？</translation>
     </message>
     <message>
         <source>Confirm Selective Deletion</source>
@@ -2453,7 +2453,7 @@ Do you want to proceed?</source>
     </message>
     <message>
         <source>You have selected {count} mod(s) for selective deletion.</source>
-        <translation>您已选择 {count} 个模组进行选择删除。</translation>
+        <translation>你已选择 {count} 个模组进行选择删除。</translation>
     </message>
     <message>
         <source>
@@ -2465,7 +2465,7 @@ Do you want to proceed?</source>
 此操作将删除所有模组文件，除了 .dds 纹理文件。
 .dds 文件将被保留。
 
-您想继续吗？</translation>
+你想继续吗？</translation>
     </message>
     <message>
         <source>An error occurred while trying to {action} from Steam Workshop mods.</source>
@@ -2500,7 +2500,7 @@ The process may take a few moments to complete.</source>
     <message>
         <source>You have selected {count} mod(s) for deletion.
 {steam_count} of these are Steam Workshop mods that will also be {action}.</source>
-        <translation>您已选择 {count} 个模组进行删除。
+        <translation>你已选择 {count} 个模组进行删除。
 其中 {steam_count} 个是 Steam Workshop 模组，将被 {action}。</translation>
     </message>
     <message>
@@ -2510,7 +2510,7 @@ This operation will:
 • {action} Steam Workshop mods from your Steam account
 
 Do you want to proceed?</source>
-        <translation>您想继续吗？</translation>
+        <translation>你想继续吗？</translation>
     </message>
     <message>
         <source>unsubscribe</source>
@@ -3608,7 +3608,7 @@ Name of folder will be used as name of the theme and any invalid theme will be i
     </message>
     <message>
         <source>RimSort restart required for some settings</source>
-        <translation>部分设置需要重启 RimSort</translation>
+        <translation>某些设置需要重启 RimSort</translation>
     </message>
     <message>
         <source>Enable debug logging</source>
@@ -3700,44 +3700,56 @@ Name of folder will be used as name of the theme and any invalid theme will be i
         <translation>数据库过期时间（秒），例如，604800 表示 7 天，0 表示不过期。</translation>
     </message>
     <message>
-        <source>Window Size Configuration detected window display size: {max_width} x {max_height} pixels</source>
-        <translation>窗口大小配置检测到窗口显示大小：{max_width} x {max_height} 像素</translation>
-    </message>
-    <message>
-        <source>Reset Window Size based on Screen Dimensions</source>
-        <translation>根据屏幕尺寸重置窗口大小</translation>
-    </message>
-    <message>
-        <source>Warning: Window may not fit on the current screen! Please adjust the values.</source>
-        <translation>警告：窗口可能无法适应当前屏幕！请调整数值。</translation>
-    </message>
-    <message>
         <source>Authentication</source>
         <translation>认证</translation>
     </message>
     <message>
-        <source>Window X Position (px): minimum: 100, maximum: {}</source>
-        <translation>窗口 X 位置 (px): 最小: 100, 最大: {}</translation>
+        <source>Launch State</source>
+        <translation>启动状态</translation>
     </message>
     <message>
-        <source>Window Y Position (px): minimum: 100, maximum: {}</source>
-        <translation>窗口 Y 位置 (px): 最小: 100, 最大: {}</translation>
+        <source>Main Window Launch State</source>
+        <translation>主窗口启动状态</translation>
     </message>
     <message>
-        <source>Window Width (px): minimum: 600, maximum: {}</source>
-        <translation>窗口宽度 (px): 最小: 600, 最大: {}</translation>
+        <source>Maximized</source>
+        <translation>最大化</translation>
     </message>
     <message>
-        <source>Window Height (px): minimum: 400, maximum: {}</source>
-        <translation>窗口高度 (px): 最小: 400, 最大: {}</translation>
+        <source>Normal</source>
+        <translation>普通</translation>
     </message>
     <message>
-        <source>Panel Width (px): minimum: 600, maximum: {}</source>
-        <translation>面板宽度 (px): 最小: 600, 最大: {}</translation>
+        <source>Custom size</source>
+        <translation>自定义大小</translation>
     </message>
     <message>
-        <source>Panel Height (px): minimum: 400, maximum: {}</source>
-        <translation>面板高度 (px): 最小: 400, 最大: {}</translation>
+        <source>Browser Window Launch State</source>
+        <translation>浏览器窗口启动状态</translation>
+    </message>
+    <message>
+        <source>Settings Window Launch State</source>
+        <translation>设置窗口启动状态</translation>
+    </message>
+    <message>
+        <source>Custom Width:</source>
+        <translation>自定义宽度：</translation>
+    </message>
+    <message>
+        <source>Custom Height:</source>
+        <translation>自定义高度：</translation>
+    </message>
+    <message>
+        <source>Delete before update</source>
+        <translation>更新前删除</translation>
+    </message>
+    <message>
+        <source>This is useful if you want to ensure clean mod updates.</source>
+        <translation>如果你想确保模组干净更新，请启用该选项。</translation>
+    </message>
+    <message>
+        <source>Min is {MIN_SIZE} and Max is {MAX_SIZE}. Values outside this range will be reset to defaults.</source>
+        <translation>最小值 {MIN_SIZE}，最大值 {MAX_SIZE}。此范围之外的值将重置为默认值。</translation>
     </message>
 </context>
 <context>
@@ -4060,10 +4072,6 @@ WARNING: This will permanently delete all mods in your Mods folder and reset to 
         <translation>路径错误</translation>
     </message>
     <message>
-        <source>Failed to get Location: {save_path}.</source>
-        <translation>获取路径失败：{save_path}。</translation>
-    </message>
-    <message>
         <source>Confirm Export</source>
         <translation>确认导出</translation>
     </message>
@@ -4213,16 +4221,16 @@ Details: {e}</source>
         <source>You are not a Steam user, or Path not set, Please check settings and try again.</source>
         <translation>你不是 Steam 用户，或者路径未设置，请检查设置并重试。</translation>
     </message>
+    <message>
+        <source>Error: {e}</source>
+        <translation>错误：{e}</translation>
+    </message>
 </context>
 <context>
     <name>TroubleshootingDialog</name>
     <message>
         <source>Game Files Recovery</source>
         <translation>游戏文件恢复</translation>
-    </message>
-    <message>
-        <source>⚠️ Warning: These operations will delete selected files permanently!</source>
-        <translation>⚠️ 警告：这些操作将永久删除选定的文件！</translation>
     </message>
     <message>
         <source>If you&apos;re experiencing issues with your game, you can try the following recovery options. Steam will automatically redownload any deleted files on next launch.</source>
@@ -4269,16 +4277,8 @@ Details: {e}</source>
         <translation>应用恢复选项</translation>
     </message>
     <message>
-        <source>Apply the selected recovery options</source>
-        <translation>应用选定的恢复选项</translation>
-    </message>
-    <message>
         <source>Cancel</source>
         <translation>取消</translation>
-    </message>
-    <message>
-        <source>Cancel and clear selections</source>
-        <translation>取消并清除选择</translation>
     </message>
     <message>
         <source>Mod Configuration Options</source>
@@ -4313,14 +4313,6 @@ Details: {e}</source>
         <translation>从文件导入模组列表</translation>
     </message>
     <message>
-        <source>⚠️ WARNING: This will delete all mods in your Mods folder and reset to vanilla state</source>
-        <translation>⚠️ 警告：此操作将删除你的Mods文件夹中的所有Mod，并重置为原版状态</translation>
-    </message>
-    <message>
-        <source>Clear Mods</source>
-        <translation>清除模组</translation>
-    </message>
-    <message>
         <source>Delete all mods and reset to vanilla state</source>
         <translation>删除所有模组并重置为原版状态</translation>
     </message>
@@ -4329,20 +4321,8 @@ Details: {e}</source>
         <translation>Steam 工具</translation>
     </message>
     <message>
-        <source>🔄 Clear Download Cache</source>
-        <translation>🔄 清除下载缓存</translation>
-    </message>
-    <message>
-        <source>✓ Verify Game Files</source>
-        <translation>✓ 验证游戏文件</translation>
-    </message>
-    <message>
-        <source>🔧 Repair Steam library</source>
-        <translation>🔧 修复Steam库</translation>
-    </message>
-    <message>
         <source>Delete Steam&apos;s downloading folder to fix download issues</source>
-        <translation>删除 Steam 下载缓存文件夹以解决下载问题</translation>
+        <translation>删除 Steam 下载文件夹以修复下载问题</translation>
     </message>
     <message>
         <source>Check and repair RimWorld game files</source>
@@ -4351,6 +4331,46 @@ Details: {e}</source>
     <message>
         <source>Verify integrity of all installed Steam games</source>
         <translation>验证所有已安装 Steam 游戏的完整性</translation>
+    </message>
+    <message>
+        <source>Warning: These operations will delete selected files permanently!</source>
+        <translation>警告：这些操作将永久删除所选文件！</translation>
+    </message>
+    <message>
+        <source>Export List</source>
+        <translation>导出列表</translation>
+    </message>
+    <message>
+        <source>Import List</source>
+        <translation>导入列表</translation>
+    </message>
+    <message>
+        <source>Reset to Vanilla</source>
+        <translation>重置为原版</translation>
+    </message>
+    <message>
+        <source>This will delete all mods in your Mods folder and reset to vanilla state</source>
+        <translation>这将删除你的模组文件夹中的所有模组并重置为原版状态</translation>
+    </message>
+    <message>
+        <source>Clear All Mods</source>
+        <translation>清除所有模组</translation>
+    </message>
+    <message>
+        <source>Steam-specific utilities to help resolve download and game file issues.</source>
+        <translation>Steam 专用工具，帮助解决下载和游戏文件问题。</translation>
+    </message>
+    <message>
+        <source>Clear Download Cache</source>
+        <translation>清理下载缓存</translation>
+    </message>
+    <message>
+        <source>Verify Game Files</source>
+        <translation>验证游戏文件</translation>
+    </message>
+    <message>
+        <source>Repair Steam Library</source>
+        <translation>修复 Steam 库</translation>
     </message>
 </context>
 <context>

@@ -933,7 +933,10 @@ class SettingsDialog(QDialog):
 
         size_note = QLabel(
             self.tr(
-                f"Min is {Settings.MIN_SIZE} and Max is {Settings.MAX_SIZE}. Values outside this range will be reset to defaults."
+                "Min is {MIN_SIZE} and Max is {MAX_SIZE}. Values outside this range will be reset to defaults."
+            ).format(
+                MIN_SIZE=Settings.MIN_SIZE,
+                MAX_SIZE=Settings.MAX_SIZE
             )
         )
         size_note.setFont(GUIInfo().emphasis_font)
