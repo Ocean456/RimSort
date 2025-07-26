@@ -185,9 +185,23 @@ jobs:
           choco install wixtoolset -y
           
           $env:PATH += ";C:\Program Files (x86)\WiX Toolset v3.11\bin"
-
-          heat.exe dir "build\\__main__.dist" -cg MainDist -dr INSTALLFOLDER -gg -sfrag -sreg -srd -var var.DistDir -out maindist.wxs
-
+          
+          if (-not (Test-Path "build\__main__.dist")) {
+            throw "Build directory not found: build\__main__.dist"
+          }
+          
+          heat.exe dir "build\__main__.dist" `
+            -cg MainDist `
+            -dr INSTALLFOLDER `
+            -gg -sfrag -sreg -srd `
+            -var var.DistDir `
+            -t exclude_temp.xslt `
+            -out maindist.wxs
+          
+          if ($LASTEXITCODE -ne 0) {
+            throw "heat.exe failed with exit code $LASTEXITCODE"
+          }
+          
           $wixContent = @"
           <?xml version="1.0" encoding="UTF-8"?>
           <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
@@ -197,68 +211,95 @@ jobs:
                      Version="${{ steps.sem_version.outputs.major }}.${{ steps.sem_version.outputs.minor }}.${{ steps.sem_version.outputs.patch }}.${{ steps.sem_version.outputs.increment }}" 
                      Manufacturer="RimSort Team" 
                      UpgradeCode="d4f7c3b9-8a5e-4e52-bb9f-3c2d1f7a9e24">
-              <Package InstallerVersion="400" Compressed="yes" InstallScope="perMachine" />
-              <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+          
+              <Package InstallerVersion="405" 
+                       Compressed="yes" 
+                       InstallScope="perMachine" 
+                       Description="RimWorld mod management tool"
+                       Comments="RimSort - Efficient mod sorting for RimWorld"
+                       Keywords="RimWorld,Mods,Gaming,Management" />
+          
+              <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." 
+                            AllowSameVersionUpgrades="yes" />
+          
               <MediaTemplate EmbedCab="yes" />
-
-              <Property Id="DistDir" Value="build\\__main__.dist" />
-
+          
+              <Property Id="DistDir" Value="build\__main__.dist" />
+              <Property Id="ARPPRODUCTICON" Value="RimSortIcon" />
+              <Property Id="ARPHELPLINK" Value="https://github.com/RimSort/RimSort" />
+              <Property Id="ARPURLINFOABOUT" Value="https://github.com/RimSort/RimSort" />
+              <Property Id="ARPNOREPAIR" Value="yes" />
+          
               <Property Id="INSTALLFOLDER">
-                <RegistrySearch Id="PreviousInstallDirSearch" Root="HKCU" Key="Software\RimSort" Name="InstallDir" Type="raw" />
+                <RegistrySearch Id="PreviousInstallDirSearch" 
+                               Root="HKLM" 
+                               Key="Software\RimSort" 
+                               Name="InstallDir" 
+                               Type="raw" />
               </Property>
-
+          
               <CustomAction Id="SetDefaultInstallDir" Script="vbscript" Execute="immediate">
                 <![CDATA[
-                  Dim fso, installDir
+                  Dim fso, installDir, programFiles
                   Set fso = CreateObject("Scripting.FileSystemObject")
-                  
+          
                   installDir = Session.Property("INSTALLFOLDER")
-                  
+          
                   If installDir = "" Then
-                    If fso.DriveExists("D:\") Then
+                    If fso.DriveExists("D:\") And fso.FolderExists("D:\Program Files") Then
                       installDir = "D:\Program Files\RimSort"
+                    ElseIf Len(Environ("ProgramW6432")) > 0 Then
+                      installDir = Environ("ProgramW6432") & "\RimSort"
                     Else
-                      installDir = "C:\Program Files\RimSort"
+                      installDir = Environ("ProgramFiles") & "\RimSort"
                     End If
                     Session.Property("INSTALLFOLDER") = installDir
                   End If
                 ]]>
               </CustomAction>
-
-              <Icon Id="RimSortIcon" SourceFile="themes\\default-icons\\AppIcon.ico" />
-
+          
+              <Icon Id="RimSortIcon" SourceFile="themes\default-icons\AppIcon.ico" />
+          
               <Directory Id="TARGETDIR" Name="SourceDir">
-                <Directory Id="ProgramFilesFolder">
+                <Directory Id="ProgramFiles64Folder">
                   <Directory Id="INSTALLFOLDER" Name="RimSort" />
                 </Directory>
                 <Directory Id="ProgramMenuFolder">
                   <Directory Id="ApplicationProgramsFolder" Name="RimSort"/>
                 </Directory>
+                <Directory Id="DesktopFolder" Name="Desktop" />
               </Directory>
-
-              <Feature Id="ProductFeature" Title="RimSort" Level="1">
+          
+              <Feature Id="ProductFeature" Title="RimSort Application" Level="1" Description="Main RimSort application">
                 <ComponentGroupRef Id="MainDist" />
                 <ComponentGroupRef Id="ShortcutComponents" />
                 <ComponentGroupRef Id="RegistryComponents" />
               </Feature>
-
-              <UIRef Id="WixUI_InstallDir" />
-
+          
+              <Feature Id="DesktopShortcutFeature" Title="Desktop Shortcut" Level="1" Description="Create desktop shortcut">
+                <ComponentGroupRef Id="DesktopShortcutComponents" />
+              </Feature>
+          
+              <UIRef Id="WixUI_FeatureTree" />
               <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
-
+          
+              <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+              <WixVariable Id="WixUIBannerBmp" Value="Banner.bmp" />
+              <WixVariable Id="WixUIDialogBmp" Value="Dialog.bmp" />
+          
               <InstallExecuteSequence>
                 <Custom Action="SetDefaultInstallDir" After="ValidateProductID">NOT Installed</Custom>
               </InstallExecuteSequence>
-
+          
               <InstallUISequence>
                 <Custom Action="SetDefaultInstallDir" After="ValidateProductID">NOT Installed</Custom>
               </InstallUISequence>
 
               <ComponentGroup Id="ShortcutComponents" Directory="ApplicationProgramsFolder">
                 <Component Id="StartMenuShortcut" Guid="3C5F5459-99AE-5A3E-0422-E64DA66B4443">
-                  <RegistryValue Root="HKCU"
-                                Key="Software\RimSort"
-                                Name="StartMenuShortcutInstalled"
+                  <RegistryValue Root="HKLM"
+                                Key="Software\RimSort\StartMenu"
+                                Name="installed"
                                 Type="integer"
                                 Value="1"
                                 KeyPath="yes" />
@@ -269,45 +310,108 @@ jobs:
                             WorkingDirectory="INSTALLFOLDER"
                             Icon="RimSortIcon"
                             IconIndex="0"
-                            Advertise="no" />
+                            Advertise="no"
+                            Description="RimWorld mod management tool" />
+                  <util:InternetShortcut Id="WebsiteShortcut"
+                                        Directory="ApplicationProgramsFolder"
+                                        Name="RimSort Website"
+                                        Target="https://github.com/RimSort/RimSort" />
                   <RemoveFolder Id="RemoveApplicationProgramsFolder"
                                 Directory="ApplicationProgramsFolder"
                                 On="uninstall" />
                 </Component>
               </ComponentGroup>
 
-              <ComponentGroup Id="RegistryComponents" Directory="INSTALLFOLDER">
-                <Component Id="InstallFlagRegistry" Guid="92D579F1-DC10-4E2F-87F5-25B36476C271">
-                  <RegistryValue Root="HKCU"
-                                Key="Software\RimSort\StartMenu"
+              <ComponentGroup Id="DesktopShortcutComponents" Directory="DesktopFolder">
+                <Component Id="DesktopShortcut" Guid="B8E7F3C2-1A4D-5E6F-9C8B-7A5E3D2F1C4B">
+                  <RegistryValue Root="HKLM"
+                                Key="Software\RimSort\Desktop"
                                 Name="installed"
                                 Type="integer"
                                 Value="1"
                                 KeyPath="yes" />
+                  <Shortcut Id="ApplicationDesktopShortcut"
+                            Directory="DesktopFolder"
+                            Name="RimSort"
+                            Target="[INSTALLFOLDER]RimSort.exe"
+                            WorkingDirectory="INSTALLFOLDER"
+                            Icon="RimSortIcon"
+                            IconIndex="0"
+                            Advertise="no"
+                            Description="RimWorld mod management tool" />
                 </Component>
-                <Component Id="InstallPathRegistry" Guid="A1B2C3D4-E5F6-7890-ABCD-EF1234567890">
-                  <RegistryValue Root="HKCU"
+              </ComponentGroup>
+          
+              <ComponentGroup Id="RegistryComponents" Directory="INSTALLFOLDER">
+                <Component Id="MainRegistry" Guid="A1B2C3D4-E5F6-7890-ABCD-EF1234567890">
+                  <RegistryValue Root="HKLM"
                                 Key="Software\RimSort"
                                 Name="InstallDir"
                                 Type="string"
                                 Value="[INSTALLFOLDER]"
                                 KeyPath="yes" />
+                  <RegistryValue Root="HKLM"
+                                Key="Software\RimSort"
+                                Name="Version"
+                                Type="string"
+                                Value="${{ steps.sem_version.outputs.version }}" />
+                  <RegistryValue Root="HKLM"
+                                Key="Software\RimSort"
+                                Name="InstallDate"
+                                Type="string"
+                                Value="[Date]" />
+                </Component>
+          
+                <Component Id="FileAssociation" Guid="F1E2D3C4-B5A6-9807-CDEF-123456789ABC">
+                  <RegistryValue Root="HKLM"
+                                Key="Software\Classes\.rimsort"
+                                Value="RimSort.Document"
+                                Type="string"
+                                KeyPath="yes" />
+                  <RegistryValue Root="HKLM"
+                                Key="Software\Classes\RimSort.Document"
+                                Value="RimSort Configuration File"
+                                Type="string" />
+                  <RegistryValue Root="HKLM"
+                                Key="Software\Classes\RimSort.Document\DefaultIcon"
+                                Value="[INSTALLFOLDER]RimSort.exe,0"
+                                Type="string" />
+                  <RegistryValue Root="HKLM"
+                                Key="Software\Classes\RimSort.Document\shell\open\command"
+                                Value="&quot;[INSTALLFOLDER]RimSort.exe&quot; &quot;%1&quot;"
+                                Type="string" />
                 </Component>
               </ComponentGroup>
             </Product>
           </Wix>
           "@
-          $wixContent | Out-File -FilePath "RimSort.wxs" -Encoding UTF8
-
+          
+          $wixContent | Out-File -FilePath "RimSort.wxs" -Encoding UTF8 -NoNewline
+          
+          Write-Host "Compiling WiX sources..."
           candle.exe `
-            -dDistDir="build\\__main__.dist" `
+            -dDistDir="build\__main__.dist" `
+            -arch x64 `
             maindist.wxs RimSort.wxs
-
+          
+          if ($LASTEXITCODE -ne 0) {
+            throw "candle.exe failed with exit code $LASTEXITCODE"
+          }
+          
+          Write-Host "Linking MSI package..."
           light.exe `
             -ext WixUIExtension `
+            -ext WixUtilExtension `
             -cultures:en-us `
+            -loc Localization.wxl `
             maindist.wixobj RimSort.wixobj `
             -o "RimSort-${{ steps.sem_version.outputs.version }}-${{ matrix.platform }}-${{ matrix.arch }}.msi"
+          
+          if ($LASTEXITCODE -ne 0) {
+            throw "light.exe failed with exit code $LASTEXITCODE"
+          }
+          
+          Write-Host "MSI package created successfully!"
         shell: powershell
 
       - name: Generate executable attestations
