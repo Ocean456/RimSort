@@ -2574,6 +2574,10 @@ Do you want to proceed?</source>
         <source>Workshop Times:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Put your personal mod notes here!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ModListItemInner</name>
@@ -2828,6 +2832,11 @@ Mod and Game Version Mismatch</source>
         <source>
 An alternative updated mod is recommended:
 {alternative}</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+Alternative Dependencies:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3872,6 +3881,18 @@ Improves performance by ~50%.</source>
     </message>
     <message>
         <source>Compare mod lists with the recent save file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear also moves DLC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Consider alternativePackageIds as satisfying dependencies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If enabled, an alternativePackageIds entry in About.xml can satisfy a mod&apos;s dependency when the main dependency is missing.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
