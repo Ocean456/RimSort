@@ -2632,6 +2632,10 @@ Do you want to proceed?</source>
         <source>Workshop Times:</source>
         <translation>创意工坊时间：</translation>
     </message>
+    <message>
+        <source>Put your personal mod notes here!</source>
+        <translation>在这里放置你的模组备注！</translation>
+    </message>
 </context>
 <context>
     <name>ModListItemInner</name>
@@ -2897,6 +2901,11 @@ An alternative updated mod is recommended:
     <message>
         <source>Reset mod color</source>
         <translation>重置模组颜色</translation>
+    </message>
+    <message>
+        <source>
+Alternative Dependencies:</source>
+        <translation>替代依赖：</translation>
     </message>
 </context>
 <context>
@@ -3949,6 +3958,18 @@ This basically preserves your mod coloring, user notes etc. for this many second
     <message>
         <source>Compare mod lists with the recent save file</source>
         <translation>将模组列表与最近的存档文件进行比较</translation>
+    </message>
+    <message>
+        <source>Clear also moves DLC</source>
+        <translation>清除也会移动DLC</translation>
+    </message>
+    <message>
+        <source>Consider alternativePackageIds as satisfying dependencies</source>
+        <translation>将alternativePackageIds视为满足依赖关系</translation>
+    </message>
+    <message>
+        <source>If enabled, an alternativePackageIds entry in About.xml can satisfy a mod&apos;s dependency when the main dependency is missing.</source>
+        <translation>如果启用，About.xml 中的 alternativePackageIds 条目可以满足模组的依赖关系，即使主要依赖项缺失。</translation>
     </message>
 </context>
 <context>

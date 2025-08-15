@@ -96,6 +96,7 @@ class Settings(QObject):
         # SteamCMD
         self.steamcmd_validate_downloads: bool = False
         self.steamcmd_delete_before_update: bool = False
+
         # todds
         self.todds_preset: str = "optimized"
         self.todds_active_mods_target: bool = True
